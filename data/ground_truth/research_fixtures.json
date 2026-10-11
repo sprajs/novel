@@ -1,0 +1,1076 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "publication_status": "public_illustrative_development_only",
+  "historical_admission": "none",
+  "note": "All labels and control texts are public. No sealed confirmation worlds exist in this file. Numeric fixtures check consequences; symbolic discovery/derivation questions are specified separately in packets. Do not serialize expected, candidate_id, verifier_id, world_id, family_id, case_kind or source metadata into model prompts.",
+  "fixtures": [
+    {
+      "fixture_id": "dpo-dev-001",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "shared-context-nuisance-cancellation",
+      "world_id": "dpo-dev-001-world",
+      "case_kind": "positive",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ],
+        "policy": [
+          "1/3",
+          "1/2",
+          "1/6"
+        ],
+        "beta": 2,
+        "same_context": true,
+        "pair": [
+          0,
+          1
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "preference_probability": "16/97",
+        "odds": "16/81"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dpo-dev-002",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "shared-context-nuisance-cancellation",
+      "world_id": "dpo-dev-002-world",
+      "case_kind": "different-answer",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1/2",
+          "1/2"
+        ],
+        "policy": [
+          "3/4",
+          "1/4"
+        ],
+        "beta": 1,
+        "same_context": true,
+        "pair": [
+          0,
+          1
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "preference_probability": "3/4",
+        "odds": "3"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dpo-dev-003",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "different-context-offsets",
+      "world_id": "dpo-dev-003-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ],
+        "policy": [
+          "1/3",
+          "1/2",
+          "1/6"
+        ],
+        "beta": 2,
+        "same_context": false,
+        "pair": [
+          0,
+          1
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "UNKNOWN",
+        "reason": "relative_reward_offset_missing"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dpo-dev-004",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "support-boundary",
+      "world_id": "dpo-dev-004-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1",
+          "0"
+        ],
+        "policy": [
+          "1/2",
+          "1/2"
+        ],
+        "beta": 1,
+        "same_context": true,
+        "pair": [
+          0,
+          1
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "INAPPLICABLE",
+        "reason": "positive_support_required"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dpo-dev-005",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "identity-policy",
+      "world_id": "dpo-dev-005-world",
+      "case_kind": "bridge-unnecessary",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ],
+        "policy": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ],
+        "beta": 2,
+        "same_context": true,
+        "pair": [
+          0,
+          1
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "preference_probability": "1/2",
+        "odds": "1"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dpo-dev-006",
+      "candidate_id": "dpo",
+      "split": "development",
+      "family_id": "shared-context-nuisance-cancellation",
+      "world_id": "dpo-dev-006-world",
+      "case_kind": "label-reversal",
+      "premises": {
+        "prerequisite_A": "At one context, the optimizer of expected finite reward minus beta KL(pi||q), with beta>0 and positive q, satisfies pi(y)=q(y) exp(r(y)/beta)/Z(context).",
+        "prerequisite_B": "Within the same context, the Bradley-Terry preference probability for a over b is exp(r(a))/(exp(r(a))+exp(r(b))). Reward offsets may differ across contexts.",
+        "reference": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ],
+        "policy": [
+          "1/3",
+          "1/2",
+          "1/6"
+        ],
+        "beta": 2,
+        "same_context": true,
+        "pair": [
+          1,
+          0
+        ]
+      },
+      "target": {
+        "question": "Determine whether the pairwise probability is identifiable under the stated identity. Return status VALID with preference_probability and odds when defined; otherwise use UNKNOWN or INAPPLICABLE with a reason. Indexing starts at zero. Give exact rational numbers. The two supplied distributions apply at both compared contexts when same_context is false, but relative reward offsets are not provided.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), preference_probability (rational string), odds (rational string). Nonvalid result keys: status (UNKNOWN or INAPPLICABLE), reason (one of relative_reward_offset_missing, positive_support_required). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "preference_probability": "81/97",
+        "odds": "81/16"
+      },
+      "verifier_id": "dpo_exact",
+      "condition_text": {
+        "minimal_bridge": "Express each compared reward through its policy ratio, then compare within the same context.",
+        "alternate_bridge": "Work with preference odds and cancel factors shared by both choices.",
+        "wrong_bridge": "Treat each context normalizer as the reference probability of the preferred choice.",
+        "irrelevant": "A categorical distribution can be sampled by dividing the unit interval into intervals of the specified probabilities."
+      },
+      "template_lineage": "dpo-dpo_exact",
+      "counterfactual_parent_id": "dpo-dev-001-world"
+    },
+    {
+      "fixture_id": "spec-dev-001",
+      "candidate_id": "speculative-decoding",
+      "split": "development",
+      "family_id": "residual-mass-accounting",
+      "world_id": "spec-dev-001-world",
+      "case_kind": "positive",
+      "premises": {
+        "prerequisite_A": "Draw a symbol from q. Accept a proposed i with probability min(1,p_i/q_i). On q_i>0, accepted mass is min(p_i,q_i).",
+        "prerequisite_B": "Total output mass is accepted-branch mass plus rejection probability times the conditional fallback probability. A nonnegative vector with positive sum can be normalized.",
+        "target_distribution": [
+          "1/3",
+          "1/6",
+          "1/2"
+        ],
+        "actual_proposal": [
+          "1/2",
+          "1/3",
+          "1/6"
+        ]
+      },
+      "target": {
+        "question": "Construct a conditional fallback distribution, independent of the rejected symbol, such that the accept-or-fallback sampler has law target_distribution when the draft law is reported_proposal (use actual_proposal if reported_proposal is absent). Then compute the actual output law if draws instead come from actual_proposal while that acceptance ratio and fallback are retained. Return status VALID, per-symbol acceptance (null for symbols never proposed), rejection_probability, residual (null if rejection is unreachable and no residual mass exists), output, and target_equal. Do not assume reported and actual proposal laws agree.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), acceptance (rational-string array with null for never-proposed symbols), rejection_probability (rational string), residual (rational-string array or null for a zero-mass unused fallback), output (rational-string array), target_equal (boolean). Nonvalid result keys: status (INAPPLICABLE), reason (one of undefined_acceptance_ratio, fallback_undefined_on_reachable_branch). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "acceptance": [
+          "2/3",
+          "1/2",
+          "1"
+        ],
+        "rejection_probability": "1/3",
+        "residual": [
+          "0",
+          "0",
+          "1"
+        ],
+        "output": [
+          "1/3",
+          "1/6",
+          "1/2"
+        ],
+        "target_equal": true
+      },
+      "verifier_id": "speculative_exact",
+      "condition_text": {
+        "minimal_bridge": "Account for the target probability mass already supplied by the accepted branch.",
+        "alternate_bridge": "Partition each symbol's target mass into shared and unfilled portions.",
+        "wrong_bridge": "After rejection, draw again from the unchanged target distribution.",
+        "irrelevant": "Permuting the labels of a categorical distribution preserves its total probability."
+      },
+      "template_lineage": "speculative-decoding-speculative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "spec-dev-002",
+      "candidate_id": "speculative-decoding",
+      "split": "development",
+      "family_id": "zero-proposal-support",
+      "world_id": "spec-dev-002-world",
+      "case_kind": "support-edge",
+      "premises": {
+        "prerequisite_A": "Draw a symbol from q. Accept a proposed i with probability min(1,p_i/q_i). On q_i>0, accepted mass is min(p_i,q_i).",
+        "prerequisite_B": "Total output mass is accepted-branch mass plus rejection probability times the conditional fallback probability. A nonnegative vector with positive sum can be normalized.",
+        "target_distribution": [
+          "1/4",
+          "3/4"
+        ],
+        "actual_proposal": [
+          "1",
+          "0"
+        ]
+      },
+      "target": {
+        "question": "Construct a conditional fallback distribution, independent of the rejected symbol, such that the accept-or-fallback sampler has law target_distribution when the draft law is reported_proposal (use actual_proposal if reported_proposal is absent). Then compute the actual output law if draws instead come from actual_proposal while that acceptance ratio and fallback are retained. Return status VALID, per-symbol acceptance (null for symbols never proposed), rejection_probability, residual (null if rejection is unreachable and no residual mass exists), output, and target_equal. Do not assume reported and actual proposal laws agree.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), acceptance (rational-string array with null for never-proposed symbols), rejection_probability (rational string), residual (rational-string array or null for a zero-mass unused fallback), output (rational-string array), target_equal (boolean). Nonvalid result keys: status (INAPPLICABLE), reason (one of undefined_acceptance_ratio, fallback_undefined_on_reachable_branch). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "acceptance": [
+          "1/4",
+          null
+        ],
+        "rejection_probability": "3/4",
+        "residual": [
+          "0",
+          "1"
+        ],
+        "output": [
+          "1/4",
+          "3/4"
+        ],
+        "target_equal": true
+      },
+      "verifier_id": "speculative_exact",
+      "condition_text": {
+        "minimal_bridge": "Account for the target probability mass already supplied by the accepted branch.",
+        "alternate_bridge": "Partition each symbol's target mass into shared and unfilled portions.",
+        "wrong_bridge": "After rejection, draw again from the unchanged target distribution.",
+        "irrelevant": "Permuting the labels of a categorical distribution preserves its total probability."
+      },
+      "template_lineage": "speculative-decoding-speculative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "spec-dev-003",
+      "candidate_id": "speculative-decoding",
+      "split": "development",
+      "family_id": "equal-distributions",
+      "world_id": "spec-dev-003-world",
+      "case_kind": "bridge-unnecessary",
+      "premises": {
+        "prerequisite_A": "Draw a symbol from q. Accept a proposed i with probability min(1,p_i/q_i). On q_i>0, accepted mass is min(p_i,q_i).",
+        "prerequisite_B": "Total output mass is accepted-branch mass plus rejection probability times the conditional fallback probability. A nonnegative vector with positive sum can be normalized.",
+        "target_distribution": [
+          "1/4",
+          "3/4"
+        ],
+        "actual_proposal": [
+          "1/4",
+          "3/4"
+        ]
+      },
+      "target": {
+        "question": "Construct a conditional fallback distribution, independent of the rejected symbol, such that the accept-or-fallback sampler has law target_distribution when the draft law is reported_proposal (use actual_proposal if reported_proposal is absent). Then compute the actual output law if draws instead come from actual_proposal while that acceptance ratio and fallback are retained. Return status VALID, per-symbol acceptance (null for symbols never proposed), rejection_probability, residual (null if rejection is unreachable and no residual mass exists), output, and target_equal. Do not assume reported and actual proposal laws agree.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), acceptance (rational-string array with null for never-proposed symbols), rejection_probability (rational string), residual (rational-string array or null for a zero-mass unused fallback), output (rational-string array), target_equal (boolean). Nonvalid result keys: status (INAPPLICABLE), reason (one of undefined_acceptance_ratio, fallback_undefined_on_reachable_branch). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "acceptance": [
+          "1",
+          "1"
+        ],
+        "rejection_probability": "0",
+        "residual": null,
+        "output": [
+          "1/4",
+          "3/4"
+        ],
+        "target_equal": true
+      },
+      "verifier_id": "speculative_exact",
+      "condition_text": {
+        "minimal_bridge": "Account for the target probability mass already supplied by the accepted branch.",
+        "alternate_bridge": "Partition each symbol's target mass into shared and unfilled portions.",
+        "wrong_bridge": "After rejection, draw again from the unchanged target distribution.",
+        "irrelevant": "Permuting the labels of a categorical distribution preserves its total probability."
+      },
+      "template_lineage": "speculative-decoding-speculative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "spec-dev-004",
+      "candidate_id": "speculative-decoding",
+      "split": "development",
+      "family_id": "stale-proposal-scores",
+      "world_id": "spec-dev-004-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "Draw a symbol from q. Accept a proposed i with probability min(1,p_i/q_i). On q_i>0, accepted mass is min(p_i,q_i).",
+        "prerequisite_B": "Total output mass is accepted-branch mass plus rejection probability times the conditional fallback probability. A nonnegative vector with positive sum can be normalized.",
+        "target_distribution": [
+          "1/4",
+          "3/4"
+        ],
+        "actual_proposal": [
+          "3/4",
+          "1/4"
+        ],
+        "reported_proposal": [
+          "1/2",
+          "1/2"
+        ]
+      },
+      "target": {
+        "question": "Construct a conditional fallback distribution, independent of the rejected symbol, such that the accept-or-fallback sampler has law target_distribution when the draft law is reported_proposal (use actual_proposal if reported_proposal is absent). Then compute the actual output law if draws instead come from actual_proposal while that acceptance ratio and fallback are retained. Return status VALID, per-symbol acceptance (null for symbols never proposed), rejection_probability, residual (null if rejection is unreachable and no residual mass exists), output, and target_equal. Do not assume reported and actual proposal laws agree.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), acceptance (rational-string array with null for never-proposed symbols), rejection_probability (rational string), residual (rational-string array or null for a zero-mass unused fallback), output (rational-string array), target_equal (boolean). Nonvalid result keys: status (INAPPLICABLE), reason (one of undefined_acceptance_ratio, fallback_undefined_on_reachable_branch). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "acceptance": [
+          "1/2",
+          "1"
+        ],
+        "rejection_probability": "3/8",
+        "residual": [
+          "0",
+          "1"
+        ],
+        "output": [
+          "3/8",
+          "5/8"
+        ],
+        "target_equal": false
+      },
+      "verifier_id": "speculative_exact",
+      "condition_text": {
+        "minimal_bridge": "Account for the target probability mass already supplied by the accepted branch.",
+        "alternate_bridge": "Partition each symbol's target mass into shared and unfilled portions.",
+        "wrong_bridge": "After rejection, draw again from the unchanged target distribution.",
+        "irrelevant": "Permuting the labels of a categorical distribution preserves its total probability."
+      },
+      "template_lineage": "speculative-decoding-speculative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "spec-dev-005",
+      "candidate_id": "speculative-decoding",
+      "split": "development",
+      "family_id": "disjoint-support",
+      "world_id": "spec-dev-005-world",
+      "case_kind": "support-edge",
+      "premises": {
+        "prerequisite_A": "Draw a symbol from q. Accept a proposed i with probability min(1,p_i/q_i). On q_i>0, accepted mass is min(p_i,q_i).",
+        "prerequisite_B": "Total output mass is accepted-branch mass plus rejection probability times the conditional fallback probability. A nonnegative vector with positive sum can be normalized.",
+        "target_distribution": [
+          "0",
+          "1"
+        ],
+        "actual_proposal": [
+          "1",
+          "0"
+        ]
+      },
+      "target": {
+        "question": "Construct a conditional fallback distribution, independent of the rejected symbol, such that the accept-or-fallback sampler has law target_distribution when the draft law is reported_proposal (use actual_proposal if reported_proposal is absent). Then compute the actual output law if draws instead come from actual_proposal while that acceptance ratio and fallback are retained. Return status VALID, per-symbol acceptance (null for symbols never proposed), rejection_probability, residual (null if rejection is unreachable and no residual mass exists), output, and target_equal. Do not assume reported and actual proposal laws agree.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), acceptance (rational-string array with null for never-proposed symbols), rejection_probability (rational string), residual (rational-string array or null for a zero-mass unused fallback), output (rational-string array), target_equal (boolean). Nonvalid result keys: status (INAPPLICABLE), reason (one of undefined_acceptance_ratio, fallback_undefined_on_reachable_branch). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "acceptance": [
+          "0",
+          null
+        ],
+        "rejection_probability": "1",
+        "residual": [
+          "0",
+          "1"
+        ],
+        "output": [
+          "0",
+          "1"
+        ],
+        "target_equal": true
+      },
+      "verifier_id": "speculative_exact",
+      "condition_text": {
+        "minimal_bridge": "Account for the target probability mass already supplied by the accepted branch.",
+        "alternate_bridge": "Partition each symbol's target mass into shared and unfilled portions.",
+        "wrong_bridge": "After rejection, draw again from the unchanged target distribution.",
+        "irrelevant": "Permuting the labels of a categorical distribution preserves its total probability."
+      },
+      "template_lineage": "speculative-decoding-speculative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dora-dev-001",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "normalization-differential",
+      "world_id": "dora-dev-001-world",
+      "case_kind": "positive",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "v": [
+          "3",
+          "4"
+        ],
+        "dv": [
+          "1",
+          "2"
+        ],
+        "m": "10",
+        "dm": "3",
+        "derivative_mode": "ordinary"
+      },
+      "target": {
+        "question": "For w(t)=(m+t*dm)*(v+t*dv)/||v+t*dv||, compute dw at t=0 under derivative_mode. ordinary means the true function derivative; detached_denominator_autodiff means freeze only the denominator during differentiation. Return status VALID, vector dw, and radial_rate=(v/||v||) dot dw. For v=0 return UNDEFINED and reason zero_direction.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), dw (rational-string array), radial_rate (rational string). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "dw": [
+          "29/25",
+          "72/25"
+        ],
+        "radial_rate": "3"
+      },
+      "verifier_id": "dora_derivative_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_derivative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dora-dev-002",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "radial-direction",
+      "world_id": "dora-dev-002-world",
+      "case_kind": "positive",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "v": [
+          "3",
+          "4"
+        ],
+        "dv": [
+          "6",
+          "8"
+        ],
+        "m": "10",
+        "dm": "0",
+        "derivative_mode": "ordinary"
+      },
+      "target": {
+        "question": "For w(t)=(m+t*dm)*(v+t*dv)/||v+t*dv||, compute dw at t=0 under derivative_mode. ordinary means the true function derivative; detached_denominator_autodiff means freeze only the denominator during differentiation. Return status VALID, vector dw, and radial_rate=(v/||v||) dot dw. For v=0 return UNDEFINED and reason zero_direction.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), dw (rational-string array), radial_rate (rational string). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "dw": [
+          "0",
+          "0"
+        ],
+        "radial_rate": "0"
+      },
+      "verifier_id": "dora_derivative_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_derivative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dora-dev-003",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "detached-normalizer",
+      "world_id": "dora-dev-003-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "v": [
+          "3",
+          "4"
+        ],
+        "dv": [
+          "6",
+          "8"
+        ],
+        "m": "10",
+        "dm": "0",
+        "derivative_mode": "detached_denominator_autodiff"
+      },
+      "target": {
+        "question": "For w(t)=(m+t*dm)*(v+t*dv)/||v+t*dv||, compute dw at t=0 under derivative_mode. ordinary means the true function derivative; detached_denominator_autodiff means freeze only the denominator during differentiation. Return status VALID, vector dw, and radial_rate=(v/||v||) dot dw. For v=0 return UNDEFINED and reason zero_direction.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), dw (rational-string array), radial_rate (rational string). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "dw": [
+          "12",
+          "16"
+        ],
+        "radial_rate": "20"
+      },
+      "verifier_id": "dora_derivative_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_derivative_exact",
+      "counterfactual_parent_id": "dora-dev-002-world"
+    },
+    {
+      "fixture_id": "dora-dev-004",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "zero-direction",
+      "world_id": "dora-dev-004-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "v": [
+          "0",
+          "0"
+        ],
+        "dv": [
+          "1",
+          "2"
+        ],
+        "m": "10",
+        "dm": "3",
+        "derivative_mode": "ordinary"
+      },
+      "target": {
+        "question": "For w(t)=(m+t*dm)*(v+t*dv)/||v+t*dv||, compute dw at t=0 under derivative_mode. ordinary means the true function derivative; detached_denominator_autodiff means freeze only the denominator during differentiation. Return status VALID, vector dw, and radial_rate=(v/||v||) dot dw. For v=0 return UNDEFINED and reason zero_direction.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), dw (rational-string array), radial_rate (rational string). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "UNDEFINED",
+        "reason": "zero_direction"
+      },
+      "verifier_id": "dora_derivative_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_derivative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dora-dev-005",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "magnitude-only",
+      "world_id": "dora-dev-005-world",
+      "case_kind": "bridge-unnecessary",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "v": [
+          "3",
+          "4"
+        ],
+        "dv": [
+          "0",
+          "0"
+        ],
+        "m": "10",
+        "dm": "5",
+        "derivative_mode": "ordinary"
+      },
+      "target": {
+        "question": "For w(t)=(m+t*dm)*(v+t*dv)/||v+t*dv||, compute dw at t=0 under derivative_mode. ordinary means the true function derivative; detached_denominator_autodiff means freeze only the denominator during differentiation. Return status VALID, vector dw, and radial_rate=(v/||v||) dot dw. For v=0 return UNDEFINED and reason zero_direction.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), dw (rational-string array), radial_rate (rational string). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "dw": [
+          "3",
+          "4"
+        ],
+        "radial_rate": "5"
+      },
+      "verifier_id": "dora_derivative_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_derivative_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "dora-dev-006",
+      "candidate_id": "dora",
+      "split": "development",
+      "family_id": "normalized-low-rank-forward",
+      "world_id": "dora-dev-006-world",
+      "case_kind": "forward-construction",
+      "premises": {
+        "prerequisite_A": "For a nonzero column v and positive magnitude m, weight normalization is w=m*v/||v||_2. Matrix columns are normalized independently.",
+        "prerequisite_B": "A low-rank update of a frozen matrix W0 is B*A. For the local derivative, the supplied dv is a direction perturbation and dm a magnitude perturbation. Ordinary derivatives include the norm derivative; detached-denominator autodiff holds that denominator constant.",
+        "W0": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "4",
+            "5"
+          ]
+        ],
+        "B": [
+          [
+            "3"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "A": [
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "magnitudes": [
+          "10",
+          "5"
+        ]
+      },
+      "target": {
+        "question": "Combine A and B so B*A changes the direction argument and magnitudes sets the final column lengths. Return status VALID, weight matrix, and column_norm_squares. W0, B, and A use ordinary matrix multiplication and columns as direction vectors.",
+        "response_format": "Return only a JSON object. Valid result keys: status (VALID), weight (matrix of rational strings), column_norm_squares (rational-string array). Undefined result keys: status (UNDEFINED), reason (zero_direction). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "weight": [
+          [
+            "6",
+            "0"
+          ],
+          [
+            "8",
+            "5"
+          ]
+        ],
+        "column_norm_squares": [
+          "100",
+          "25"
+        ]
+      },
+      "verifier_id": "dora_forward_exact",
+      "condition_text": {
+        "minimal_bridge": "Put the low-rank change inside the direction argument while keeping the magnitude parameter separate.",
+        "alternate_bridge": "Normalize the adapted column before applying its desired length.",
+        "wrong_bridge": "Normalize W0 first and add BA afterward; the column length stays fixed.",
+        "irrelevant": "A square matrix and its transpose have the same determinant."
+      },
+      "template_lineage": "dora-dora_forward_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "flash-dev-001",
+      "candidate_id": "flashattention",
+      "split": "development",
+      "family_id": "stable-block-summary",
+      "world_id": "flash-dev-001-world",
+      "case_kind": "positive",
+      "premises": {
+        "prerequisite_A": "Subtracting the same score from all softmax scores preserves normalized weights. Scores here are k*log(2), with integer score_exponents k.",
+        "prerequisite_B": "Attention is sum(exp(score)*value)/sum(exp(score)). Numerators and denominators add over disjoint blocks. A stable block summary is (maximum, sum(exp(score-maximum)), sum(exp(score-maximum)*value)). Included=false means masked and excluded.",
+        "blocks": [
+          {
+            "score_exponents": [
+              0,
+              1
+            ],
+            "values": [
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ]
+          },
+          {
+            "score_exponents": [
+              2
+            ],
+            "values": [
+              [
+                "2",
+                "3"
+              ]
+            ]
+          }
+        ]
+      },
+      "target": {
+        "question": "Determine the merged attention output from the available information. For supplied blocks return status VALID, maximum_exponent, denominator and numerator at that reference exponent, and output. With only normalized_outputs_only, return status VALID and output if identifiable. If the information is insufficient return UNKNOWN with a reason; if the mathematical operation is undefined return UNDEFINED with a reason. No all-masked library convention is supplied.",
+        "response_format": "Return only a JSON object. For a valid block result keys: status (VALID), maximum_exponent (integer), denominator (rational string), numerator (rational-string array), output (rational-string array). For identifiable output-only inputs keys: status (VALID), output (rational-string array). Otherwise keys: status (UNKNOWN or UNDEFINED), reason (one of relative_block_masses_missing, empty_attention_support). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "maximum_exponent": 2,
+        "denominator": "7/4",
+        "numerator": [
+          "9/4",
+          "7/2"
+        ],
+        "output": [
+          "9/7",
+          "2"
+        ]
+      },
+      "verifier_id": "flashattention_exact",
+      "condition_text": {
+        "minimal_bridge": "Convert the block summaries to the same reference scale before combining them.",
+        "alternate_bridge": "Undo each block's local normalization only up to a shared global factor.",
+        "wrong_bridge": "Average the separately normalized block outputs with equal weight.",
+        "irrelevant": "A permutation matrix preserves a vector's Euclidean norm."
+      },
+      "template_lineage": "flashattention-flashattention_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "flash-dev-002",
+      "candidate_id": "flashattention",
+      "split": "development",
+      "family_id": "masked-score-distractor",
+      "world_id": "flash-dev-002-world",
+      "case_kind": "masked-edge",
+      "premises": {
+        "prerequisite_A": "Subtracting the same score from all softmax scores preserves normalized weights. Scores here are k*log(2), with integer score_exponents k.",
+        "prerequisite_B": "Attention is sum(exp(score)*value)/sum(exp(score)). Numerators and denominators add over disjoint blocks. A stable block summary is (maximum, sum(exp(score-maximum)), sum(exp(score-maximum)*value)). Included=false means masked and excluded.",
+        "blocks": [
+          {
+            "score_exponents": [
+              -1,
+              10
+            ],
+            "values": [
+              [
+                "2"
+              ],
+              [
+                "999"
+              ]
+            ],
+            "included": [
+              true,
+              false
+            ]
+          },
+          {
+            "score_exponents": [
+              -1
+            ],
+            "values": [
+              [
+                "0"
+              ]
+            ]
+          }
+        ]
+      },
+      "target": {
+        "question": "Determine the merged attention output from the available information. For supplied blocks return status VALID, maximum_exponent, denominator and numerator at that reference exponent, and output. With only normalized_outputs_only, return status VALID and output if identifiable. If the information is insufficient return UNKNOWN with a reason; if the mathematical operation is undefined return UNDEFINED with a reason. No all-masked library convention is supplied.",
+        "response_format": "Return only a JSON object. For a valid block result keys: status (VALID), maximum_exponent (integer), denominator (rational string), numerator (rational-string array), output (rational-string array). For identifiable output-only inputs keys: status (VALID), output (rational-string array). Otherwise keys: status (UNKNOWN or UNDEFINED), reason (one of relative_block_masses_missing, empty_attention_support). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "maximum_exponent": -1,
+        "denominator": "2",
+        "numerator": [
+          "2"
+        ],
+        "output": [
+          "1"
+        ]
+      },
+      "verifier_id": "flashattention_exact",
+      "condition_text": {
+        "minimal_bridge": "Convert the block summaries to the same reference scale before combining them.",
+        "alternate_bridge": "Undo each block's local normalization only up to a shared global factor.",
+        "wrong_bridge": "Average the separately normalized block outputs with equal weight.",
+        "irrelevant": "A permutation matrix preserves a vector's Euclidean norm."
+      },
+      "template_lineage": "flashattention-flashattention_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "flash-dev-003",
+      "candidate_id": "flashattention",
+      "split": "development",
+      "family_id": "missing-relative-mass",
+      "world_id": "flash-dev-003-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "Subtracting the same score from all softmax scores preserves normalized weights. Scores here are k*log(2), with integer score_exponents k.",
+        "prerequisite_B": "Attention is sum(exp(score)*value)/sum(exp(score)). Numerators and denominators add over disjoint blocks. A stable block summary is (maximum, sum(exp(score-maximum)), sum(exp(score-maximum)*value)). Included=false means masked and excluded.",
+        "normalized_outputs_only": [
+          [
+            "0"
+          ],
+          [
+            "1"
+          ]
+        ]
+      },
+      "target": {
+        "question": "Determine the merged attention output from the available information. For supplied blocks return status VALID, maximum_exponent, denominator and numerator at that reference exponent, and output. With only normalized_outputs_only, return status VALID and output if identifiable. If the information is insufficient return UNKNOWN with a reason; if the mathematical operation is undefined return UNDEFINED with a reason. No all-masked library convention is supplied.",
+        "response_format": "Return only a JSON object. For a valid block result keys: status (VALID), maximum_exponent (integer), denominator (rational string), numerator (rational-string array), output (rational-string array). For identifiable output-only inputs keys: status (VALID), output (rational-string array). Otherwise keys: status (UNKNOWN or UNDEFINED), reason (one of relative_block_masses_missing, empty_attention_support). No additional keys."
+      },
+      "expected": {
+        "status": "UNKNOWN",
+        "reason": "relative_block_masses_missing"
+      },
+      "verifier_id": "flashattention_exact",
+      "condition_text": {
+        "minimal_bridge": "Convert the block summaries to the same reference scale before combining them.",
+        "alternate_bridge": "Undo each block's local normalization only up to a shared global factor.",
+        "wrong_bridge": "Average the separately normalized block outputs with equal weight.",
+        "irrelevant": "A permutation matrix preserves a vector's Euclidean norm."
+      },
+      "template_lineage": "flashattention-flashattention_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "flash-dev-004",
+      "candidate_id": "flashattention",
+      "split": "development",
+      "family_id": "fully-masked",
+      "world_id": "flash-dev-004-world",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "Subtracting the same score from all softmax scores preserves normalized weights. Scores here are k*log(2), with integer score_exponents k.",
+        "prerequisite_B": "Attention is sum(exp(score)*value)/sum(exp(score)). Numerators and denominators add over disjoint blocks. A stable block summary is (maximum, sum(exp(score-maximum)), sum(exp(score-maximum)*value)). Included=false means masked and excluded.",
+        "blocks": [
+          {
+            "score_exponents": [
+              0
+            ],
+            "values": [
+              [
+                "1"
+              ]
+            ],
+            "included": [
+              false
+            ]
+          }
+        ]
+      },
+      "target": {
+        "question": "Determine the merged attention output from the available information. For supplied blocks return status VALID, maximum_exponent, denominator and numerator at that reference exponent, and output. With only normalized_outputs_only, return status VALID and output if identifiable. If the information is insufficient return UNKNOWN with a reason; if the mathematical operation is undefined return UNDEFINED with a reason. No all-masked library convention is supplied.",
+        "response_format": "Return only a JSON object. For a valid block result keys: status (VALID), maximum_exponent (integer), denominator (rational string), numerator (rational-string array), output (rational-string array). For identifiable output-only inputs keys: status (VALID), output (rational-string array). Otherwise keys: status (UNKNOWN or UNDEFINED), reason (one of relative_block_masses_missing, empty_attention_support). No additional keys."
+      },
+      "expected": {
+        "status": "UNDEFINED",
+        "reason": "empty_attention_support"
+      },
+      "verifier_id": "flashattention_exact",
+      "condition_text": {
+        "minimal_bridge": "Convert the block summaries to the same reference scale before combining them.",
+        "alternate_bridge": "Undo each block's local normalization only up to a shared global factor.",
+        "wrong_bridge": "Average the separately normalized block outputs with equal weight.",
+        "irrelevant": "A permutation matrix preserves a vector's Euclidean norm."
+      },
+      "template_lineage": "flashattention-flashattention_exact",
+      "counterfactual_parent_id": null
+    },
+    {
+      "fixture_id": "flash-dev-005",
+      "candidate_id": "flashattention",
+      "split": "development",
+      "family_id": "equal-local-outputs",
+      "world_id": "flash-dev-005-world",
+      "case_kind": "bridge-unnecessary",
+      "premises": {
+        "prerequisite_A": "Subtracting the same score from all softmax scores preserves normalized weights. Scores here are k*log(2), with integer score_exponents k.",
+        "prerequisite_B": "Attention is sum(exp(score)*value)/sum(exp(score)). Numerators and denominators add over disjoint blocks. A stable block summary is (maximum, sum(exp(score-maximum)), sum(exp(score-maximum)*value)). Included=false means masked and excluded.",
+        "normalized_outputs_only": [
+          [
+            "2",
+            "-1"
+          ],
+          [
+            "2",
+            "-1"
+          ]
+        ]
+      },
+      "target": {
+        "question": "Determine the merged attention output from the available information. For supplied blocks return status VALID, maximum_exponent, denominator and numerator at that reference exponent, and output. With only normalized_outputs_only, return status VALID and output if identifiable. If the information is insufficient return UNKNOWN with a reason; if the mathematical operation is undefined return UNDEFINED with a reason. No all-masked library convention is supplied.",
+        "response_format": "Return only a JSON object. For a valid block result keys: status (VALID), maximum_exponent (integer), denominator (rational string), numerator (rational-string array), output (rational-string array). For identifiable output-only inputs keys: status (VALID), output (rational-string array). Otherwise keys: status (UNKNOWN or UNDEFINED), reason (one of relative_block_masses_missing, empty_attention_support). No additional keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "output": [
+          "2",
+          "-1"
+        ]
+      },
+      "verifier_id": "flashattention_exact",
+      "condition_text": {
+        "minimal_bridge": "Convert the block summaries to the same reference scale before combining them.",
+        "alternate_bridge": "Undo each block's local normalization only up to a shared global factor.",
+        "wrong_bridge": "Average the separately normalized block outputs with equal weight.",
+        "irrelevant": "A permutation matrix preserves a vector's Euclidean norm."
+      },
+      "template_lineage": "flashattention-flashattention_exact",
+      "counterfactual_parent_id": null
+    }
+  ]
+}

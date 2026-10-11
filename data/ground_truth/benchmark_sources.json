@@ -1,0 +1,420 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "record_kind": "benchmark_source_audit",
+  "audit_date": "2026-10-11",
+  "purpose": "Public primary-source audit and candidate-source decisions; not historical-item admission.",
+  "scope": {
+    "corpora_downloaded": false,
+    "pdfs_downloaded": false,
+    "dataset_access_terms_accepted": false,
+    "evaluators_executed": false,
+    "item_admissions_certified": 0
+  },
+  "decisions": [
+    {
+      "benchmark": "ResearchBench",
+      "status": "candidate_source_only",
+      "clean_temporal_benchmark": false,
+      "reason": "Paper dates and extracted inspirations do not certify checkpoint exclusion or unassisted reconstruction."
+    },
+    {
+      "benchmark": "DiscoveryBench",
+      "status": "candidate_source_only",
+      "clean_temporal_benchmark": false,
+      "reason": "Data/goal assistance, target chronology, verifiers, and source-data rights need item-level review."
+    },
+    {
+      "benchmark": "CUSP",
+      "status": "candidate_source_only",
+      "clean_temporal_benchmark": false,
+      "reason": "DOI-linked dates and an output auditor do not certify checkpoint history; matching a later method is not alone contamination."
+    },
+    {
+      "benchmark": "Reconstruction",
+      "status": "protocol_and_candidate_reference_only",
+      "clean_temporal_benchmark": false,
+      "reason": "Hindsight bibliography assistance, parametric exposure, judge validity, and release terms remain."
+    }
+  ],
+  "methodological_judgments": [
+    "Independent correct rediscovery is a positive outcome, not an output-contamination test failure.",
+    "Actual immutable checkpoint release including post-training must precede earliest contribution-bearing disclosure for historical admission.",
+    "A prompt-time temporal cutoff does not certify a model's weights or a retrieved document version.",
+    "Hindsight-selected bibliographies and precursor pairs are assistance even if each input predates the target.",
+    "No-match named-entity audit pass does not prove absence of paraphrased memorization.",
+    "Date strata compare different item sets and cannot alone identify a causal memorization effect."
+  ],
+  "sources": [
+    {
+      "source_id": "researchbench_acl",
+      "url": "https://aclanthology.org/2026.findings-acl.644/",
+      "retrieved_date": "2026-10-11",
+      "version": "ACL Findings 2026, final proceedings record",
+      "access_status": "available_public_html",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "publisher_statement"
+      },
+      "claims": [
+        "Publication month is July 2026; no publication day given.",
+        "Paper-derived inspiration retrieval, hypothesis composition, and ranking; 12 disciplines; targets dated 2024 onward."
+      ],
+      "title": "ResearchBench: Benchmarking LLMs in Scientific Discovery via Inspiration-Based Task Decomposition",
+      "publication_date": {
+        "value": "2026-07",
+        "precision": "month"
+      }
+    },
+    {
+      "source_id": "researchbench_arxiv",
+      "url": "https://arxiv.org/abs/2503.21248",
+      "retrieved_date": "2026-10-11",
+      "version": "current v3; explicit v1 also checked",
+      "access_status": "available_public_abstract_and_history",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "arxiv_license_link"
+      },
+      "claims": [
+        "Earliest located arXiv version precedes ACL proceedings; not a universal first-disclosure certificate."
+      ],
+      "title": "ResearchBench: Benchmarking LLMs in Scientific Discovery via Inspiration-Based Task Decomposition",
+      "earliest_version_url": "https://arxiv.org/abs/2503.21248v1",
+      "versions": [
+        {
+          "version": "v1",
+          "submitted_at_utc": "2025-03-27T08:09:15Z"
+        },
+        {
+          "version": "v2",
+          "submitted_at_utc": "2025-07-01T07:00:59Z"
+        },
+        {
+          "version": "v3",
+          "submitted_at_utc": "2026-04-20T16:53:43Z"
+        }
+      ]
+    },
+    {
+      "source_id": "researchbench_code",
+      "url": "https://github.com/ankitala/ResearchBench/blob/03873e075c8f33544adeac37745fdc14f0c16c50/LICENSE",
+      "retrieved_date": "2026-10-11",
+      "version": "commit 03873e075c8f33544adeac37745fdc14f0c16c50",
+      "access_status": "available_official_raw_license",
+      "license": {
+        "scope": "code",
+        "identifier": "MIT",
+        "status": "explicit_license_file"
+      },
+      "claims": [
+        "Code license does not replace dataset terms."
+      ],
+      "repository_url": "https://github.com/ankitala/ResearchBench",
+      "observed_raw_url": "https://raw.githubusercontent.com/ankitala/ResearchBench/main/LICENSE",
+      "revision_evidence_url": "https://api.github.com/repos/ankitala/ResearchBench/commits/main"
+    },
+    {
+      "source_id": "researchbench_data_license",
+      "url": "https://github.com/ankitala/ResearchBench/blob/03873e075c8f33544adeac37745fdc14f0c16c50/DATA_LICENSE.md",
+      "retrieved_date": "2026-10-11",
+      "version": "commit 03873e075c8f33544adeac37745fdc14f0c16c50",
+      "access_status": "available_official_raw_text_after_browser_error",
+      "license": {
+        "scope": "dataset",
+        "identifier": "CC-BY-NC-4.0",
+        "status": "explicit_data_license",
+        "upstream_terms": "Potentially stricter upstream terms; source metadata and abstracts require review."
+      },
+      "claims": [
+        "Official data license states non-commercial research and attribution to represented scholarly works."
+      ],
+      "observed_raw_url": "https://raw.githubusercontent.com/ankitala/ResearchBench/main/DATA_LICENSE.md",
+      "access_notes": "Browser click to GitHub DATA_LICENSE page returned Internal Error; raw official file succeeded."
+    },
+    {
+      "source_id": "researchbench_dataset_card",
+      "url": "https://huggingface.co/datasets/ankilok/ResearchBench",
+      "retrieved_date": "2026-10-11",
+      "version": "observed dataset revision fed60388d4e7b45dd383931724b74da9a8f14b35",
+      "access_status": "public_card_available_raw_dataset_gated_not_accessed",
+      "license": {
+        "scope": "dataset_and_access",
+        "identifier": "CC-BY-NC-4.0",
+        "status": "card_label_and_gate_terms",
+        "access_terms_summary": [
+          "Non-commercial academic research only.",
+          "No raw redistribution outside the research group.",
+          "Citation required; third-party publisher/provider terms remain applicable.",
+          "Terms also prohibit identification, contact, or harm of individuals; provided without warranty."
+        ]
+      },
+      "claims": [
+        "API reports automatic access gate; no access requested or terms accepted."
+      ],
+      "revision_evidence_url": "https://huggingface.co/api/datasets/ankilok/ResearchBench",
+      "api_last_modified": "2026-05-31T17:18:41.000Z",
+      "date_limit": "Last modification is not first release."
+    },
+    {
+      "source_id": "discoverybench_paper",
+      "url": "https://arxiv.org/abs/2407.01725",
+      "retrieved_date": "2026-10-11",
+      "version": "current v1; only version listed",
+      "access_status": "available_public_abstract_and_history",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "arxiv_license_link"
+      },
+      "claims": [
+        "264 real and 903 synthetic data-grounded tasks with metadata and goals; analysis and semantic reasoning required."
+      ],
+      "title": "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models",
+      "versions": [
+        {
+          "version": "v1",
+          "submitted_at_utc": "2024-07-01T18:58:22Z"
+        }
+      ],
+      "earliest_version_url": "https://arxiv.org/abs/2407.01725v1",
+      "date_limit": "No additional venue publication date certified."
+    },
+    {
+      "source_id": "discoverybench_repository",
+      "url": "https://github.com/allenai/discoverybench",
+      "retrieved_date": "2026-10-11",
+      "version": "observed commit c31fcf011e070f021a5f5b906896d0821f6880e8",
+      "access_status": "available_public_readme_and_root_metadata",
+      "license": {
+        "scope": "software",
+        "identifier": null,
+        "status": "unresolved_separate_software_permission"
+      },
+      "claims": [
+        "Official repository hosts data, agents, and evaluation code; no separate software license located in root listing."
+      ],
+      "revision_evidence_url": "https://api.github.com/repos/allenai/discoverybench/commits/main",
+      "root_listing_evidence_url": "https://api.github.com/repos/allenai/discoverybench/contents",
+      "inspection_limit": "No exhaustive nested-file license audit or code execution."
+    },
+    {
+      "source_id": "discoverybench_database_license",
+      "url": "https://github.com/allenai/discoverybench/blob/c31fcf011e070f021a5f5b906896d0821f6880e8/LICENSE",
+      "retrieved_date": "2026-10-11",
+      "version": "commit c31fcf011e070f021a5f5b906896d0821f6880e8",
+      "access_status": "available_official_raw_license",
+      "license": {
+        "scope": "database",
+        "identifier": "ODC-By",
+        "status": "explicit_license_file",
+        "software_terms": "Section 2.3(a) excludes computer programs used to make or operate the database.",
+        "upstream_terms": "Database license does not independently license protected contents."
+      },
+      "claims": [
+        "Separate software and individual source-content rights remain unresolved."
+      ],
+      "observed_raw_url": "https://raw.githubusercontent.com/allenai/discoverybench/main/LICENSE"
+    },
+    {
+      "source_id": "cusp_arxiv",
+      "url": "https://arxiv.org/abs/2605.22681",
+      "retrieved_date": "2026-10-11",
+      "version": "current v2; explicit v1 checked",
+      "access_status": "available_public_abstract_and_history",
+      "license": {
+        "scope": "paper",
+        "identifier": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "status": "arxiv_license_link"
+      },
+      "claims": [
+        "v2 changes title; use version-specific descriptions."
+      ],
+      "title": "Scientific reasoning does not reliably translate into scientific forecasting in frontier AI",
+      "earliest_version_url": "https://arxiv.org/abs/2605.22681v1",
+      "versions": [
+        {
+          "version": "v1",
+          "submitted_at_utc": "2026-05-21T16:23:36Z",
+          "title": "Forecasting Scientific Progress with Artificial Intelligence"
+        },
+        {
+          "version": "v2",
+          "submitted_at_utc": "2026-07-18T20:33:32Z",
+          "title": "Scientific reasoning does not reliably translate into scientific forecasting in frontier AI"
+        }
+      ]
+    },
+    {
+      "source_id": "cusp_current_method",
+      "url": "https://arxiv.org/html/2605.22681v2",
+      "retrieved_date": "2026-10-11",
+      "version": "v2",
+      "access_status": "available_public_html_direct_http_and_browser_partial_extraction",
+      "license": {
+        "scope": "paper",
+        "identifier": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "status": "html_license_notice"
+      },
+      "claims": [
+        "4,760 events and 17,429 questions.",
+        "DOI-associated earliest observed dates are temporal leads.",
+        "Auditor exempts matching methods/numbers; failure requires verbatim future entity, verified date, and independent-invention exclusion."
+      ],
+      "relevant_sections": [
+        "Model Evaluation, Track II",
+        "Appendix A.1: Scientific data sources",
+        "Appendix H.1: System Prompt: Data-Contamination Auditor"
+      ],
+      "access_notes": "Browser finds omitted auditor block; direct HTML fetched and read without saving source content.",
+      "implementation_limit": "Published prompt reviewed; evaluator not run and code/prompt parity not established."
+    },
+    {
+      "source_id": "cusp_v1_method",
+      "url": "https://arxiv.org/html/2605.22681v1",
+      "retrieved_date": "2026-10-11",
+      "version": "v1",
+      "access_status": "available_public_html_direct_http",
+      "license": {
+        "scope": "paper",
+        "identifier": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "status": "html_license_notice"
+      },
+      "claims": [
+        "The explicit rediscovery exemptions also occur in v1's auditor."
+      ],
+      "relevant_sections": [
+        "Appendix G.1: System Prompt: Data-Contamination Auditor"
+      ],
+      "access_notes": "Version comparison scoped to relevant methodology, not an exhaustive paper diff."
+    },
+    {
+      "source_id": "cusp_code_license",
+      "url": "https://github.com/SeanWu25/cusp-scientific-foresight/blob/09f24b2e10e706cd9616269cdafc518e200eebc2/LICENSE",
+      "retrieved_date": "2026-10-11",
+      "version": "commit 09f24b2e10e706cd9616269cdafc518e200eebc2",
+      "access_status": "available_official_raw_license",
+      "license": {
+        "scope": "code",
+        "identifier": "MIT",
+        "status": "explicit_license_file"
+      },
+      "claims": [
+        "Official repository has a code MIT license."
+      ],
+      "repository_url": "https://github.com/SeanWu25/cusp-scientific-foresight",
+      "observed_raw_url": "https://raw.githubusercontent.com/SeanWu25/cusp-scientific-foresight/main/LICENSE",
+      "revision_evidence_url": "https://api.github.com/repos/SeanWu25/cusp-scientific-foresight/commits/main"
+    },
+    {
+      "source_id": "cusp_dataset_card",
+      "url": "https://huggingface.co/datasets/SeanWu25/CUSP",
+      "retrieved_date": "2026-10-11",
+      "version": "observed dataset revision 7518df1cabe6f4bc2a663ffc9dc60bea876531f9",
+      "access_status": "available_public_card_raw_readme_no_corpus_download",
+      "license": {
+        "scope": "dataset",
+        "identifier": "MIT",
+        "status": "official_card_label_and_paper_data_availability",
+        "upstream_terms": "Third-party scholarly content not independently cleared."
+      },
+      "claims": [
+        "API reports no gate."
+      ],
+      "observed_raw_url": "https://huggingface.co/datasets/SeanWu25/CUSP/raw/main/README.md",
+      "revision_evidence_url": "https://huggingface.co/api/datasets/SeanWu25/CUSP",
+      "api_last_modified": "2026-09-18T21:31:21.000Z",
+      "date_limit": "Last modification is not first release."
+    },
+    {
+      "source_id": "reconstruction_arxiv",
+      "url": "https://arxiv.org/abs/2608.16645",
+      "retrieved_date": "2026-10-11",
+      "version": "current v3; explicit v1 checked",
+      "access_status": "available_public_abstract_and_history",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "arxiv_license_link"
+      },
+      "claims": [
+        "Earliest located arXiv version is 17 August 2026."
+      ],
+      "title": "Reconstruction: A Blind Benchmark for Recovering Research Ideas from Pre-Publication Bibliographies",
+      "earliest_version_url": "https://arxiv.org/abs/2608.16645v1",
+      "versions": [
+        {
+          "version": "v1",
+          "submitted_at_utc": "2026-08-17T14:44:30Z"
+        },
+        {
+          "version": "v2",
+          "submitted_at_utc": "2026-08-19T00:55:47Z"
+        },
+        {
+          "version": "v3",
+          "submitted_at_utc": "2026-08-24T20:33:03Z"
+        }
+      ]
+    },
+    {
+      "source_id": "reconstruction_current_method",
+      "url": "https://arxiv.org/html/2608.16645v3",
+      "retrieved_date": "2026-10-11",
+      "version": "v3",
+      "access_status": "available_public_html",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "html_license_notice"
+      },
+      "claims": [
+        "Bibliography-conditioned recovery uses anonymous references and a temporal cutoff.",
+        "Parametric contamination remains; cutoff strata are reachability proxies.",
+        "LLM judge validation and matched candidate-count controls remain limitations."
+      ],
+      "relevant_sections": [
+        "3.2: Anti-leakage guarantees",
+        "4.4: Parametric contamination strata",
+        "5: Limitations",
+        "Appendix F"
+      ],
+      "release_terms": {
+        "code": "unresolved",
+        "benchmark_data": "unresolved"
+      },
+      "access_notes": "No official dataset/code release link located in inspected paper pages; no claim of nonexistence."
+    },
+    {
+      "source_id": "reconstruction_v1_method",
+      "url": "https://arxiv.org/html/2608.16645v1",
+      "retrieved_date": "2026-10-11",
+      "version": "v1",
+      "access_status": "available_public_html",
+      "license": {
+        "scope": "paper",
+        "identifier": "CC-BY-4.0",
+        "status": "html_license_notice"
+      },
+      "claims": [
+        "v1 already states parametric contamination cannot be ruled out."
+      ],
+      "relevant_sections": [
+        "5: Limitations"
+      ],
+      "release_terms": {
+        "code": "unresolved",
+        "benchmark_data": "unresolved"
+      }
+    }
+  ],
+  "remaining_blockers": [
+    "No target item or checkpoint pair individually admitted.",
+    "ResearchBench raw data access gated and unrequested.",
+    "DiscoveryBench separate software terms and source-content permissions unresolved.",
+    "Reconstruction official release and data/code terms unlocated.",
+    "ArXiv histories are not exhaustive first-disclosure searches.",
+    "Published CUSP auditor not executed; code/prompt parity unverified."
+  ]
+}

@@ -1,0 +1,376 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "fixtures": [
+    {
+      "fixture_id": "meanflow-dev-001",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-quadratic-endpoint",
+      "world_id": "meanflow-dev-001-world",
+      "template_lineage": "meanflow-quadratic_time_field",
+      "case_kind": "composition",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "quadratic_time_field",
+        "a": "0",
+        "b": "0",
+        "c": "1",
+        "r": "0",
+        "t": "2",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "2",
+        "instantaneous_velocity": "4",
+        "partial_time": "1",
+        "partial_state": "0",
+        "total_derivative": "1",
+        "identity_rhs": "2",
+        "identity_holds": true,
+        "displacement": "4",
+        "endpoint_r": "0"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-002",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-rational-quadratic",
+      "world_id": "meanflow-dev-002-world",
+      "template_lineage": "meanflow-quadratic_time_field",
+      "case_kind": "different-answer",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "quadratic_time_field",
+        "a": "3",
+        "b": "-2",
+        "c": "3/2",
+        "r": "1/3",
+        "t": "5/3",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "1",
+        "instantaneous_velocity": "3",
+        "partial_time": "3/2",
+        "partial_state": "0",
+        "total_derivative": "3/2",
+        "identity_rhs": "1",
+        "identity_holds": true,
+        "displacement": "4/3",
+        "endpoint_r": "5/2"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-003",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-quadratic-diagonal",
+      "world_id": "meanflow-dev-003-world",
+      "template_lineage": "meanflow-quadratic_time_field",
+      "case_kind": "boundary",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "quadratic_time_field",
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "r": "1/2",
+        "t": "1/2",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "5",
+        "instantaneous_velocity": "5",
+        "partial_time": "3",
+        "partial_state": "0",
+        "total_derivative": "3",
+        "identity_rhs": "5",
+        "identity_holds": true,
+        "displacement": "0",
+        "endpoint_r": "11/4"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-004",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-state-dependent-square",
+      "world_id": "meanflow-dev-004-world",
+      "template_lineage": "meanflow-positive_square_field",
+      "case_kind": "partial-versus-total",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "positive_square_field",
+        "shift": "1",
+        "r": "0",
+        "t": "2",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "4",
+        "instantaneous_velocity": "6",
+        "partial_time": "-1",
+        "partial_state": "1/3",
+        "total_derivative": "1",
+        "identity_rhs": "4",
+        "identity_holds": true,
+        "displacement": "8",
+        "endpoint_r": "1"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-005",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-square-diagonal",
+      "world_id": "meanflow-dev-005-world",
+      "template_lineage": "meanflow-positive_square_field",
+      "case_kind": "boundary",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "positive_square_field",
+        "shift": "1",
+        "r": "1",
+        "t": "1",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "4",
+        "instantaneous_velocity": "4",
+        "partial_time": "-1",
+        "partial_state": "1/2",
+        "total_derivative": "1",
+        "identity_rhs": "4",
+        "identity_holds": true,
+        "displacement": "0",
+        "endpoint_r": "4"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-006",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-constant-velocity",
+      "world_id": "meanflow-dev-006-world",
+      "template_lineage": "meanflow-quadratic_time_field",
+      "case_kind": "bridge-unnecessary",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "quadratic_time_field",
+        "a": "7",
+        "b": "-3",
+        "c": "0",
+        "r": "1/4",
+        "t": "3/4",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "-3",
+        "instantaneous_velocity": "-3",
+        "partial_time": "0",
+        "partial_state": "0",
+        "total_derivative": "0",
+        "identity_rhs": "-3",
+        "identity_holds": true,
+        "displacement": "-3/2",
+        "endpoint_r": "25/4"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-007",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-square-invalid-branch",
+      "world_id": "meanflow-dev-007-world",
+      "template_lineage": "meanflow-positive_square_field",
+      "case_kind": "bridge-inapplicable",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "positive_square_field",
+        "shift": "-2",
+        "r": "0",
+        "t": "1",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "INAPPLICABLE",
+        "reason": "positive_branch_required"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-008",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-moving-lower-limit",
+      "world_id": "meanflow-dev-008-world",
+      "template_lineage": "meanflow-quadratic_time_field",
+      "case_kind": "fixed-r-inapplicable",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "quadratic_time_field",
+        "a": "0",
+        "b": "0",
+        "c": "1",
+        "r": "1",
+        "t": "2",
+        "lower_time_rate": "1/2"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "3",
+        "instantaneous_velocity": "4",
+        "partial_time": "1",
+        "partial_state": "0",
+        "total_derivative": "3/2",
+        "identity_rhs": "5/2",
+        "identity_holds": false,
+        "displacement": "3",
+        "endpoint_r": "1"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    },
+    {
+      "fixture_id": "meanflow-dev-009",
+      "candidate_id": "meanflow",
+      "split": "development",
+      "family_id": "meanflow-rational-square-flow",
+      "world_id": "meanflow-dev-009-world",
+      "template_lineage": "meanflow-positive_square_field",
+      "case_kind": "different-answer",
+      "premises": {
+        "prerequisite_A": "The supplied scalar velocity field defines, for every arbitrary nearby endpoint z at time t, the unique local ODE solution dz(s)/ds=v(z(s),s) ending at that endpoint. Define the field u(z,r,t) as the integral of v along that backward solution divided by t-r for r<t, with its continuous extension at r=t. The integral equals endpoint displacement. In the square-root flow, use only endpoints whose backward solution stays strictly positive with sqrt(z)+(r-t)>0; no other off-trajectory extension of u is allowed.",
+        "prerequisite_B": "The product rule and chain rule hold. For a differentiable field f(z,r,t), its derivative along dz/dt=v and dr/dt=rho is partial_t f + v*partial_z f + rho*partial_r f. Holding the endpoint state fixed defines partial_t; it does not generally define the trajectory derivative.",
+        "flow_family": "positive_square_field",
+        "shift": "1/2",
+        "r": "1/4",
+        "t": "3/4",
+        "lower_time_rate": "0"
+      },
+      "target": {
+        "question": "Derive the local relation for average velocity at fixed lower time from the integral definition, then evaluate its right-hand side using the actual derivative along the supplied trajectory and lower-time rate. Return the average, instantaneous endpoint velocity, partial derivative with respect to upper time holding z and r fixed, partial derivative with respect to endpoint state, actual total derivative, the fixed-lower relation's right-hand side, whether that right-hand side equals the average, displacement, and lower endpoint. If the stated positive-branch flow and trajectory are incompatible, return INAPPLICABLE with reason positive_branch_required. Use the continuous extension at r=t.",
+        "response_format": "Return exactly one JSON object. VALID has keys status, average_velocity, instantaneous_velocity, partial_time, partial_state, total_derivative, identity_rhs, identity_holds, displacement, endpoint_r. All numeric fields are integers or exact rational strings; identity_holds is a boolean. INAPPLICABLE has exactly status and reason. No prose or extra keys."
+      },
+      "expected": {
+        "status": "VALID",
+        "average_velocity": "2",
+        "instantaneous_velocity": "5/2",
+        "partial_time": "-1",
+        "partial_state": "4/5",
+        "total_derivative": "1",
+        "identity_rhs": "2",
+        "identity_holds": true,
+        "displacement": "1",
+        "endpoint_r": "9/16"
+      },
+      "verifier_id": "meanflow-polynomial-exact-v1",
+      "condition_text": {
+        "minimal_bridge": "Differentiate the interval-scaled average along the trajectory; keep the lower time fixed when deriving the fixed-lower relation.",
+        "alternate_bridge": "Replace the velocity integral by endpoint displacement, then apply the quotient rule along the trajectory.",
+        "wrong_bridge": "Hold the endpoint state fixed and use only the partial time derivative as the trajectory derivative.",
+        "irrelevant": "A paragraph can contain several sentences, and a sentence can contain several words."
+      }
+    }
+  ]
+}

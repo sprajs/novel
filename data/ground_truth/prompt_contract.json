@@ -1,0 +1,17 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "record_kind": "prompt_contract",
+  "visible_fields": ["task", "premises_a", "premises_b", "observations", "question", "response_format"],
+  "evaluator_only_fields": ["expected", "certificate", "source_urls", "candidate_id", "ranking", "model_eligibility", "answer_equivalence_key", "family_id", "world_id"],
+  "primary_text_arms": ["premises_only", "minimal_bridge"],
+  "shared_prerequisites": true,
+  "diagnostic_conditions": ["alternate_bridge", "scaffold", "worked_example", "full_explanation", "wrong_bridge", "irrelevant", "answer_only", "generic_reasoning"],
+  "neutral_capture_cue": "Continue with the requested response.",
+  "capture_boundary": "after_neutral_cue_before_first_generated_answer_token",
+  "primary_recipient_condition": "premises_only",
+  "primary_comparison": "frozen_cross_world_bridge_intervention_minus_unmodified_baseline",
+  "primary_outcome": "independently_verified_free_generation_on_held_out_structural_consequences",
+  "confirmation_status": "not_materialized",
+  "freeze_gates_unresolved": ["exact_model_revision_and_role", "prerequisite_calibration", "independent_historical_admission", "family_allocation", "sample_size_and_weighting", "donor_answer_equivalence_and_pools", "intervention_and_sampling_policy", "effect_threshold_and_harm_margins", "budget", "human_review"],
+  "interpretation_limit": "Behavioral bridge sensitivity and causal transfer; exposed reasoning does not establish a uniquely missing thought."
+}

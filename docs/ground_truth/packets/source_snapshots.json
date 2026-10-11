@@ -1,0 +1,75 @@
+{
+  "note": "PDF hashes from temporary audit copies; PDFs are not redistributed. A content hash is not independent public-release proof.",
+  "sources": [
+    {
+      "id": "2305.18290v1",
+      "url": "https://arxiv.org/pdf/2305.18290v1",
+      "sha256": "304d57efe53317673ee5e93e1e1d990e3231fb4e24198aedd4829968e2c3cfbb",
+      "bytes": 1286755,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "2211.17192v1",
+      "url": "https://arxiv.org/pdf/2211.17192v1",
+      "sha256": "c4254776b84513ed9ed00aa62e4b85c0e850ff2782b4b39dd39a8be13b81a696",
+      "bytes": 571518,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "2402.09353v1",
+      "url": "https://arxiv.org/pdf/2402.09353v1",
+      "sha256": "6c15b619c34e4fab99e2fb2c510838a66a30b94ad499a5538d4d10e8aa4cb876",
+      "bytes": 604050,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "2205.14135v1",
+      "url": "https://arxiv.org/pdf/2205.14135v1",
+      "sha256": "be21f20c749ba8443988b479bece93617dd37b214ea9099413f951f756d4104f",
+      "bytes": 2004922,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "1708.03625v1",
+      "url": "https://arxiv.org/pdf/1708.03625v1",
+      "sha256": "737266ddd75afe7b271dc044a72c9f98e05c4de9bd5cd40e527d80194d186aac",
+      "bytes": 1067898,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "1602.07868v1",
+      "url": "https://arxiv.org/pdf/1602.07868v1",
+      "sha256": "743a76206225467065b89c91fccd1ec944ebd3402d10cc6e1569e2c60eb02392",
+      "bytes": 304611,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "2106.09685v1",
+      "url": "https://arxiv.org/pdf/2106.09685v1",
+      "sha256": "38a259c1926b724363fcfbd8e5f80fcadf0dd8d9ab6944fea8c00e74fd7590b0",
+      "bytes": 1502998,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "1805.02867v1",
+      "url": "https://arxiv.org/pdf/1805.02867v1",
+      "sha256": "a5f6bb2d0a0ba9952c419529d515c4a1c875c85812a2646da2ff35339bb3266c",
+      "bytes": 144302,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "2112.05682v1",
+      "url": "https://arxiv.org/pdf/2112.05682v1",
+      "sha256": "93b563932d75e47a749808371ecbf494961be0e64956e55efb4183f27c477da9",
+      "bytes": 136547,
+      "retrieved_on": "2026-10-11"
+    },
+    {
+      "id": "1910.00177v1",
+      "url": "https://arxiv.org/pdf/1910.00177v1",
+      "sha256": "2d97ce3eb9a58da2f3c9ce7eafbb9f8ce2ac3b2fde8fe32a9a71b86adf7fbc20",
+      "bytes": 4319350,
+      "retrieved_on": "2026-10-11"
+    }
+  ]
+}

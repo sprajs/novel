@@ -1,0 +1,240 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "collection_id": "ground-truth-research-2026-10-11",
+  "base_revision": "36b7f6bff70f79642b1ab6d65e591c1b96a44738",
+  "base_verification": "origin/main fetched and compared on 2026-10-11; Plan/research-plan.md has a narrow CUSP evidence correction",
+  "scope": [
+    "data/ground_truth",
+    "docs/ground_truth",
+    "tests/ground_truth"
+  ],
+  "public_content": "calibration_and_development_only",
+  "model_runs_performed": false,
+  "historically_admitted_candidates": 0,
+  "confirmation_materialized": false,
+  "hash_method": "sha256_raw_file_bytes",
+  "source_provenance_note": "Upstream URLs/revisions are in individual audits. Unacquired upstream files have no asserted content hash. Local hashes certify file identity, not historical truth.",
+  "license_status": "Original artifact licensing awaits repository-owner choice; upstream rights remain separate. No copyrighted PDFs or restricted corpora redistributed.",
+  "files": [
+    {
+      "path": "data/ground_truth/.gitignore",
+      "bytes": 32,
+      "sha256": "38414be0be493d999492fe31cb4f2428a2db851485d2672f514aaf6dcb484d6e"
+    },
+    {
+      "path": "data/ground_truth/benchmark_sources.json",
+      "bytes": 17476,
+      "sha256": "62c858377180d07cac6e47b259fda16528e8d5842cd424c092ec7b74b573a00d"
+    },
+    {
+      "path": "data/ground_truth/calibration_fixtures.json",
+      "bytes": 24279,
+      "sha256": "be388aff7755730170cc6929be0cdc763f74c51b489cc0e3e75f3b7e47822fbc"
+    },
+    {
+      "path": "data/ground_truth/candidate_registry.json",
+      "bytes": 106717,
+      "sha256": "317bcda69d1b121bf4dcea917b8361610f7cc7d5cd6f5a02e3cb5c1b639d758d"
+    },
+    {
+      "path": "data/ground_truth/meanflow_fixtures.json",
+      "bytes": 30764,
+      "sha256": "2b35de0726a777245258656ecec5eb738a09135dc70de6cae2538ec06da5ca7e"
+    },
+    {
+      "path": "data/ground_truth/model_audit.json",
+      "bytes": 107294,
+      "sha256": "74f97eb01210675774c87163a2b1ac6a1c386ee3445da5a4284d7c808e8627f3"
+    },
+    {
+      "path": "data/ground_truth/prompt_contract.json",
+      "bytes": 1503,
+      "sha256": "5351527ad0c2dbaf06fa077f4c732ef23a373c07edb9a650c56a56cdc4572a42"
+    },
+    {
+      "path": "data/ground_truth/research_fixtures.json",
+      "bytes": 56648,
+      "sha256": "5ccfc4142a55286ed9a93c8d99c66813f67fe4e56d1199a9543c054e21b95f56"
+    },
+    {
+      "path": "data/ground_truth/schema.json",
+      "bytes": 7810,
+      "sha256": "b097b14910627bc38d4b3926a0f6003716bad0c784834810669f562e8036e4e1"
+    },
+    {
+      "path": "data/ground_truth/split_policy.json",
+      "bytes": 1337,
+      "sha256": "88d0c4d18b91506339ee1172bbe75025e23c800ce3903e2c78c246c6da8511df"
+    },
+    {
+      "path": "data/ground_truth/transfer_examples.json",
+      "bytes": 1533,
+      "sha256": "951cd2b082913ed59cd67dcba172cd79877245a30e10b8c0586210e89fb16f42"
+    },
+    {
+      "path": "data/ground_truth/validation_report.json",
+      "bytes": 2713,
+      "sha256": "42856906978b9c7f30a24e78defeb6467f1a69db9ea40000c16ced24ed34ac35"
+    },
+    {
+      "path": "docs/ground_truth/README.md",
+      "bytes": 3261,
+      "sha256": "183993ad5a5c34cc52fd875a863f76bf1cb7bdfc163e8839bb5c8307e1205c70"
+    },
+    {
+      "path": "docs/ground_truth/adversarial_review.md",
+      "bytes": 15937,
+      "sha256": "a79b1840a0523dd78289874eccefa8d9eca9b40ee1e3c6dc8bd58fb279586089"
+    },
+    {
+      "path": "docs/ground_truth/benchmark_audit.md",
+      "bytes": 11940,
+      "sha256": "5537f59970afc123d6d9ccf88e68210e50575d65a49d7d6d5d199aa158ff9d57"
+    },
+    {
+      "path": "docs/ground_truth/calibration.md",
+      "bytes": 16345,
+      "sha256": "35eb59e2c9c4eb2fd6d4ec08479037dd15bb0f51d0f8fbd6efe99587b9c37c9e"
+    },
+    {
+      "path": "docs/ground_truth/candidate_survey.md",
+      "bytes": 66703,
+      "sha256": "c4cc41a3b6bc508925182ffc320806cde9a3c4d41a6c24d14c8a45f22bc34f7d"
+    },
+    {
+      "path": "docs/ground_truth/decision_report.md",
+      "bytes": 13057,
+      "sha256": "4d2c4d1f658252104e57d8894c22dda695f98a7c640755091c52cc5ea6314169"
+    },
+    {
+      "path": "docs/ground_truth/evidence_and_annotation.md",
+      "bytes": 8939,
+      "sha256": "efa1ab3bbb677c59b22e0c72c00040eadaa6a5d51f33eae2ab2cb06a7429be7b"
+    },
+    {
+      "path": "docs/ground_truth/interface.md",
+      "bytes": 9178,
+      "sha256": "e44b46212de5951e296b39c9fe49d9eb0d14eca45165aa9211bbff4828761c4e"
+    },
+    {
+      "path": "docs/ground_truth/lead_temporal_audit.md",
+      "bytes": 13229,
+      "sha256": "74eec0f63b8b0809781845cc523ae8850f73a8be75c495c172952df693bc893f"
+    },
+    {
+      "path": "docs/ground_truth/model_audit.md",
+      "bytes": 12053,
+      "sha256": "8e35162ba26560c3f3f7a408dde2d7c3be74634b396a94e3493928d4630ddd80"
+    },
+    {
+      "path": "docs/ground_truth/packets/README.md",
+      "bytes": 8407,
+      "sha256": "d0af20067a8ed8de545fac61ea2e7e8fa892389447a36384db328e2cc30b0b16"
+    },
+    {
+      "path": "docs/ground_truth/packets/dora.md",
+      "bytes": 8329,
+      "sha256": "5269ad9dbf5386d258d3ea69339a4e104e08af97a54eb4bb110cd9a1bdcf78c6"
+    },
+    {
+      "path": "docs/ground_truth/packets/dpo.md",
+      "bytes": 7422,
+      "sha256": "f436e0cddd3cdfc6625d4b68643885febfede892f25088ee950ca56b8ed1131f"
+    },
+    {
+      "path": "docs/ground_truth/packets/flashattention.md",
+      "bytes": 7995,
+      "sha256": "61038d0c3e04aba5cd31ba5c8bd8e8e8187bd3473e1e1382a9ba4ffada9aa774"
+    },
+    {
+      "path": "docs/ground_truth/packets/meanflow.md",
+      "bytes": 11823,
+      "sha256": "31d412d28f0249dfee837414c3bbfa31fba0bc8c6f7edc10dfd7ffc9ada0d9e3"
+    },
+    {
+      "path": "docs/ground_truth/packets/source_snapshots.json",
+      "bytes": 2504,
+      "sha256": "8bd15712d94d157be0dd6c9bfefa9fa1e1d0d6260bb05540b53394b097c7331d"
+    },
+    {
+      "path": "docs/ground_truth/packets/speculative-decoding.md",
+      "bytes": 7285,
+      "sha256": "90a2a73249eacd7af2f6c3e80bdb744d30f350686b7230e3fb54f8301c58f971"
+    },
+    {
+      "path": "docs/ground_truth/protocol.md",
+      "bytes": 9840,
+      "sha256": "e71495cdcafa68acfbb9baf027f38e2773cede132b56b05e4bd121917811ad73"
+    },
+    {
+      "path": "tests/ground_truth/.gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "tests/ground_truth/artifact_tools.py",
+      "bytes": 14374,
+      "sha256": "3c0dcbf4a31fa558c8b0d787100e28f5bad9344bd22df83be660f3326ac44ebb"
+    },
+    {
+      "path": "tests/ground_truth/calibration.py",
+      "bytes": 24457,
+      "sha256": "c05a8e54d529f2e2377035ffe5a0a4b2b9bf2fa45fa3965eadac050a4deae0da"
+    },
+    {
+      "path": "tests/ground_truth/check_sibling_interface.py",
+      "bytes": 2170,
+      "sha256": "e89f8cbc03df2fd365a09a635077e2924846ec23af89a4cb3384cc54e3323a4a"
+    },
+    {
+      "path": "tests/ground_truth/infrastructure_adapter.py",
+      "bytes": 5334,
+      "sha256": "c08e97dc29040de85522d8c244fa0ddc3a6d664a5c1da0ec9ad5b4add0eeb1bf"
+    },
+    {
+      "path": "tests/ground_truth/meanflow_verifier.py",
+      "bytes": 8179,
+      "sha256": "9d225331621745fd90098b133e1cabcf0ee67299a06f04fb2fd17d4a7b7b1047"
+    },
+    {
+      "path": "tests/ground_truth/research_prompting.py",
+      "bytes": 3426,
+      "sha256": "2ac99575e4b868cfe4d85d543e83a5b97f0c2356f7d7db46e735672dc9e6ca7a"
+    },
+    {
+      "path": "tests/ground_truth/research_verifiers.py",
+      "bytes": 13069,
+      "sha256": "9404c97fbb175e9c0e2851aa7ff764d4f26bfeb2ad3b389dfc2f13b05ec4b2ed"
+    },
+    {
+      "path": "tests/ground_truth/test_calibration.py",
+      "bytes": 23380,
+      "sha256": "d0842df98996fa96efa50f83be46eee5f5e34c6f496b76611adcfb7fe6d6a5a4"
+    },
+    {
+      "path": "tests/ground_truth/test_ground_truth_artifacts.py",
+      "bytes": 7012,
+      "sha256": "6ebe9e826c25f8c85dc8e16e1a7abd125b8b30d3b4b8d20625d637670ff76021"
+    },
+    {
+      "path": "tests/ground_truth/test_infrastructure_adapter.py",
+      "bytes": 3679,
+      "sha256": "d5c78d3f6ca0342d0b91d586b2aba702f35c6736bb922a308c10fc36a9b6db02"
+    },
+    {
+      "path": "tests/ground_truth/test_meanflow.py",
+      "bytes": 8082,
+      "sha256": "d6cececae95a0ee7bf40c00f5408cd638d99f8d5244ff019c3f20b2303cb5161"
+    },
+    {
+      "path": "tests/ground_truth/test_research_packets.py",
+      "bytes": 14330,
+      "sha256": "df199df7ed48fc0cb527f343d538ed60f93d3a3faa75903555a63058568cbb1d"
+    },
+    {
+      "path": "tests/ground_truth/test_transfer_contract.py",
+      "bytes": 4174,
+      "sha256": "3dec8354709b4c15acc5e719c522309b02c8b973a9057ed3e92ea0f6f7f10153"
+    }
+  ]
+}
