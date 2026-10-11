@@ -2,7 +2,7 @@ import hashlib
 
 import pytest
 
-from novel.artifacts import RunStore, sha256_file
+from novel.artifacts import RunStore, sha256_file, strict_json
 
 
 def test_budget_and_integrity(tmp_path):
@@ -22,3 +22,9 @@ def test_no_overwrite_and_no_path_traversal(tmp_path):
         store.write_bytes("one", b"b")
     with pytest.raises(ValueError):
         store.write_bytes("../escape", b"c")
+
+
+@pytest.mark.parametrize("text", ['{"a":1,"a":2}', '{"a":NaN}', '{"a":Infinity}'])
+def test_invalid_json_provenance_is_rejected(text):
+    with pytest.raises(ValueError):
+        strict_json(text)

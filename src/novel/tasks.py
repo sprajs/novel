@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Iterator, Literal
 
+from .artifacts import strict_json
+
 
 @dataclass(frozen=True)
 class TaskInput:
@@ -47,7 +49,7 @@ def read_public_tasks(path: Path, *, allow_confirmation: bool = False) -> Iterat
         for line in handle:
             if len(line.encode("utf-8")) > 131072:
                 raise ValueError("Task record exceeds 128 KiB")
-            task = TaskInput.from_dict(json.loads(line))
+            task = TaskInput.from_dict(strict_json(line))
             if task.item_id in seen:
                 raise ValueError(f"Duplicate item_id: {task.item_id}")
             if task.split == "confirmation" and not allow_confirmation:

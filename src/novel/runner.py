@@ -14,14 +14,29 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from .activation import (AdditiveIntervention, IdentityIntervention, ResidualSite,
                          SemanticAnchor, forward_reference, prepare_reference_model)
-from .artifacts import RunStore, environment_record, sha256_file
+from .artifacts import RunStore, environment_record, sha256_file, strict_json
 from .generation import generate_reference
 from .models import model_entry, snapshot_path, verify_snapshot
 from .tasks import TaskInput
 
 
 def load_config(path: Path) -> dict:
-    config = json.loads(path.read_text())
+    config = strict_json(path.read_text())
+    fields = {"schema_version", "name", "model_key", "device", "dtype", "attention_implementation",
+              "enable_thinking", "prompt", "max_input_tokens", "max_new_tokens", "sampling", "seeds",
+              "layer", "threads", "atol", "rtol", "max_artifact_bytes", "task", "budget"}
+    if set(config) != fields:
+        raise ValueError("Unknown or missing configuration fields")
+    nested = {"sampling": {"temperature", "top_p", "top_k", "do_sample"},
+              "seeds": {"sampling", "fixture", "perturbation", "donor_selection", "world_generation"},
+              "task": {"item_id", "world_id", "family_id", "lineage_id", "split", "condition"},
+              "budget": {"maximum_generation_conditions", "maximum_total_generated_tokens", "scientific_sweep"}}
+    for field, expected in nested.items():
+        if not isinstance(config[field], dict) or set(config[field]) != expected:
+            raise ValueError(f"Unknown or missing {field} fields")
+    for seed in config["seeds"].values():
+        if type(seed) is not int or not 0 <= seed <= 2**63 - 1:
+            raise ValueError("Seeds must be nonnegative signed 64-bit integers")
     if config["schema_version"] != 1 or config["device"] != "cpu" or config["dtype"] != "float32":
         raise ValueError("This tested runner is the named CPU FP32 condition only")
     if config["attention_implementation"] != "eager" or config["enable_thinking"] is not False:

@@ -23,6 +23,22 @@ def json_bytes(value) -> bytes:
     return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
 
 
+def strict_json(text: str):
+    """Reject duplicate keys and JavaScript nonfinite extensions in manifests."""
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            if key in result:
+                raise ValueError(f"Duplicate JSON key: {key}")
+            result[key] = value
+        return result
+
+    def constant(value):
+        raise ValueError(f"Nonfinite JSON number: {value}")
+
+    return json.loads(text, object_pairs_hook=pairs, parse_constant=constant)
+
+
 class RunStore:
     """Reserve a unique run; never overwrite existing observations."""
 

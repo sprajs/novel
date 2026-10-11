@@ -8,11 +8,11 @@ import shutil
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
-from novel.artifacts import sha256_file
+from novel.artifacts import sha256_file, strict_json
 
 
 def model_entry(registry: Path, key: str) -> dict:
-    data = json.loads(registry.read_text())
+    data = strict_json(registry.read_text())
     entry = data["models"][key]
     if not re.fullmatch(r"[a-zA-Z0-9_-]+", key):
         raise ValueError("Invalid model key")
