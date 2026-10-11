@@ -1,0 +1,22 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "record_kind": "split_policy",
+  "unit_of_independence": "latent_world",
+  "primary_generalization_unit": "structural_family",
+  "public_splits": ["calibration", "development"],
+  "world_variants_share_split": true,
+  "primary_families_disjoint": true,
+  "dependency_keys": ["world_id", "family_id", "donor_library_id", "template_lineage", "counterfactual_parent_id"],
+  "donor_role": "development_only_separate_worlds",
+  "donor_answer_rule": "Prospectively disjoint verifier-defined equivalence keys for substantive transfer; shared UNKNOWN/INCONSISTENT/UNREACHABLE classes are separate guardrail strata.",
+  "selection_rule": "Candidate audit and structural-family recipe precede model outcomes; no confirmation filtering by unaided failure and hinted success.",
+  "confirmation": {
+    "materialized": false,
+    "items": [],
+    "seed": null,
+    "inventory_sha256": null,
+    "custodian": null,
+    "reason": "All authored examples are public development; new content is generated and sealed after protocol freeze. Hashes alone cannot prove non-access."
+  },
+  "statistical_note": "Average repeated seeds within world. Shared donor libraries induce dependence; report conditional-on-library inference or collect independent libraries. Same-family unseen-world transfer is secondary."
+}

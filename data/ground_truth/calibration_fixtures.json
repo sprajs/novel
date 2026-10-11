@@ -1,0 +1,1118 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "fixtures": [
+    {
+      "fixture_id": "offset-subtraction-probe",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-anchored-pair",
+      "world_id": "world-offset-subtraction-probe",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "N",
+          "P"
+        ],
+        "instruments": [
+          "zero"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "zero",
+            "object": "N",
+            "value": "11"
+          },
+          {
+            "instrument": "zero",
+            "object": "P",
+            "value": "4"
+          }
+        ],
+        "known_offsets": {
+          "zero": "0"
+        }
+      },
+      "target": {
+        "coefficients": {
+          "N": "1",
+          "P": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "7"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "offset-shared-probe",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-shared-pair",
+      "world_id": "world-offset-shared-probe",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "O",
+          "P"
+        ],
+        "instruments": [
+          "scale"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "scale",
+            "object": "O",
+            "value": "17"
+          },
+          {
+            "instrument": "scale",
+            "object": "P",
+            "value": "12"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "O": "1",
+          "P": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "5"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "offset-signed-chain-probe",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-signed-chain",
+      "world_id": "world-offset-signed-chain-probe",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "X",
+          "Y",
+          "Z"
+        ],
+        "instruments": [
+          "alpha",
+          "beta"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "alpha",
+            "object": "X",
+            "value": "2"
+          },
+          {
+            "instrument": "alpha",
+            "object": "Y",
+            "value": "7"
+          },
+          {
+            "instrument": "beta",
+            "object": "Y",
+            "value": "4"
+          },
+          {
+            "instrument": "beta",
+            "object": "Z",
+            "value": "1"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "X": "1",
+          "Z": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "-2"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "offset-absolute-probe",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-unanchored-absolute",
+      "world_id": "world-offset-absolute-probe",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "L",
+          "M"
+        ],
+        "instruments": [
+          "meter"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "meter",
+            "object": "L",
+            "value": "12"
+          },
+          {
+            "instrument": "meter",
+            "object": "M",
+            "value": "9"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "L": "1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "UNKNOWN",
+        "value": null
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "offset-anchored-absolute",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-anchored-absolute",
+      "world_id": "world-offset-anchored-absolute",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "R",
+          "S"
+        ],
+        "instruments": [
+          "meter"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "meter",
+            "object": "R",
+            "value": "11"
+          },
+          {
+            "instrument": "meter",
+            "object": "S",
+            "value": "6"
+          }
+        ],
+        "known_offsets": {
+          "meter": "2"
+        }
+      },
+      "target": {
+        "coefficients": {
+          "R": "1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "9"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-subtraction-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-plan-chain",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-two-instrument-chain",
+      "world_id": "world-offset-plan-chain",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "A",
+          "B",
+          "C"
+        ],
+        "instruments": [
+          "one",
+          "two"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "one",
+            "object": "A",
+            "value": "17"
+          },
+          {
+            "instrument": "one",
+            "object": "B",
+            "value": "11"
+          },
+          {
+            "instrument": "two",
+            "object": "B",
+            "value": "25"
+          },
+          {
+            "instrument": "two",
+            "object": "C",
+            "value": "22"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "A": "1",
+          "C": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "9"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-subtraction-probe",
+        "offset-shared-probe",
+        "offset-signed-chain-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-negative-chain",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-reversed-sign-chain",
+      "world_id": "world-offset-negative-chain",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "D",
+          "E",
+          "F"
+        ],
+        "instruments": [
+          "three",
+          "four"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "three",
+            "object": "D",
+            "value": "9"
+          },
+          {
+            "instrument": "three",
+            "object": "E",
+            "value": "14"
+          },
+          {
+            "instrument": "four",
+            "object": "E",
+            "value": "6"
+          },
+          {
+            "instrument": "four",
+            "object": "F",
+            "value": "2"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "D": "1",
+          "F": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "-1"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-subtraction-probe",
+        "offset-shared-probe",
+        "offset-signed-chain-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-disconnected",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-disconnected-query",
+      "world_id": "world-offset-disconnected",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "instruments": [
+          "left",
+          "right"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "left",
+            "object": "A",
+            "value": "8"
+          },
+          {
+            "instrument": "left",
+            "object": "B",
+            "value": "3"
+          },
+          {
+            "instrument": "right",
+            "object": "C",
+            "value": "10"
+          },
+          {
+            "instrument": "right",
+            "object": "D",
+            "value": "6"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "A": "1",
+          "C": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "UNKNOWN",
+        "value": null
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-shared-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-inconsistent-cycle",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-contradictory-cycle",
+      "world_id": "world-offset-inconsistent-cycle",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "A",
+          "B",
+          "C"
+        ],
+        "instruments": [
+          "one",
+          "two",
+          "three"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "one",
+            "object": "A",
+            "value": "6"
+          },
+          {
+            "instrument": "one",
+            "object": "B",
+            "value": "2"
+          },
+          {
+            "instrument": "two",
+            "object": "B",
+            "value": "8"
+          },
+          {
+            "instrument": "two",
+            "object": "C",
+            "value": "5"
+          },
+          {
+            "instrument": "three",
+            "object": "A",
+            "value": "11"
+          },
+          {
+            "instrument": "three",
+            "object": "C",
+            "value": "5"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "A": "1",
+          "C": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "INCONSISTENT",
+        "value": null
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-shared-probe",
+        "offset-signed-chain-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-per-reading",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-invalid-cancellation",
+      "world_id": "world-offset-per-reading",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "A",
+          "B"
+        ],
+        "instruments": [
+          "meter"
+        ],
+        "offset_scope": "reading",
+        "readings": [
+          {
+            "instrument": "meter",
+            "object": "A",
+            "value": "17"
+          },
+          {
+            "instrument": "meter",
+            "object": "B",
+            "value": "11"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "A": "1",
+          "B": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "UNKNOWN",
+        "value": null
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-shared-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-tiny-rational",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-rational-chain",
+      "world_id": "world-offset-tiny-rational",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "U",
+          "V",
+          "W"
+        ],
+        "instruments": [
+          "one",
+          "two"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "one",
+            "object": "U",
+            "value": "1/1000000"
+          },
+          {
+            "instrument": "one",
+            "object": "V",
+            "value": "1/3000000"
+          },
+          {
+            "instrument": "two",
+            "object": "V",
+            "value": "-1/2000000"
+          },
+          {
+            "instrument": "two",
+            "object": "W",
+            "value": "-1/1000000"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "U": "1",
+          "W": "-1"
+        },
+        "constant": "0"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "7/6000000"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-shared-probe",
+        "offset-signed-chain-probe"
+      ]
+    },
+    {
+      "fixture_id": "offset-weighted-functional",
+      "candidate_id": "synthetic-offset",
+      "split": "calibration",
+      "family_id": "offset-component-balanced-functional",
+      "world_id": "world-offset-weighted-functional",
+      "mechanism": "additive_offsets",
+      "premises": {
+        "objects": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "instruments": [
+          "left",
+          "right"
+        ],
+        "offset_scope": "instrument",
+        "readings": [
+          {
+            "instrument": "left",
+            "object": "A",
+            "value": "4"
+          },
+          {
+            "instrument": "left",
+            "object": "B",
+            "value": "1"
+          },
+          {
+            "instrument": "right",
+            "object": "C",
+            "value": "7"
+          },
+          {
+            "instrument": "right",
+            "object": "D",
+            "value": "2"
+          }
+        ]
+      },
+      "target": {
+        "coefficients": {
+          "A": "2",
+          "B": "-2",
+          "C": "-1",
+          "D": "1"
+        },
+        "constant": "1"
+      },
+      "expected": {
+        "status": "IDENTIFIED",
+        "value": "2"
+      },
+      "verifier_id": "exact-rational-offset-v1",
+      "prerequisites": [
+        "offset-shared-probe",
+        "offset-absolute-probe"
+      ]
+    },
+    {
+      "fixture_id": "badge-transition-probe",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-single-transition",
+      "world_id": "world-badge-transition-probe",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "A",
+          "B"
+        ],
+        "doors": [
+          {
+            "from": "A",
+            "to": "B",
+            "requires": 0,
+            "toggle": true
+          }
+        ],
+        "start": [
+          "A",
+          0
+        ]
+      },
+      "target": {
+        "room": "B",
+        "badge": 1
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 1,
+        "path": [
+          [
+            "A",
+            0
+          ],
+          [
+            "B",
+            1
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "badge-goal-probe",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-goal-state",
+      "world_id": "world-badge-goal-probe",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "P",
+          "Q"
+        ],
+        "doors": [
+          {
+            "from": "P",
+            "to": "Q",
+            "requires": "any",
+            "toggle": false
+          }
+        ],
+        "start": [
+          "P",
+          1
+        ]
+      },
+      "target": {
+        "room": "Q",
+        "badge": 0
+      },
+      "expected": {
+        "status": "UNREACHABLE",
+        "distance": null,
+        "path": null
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "badge-plan-revisit",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-return-with-new-state",
+      "world_id": "world-badge-plan-revisit",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doors": [
+          {
+            "from": "A",
+            "to": "B",
+            "requires": 0,
+            "toggle": true
+          },
+          {
+            "from": "B",
+            "to": "C",
+            "requires": 1,
+            "toggle": true
+          },
+          {
+            "from": "C",
+            "to": "A",
+            "requires": 0,
+            "toggle": true
+          },
+          {
+            "from": "A",
+            "to": "D",
+            "requires": 1,
+            "toggle": false
+          }
+        ],
+        "start": [
+          "A",
+          0
+        ]
+      },
+      "target": {
+        "room": "D",
+        "badge": "any"
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 4,
+        "path": [
+          [
+            "A",
+            0
+          ],
+          [
+            "B",
+            1
+          ],
+          [
+            "C",
+            0
+          ],
+          [
+            "A",
+            1
+          ],
+          [
+            "D",
+            1
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": [
+        "badge-transition-probe",
+        "badge-goal-probe"
+      ]
+    },
+    {
+      "fixture_id": "badge-plain-alternatives",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-irrelevant-diamond",
+      "world_id": "world-badge-plain-alternatives",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doors": [
+          {
+            "from": "A",
+            "to": "B",
+            "requires": "any",
+            "toggle": false
+          },
+          {
+            "from": "B",
+            "to": "D",
+            "requires": "any",
+            "toggle": false
+          },
+          {
+            "from": "A",
+            "to": "C",
+            "requires": "any",
+            "toggle": false
+          },
+          {
+            "from": "C",
+            "to": "D",
+            "requires": "any",
+            "toggle": false
+          }
+        ],
+        "start": [
+          "A",
+          0
+        ]
+      },
+      "target": {
+        "room": "D",
+        "badge": "any"
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 2,
+        "path": [
+          [
+            "A",
+            0
+          ],
+          [
+            "B",
+            0
+          ],
+          [
+            "D",
+            0
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": [
+        "badge-transition-probe"
+      ]
+    },
+    {
+      "fixture_id": "badge-gated-unreachable",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-blocked-start",
+      "world_id": "world-badge-gated-unreachable",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "doors": [
+          {
+            "from": "A",
+            "to": "B",
+            "requires": 1,
+            "toggle": false
+          },
+          {
+            "from": "B",
+            "to": "C",
+            "requires": "any",
+            "toggle": true
+          },
+          {
+            "from": "C",
+            "to": "D",
+            "requires": 0,
+            "toggle": false
+          }
+        ],
+        "start": [
+          "A",
+          0
+        ]
+      },
+      "target": {
+        "room": "D",
+        "badge": "any"
+      },
+      "expected": {
+        "status": "UNREACHABLE",
+        "distance": null,
+        "path": null
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": [
+        "badge-transition-probe"
+      ]
+    },
+    {
+      "fixture_id": "badge-state-detour",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-detour-to-new-state",
+      "world_id": "world-badge-state-detour",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "S",
+          "B",
+          "C",
+          "G"
+        ],
+        "doors": [
+          {
+            "from": "S",
+            "to": "B",
+            "requires": "any",
+            "toggle": false
+          },
+          {
+            "from": "B",
+            "to": "G",
+            "requires": 1,
+            "toggle": false
+          },
+          {
+            "from": "S",
+            "to": "C",
+            "requires": "any",
+            "toggle": true
+          },
+          {
+            "from": "C",
+            "to": "B",
+            "requires": 1,
+            "toggle": false
+          }
+        ],
+        "start": [
+          "S",
+          0
+        ]
+      },
+      "target": {
+        "room": "G",
+        "badge": "any"
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 3,
+        "path": [
+          [
+            "S",
+            0
+          ],
+          [
+            "C",
+            1
+          ],
+          [
+            "B",
+            1
+          ],
+          [
+            "G",
+            1
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": [
+        "badge-transition-probe",
+        "badge-goal-probe"
+      ]
+    },
+    {
+      "fixture_id": "badge-start-is-goal",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-zero-distance",
+      "world_id": "world-badge-start-is-goal",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "W"
+        ],
+        "doors": [
+          {
+            "from": "W",
+            "to": "W",
+            "requires": "any",
+            "toggle": true
+          }
+        ],
+        "start": [
+          "W",
+          1
+        ]
+      },
+      "target": {
+        "room": "W",
+        "badge": 1
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 0,
+        "path": [
+          [
+            "W",
+            1
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": []
+    },
+    {
+      "fixture_id": "badge-cycle-goal-bit",
+      "candidate_id": "synthetic-badge",
+      "split": "calibration",
+      "family_id": "badge-return-goal-state",
+      "world_id": "world-badge-cycle-goal-bit",
+      "mechanism": "badge_navigation",
+      "premises": {
+        "rooms": [
+          "A",
+          "B"
+        ],
+        "doors": [
+          {
+            "from": "A",
+            "to": "B",
+            "requires": 0,
+            "toggle": false
+          },
+          {
+            "from": "B",
+            "to": "A",
+            "requires": 0,
+            "toggle": true
+          }
+        ],
+        "start": [
+          "A",
+          0
+        ]
+      },
+      "target": {
+        "room": "A",
+        "badge": 1
+      },
+      "expected": {
+        "status": "REACHABLE",
+        "distance": 2,
+        "path": [
+          [
+            "A",
+            0
+          ],
+          [
+            "B",
+            0
+          ],
+          [
+            "A",
+            1
+          ]
+        ]
+      },
+      "verifier_id": "exact-badge-bfs-v1",
+      "prerequisites": [
+        "badge-transition-probe",
+        "badge-goal-probe"
+      ]
+    }
+  ]
+}

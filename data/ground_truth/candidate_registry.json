@@ -1,0 +1,1468 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "prepared_date": "2026-10-11",
+  "purpose": "Candidate search and source audit for historical reconstruction; not model observations, final historical admission, a completed novelty search, or empirical reproduction.",
+  "date_policy": "earliest_verified_public_date records the earliest relevant dated primary disclosure verified in this survey. ArXiv v1 dates are submission-history proxies, not guaranteed first public availability. For a disqualified later attribution, an earlier equivalent source may set this field. null means unresolved; primary_sources retain the target paper dates.",
+  "status_policy": {
+    "priority_pending_audit": "Promising exact-claim research priority; historical admissibility remains unproven.",
+    "ambiguous": "Useful exploratory or ambitious option with material novelty, chronology, verifier or competence uncertainty.",
+    "rejected": "Excluded for the exact claim and present assay, with an explicit reason; does not reject every contribution in the paper."
+  },
+  "ranking_policy": "Five ordinal dimensions from 0 weak, 1 mixed/unknown, 2 favorable. Scores are investigator judgements before any model response, not observed difficulty or success. Temporal scores reflect possible family-era separation, never certified immutable release eligibility; novelty_isolation 2 is a clear target, not a clean historical claim.",
+  "model_release_context": [
+    {
+      "url": "https://qwenlm.github.io/blog/qwen3/",
+      "date": "2025-04-29",
+      "evidence": "Official dated announcement lists Qwen3-1.7B and other released open-weight models. Immutable release-era checkpoint audit is separate."
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "meanflow",
+      "title": "MeanFlow average-velocity identity",
+      "domain": "calculus / generative scientific methods",
+      "status": "priority_pending_audit",
+      "target_claim": "Let u(z,r,t) be average velocity along the locally unique ODE trajectory ending at arbitrary endpoint(z,t), defined on a neighborhood, with fixed r and dz/dt=v(z,t). Derive u=v-(t-r)[D_z u·v+partial_t u] from the displacement integral and establish the converse with a bounded diagonal limit.",
+      "earliest_verified_public_date": "2025-05-19",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2505.13447v1",
+          "version": "v1",
+          "date": "2025-05-19",
+          "claim_supported": "v1 date and average-velocity contribution"
+        },
+        {
+          "url": "https://arxiv.org/html/2505.13447v1",
+          "version": "v1",
+          "date": "2025-05-19",
+          "claim_supported": "Section 4.1 equations 4-8 and Appendix B.3; inspect boundary assumptions separately"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2210.02747v1",
+          "date": "2022-10-06",
+          "relationship": "Flow Matching supplies instantaneous marginal/conditional velocity context."
+        },
+        {
+          "url": "https://arxiv.org/abs/2410.12557v1",
+          "date": "2024-10-16",
+          "relationship": "Shortcut Models already use step-size-conditioned finite-time transport; audit whether its consistency equation or earlier transport literature contains an equivalent two-time identity."
+        }
+      ],
+      "prerequisites": {
+        "A": "Fundamental theorem of calculus and the product rule with a fixed integration endpoint.",
+        "B": "Total versus partial derivatives along an ODE trajectory; average displacement divided by elapsed time."
+      },
+      "bridge": "Differentiate the displacement relation along the same trajectory while holding the earlier time fixed. The donor cue must not contain the final identity or JVP direction.",
+      "verification": "Prospective proof check: differentiate the defining integral, expand the total derivative, and integrate the differential identity back. Include polynomial/nonconstant trajectories, vector fields, r=t limits, and an unbounded C/(t-r) counterexample to an unrestricted converse. Require boundedness or a boundary condition. When requesting separate partial derivatives, define the full endpoint field via the supplied locally unique ODE, including neighboring endpoints and any required branch/domain. An average specified on just one trajectory fixes only its total derivative, not individual partial derivatives.",
+      "unavailable_empirical_claims": [
+        "One-step ImageNet quality, optimization stability, effectiveness of conditional-velocity substitution or stop-gradient training, and FID comparisons are not established by recovering the identity."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "The separate model audit supports full original April 29 snapshots: 1.7B d3e258980a49b060055ea9038dad99d75923f7c4 and 0.6B 6130ef31402718485ca4d80a6234f70d9a4cf362, with original tokenizer/template. These predate the recorded target channel; exact earlier disclosure and claim novelty remain unresolved. The July mechanics revision is a different condition.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown.",
+        "model_audit_reference": "docs/ground_truth/model_audit.md and data/ground_truth/model_audit.json; inspected 2026-10-11, independent temporal audit evidence rather than target admission."
+      },
+      "license_notes": "v1 HTML labels the paper CC BY 4.0. Repository and any generated model/data terms need separate version-specific checks.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 2,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 2,
+        "rationale": "Highest recent algebraic audit priority: short derivation and potentially compatible release-era Qwen3; novelty of the elementary identity itself is not established.",
+        "total": 9
+      },
+      "open_audit_tasks": [
+        "Audit MeanFlow official code and announcement histories for disclosure before 19 May 2025.",
+        "Separate the classical calculus identity from the paper-specific two-time generative training construction; decide which novelty claim is actually admissible.",
+        "Test whether the selected average-displacement definition already supplies too much of the result.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "speculative-decoding",
+      "title": "Exact residual correction in speculative decoding",
+      "domain": "probability / exact sampling algorithms",
+      "status": "rejected",
+      "target_claim": "For draft q and target p on a finite alphabet, derive acceptance min(1,p(x)/q(x)) and rejection replacement proportional to(p-q)_+, proving the final one-token marginal is p. This scalar correction is the selected packet claim; parallel target scoring and an autoregressive block systems contribution require a separate historical scope.",
+      "earliest_verified_public_date": "2017-08-11",
+      "earliest_date_status": "The selected scalar accept/positive-residual law is verified in an earlier maximal-coupling v1 submitted 11 August 2017. The speculative-decoding target paper v1 is 30 November 2022; generic scalar-law novelty at that later boundary is disqualified. Thorisson 2000 is an earlier lead, not independently inspected.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2211.17192v1",
+          "version": "v1",
+          "date": "2022-11-30",
+          "claim_supported": "Earliest verified target-paper v1 rather than its 2023 venue date"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2211.17192v1",
+          "version": "v1",
+          "date": "2022-11-30",
+          "claim_supported": "Algorithm and distribution-preservation argument"
+        },
+        {
+          "url": "https://arxiv.org/abs/2302.01318v1",
+          "version": "v1",
+          "date": "2023-02-02",
+          "claim_supported": "Independent later speculative-sampling disclosure; it cannot set the earlier boundary"
+        },
+        {
+          "url": "https://arxiv.org/html/1708.03625v1",
+          "version": "v1",
+          "date": "2017-08-11",
+          "claim_supported": "Section 4.1 Algorithm 4 and Appendix B: shared accepted mass is min(p,q), with rejection mass the positive residual; swap p/q to match draft/target notation."
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/html/1708.03625v1",
+          "date": "2017-08-11",
+          "relationship": "Direct claim-equivalent maximal-coupling antecedent, independently opened after reviewer supplied the lead; selected scalar residual novelty is rejected, not merely uncertain. Thorisson 2000 Chapter1§4.5 is cited here but not directly inspected."
+        },
+        {
+          "url": "https://arxiv.org/html/2504.15475v1",
+          "date": "2025-04-21",
+          "relationship": "Later primary analysis identifies equivalence to older greedy rejection/channel-simulation procedures; follow its Harsha and Flamich references to their original versions before admitting algorithmic novelty."
+        },
+        {
+          "url": "https://doi.org/10.1137/080712720",
+          "date": null,
+          "relationship": "Harsha et al., The Communication Complexity of Correlation: earlier rejection/channel simulation antecedent cited by the later analysis; conference/preprint/journal disclosure dates and exact equivalence require verification."
+        }
+      ],
+      "prerequisites": {
+        "A": "Finite probability mixtures, conditional probability, and pointwise minimum/positive-part identities.",
+        "B": "Parallel target scoring of a proposed prefix and left-to-right autoregressive factorization."
+      },
+      "bridge": "Account for the probability mass already emitted through accepted proposals, then complete the target distribution with the missing mass.",
+      "verification": "Exact rational small-alphabet probabilities and symbolic mass conservation, including q=0, p=0 and p=q. The earlier maximal-coupling algorithm yields this residual law after swapping source p/q labels. A block/EOS/cache extension can be checked separately but is not a newly admitted claim here.",
+      "unavailable_empirical_claims": [
+        "Wall-clock acceleration, hardware-numeric distribution fidelity, draft-model usefulness and output quality on real LLMs require measurement."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "No model is proposed for admitting the rejected claim under its later named-paper novelty boundary. The mathematical/program content can be retained as a separately labeled method/calibration control; any new historical scope needs a fresh timing audit.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Excellent scalar verifier/control, but a directly verified 2017 maximal-coupling equivalent disqualifies attributing this scalar law to the 2022 discovery. Specific parallel/block systems contributions are a separate unaudited scope.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "If re-targeting, define the specific parallel block-scoring/application contribution and independently audit it; do not reuse the scalar packet as a 2022 novelty claim.",
+        "Audit authors code, patents, workshop abstracts and talks; document the independent 2023 paper without using its later date as eligibility.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": "Rejected for the selected scalar residual identity because an exact maximal-coupling antecedent is directly verified in 2017. This does not reject the distinct application to parallel autoregressive model scoring; that systems target requires its own claim, earliest-disclosure audit and verifier."
+    },
+    {
+      "candidate_id": "dpo",
+      "title": "Direct Preference Optimization normalization cancellation",
+      "domain": "preference learning / variational algebra",
+      "status": "priority_pending_audit",
+      "target_claim": "Combine the optimal KL-regularized policy relation r(x,y)=beta log(pi(y|x)/pi_ref(y|x))+beta log Z(x) with a Bradley-Terry pairwise likelihood; cancel log Z(x) and derive the pairwise policy log-ratio logistic objective.",
+      "earliest_verified_public_date": "2023-05-29",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2305.18290v1",
+          "version": "v1",
+          "date": "2023-05-29",
+          "claim_supported": "DPO v1 history and contribution"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2305.18290v1",
+          "version": "v1",
+          "date": "2023-05-29",
+          "claim_supported": "Section 4 and derivation appendices"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/1805.00909v1",
+          "date": "2018-05-02",
+          "relationship": "Levine variational/control-as-inference review supplies entropy-regularized optimal-policy background; not evidence of the complete DPO pairing."
+        },
+        {
+          "url": "https://doi.org/10.2307/2334029",
+          "date": null,
+          "relationship": "Bradley and Terry paired-comparison model, 1952 journal work; exact original public date was not independently resolved here."
+        }
+      ],
+      "prerequisites": {
+        "A": "KL-regularized reward maximization on a finite action set, including normalization and support conditions.",
+        "B": "Pairwise Bradley-Terry preference likelihood and logistic log-likelihood algebra."
+      },
+      "bridge": "Compare rewards for alternatives with the same conditioning context so the shared normalizer cancels.",
+      "verification": "Prospective symbolic substitution and exact/controlled high-precision finite-action checks under varied beta and reference policies. Test zero-support exclusions, separate contexts where cancellation fails, and reward shifts that leave preferences unchanged.",
+      "unavailable_empirical_claims": [
+        "Human preference alignment, optimization behavior, benchmark wins and real-policy generalization are unavailable from the algebra alone."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 1,
+        "rationale": "Strong first packet candidate because the composition is short; older inverse-RL/preferences literature and archived pre-disclosure checkpoint competence remain open.",
+        "total": 7
+      },
+      "open_audit_tasks": [
+        "Audit reward-to-policy preference optimization and earlier inverse reinforcement learning for the same normalization cancellation.",
+        "Verify an actual pre-disclosure Pythia snapshot, rather than current main or a retrospectively moved step tag.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "dora",
+      "title": "DoRA normalized low-rank direction and radial separation",
+      "domain": "matrix calculus / parameter-efficient adaptation",
+      "status": "priority_pending_audit",
+      "target_claim": "Construct a mergeable adaptation w_j=m_j(w0_j+BA_j)/||w0_j+BA_j|| for each nonzero vector and derive radial scale versus tangent-direction derivatives, with the chosen row/column convention stated explicitly.",
+      "earliest_verified_public_date": "2024-02-14",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2402.09353v1",
+          "version": "v1",
+          "date": "2024-02-14",
+          "claim_supported": "v1 contribution and date"
+        },
+        {
+          "url": "https://arxiv.org/html/2402.09353v1",
+          "version": "v1",
+          "date": "2024-02-14",
+          "claim_supported": "Sections 4.1-4.3 define direction update, gradient analysis and detached-norm approximation"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/1602.07868v1",
+          "date": "2016-02-25",
+          "relationship": "Weight Normalization already provides magnitude/direction reparameterization and tangent projection derivative."
+        },
+        {
+          "url": "https://arxiv.org/abs/2106.09685v1",
+          "date": "2021-06-17",
+          "relationship": "LoRA provides the low-rank additive and mergeable direction update ingredient."
+        }
+      ],
+      "prerequisites": {
+        "A": "Weight normalization separates a vector magnitude from its unit direction.",
+        "B": "A low-rank additive weight update can be merged into a frozen linear map."
+      },
+      "bridge": "Use the low-rank update as a change in direction, then renormalize that direction independently of its learned magnitude.",
+      "verification": "Exact expression checks and symbolic derivative of z/||z||; independent finite differences away from zero, explicit initialization equivalence and merged-forward equality. Full normalization gradients and a detached-denominator implementation are separate targets.",
+      "unavailable_empirical_claims": [
+        "Accuracy, stability, rank robustness and resemblance to full fine-tuning are empirical, not consequences of radial normalization."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "v1 HTML labels the paper CC BY-NC-SA 4.0. NVlabs/DoRA code, dependency, model and dataset licenses must be checked independently; paper terms do not license all artifacts.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 2,
+        "rationale": "Checkable composition of two explicit older ingredients; strong packet option but the tangent gradient alone is old, and selecting these prerequisites is human assistance.",
+        "total": 8
+      },
+      "open_audit_tasks": [
+        "Audit normalized low-rank adapter variants before February 2024.",
+        "Distinguish a new combination from rediscovering 2016 weight-normalization calculus.",
+        "Freeze vector convention and norm-detachment semantics before prompt construction.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "ssd",
+      "title": "Mamba-2 SSD block decomposition",
+      "domain": "state-space systems / structured linear algebra",
+      "status": "priority_pending_audit",
+      "target_claim": "For scalar-transition selective state recurrences, derive the causal masked matrix representation and a block algorithm with within-block dense products, low-rank off-diagonal factors and propagated boundary states; prove equivalence to the sequential recurrence.",
+      "earliest_verified_public_date": "2024-05-31",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2405.21060v1",
+          "version": "v1",
+          "date": "2024-05-31",
+          "claim_supported": "v1 submission history"
+        },
+        {
+          "url": "https://arxiv.org/html/2405.21060v1",
+          "version": "v1",
+          "date": "2024-05-31",
+          "claim_supported": "Sections 3-6 connect semiseparable matrices and the block SSD algorithm"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2102.11174v1",
+          "date": "2021-02-22",
+          "relationship": "Linear attention/fast-weight recurrence equivalence is already public."
+        },
+        {
+          "url": "https://arxiv.org/abs/2312.00752v1",
+          "date": "2023-12-01",
+          "relationship": "Mamba selective state-space recurrences precede the scalar-transition SSD specialization."
+        },
+        {
+          "url": "https://arxiv.org/html/2405.21060v1",
+          "date": null,
+          "relationship": "The target itself acknowledges older sequentially semiseparable matrix representations; cited numerical-linear-algebra papers and technical-report histories need direct audit."
+        }
+      ],
+      "prerequisites": {
+        "A": "Unroll a time-varying linear state recurrence, including products of intervening transitions.",
+        "B": "Factor cross-block interactions through a low-dimensional boundary state and use associativity of matrix products."
+      },
+      "bridge": "Cut the recurrence at block boundaries; every cross-block contribution passes through the boundary state.",
+      "verification": "Independent rational scalar-transition recurrence and dense masked-matrix reference on short sequences with nonzero initial states, unequal blocks and zero/negative transitions; symbolic factorization proves all-size correctness. The mere existence of a recurrent/attention equivalence is not the new target.",
+      "unavailable_empirical_claims": [
+        "Mamba-2 throughput, scaling, language quality and hardware efficiency are not established by output equality."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 1,
+        "rationale": "Useful structured-linear-algebra bridge; generic recurrence-to-matrix conversion is old, so the block algorithm must be isolated precisely.",
+        "total": 7
+      },
+      "open_audit_tasks": [
+        "Audit older semiseparable matrix multiplication and gated linear attention algorithms for the same scalar-transition block decomposition.",
+        "Check pre-v1 ICML submissions, talks, Mamba-2 code and public project history.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "deltanet-wy",
+      "title": "Parallel DeltaNet through compact rank-one products",
+      "domain": "recurrence algorithms / numerical linear algebra",
+      "status": "priority_pending_audit",
+      "target_claim": "Starting from S_t=S_(t-1)(I-beta_t k_t k_t^T)+beta_t v_t k_t^T, derive compact vector-factor recurrences for transition and injection products, then chunk states and outputs without materializing every dense transition.",
+      "earliest_verified_public_date": "2024-06-10",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2406.06484v1",
+          "version": "v1",
+          "date": "2024-06-10",
+          "claim_supported": "v1 date"
+        },
+        {
+          "url": "https://arxiv.org/html/2406.06484v1",
+          "version": "v1",
+          "date": "2024-06-10",
+          "claim_supported": "Sections 3.1-3.2 and equations 3-8; HTML has indexing/transcription issues, so compare PDF before implementation"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2102.11174v1",
+          "date": "2021-02-22",
+          "relationship": "Schlag et al. provides the earlier delta-rule fast-weight memory."
+        },
+        {
+          "url": "https://doi.org/10.1137/0908009",
+          "date": null,
+          "relationship": "Bischof and Van Loan WY representation, journal 1987 with a 1985 technical-report citation in the target; exact earlier public history and generalized non-Householder factors require audit."
+        }
+      ],
+      "prerequisites": {
+        "A": "The delta-rule outer-product memory update and noncommuting ordered matrix products.",
+        "B": "WY-style compact representation of products of identity-minus-rank-one factors."
+      },
+      "bridge": "Treat the sequence of memory erasures as an ordered product of rank-one factors and apply the same representation to accumulated writes.",
+      "verification": "Rational small-matrix checks of sequential updates versus compact products and chunk outputs, plus induction. Include nonzero initial state, nonorthogonal keys, varied beta, arbitrary chunk lengths and swapped-order counterexamples. Complexity must be assessed under an explicit cost model.",
+      "unavailable_empirical_claims": [
+        "GPU training speed, associative recall, perplexity and hybrid-model superiority are empirical and unavailable from algebraic reconstruction."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 1,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 1,
+        "rationale": "A specific composition with strong exact checks; noncommutativity and rank-one recurrence competence could be difficult for a small checkpoint.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Audit compact WY/generalized rank-one product algorithms beyond normalized Householder reflectors.",
+        "Determine whether older fast-weight parallel training code already realizes the same chunk recurrence.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "exponential-race-speculation",
+      "title": "Speculative sampling with shared exponential races",
+      "domain": "probability coupling / sampling algorithms",
+      "status": "ambiguous",
+      "target_claim": "Couple draft and target categorical draws using the same independent Exp(1) clocks; verify draft tokens by equality with the target race winner and preserve the autoregressive target law when accepting a prefix or replacing its first mismatch.",
+      "earliest_verified_public_date": "2025-04-21",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2504.15475v1",
+          "version": "v1",
+          "date": "2025-04-21",
+          "claim_supported": "v1 dates and contribution; abstract says Sampling while HTML title says Decoding"
+        },
+        {
+          "url": "https://arxiv.org/html/2504.15475v1",
+          "version": "v1",
+          "date": "2025-04-21",
+          "claim_supported": "Algorithm 2 and Appendix B use shared clocks for exact sampling"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/1411.0030v1",
+          "date": "2014-10-31",
+          "relationship": "A* Sampling develops Gumbel process sampling; classical Gumbel-max/exponential-race identities are earlier than 2025."
+        },
+        {
+          "url": "https://arxiv.org/html/2504.15475v1",
+          "date": null,
+          "relationship": "The target cites Maddison 2017 and Li/El Gamal 2018 Poisson functional representation; earlier channel simulation and correlated sampling may already contain the selected coupling."
+        }
+      ],
+      "prerequisites": {
+        "A": "The minimum of independent exponential clocks scaled by probabilities has the required categorical winner distribution.",
+        "B": "Prefix-conditional autoregressive sampling with matched random numbers for proposed and verified positions."
+      },
+      "bridge": "Reuse the random clocks under both distributions and compare their winners, keeping the target winner after disagreement.",
+      "verification": "Analytic integration of winner probabilities and exact conditional-law proof for short blocks. Test probability zeros, support mismatch handling, prefix truncation, ties of probability zero and random-number alignment. Simulation can diagnose but not prove distribution equality.",
+      "unavailable_empirical_claims": [
+        "Speed-up, acceptance-rate advantage, channel-simulation bounds beyond the selected elementary claim, and empirical parity with other decoders need separate evidence."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "v1 HTML labels the paper CC BY 4.0. Code terms and release history remain unverified.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Compact verifier-friendly bridge but elementary shared-race coupling is old. Qwen3 arrives after this v1, so the initially attractive 2025 date does not solve temporal eligibility.",
+        "total": 7
+      },
+      "open_audit_tasks": [
+        "Audit shared-Gumbel decoding before April 2025 and distinguish an application from a new coupling theorem.",
+        "Inspect 2025 conference submission/public review histories and exact block verification random-number semantics.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "ttt-dual",
+      "title": "Causal minibatch TTT-Linear dual form",
+      "domain": "online learning / matrix algorithms",
+      "status": "ambiguous",
+      "target_claim": "With squared-error gradients all evaluated at the same minibatch start W0, derive both the final weight update and causal token outputs using residual matrices and a masked Gram matrix, avoiding one dense gradient/state matrix per token.",
+      "earliest_verified_public_date": "2024-07-05",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2407.04620v1",
+          "version": "v1",
+          "date": "2024-07-05",
+          "claim_supported": "v1 date"
+        },
+        {
+          "url": "https://arxiv.org/html/2407.04620v1",
+          "version": "v1",
+          "date": "2024-07-05",
+          "claim_supported": "Sections 2.4-2.6 and Appendix A; explicitly cites prior dual formulations"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://proceedings.mlr.press/v162/irie22a.html",
+          "date": null,
+          "relationship": "ICML proceedings in July 2022 (exact day/earlier preprint unresolved). Irie et al. The Dual Form of Neural Networks Revisited already expresses trained linear maps as attention-like key-value memory; this is an actual novelty limitation, not an incidental citation."
+        },
+        {
+          "url": "https://arxiv.org/abs/2102.11174v1",
+          "date": "2021-02-22",
+          "relationship": "Fast-weight memory/linear-attention connection supplies older equivalent components."
+        }
+      ],
+      "prerequisites": {
+        "A": "Squared-error linear-model gradients are outer products; minibatch gradients may share a fixed evaluation point.",
+        "B": "Reassociate outer-product sums into matrix products and impose causal prefix masks."
+      },
+      "bridge": "Substitute each cumulative weight update directly into its output, then collect all inner products into a triangular Gram matrix.",
+      "verification": "Rational explicit per-token gradients/states versus the dual formula with independent row/column implementations; include unequal learning rates and nonzero W0. Reject equivalence to fully online gradients evaluated at successively updated weights, which is a different algorithm. Audit v1 PDF against HTML equation indexing.",
+      "unavailable_empirical_claims": [
+        "Long-context quality, hardware throughput and nonlinear-TTT empirical improvements are not available from the simplified equivalence."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "v1 HTML labels the paper CC BY 4.0; implementation and pretrained-model terms remain separate.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 1,
+        "rationale": "Useful causal minibatch specialization; generic dual form is explicitly prior art. Needs a narrow differentiation from 2022 rather than a claim to invent the duality.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Compare the causal shared-W0 minibatch target line by line with Irie 2022 and earlier dual forms.",
+        "Check whether specifying minibatch and causal Gram premises effectively supplies the result.",
+        "Audit project talks and public code because the authors describe internal work beginning in 2022.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "schedule-free",
+      "title": "Schedule-Free online-to-batch interpolation theorem",
+      "domain": "convex optimization / proof reconstruction",
+      "status": "ambiguous",
+      "target_claim": "For weighted running averages x_t, interpolated evaluation points y_t=beta_t x_t+(1-beta_t)z_t and fresh unbiased stochastic gradients, derive the stated expected suboptimality bound from linearized regret at z_t under the theorem conditions.",
+      "earliest_verified_public_date": "2024-05-24",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2405.15682v1",
+          "version": "v1",
+          "date": "2024-05-24",
+          "claim_supported": "v1 submission history"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2405.15682v1",
+          "version": "v1",
+          "date": "2024-05-24",
+          "claim_supported": "Theorems 1-2 and Appendix A; general interpolation online-to-batch conversion"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/pdf/2405.15682v1",
+          "date": null,
+          "relationship": "The v1 explicitly traces Polyak/Ruppert averaging, primal averaging and earlier online-to-batch conversions; retrieve original articles before assigning novelty to the interpolation theorem."
+        }
+      ],
+      "prerequisites": {
+        "A": "Convexity subgradient inequality and martingale/unbiased-gradient expectation with correctly timed randomness.",
+        "B": "Weighted running-average telescoping and an online regret bound."
+      },
+      "bridge": "Express each new weighted-average displacement in terms of z_t-x_(t-1), then telescope the convexity bounds while accounting for interpolation.",
+      "verification": "A complete symbolic telescoping proof with measurable/adaptedness assumptions; finite convex examples only sanity-check it. Recovering SGD worst-case rates additionally requires its regret bound. Report theorem horizon-dependent constants separately from practical schedule-free stopping.",
+      "unavailable_empirical_claims": [
+        "Deep-network performance, robustness, tuning burden and AlgoPerf success are empirical. Numerical examples cannot prove the theorem."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 1,
+        "verifiability": 1,
+        "temporal_separation": 1,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 1,
+        "rationale": "Broader optimizer diversity and a meaningful proof target, but verifier construction and exact proof competence are harder than a matrix identity.",
+        "total": 5
+      },
+      "open_audit_tasks": [
+        "Trace the exact general theorem through the earlier averaging and online-to-batch works cited by v1.",
+        "Check whether the constants, weighted case or interpolation, rather than the baseline convergence order, is the contribution.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "lora-fa",
+      "title": "Frozen-factor low-rank adaptation activation gradient",
+      "domain": "matrix differentiation / memory algorithms",
+      "status": "ambiguous",
+      "target_claim": "For y=x(W0+AB) with W0 and projection-down A frozen, derive dL/dB=(xA)^T delta and identify conditions under which the B-gradient requires retaining xA instead of x solely for this adapter path.",
+      "earliest_verified_public_date": "2023-08-07",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2308.03303v1",
+          "version": "v1",
+          "date": "2023-08-07",
+          "claim_supported": "v1 date; later 2026 revisions must not replace v1"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2308.03303v1",
+          "version": "v1",
+          "date": "2023-08-07",
+          "claim_supported": "Section 3.1 frozen A and projected activation memory"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2106.09685v1",
+          "date": "2021-06-17",
+          "relationship": "LoRA already has the factorized branch."
+        },
+        {
+          "url": "https://arxiv.org/abs/2012.13255v1",
+          "date": "2020-12-22",
+          "relationship": "Frozen subspace fine-tuning antecedent; fixed random features and local sufficient gradient activations may make this exact algebra old."
+        }
+      ],
+      "prerequisites": {
+        "A": "Chain rule for matrix linear maps and outer-product parameter gradients.",
+        "B": "A fixed low-dimensional projection precedes the only trainable matrix."
+      },
+      "bridge": "Differentiate only the trainable factor after the fixed projection, and retain the projected sufficient activation.",
+      "verification": "Symbolic matrix differentiation and independent finite-difference B gradients; activation-liveness analysis of the explicitly specified graph. Backbone paths and other trainable parameters may still require x, so do not claim whole-model O(rank) activation storage from this local identity.",
+      "unavailable_empirical_claims": [
+        "Fine-tuning accuracy parity, end-to-end memory savings and interactions with quantization/sharding require experiments."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Simple memory/computation bridge, but the chosen derivative is elementary and the main contribution is engineering and empirical adequacy.",
+        "total": 7
+      },
+      "open_audit_tasks": [
+        "Audit earlier frozen-factor adapters/random-feature training for the same activation-memory argument.",
+        "Freeze matrix orientation and graph scope; inspect the paper optimizer/preconditioner extension separately.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "flow-matching",
+      "title": "Conditional-to-marginal flow-matching gradient equivalence",
+      "domain": "probability transport / scientific modeling",
+      "status": "ambiguous",
+      "target_claim": "Define the marginal velocity as the conditional expectation of a conditional velocity given x,t; derive that marginal and conditional squared-regression objectives have the same parameter gradient under integrability and differentiation assumptions.",
+      "earliest_verified_public_date": "2022-10-06",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2210.02747v1",
+          "version": "v1",
+          "date": "2022-10-06",
+          "claim_supported": "v1 history"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2210.02747v1",
+          "version": "v1",
+          "date": "2022-10-06",
+          "claim_supported": "Conditional/marginal flow-matching equivalence theorem"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2209.03003v1",
+          "date": "2022-09-07",
+          "relationship": "Rectified Flow earlier models straight-path transport by regression; exact overlap requires audit."
+        },
+        {
+          "url": "https://arxiv.org/abs/2209.15571v1",
+          "date": "2022-09-30",
+          "relationship": "Stochastic Interpolants already derives marginal vector fields from interpolating distributions before the Flow Matching v1."
+        }
+      ],
+      "prerequisites": {
+        "A": "Mixture/conditional probability, conditional expectation and the tower property.",
+        "B": "Squared regression gradient, with a parameter-free conditional target and justified derivative-expectation interchange."
+      },
+      "bridge": "Condition the regression gradient on the observed state, replacing the hidden conditional velocity by its conditional expectation.",
+      "verification": "Symbolic conditional-expectation proof and exact finite-mixture algebra; verify continuity-equation transport as a separate target. Include nonintegrable/parameter-dependent-target counterexamples. Distributional sampling quality does not follow solely from equality of gradients.",
+      "unavailable_empirical_claims": [
+        "Image quality, likelihood, training stability, practical ODE cost and optimal-transport path gains are empirical."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 1,
+        "rationale": "Checkable scientific-method derivation, but two close earlier disclosures and classical conditional-regression identities make novelty isolation weak.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Compare the exact selected theorem with September 2022 Rectified Flow and Stochastic Interpolants, not their later venues.",
+        "Audit earlier conditional score-matching and transport-regression formulations for equivalence.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "dora-factored-norms",
+      "title": "Factored norms for high-rank DoRA",
+      "domain": "low-rank systems / algebraic memory optimization",
+      "status": "ambiguous",
+      "target_claim": "Compute each row norm of W+sBA without materializing BA: ||W_j||^2+2s B_j(W_j A^T)^T+s^2 B_j(AA^T)B_j^T, with exact equality and an explicit intermediate-memory cost model.",
+      "earliest_verified_public_date": "2026-03-23",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2603.22276v1",
+          "version": "v1",
+          "date": "2026-03-23",
+          "claim_supported": "v1 date and factored-norm proposal"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2603.22276v1",
+          "version": "v1",
+          "date": "2026-03-23",
+          "claim_supported": "Section 2 equations 2-5 state the contraction; memory and precision caveats matter"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2402.09353v1",
+          "date": "2024-02-14",
+          "relationship": "DoRA makes the normalized low-rank sum a practical target."
+        },
+        {
+          "url": "https://arxiv.org/abs/2106.09685v1",
+          "date": "2021-06-17",
+          "relationship": "Low-rank update contraction is earlier; the displayed norm identity is classical quadratic-form algebra, so its novel application/history must be audited."
+        }
+      ],
+      "prerequisites": {
+        "A": "Quadratic expansion of a squared norm and Gram-matrix identities.",
+        "B": "Associativity of low-rank matrix products and rowwise reductions."
+      },
+      "bridge": "Expand the squared norm before forming the low-rank product, then contract the small shared dimension first.",
+      "verification": "Symbolic polynomial identity and exact rational matrices against dense row norms. Include s=0, negative scale, nonorthogonal factors and near-cancellation. Floating-point clamping, detached gradients and measured allocator savings are separate implementation claims.",
+      "unavailable_empirical_claims": [
+        "Fused-kernel speed-ups, observed GPU memory, bf16 numerical parity and training fidelity require systems measurements."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "The separate model audit supports full original April 29 snapshots: 1.7B d3e258980a49b060055ea9038dad99d75923f7c4 and 0.6B 6130ef31402718485ca4d80a6234f70d9a4cf362, with original tokenizer/template. These predate the recorded target channel; exact earlier disclosure and claim novelty remain unresolved. The July mechanics revision is a different condition.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown.",
+        "model_audit_reference": "docs/ground_truth/model_audit.md and data/ground_truth/model_audit.json; inspected 2026-10-11, independent temporal audit evidence rather than target admission."
+      },
+      "license_notes": "arXiv v1 links a Creative Commons license, but the exact terms and code/data terms were not fully resolved; do not inherit the original DoRA paper license.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 2,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Recent and highly mechanically checkable, potentially release-era Qwen3 compatible, but easy rediscovery of old algebra cannot by itself establish a new 2026 theorem.",
+        "total": 8
+      },
+      "open_audit_tasks": [
+        "Search pre-2026 PEFT/DoRA code, merge implementations and low-rank norm estimation for exactly this contraction.",
+        "Audit whether paper-specific memory-saving execution rather than the mathematical identity is an admissible target.",
+        "Pin earliest official code publication and repository license.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "alphaevolve-rank48",
+      "title": "AlphaEvolve rank-48 complex matrix multiplication certificate",
+      "domain": "algebraic algorithms / constructive mathematics",
+      "status": "ambiguous",
+      "target_claim": "Produce a 48-term rank-one decomposition of the 4x4 matrix-multiplication tensor over the complex numbers (as in the released half-integer complex factor construction), and certify every tensor coefficient. The target is bilinear tensor rank, not unrestricted scalar multiplication count.",
+      "earliest_verified_public_date": "2025-05-14",
+      "earliest_date_status": "Official announcement dated 14 May 2025 is an earlier verified public disclosure than arXiv v1 (16 June 2025). Earlier code, presentations and equivalent certificates are unresolved.",
+      "primary_sources": [
+        {
+          "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+          "version": "dated announcement, live page",
+          "date": "2025-05-14",
+          "claim_supported": "Official public disclosure of 48-multiplication 4x4 complex result before arXiv."
+        },
+        {
+          "url": "https://arxiv.org/abs/2506.13131v1",
+          "version": "v1",
+          "date": "2025-06-16",
+          "claim_supported": "Later white-paper v1; it cannot set a June novelty boundary"
+        },
+        {
+          "url": "https://github.com/google-deepmind/alphaevolve_results/blob/main/mathematical_results.ipynb",
+          "version": "main inspected 2026-10-11; immutable commit unresolved",
+          "date": null,
+          "claim_supported": "Notebook includes Rank-48 <4,4,4> over 0.5*C and tensor coefficient verification code; publication history unresolved."
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://doi.org/10.1007/BF02165411",
+          "date": null,
+          "relationship": "Strassen 1969 provides the recursive 49-term benchmark; exact original public date was not resolved."
+        },
+        {
+          "url": "https://www.nature.com/articles/s41586-022-05172-4",
+          "date": "2022-10-05",
+          "relationship": "AlphaTensor 47-term 4x4 result is over GF(2), a different field."
+        },
+        {
+          "url": "https://doi.org/10.1109/T-C.1970.222926",
+          "date": null,
+          "relationship": "Older Waksman scalar-operation algorithms require scope audit; lower unrestricted counts do not automatically disqualify a bilinear tensor-rank contribution."
+        }
+      ],
+      "prerequisites": {
+        "A": "Bilinear algorithms correspond to exact sums of rank-one tensors, with a fixed input/output indexing convention.",
+        "B": "Strassen-type decomposition, linear changes of basis and cancellation/search over factor coefficients."
+      },
+      "bridge": "Explore cancellation among rank-one tensor terms or propose a search procedure whose output is a valid lower-rank certificate. This is an exploratory search bridge, not a known short deduction of the 48-term construction.",
+      "verification": "An independent exact Gaussian-rational coefficient checker compares all 16^3 entries to the matrix-multiplication tensor; require 48 terms and validate coefficient representation. The official notebook contains the construction and a verifier but was only inspected, not executed or independently validated here.",
+      "unavailable_empirical_claims": [
+        "Agent discovery rates, search cost, superiority on arbitrary fields, runtime gains and hardware deployment claims are not certified by one valid tensor decomposition."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "The separate model audit supports full original April 29 snapshots: 1.7B d3e258980a49b060055ea9038dad99d75923f7c4 and 0.6B 6130ef31402718485ca4d80a6234f70d9a4cf362, with original tokenizer/template. These predate the recorded target channel; exact earlier disclosure and claim novelty remain unresolved. The July mechanics revision is a different condition.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown.",
+        "model_audit_reference": "docs/ground_truth/model_audit.md and data/ground_truth/model_audit.json; inspected 2026-10-11, independent temporal audit evidence rather than target admission."
+      },
+      "license_notes": "Official results README states Apache 2.0 for software and CC BY 4.0 for other materials. arXiv v1 paper separately labels CC BY-NC-ND 4.0; these licenses must not be conflated.",
+      "ranking": {
+        "deducibility": 0,
+        "verifiability": 2,
+        "temporal_separation": 2,
+        "novelty_isolation": 2,
+        "prerequisite_feasibility": 0,
+        "rationale": "A meaningful recent mathematics target with an exact finite certificate and potential old-Qwen3 chronology, but likely unrealistic for a small-model short-bridge assay.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Archive the May announcement/linked white paper and notebook first-public visibility; do not use June arXiv as the first disclosure.",
+        "Independently verify the exact complex certificate and all tensor index conventions.",
+        "Audit prior bilinear rank-48 constructions and distinguish Waksman/Winograd nonbilinear operation counts.",
+        "Decide whether a certificate search belongs in a later program-search study instead of the initial composition assay.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "alphatensor-rank47",
+      "title": "AlphaTensor rank-47 GF(2) matrix multiplication certificate",
+      "domain": "finite-field algorithms / constructive mathematics",
+      "status": "ambiguous",
+      "target_claim": "Produce and check a 47-term rank-one decomposition for 4x4 matrix multiplication over GF(2), below the recursive Strassen 49-term construction; do not transfer this field-specific result to characteristic zero.",
+      "earliest_verified_public_date": "2022-10-05",
+      "earliest_date_status": "Verified Nature version-of-record publication date, not a certified first disclosure. Earlier public code/talk/abstract history unresolved; private submission and acceptance dates are not used as disclosure dates.",
+      "primary_sources": [
+        {
+          "url": "https://www.nature.com/articles/s41586-022-05172-4",
+          "version": "version of record",
+          "date": "2022-10-05",
+          "claim_supported": "Official publication date, finite-field 47-multiplication claim and tensor decomposition formulation."
+        },
+        {
+          "url": "https://github.com/google-deepmind/alphatensor",
+          "version": "live official repository; immutable historical revision unresolved",
+          "date": null,
+          "claim_supported": "Official implementation/certificate source to audit; first visibility and licensing unresolved here."
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://doi.org/10.1007/BF02165411",
+          "date": null,
+          "relationship": "Strassen 1969 multiplication decomposition; investigate subsequent GF(2) tensor-rank algorithms before assigning novelty."
+        }
+      ],
+      "prerequisites": {
+        "A": "GF(2) arithmetic and coefficient comparison of bilinear tensor expressions.",
+        "B": "Rank-one tensor decomposition and transformations of existing Strassen-style algorithms."
+      },
+      "bridge": "Search for cancellations in a structured decomposition and return a complete coefficient certificate. No concise derivational bridge has been established.",
+      "verification": "Exact parity checks of every tensor coefficient plus output-index checks. Exhaustive enumeration of all matrix pairs is unnecessary once all bilinear coefficients match. A correct decomposition establishes an upper bound, not optimal tensor rank.",
+      "unavailable_empirical_claims": [
+        "Deep-RL discovery efficiency, search cost, hardware speed-ups and global optimality of rank 47 are unavailable from the certificate alone."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "An archived pre-disclosure Pythia/GPT-Neo/GPT-J/other open-model revision may be investigated, with all release and post-training dates checked; no eligible revision is certified here.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 0,
+        "verifiability": 2,
+        "temporal_separation": 1,
+        "novelty_isolation": 2,
+        "prerequisite_feasibility": 0,
+        "rationale": "Strong mathematical certificate, weak small-model prerequisite and bridge feasibility; retain as an ambitious separate algorithm-search branch.",
+        "total": 5
+      },
+      "open_audit_tasks": [
+        "Audit paper-linked algorithm archive and earliest code/talk disclosure; received and accepted dates are not public disclosure.",
+        "Independently reconstruct/check the 47-term GF(2) certificate and its equivalence class.",
+        "Search earlier finite-field matrix multiplication decompositions.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "gumbel-topk-sequences",
+      "title": "Stochastic Beam Search without-replacement sequence sampling",
+      "domain": "probability / sequence-search algorithms",
+      "status": "ambiguous",
+      "target_claim": "Generate k complete sequences without replacement from a finite autoregressive tree by consistently assigning/truncating Gumbel subtree maxima; prove agreement with the ordered Gumbel-top-k law, rather than rediscovering categorical Gumbel-max alone.",
+      "earliest_verified_public_date": "2019-03-14",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/1903.06059v1",
+          "version": "v1",
+          "date": "2019-03-14",
+          "claim_supported": "v1 date and sequence-level contribution"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1903.06059v1",
+          "version": "v1",
+          "date": "2019-03-14",
+          "claim_supported": "Stochastic beam algorithm and sampling proof"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/1411.0030v1",
+          "date": "2014-10-31",
+          "relationship": "A* Sampling/Gumbel process antecedent; broad perturb-and-max claims are earlier."
+        }
+      ],
+      "prerequisites": {
+        "A": "Gumbel-max/top-k equivalence to categorical/Plackett-Luce sampling.",
+        "B": "Factorized sequence probabilities and conditional subtree maxima with globally consistent random perturbations."
+      },
+      "bridge": "Represent each prefix by the maximum perturbed score of its entire completion subtree and condition children consistently on that maximum.",
+      "verification": "Exact probability-law derivation for a tiny finite tree and enumeration of ordered samples; independent simulation is secondary. A finite beam that independently perturbs local logits is not automatically exact. Include unequal depths, EOS, ties and k exceeding support.",
+      "unavailable_empirical_claims": [
+        "Translation quality, diversity usefulness and model-evaluation cost on realistic distributions require experiments."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "GPT-2 release-era snapshots would be the relevant small-model branch; competence is a substantial concern.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 1,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 1,
+        "rationale": "Mechanistically distinct sampling target, but very early release requirement leaves small GPT-2-era checkpoints with uncertain competence; generic Gumbel-top-k is not new.",
+        "total": 5
+      },
+      "open_audit_tasks": [
+        "Audit author thesis, code and older stochastic-beam/Gumbel-process results for exact sequence-tree equivalence.",
+        "Find an actual checkpoint public before March 2019; later GPT-2 size releases or Pythia cannot qualify.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    },
+    {
+      "candidate_id": "flashattention",
+      "title": "FlashAttention online exact-attention merge identity",
+      "domain": "attention systems / mergeable summaries",
+      "status": "rejected",
+      "target_claim": "Merge exact attention/softmax summaries across blocks using a common running maximum, rescaled normalization masses and weighted-value numerators.",
+      "earliest_verified_public_date": "2021-12-10",
+      "earliest_date_status": "An earlier equivalent exact-memory attention result is verified at Rabe-Staats v1 (10 December 2021); online normalization is earlier still (8 May 2018). First public disclosure of every weighted-merge detail is unresolved.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2205.14135v1",
+          "version": "v1",
+          "date": "2022-05-27",
+          "claim_supported": "FlashAttention v1 names the hardware-aware contribution; it is not the first date of generic exact-memory attention"
+        },
+        {
+          "url": "https://arxiv.org/abs/2112.05682v1",
+          "version": "v1",
+          "date": "2021-12-10",
+          "claim_supported": "Rabe and Staats earlier exact-memory attention computation"
+        },
+        {
+          "url": "https://arxiv.org/abs/1805.02867v1",
+          "version": "v1",
+          "date": "2018-05-08",
+          "claim_supported": "Earlier online stable softmax normalization"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2112.05682v1",
+          "date": "2021-12-10",
+          "relationship": "Earlier exact-memory attention disqualifies attributing the generic merge to the 2022 FlashAttention discovery."
+        },
+        {
+          "url": "https://arxiv.org/abs/1805.02867v1",
+          "date": "2018-05-08",
+          "relationship": "Online normalizer recurrence precedes both attention papers."
+        }
+      ],
+      "prerequisites": {
+        "A": "Softmax translation invariance and stable exponential normalization.",
+        "B": "Associative merging of sufficient sums and weighted-value numerators."
+      },
+      "bridge": "Put the block summaries in a shared exponential scale before adding their masses and numerators.",
+      "verification": "An exact symbolic rescaling/merge proof and numeric checks can verify the identity. They do not prove GPU IO optimality or reproduce FlashAttention tiling/backward design.",
+      "unavailable_empirical_claims": [
+        "Hardware IO savings, wall-clock throughput and practical memory efficiency are empirical/system-specific."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "No model is proposed for admitting the rejected claim under its later named-paper novelty boundary. The mathematical/program content can be retained as a separately labeled method/calibration control; any new historical scope needs a fresh timing audit.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Keep as a verifier/control example, not a FlashAttention novelty item. The specific IO-aware system contribution requires a different target and verifier.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Locate earliest claim-equivalent weighted merge before 2021 if re-targeting it historically.",
+        "Temporal worker identified a 20 May 2022 first-release code commit: verify actual public visibility before using it as the earlier FlashAttention disclosure.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": "Rejected for the selected 2022 FlashAttention reconstruction claim because the selected merge/exact-memory principle has explicit earlier antecedents. This does not reject the paper-specific IO-aware tiling/backward/complexity contribution."
+    },
+    {
+      "candidate_id": "lora",
+      "title": "Generic mergeable low-rank update attributed to LoRA",
+      "domain": "linear algebra / parameter-efficient adaptation",
+      "status": "rejected",
+      "target_claim": "Derive (W0+BA)x=W0x+B(Ax) and merge a learned low-rank additive adapter into a frozen linear weight.",
+      "earliest_verified_public_date": null,
+      "earliest_date_status": "Unknown first disclosure of this elementary identity; LoRA v1 is 17 June 2021 but is not treated as its invention date.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2106.09685v1",
+          "version": "v1",
+          "date": "2021-06-17",
+          "claim_supported": "LoRA v1 paper and date; its references acknowledge earlier factorized adaptation"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/abs/2012.13255v1",
+          "date": "2020-12-22",
+          "relationship": "Earlier intrinsic-dimensionality fine-tuning."
+        },
+        {
+          "url": "https://arxiv.org/pdf/2106.09685v1",
+          "date": null,
+          "relationship": "The v1 references a 2016 low-rank-plus-diagonal recurrent-adaptation antecedent; independently retrieve its exact source and disclosure history before claiming an equivalent neural adapter is new."
+        }
+      ],
+      "prerequisites": {
+        "A": "Matrix associativity and a rank-r factorization.",
+        "B": "Linearity of a frozen layer plus an additive trainable branch."
+      },
+      "bridge": "Regroup the two factor multiplications and add the update to the frozen weight.",
+      "verification": "Exact symbolic and rational-matrix equality suffices for the local merge identity; it cannot establish useful low-rank fine-tuning capacity.",
+      "unavailable_empirical_claims": [
+        "Low intrinsic rank, accuracy parity, adaptation quality and parameter-efficiency benefits need real training evidence."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "No model is proposed for admitting the rejected claim under its later named-paper novelty boundary. The mathematical/program content can be retained as a separately labeled method/calibration control; any new historical scope needs a fresh timing audit.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Useful calibration for prerequisites and merge verification; selected equation is elementary old algebra and cannot isolate the LoRA contribution.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "If re-targeted, identify the empirical or adapter-design contribution beyond matrix distributivity and find a suitable verifier.",
+        "Retrieve and compare the 2016 factorized-adaptation reference in the original LoRA bibliography.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": "The selected merge identity is an elementary algebraic consequence and older low-rank adaptation exists; a 2021 LoRA novelty claim cannot rest on this identity."
+    },
+    {
+      "candidate_id": "soap",
+      "title": "Adam in the Shampoo eigenbasis attributed to SOAP",
+      "domain": "optimization / coordinate transformations",
+      "status": "rejected",
+      "target_claim": "Rotate a matrix gradient into the eigenspaces of Kronecker factors, maintain diagonal squared-gradient statistics there, apply an adaptive update, and rotate back.",
+      "earliest_verified_public_date": "2021-03-05",
+      "earliest_date_status": "Verified equivalent antecedent in the March 2021 v2. Target paper is September 2024; exact first disclosure of the antecedent is unresolved, and the 2020 v1 date is not substituted for v2.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/pdf/2409.11321v1",
+          "version": "v1",
+          "date": "2024-09-17",
+          "claim_supported": "SOAP v1 date and acknowledgement of essentially equivalent prior 2D algorithm"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2002.09018v2",
+          "version": "v2",
+          "date": "2021-03-05",
+          "claim_supported": "Second Order Optimization Made Practical v2 Appendix B contains eigenbasis diagonal correction"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/pdf/2002.09018v2",
+          "date": "2021-03-05",
+          "relationship": "Directly inspected earlier eigenbasis/diagonal-gradient correction; SOAP v1 Section 3 explicitly calls this essentially equivalent for 2D layers."
+        },
+        {
+          "url": "https://arxiv.org/abs/2002.09018v1",
+          "date": "2020-02-20",
+          "relationship": "The earlier paper began in 2020, but inspected v1 did not show the same appendix; do not assert that the equivalent algorithm was definitely public in 2020."
+        }
+      ],
+      "prerequisites": {
+        "A": "Orthogonal change of coordinates and Kronecker-factored gradient statistics.",
+        "B": "Elementwise adaptive preconditioning in a chosen coordinate basis."
+      },
+      "bridge": "Apply the diagonal optimizer where the matrix preconditioner is diagonal, then undo the basis transform.",
+      "verification": "Symbolic fixed-basis change-of-coordinate equality and explicit tiny-matrix updates; changing-basis moment transport must be specified. The newer idealized Shampoo-to-Adafactor theorem is a distinct possible target, not admitted here.",
+      "unavailable_empirical_claims": [
+        "Training speed, robustness to infrequent eigendecompositions and the practical superiority reported by SOAP are empirical."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "No model is proposed for admitting the rejected claim under its later named-paper novelty boundary. The mathematical/program content can be retained as a separately labeled method/calibration control; any new historical scope needs a fresh timing audit.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 0,
+        "prerequisite_feasibility": 2,
+        "rationale": "Direct prior-art disqualification for the generic rotated optimizer; a narrower 2024 equivalence theorem could be considered under a new candidate ID after audit.",
+        "total": 6
+      },
+      "open_audit_tasks": [
+        "Verify whether equivalent code/presentation preceded March 2021 and where v1/v2 differ.",
+        "If re-targeting, formally specify every assumption of the 2024 idealized Shampoo-to-Adafactor theorem and audit its novelty separately.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": "Rejected as a 2024 novelty item: the target acknowledges an essentially equivalent earlier algorithm and a pre-2024 version was directly inspected."
+    },
+    {
+      "candidate_id": "aperiodic-monotile",
+      "title": "Hat monotile aperiodicity theorem",
+      "domain": "geometry / mathematical proof",
+      "status": "rejected",
+      "target_claim": "Construct the hat tile and prove it tiles the plane while admitting no periodic tiling, including permitted reflections and the full substitution/hierarchy argument.",
+      "earliest_verified_public_date": "2023-03-20",
+      "earliest_date_status": "Verified date in the arXiv v1 submission history, used as a disclosure-date proxy. First public announcement time and earlier talks, code, theses, abstracts and equivalent results are unresolved; this is not a certified earliest disclosure.",
+      "primary_sources": [
+        {
+          "url": "https://arxiv.org/abs/2303.10798v1",
+          "version": "v1",
+          "date": "2023-03-20",
+          "claim_supported": "v1 public record and theorem scope"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2303.10798v1",
+          "version": "v1",
+          "date": "2023-03-20",
+          "claim_supported": "Long geometric/hierarchy proof and computer-assisted classification"
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://arxiv.org/pdf/2303.10798v1",
+          "date": null,
+          "relationship": "The target reviews earlier aperiodic tiles and substitution methods; original sources and prepublication talks must be traced if revisited."
+        }
+      ],
+      "prerequisites": {
+        "A": "Substitution tilings, matching constraints and local-to-global hierarchy proofs.",
+        "B": "Geometric exact coordinates and complete classification of admissible local clusters."
+      },
+      "bridge": "Force every legal tiling to organize into larger metatiles recursively. No brief prerequisite pair or independent checker was established in this survey.",
+      "verification": "A finite patch or animated tiling is insufficient. Need independently checked exact geometric construction and a universal hierarchy/aperiodicity proof, not only bounded searches. The published v1 is 89 pages and includes computer-assisted components.",
+      "unavailable_empirical_claims": [
+        "Visual plausibility, finite patch generation and finite searches do not establish global aperiodicity."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "No model is proposed for admitting the rejected claim under its later named-paper novelty boundary. The mathematical/program content can be retained as a separately labeled method/calibration control; any new historical scope needs a fresh timing audit.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Paper and code licenses must be checked separately at the actual version used; this survey links sources and authors original summaries without redistributing their text or code.",
+      "ranking": {
+        "deducibility": 0,
+        "verifiability": 0,
+        "temporal_separation": 1,
+        "novelty_isolation": 2,
+        "prerequisite_feasibility": 0,
+        "rationale": "Historically meaningful mathematics, but outside the initial short-bridge/mechanically verified assay; retained to document domain-selection limits.",
+        "total": 3
+      },
+      "open_audit_tasks": [
+        "Only revisit after specifying a sound independent geometric proof/certificate checker and prerequisite curriculum.",
+        "Audit early author announcements, talks and code rather than relying on the preprint date.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": "Rejected for this initial assay because no tractable independent universal proof checker or plausible short A/B bridge was identified; finite geometry demonstrations would certify a weaker claim."
+    },
+    {
+      "candidate_id": "alphadev-sort3",
+      "title": "AlphaDev small-sort conditional-copy shortcut",
+      "domain": "compiler algorithms / finite program synthesis",
+      "status": "ambiguous",
+      "target_claim": "Reconstruct an exact three-element comparison/copy sorting program that removes a redundant value movement under the established partial-order invariant, while preserving the multiset and ascending order for signed integers. Specify the exact instruction set and instruction-count benchmark before asserting improvement.",
+      "earliest_verified_public_date": "2023-06-07",
+      "earliest_date_status": "Verified official shortcut announcement on 7 June 2023, but directly inspected related LLVM public review dated 24 January 2022. Exact selected motif in the earliest diff and any still earlier disclosure are unresolved; this candidate cannot be admitted using the 2023 paper date.",
+      "primary_sources": [
+        {
+          "url": "https://deepmind.google/blog/alphadev-discovers-faster-sorting-algorithms/",
+          "version": "dated official announcement, live page",
+          "date": "2023-06-07",
+          "claim_supported": "Describes small-sort swap/copy shortcuts and links the earlier LLVM review."
+        },
+        {
+          "url": "https://reviews.llvm.org/D118029",
+          "version": "archived public review and dated discussion; initial diff versus selected target unresolved",
+          "date": "2022-01-24",
+          "claim_supported": "Review authored January 2022 for branchless sort3/4/5; summary attributes algorithms to reinforcement learning, earlier than the 2023 paper."
+        },
+        {
+          "url": "https://github.com/google-deepmind/alphadev/blob/main/sort_functions_test.cc",
+          "version": "main inspected 2026-10-11; immutable historical revision unresolved",
+          "date": null,
+          "claim_supported": "Official assembly programs and finite-input tests; inspected without execution."
+        },
+        {
+          "url": "https://www.nature.com/articles/s41586-023-06004-9",
+          "version": "version of record; full text access incomplete",
+          "date": "2023-06-07",
+          "claim_supported": "Publication linked by the official dated announcement; does not set the earliest algorithm disclosure."
+        }
+      ],
+      "antecedents": [
+        {
+          "url": "https://reviews.llvm.org/D118029",
+          "date": "2022-01-24",
+          "relationship": "An earlier related disclosure from the same work, not independent prior art. Compare every revision to the selected shortcut before using its date as exact-claim boundary."
+        },
+        {
+          "url": "https://github.com/llvm/llvm-project",
+          "date": null,
+          "relationship": "Existing libc++ sort kernels and older sorting-network/superoptimization literature form the comparison baseline; exact early variant and public release history require audit."
+        }
+      ],
+      "prerequisites": {
+        "A": "Compare-exchange/min-max operations and known partial orders after an initial comparison.",
+        "B": "Conditional assignment, register liveness and redundant-copy elimination under path invariants."
+      },
+      "bridge": "Use the order already established by preceding comparisons to identify which conditional copy cannot affect the final sorted output; it must not supply the replacement expression itself.",
+      "verification": "Prove equivalence over all total preorders of three inputs including ties, then check faithful signed comparison/conditional-move ISA semantics and register/memory behavior. A source-level compare/copy model admits a small complete checker; arbitrary C++ comparators, NaNs, UB and real assembly require additional semantics. Count instructions under a declared cost model; do not infer CPU speed.",
+      "unavailable_empirical_claims": [
+        "CPU latency, library-level speed-ups, search efficiency and portability are empirical; instruction count alone does not establish the published runtime gains."
+      ],
+      "model_compatibility": {
+        "rule": "The actual publicly released checkpoint, including all post-training, tokenizer and adapters, must precede the earliest disclosure of this exact target claim.",
+        "qwen3_1_7b": "Excluded for an N2 claim tied to this dated contribution: the official Qwen3 announcement is later. Modern Qwen3 remains a behavioral calibration option only.",
+        "older_checkpoint_options": "If the January2022 LLVM diff contains the selected shortcut, investigate genuinely pre-January2022 GPT-Neo/GPT-J or older checkpoints with public-release evidence; April2023 Pythia does not qualify. Exact motif timing remains unresolved.",
+        "competence": "No model was run. Prerequisite and prompt-format competence remain unknown."
+      },
+      "license_notes": "Official AlphaDev README states Apache2 for software and CCBY4 for other materials; LLVM artifacts have their own terms. The Nature paper license was not resolved.",
+      "ranking": {
+        "deducibility": 2,
+        "verifiability": 2,
+        "temporal_separation": 0,
+        "novelty_isolation": 1,
+        "prerequisite_feasibility": 2,
+        "rationale": "A non-neural finite-program bridge with plausible small-model prerequisites, but the early LLVM review destroys an uncomplicated 2023 temporal story and instruction-level novelty remains unresolved.",
+        "total": 7
+      },
+      "open_audit_tasks": [
+        "Recover LLVM initial diff402459 and all shortcut-bearing revisions, their public visibility and the linked benchmark artifacts.",
+        "Compare the selected sort3 program/motif with old sorting networks, compiler peephole optimization and min/max simplification identities.",
+        "Pin an immutable pre-earliest-code checkpoint; a current Pythia or assumed 2023 release is insufficient.",
+        "Archive the complete exact-claim disclosure search, including code visibility, talks/slides, theses, abstracts and claim-equivalent antecedents.",
+        "Bind all model/tokenizer/template/post-training artifacts to an immutable pre-disclosure revision and independently verify actual public release.",
+        "Predeclare A/B and bridge selection before any model responses; screen for answer leakage and run prerequisite competence probes in fresh contexts."
+      ],
+      "exclusion_reason": null
+    }
+  ],
+  "bounded_search_log": [
+    {
+      "date": "2026-10-11",
+      "channel": "Primary web search and direct arXiv version pages",
+      "queries_or_actions": [
+        "Mean Flows for One-step Generative Modeling",
+        "Transformers are SSMs / state space duality",
+        "Parallelizing Linear Transformers with the Delta Rule",
+        "Speculative sampling Gumbel exponential races",
+        "TTT Learning to Learn at Test Time",
+        "SOAP Improving Stabilizing Shampoo Adam",
+        "The Road Less Scheduled",
+        "Flow Matching for Generative Modeling",
+        "DoRA LoRA-FA",
+        "Opened exact v1 abstract pages, relevant HTML/PDF sections and older source versions"
+      ],
+      "coverage": "Inspected submission histories and selected method text for the registered arXiv targets, plus selected antecedents. Search-result leads were accepted only with a primary source.",
+      "limits": "A bounded source survey, not an exhaustive literature absence proof. Talks, theses, patents and first-public code histories have not been comprehensively searched."
+    },
+    {
+      "date": "2026-10-11",
+      "channel": "Official scientific announcements and repositories",
+      "queries_or_actions": [
+        "AlphaEvolve May48",
+        "AlphaEvolve results matrix multiplication",
+        "AlphaTensor Nature47",
+        "AlphaDev LLVM sort3",
+        "Opened official DeepMind blogs, Nature record, results repository README, inspected notebook cells and sort_functions_test.cc via read-only HTTP"
+      ],
+      "coverage": "Verified May 14 AlphaEvolve disclosure before June 16 arXiv; inspected existence of rank-48 complex certificate/checker; traced AlphaDev official link to LLVM D118029 January 2022 discussion.",
+      "limits": "Did not execute third-party code or certificates. Repository main views remain mutable; immutable content/public-visibility audit remains open. LLVM initial diff exact motif comparison remains open."
+    },
+    {
+      "date": "2026-10-11",
+      "channel": "Antecedent/version comparison and model announcement",
+      "queries_or_actions": [
+        "A*Sampling v1",
+        "Online normalizer calculation for softmax",
+        "Self-attention Does Not Need O(n^2)Memory",
+        "Weight Normalization",
+        "Intrinsic Dimensionality Explains Fine-Tuning",
+        "Dual Form of Neural Networks Revisited",
+        "Second Order Optimization Made Practical v1/v2",
+        "Rectified Flow and Stochastic Interpolants v1",
+        "Qwen3 official announcement",
+        "Unbiased MCMC with couplings v1 maximal-coupling Algorithm 4 and Appendix B, supplied as a reviewer lead and directly inspected"
+      ],
+      "coverage": "Found actual FlashAttention and SOAP selected-claim disqualifications; identified TTT dual-form and Flow Matching neighboring earlier contributions; verified official Qwen3 blog dated 29 April 2025. Direct 2017 maximal-coupling antecedent disqualifies the scalar speculative residual law.",
+      "limits": "No model downloads or inference. Checkpoint commit-time versus public release and all post-training dates require the separate model eligibility audit."
+    }
+  ]
+}

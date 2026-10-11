@@ -1,0 +1,23 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "record_kind": "grounded_development_transfer_examples",
+  "status": "specification_only_no_model_runs",
+  "selection_basis": "Distinct authored development worlds and verifier-defined answers; no selection using model failures or hinted successes.",
+  "pairs": [
+    {
+      "pair_id": "dpo-development-transfer-001",
+      "donor_fixture_id": "dpo-dev-001",
+      "recipient_fixture_id": "dpo-dev-002",
+      "answer_equivalence": "same exact rational pairwise preference probability",
+      "donor_answer_key": "dpo-probability:16/97",
+      "recipient_answer_key": "dpo-probability:3/4",
+      "structural_holdout": false,
+      "donor_conditions": ["minimal_bridge", "irrelevant"],
+      "recipient_condition": "premises_only",
+      "guardrail_fixture_ids": ["dpo-dev-003", "dpo-dev-004", "dpo-dev-005"],
+      "limitations": "Both positive worlds use the same cancellation family. This checks data flow and different answers, not held-out structural generalization. Numeric and distribution-size shifts must be balanced in a future donor policy."
+    }
+  ],
+  "no_leak_controls": ["gold_mutation_leaves_primary_prompts_unchanged", "primary_arms_preserve_identical_prerequisites", "renderer_does_not_call_solver", "answer_only_requires_diagnostic_flag", "donor_gold_fails_recipient_verifier", "label_swapped_counterfactuals_are_clustered"],
+  "confirmation": "unmaterialized; a new independently held-out family cohort and prospective disjoint answer-pool recipe remain required"
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "ground-truth-v0.1",
+  "record_kind": "validation_report",
+  "date": "2026-10-11",
+  "python": "3.12.14",
+  "tests_passed": 87,
+  "checks": [
+    {
+      "command": "python -m unittest discover -s tests/ground_truth",
+      "exit_code": 0,
+      "output": ".......................................................................................\n----------------------------------------------------------------------\nRan 87 tests in 0.299s\n\nOK"
+    },
+    {
+      "command": "python tests/ground_truth/artifact_tools.py validate",
+      "exit_code": 0,
+      "output": "Ground-truth schemas, references, split boundaries and public-content checks passed."
+    },
+    {
+      "command": "python tests/ground_truth/calibration.py check-fixtures",
+      "exit_code": 0,
+      "output": "{\"schema_version\": \"ground-truth-v0.1\", \"fixtures_checked\": 20, \"offset_certificates_checked\": 12}"
+    },
+    {
+      "command": "python tests/ground_truth/check_sibling_interface.py",
+      "exit_code": 0,
+      "output": "{\"branch_merged\": false, \"infrastructure_revision\": \"c5a361363de8bb08aacc5119f1f435a847ad44d3\", \"model_execution\": false, \"public_conditions_checked\": 204, \"source_sha256\": {\"artifacts.py\": \"3faa4aad352b73529f101ef4e00a80fc0f1b24a6778c00bc70ffbdd50024e1d6\", \"tasks.py\": \"797af2f9a17aa47e53e62c04325052ad6bf25c79c60e2c3b0d2c88f1b74a8c69\"}, \"status\": \"passed\"}"
+    }
+  ],
+  "supplemental_schema_check": {
+    "checker": "installed jsonschema Draft202012Validator + FormatChecker",
+    "schema_self_validation": "passed",
+    "collections": [
+      "candidate_registry.json",
+      "calibration_fixtures.json",
+      "research_fixtures.json",
+      "meanflow_fixtures.json"
+    ],
+    "result": "passed; no dependency installed or added"
+  },
+  "candidate_counts": {
+    "priority_pending_audit": 5,
+    "rejected": 5,
+    "ambiguous": 10
+  },
+  "fixture_counts": {
+    "calibration": 20,
+    "research_four_packets": 22,
+    "meanflow": 9
+  },
+  "historical_admissions": 0,
+  "target_model_runs": 0,
+  "confirmation_materialized": false,
+  "infrastructure_revision": "c5a361363de8bb08aacc5119f1f435a847ad44d3",
+  "infrastructure_conditions_checked": 204,
+  "scope_note": "Only ground-truth tests and the exact public-task interface were executed here; no claim that the sibling model/runtime suite was rerun. The sibling branch was not merged.",
+  "remaining_gates": [
+    "historical claim/prior-art admission",
+    "exact public checkpoint evidence and acquisition/replay",
+    "human review",
+    "original artifact licensing",
+    "prerequisite and hint-response measurements",
+    "new sealed structural confirmation and powered design"
+  ]
+}

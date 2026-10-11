@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sprajs/novel/blob/research/ground-truth-audit/data/ground_truth/schema.json",
+  "title": "Ground-truth research contracts v0.1",
+  "description": "Select a definition with #/$defs/<name>. Cross-record and scientific invariants also require artifact_tools.py and review.",
+  "$defs": {
+    "version": {"const": "ground-truth-v0.1"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source": {
+      "type": "object",
+      "required": ["url", "version", "date", "claim_supported"],
+      "properties": {
+        "url": {"type": "string", "pattern": "^https?://"},
+        "version": {"type": ["string", "null"]},
+        "date": {"type": ["string", "null"], "format": "date"},
+        "claim_supported": {"type": "string", "minLength": 1},
+        "retrieved_at": {"type": "string", "format": "date-time"},
+        "content_sha256": {"anyOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]},
+        "access_status": {"enum": ["inspected", "metadata_only", "unavailable"]},
+        "evidence_level": {"enum": ["E0", "E1", "E2", "E3", "E4"]},
+        "limitations": {"type": "string"}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["candidate_id", "title", "domain", "status", "target_claim", "earliest_verified_public_date", "earliest_date_status", "primary_sources", "antecedents", "prerequisites", "bridge", "verification", "unavailable_empirical_claims", "model_compatibility", "license_notes", "ranking", "open_audit_tasks", "exclusion_reason"],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "title": {"type": "string", "minLength": 1},
+        "domain": {"type": "string"},
+        "status": {"enum": ["priority_pending_audit", "ambiguous", "rejected"]},
+        "target_claim": {"type": "string", "minLength": 1},
+        "earliest_verified_public_date": {"type": ["string", "null"], "format": "date"},
+        "earliest_date_status": {"type": "string", "minLength": 1},
+        "primary_sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+        "antecedents": {"type": "array"},
+        "prerequisites": {"type": "object", "required": ["A", "B"], "properties": {"A": {"type": "string"}, "B": {"type": "string"}}},
+        "bridge": {"type": "string", "minLength": 1},
+        "verification": {"type": "string", "minLength": 1},
+        "unavailable_empirical_claims": {"type": ["array", "string"]},
+        "model_compatibility": {"type": ["object", "string"]},
+        "license_notes": {"type": "string"},
+        "ranking": {
+          "type": "object",
+          "required": ["deducibility", "verifiability", "temporal_separation", "novelty_isolation", "prerequisite_feasibility", "rationale"],
+          "properties": {
+            "deducibility": {"type": "integer", "minimum": 0, "maximum": 2},
+            "verifiability": {"type": "integer", "minimum": 0, "maximum": 2},
+            "temporal_separation": {"type": "integer", "minimum": 0, "maximum": 2},
+            "novelty_isolation": {"type": "integer", "minimum": 0, "maximum": 2},
+            "prerequisite_feasibility": {"type": "integer", "minimum": 0, "maximum": 2},
+            "rationale": {"type": "string"}
+          }
+        },
+        "open_audit_tasks": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "exclusion_reason": {"type": ["string", "null"]}
+      }
+    },
+    "candidate_registry": {
+      "type": "object", "required": ["schema_version", "candidates"],
+      "properties": {"schema_version": {"$ref": "#/$defs/version"}, "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}}}
+    },
+    "fixture": {
+      "type": "object",
+      "required": ["fixture_id", "candidate_id", "split", "family_id", "world_id", "premises", "target", "expected", "verifier_id"],
+      "properties": {
+        "fixture_id": {"type": "string", "minLength": 1},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "split": {"enum": ["calibration", "development"]},
+        "family_id": {"type": "string", "minLength": 1},
+        "world_id": {"type": "string", "minLength": 1},
+        "template_lineage": {"type": ["string", "null"]},
+        "counterfactual_parent_id": {"type": ["string", "null"]},
+        "premises": {"type": "object"},
+        "target": {"type": "object"},
+        "expected": {"type": "object"},
+        "verifier_id": {"type": "string", "minLength": 1},
+        "prerequisites": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "fixture_collection": {
+      "type": "object", "required": ["schema_version", "fixtures"],
+      "properties": {"schema_version": {"$ref": "#/$defs/version"}, "fixtures": {"type": "array", "items": {"$ref": "#/$defs/fixture"}}}
+    },
+    "visible_prompt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["task", "premises_a", "premises_b", "observations", "question", "response_format"],
+      "properties": {
+        "task": {"type": "string"}, "premises_a": {"type": "string"}, "premises_b": {"type": "string"},
+        "observations": {"type": "array", "items": {"type": "string"}},
+        "question": {"type": "string"}, "response_format": {"type": "string"}
+      }
+    },
+    "run_record": {
+      "type": "object",
+      "required": ["schema_version", "run_id", "fixture_id", "fixture_sha256", "model_role", "model_revision", "tokenizer_revision", "model_manifest_sha256", "config_sha256", "prompt_text", "prompt_sha256", "prompt_token_ids", "condition", "rng_seeds", "donor_world_ids", "intervention_sha256", "raw_output", "output_token_ids", "stop_reason", "truncated", "verifier_id", "verifier_sha256", "evaluation"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/version"},
+        "run_id": {"type": "string"}, "fixture_id": {"type": "string"},
+        "fixture_sha256": {"$ref": "#/$defs/digest"},
+        "model_role": {"enum": ["mechanics", "historical"]},
+        "model_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "tokenizer_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "model_manifest_sha256": {"$ref": "#/$defs/digest"},
+        "config_sha256": {"$ref": "#/$defs/digest"},
+        "prompt_text": {"type": "string"}, "prompt_sha256": {"$ref": "#/$defs/digest"},
+        "prompt_token_ids": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "condition": {"type": "string"},
+        "rng_seeds": {
+          "type": "object", "required": ["world", "donor", "sampling", "intervention"],
+          "properties": {
+            "world": {"type": ["integer", "null"], "minimum": 0},
+            "donor": {"type": ["integer", "null"], "minimum": 0},
+            "sampling": {"type": ["integer", "null"], "minimum": 0},
+            "intervention": {"type": ["integer", "null"], "minimum": 0}
+          }
+        },
+        "donor_world_ids": {"type": "array", "items": {"type": "string"}},
+        "intervention_sha256": {"anyOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]},
+        "raw_output": {"type": "string"},
+        "output_token_ids": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "stop_reason": {"type": "string"}, "truncated": {"type": "boolean"},
+        "verifier_id": {"type": "string"}, "verifier_sha256": {"$ref": "#/$defs/digest"},
+        "evaluation": {
+          "type": "object", "required": ["parse_valid", "correct", "audit_status"],
+          "properties": {
+            "parse_valid": {"type": "boolean"},
+            "correct": {"type": ["boolean", "null"]},
+            "audit_status": {"enum": ["not_applicable", "pending", "eligible", "ineligible"]}
+          }
+        }
+      }
+    }
+  }
+}

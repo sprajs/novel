@@ -1,0 +1,2284 @@
+{
+  "audit_version": "1.0",
+  "audited_on": "2026-10-11",
+  "scope": "Immutable checkpoint/tokenizer/public-release evidence plus independent historical frontier audit.",
+  "research_constraints": {
+    "public_sources_only": true,
+    "weight_downloads": false,
+    "inference": false,
+    "paid_compute": false,
+    "credentials_modified": false,
+    "external_messages_sent": false,
+    "copyrighted_papers_committed": false
+  },
+  "admission_rule": "Actual immutable checkpoint, all post-training, adapters and tokenizer/prompt interface must be publicly released before earliest public target contribution; a advertised training cutoff or mutable step label is insufficient.",
+  "date_semantics": {
+    "submission_time": "arXiv-recorded submission timestamp, not independently measured first public announcement time.",
+    "commit_time": "Currently retained repository commit metadata, not proof of historical push/public visibility.",
+    "publisher_release_date": "Publisher-dated public release claim, corroborating repository identity without establishing exact public-access hour.",
+    "earliest_verified": "Earliest inspected channel with attributable evidence; not a proof no earlier channel exists."
+  },
+  "overall_decision": "No item certified clean. April Pythia and April Qwen snapshots are date-supported candidates for appropriately later narrow targets; later-interface variants remain distinct conditions.",
+  "models": [
+    {
+      "audit_id": "pythia_1_4b_april_2023",
+      "model_id": "EleutherAI/pythia-1.4b",
+      "selected_revision": "8f0af839162ddb466006494a08733ee9cfa2d338",
+      "role": "historical_DPO_candidate",
+      "selected_revision_recorded_commit_time_utc": "2023-04-03T18:33:31.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "provisional_date_support_before_known_v1; earlier target disclosure unresolved",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/EleutherAI/pythia-1.4b/tree/8f0af839162ddb466006494a08733ee9cfa2d338?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://github.com/EleutherAI/pythia/blob/ceb8e5234db499def6759c54195cd87f465cfb3d/README.md",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_historical_repository_revision",
+          "supports": "Contemporaneous April 4 commit preserves April 3 replacement-suite release claim and explicit model links.",
+          "limitations": [
+            "Commit dated April 4; no archived push/visibility log."
+          ]
+        },
+        {
+          "url": "https://arxiv.org/abs/2304.01373v1",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_preprint_record",
+          "supports": "April 3 Pythia v1 paper record and public model-release description.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": false,
+      "model_configuration": {
+        "architectures": [
+          "GPTNeoXForCausalLM"
+        ],
+        "bos_token_id": 0,
+        "eos_token_id": 0,
+        "hidden_act": "gelu",
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 8192,
+        "layer_norm_eps": 1e-05,
+        "max_position_embeddings": 2048,
+        "model_type": "gpt_neox",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 24,
+        "rotary_emb_base": 10000,
+        "rotary_pct": 0.25,
+        "tie_word_embeddings": false,
+        "torch_dtype": "float16",
+        "transformers_version": "4.24.0",
+        "use_cache": true,
+        "use_parallel_residual": true,
+        "vocab_size": 50304
+      },
+      "generation_configuration": null,
+      "tokenizer_interface": {
+        "tokenizer_class": "GPTNeoXTokenizer",
+        "chat_template": null,
+        "special_token_map_file_co_located": true,
+        "stale_publisher_cache_path_present": true
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Base Pile pretrained language model; no downstream instruction/chat fine-tuning described.",
+        "posttraining_audit": "Immutable release card explicitly distinguishes this base model from instruction/RLHF-trained chat models.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": false,
+        "tokenizer_policy": "Use all co-located tokenizer artifacts at the same immutable model SHA; do not resolve the external name_or_path against current GPT-NeoX.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "April 2023 retrained replacement suite; distinct from v0 and deduplicated variants."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1477,
+          "git_blob_sha1": "c7d9f3332a950355d5a77d85000f05e6f45435ea",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "2209d9929bc5c321611b2d6d1ba63c675ad2b12c",
+            "title": "initial commit",
+            "date": "2023-02-09T14:08:20.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "README.md",
+          "bytes": 13438,
+          "git_blob_sha1": "5961f6a3c02ce843cec0ed521e4902148ed4e7c2",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/README.md",
+          "reported_last_file_commit": {
+            "id": "7e4e774f46d00b09755f23add1fc298b28311a33",
+            "title": "create updated readme",
+            "date": "2023-03-29T22:28:16.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "4f7c836793bbb761269ad52f47b8e5c21c783c7f2d021de58b312772727fc26a",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 570,
+          "git_blob_sha1": "76f45dd29f6ae40ae5d4960a8df6386aa9cd8d5a",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/config.json",
+          "reported_last_file_commit": {
+            "id": "4b31af75a4d7733544b1475e165d3607776eebec",
+            "title": "Upload config.json",
+            "date": "2023-04-03T18:33:15.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "6ea552aa42b7437f019ccdd30b7c9b83a32dccb5170ce31b9ddbe94d00f4671c",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "pytorch_model.bin",
+          "bytes": 2930076797,
+          "git_blob_sha1": "9569eafa37b7feeca29240c20072d17b026e2521",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/pytorch_model.bin",
+          "reported_last_file_commit": {
+            "id": "0da31d8fb309463877ed8c40e54a8f911dced3ec",
+            "title": "Upload pytorch_model.bin",
+            "date": "2023-04-03T18:33:30.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "056766b124a4ac70afcc722084d7c2b6cab80581e0d066709d72ae5c1a8640d8",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "bytes": 99,
+          "git_blob_sha1": "0204ed10c186a4c7c68f55dff8f26087a45898d6",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/special_tokens_map.json",
+          "reported_last_file_commit": {
+            "id": "029df5f65eaf819b873b1a970d6472cfd4646e24",
+            "title": "Upload special_tokens_map.json",
+            "date": "2023-04-03T18:33:31.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "6f50ab5a5a509a1c309d6171f339b196a900dc9c99ad0408ff23bb615fdae7ad",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 2113710,
+          "git_blob_sha1": "f74dfbfab8f97770a87769c739fb080c21c8bacc",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "1f1a91fb469e6ca0d7d59641bcfc8da9af7e7d80",
+            "title": "Upload tokenizer.json",
+            "date": "2023-04-03T18:33:31.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 396,
+          "git_blob_sha1": "f1860edb10f80bcaf7b023fce47c68a23b724c23",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-1.4b/blob/8f0af839162ddb466006494a08733ee9cfa2d338/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "8f0af839162ddb466006494a08733ee9cfa2d338",
+            "title": "Upload tokenizer_config.json",
+            "date": "2023-04-03T18:33:31.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "70e38394e494931c6f773ba41e19460dd4436526b852207367f04341b4066d3f",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    },
+    {
+      "audit_id": "pythia_2_8b_april_2023",
+      "model_id": "EleutherAI/pythia-2.8b",
+      "selected_revision": "f20536c52a97faea73b8997cc789bd913853f14a",
+      "role": "historical_DPO_candidate",
+      "selected_revision_recorded_commit_time_utc": "2023-04-03T18:51:39.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "provisional_date_support_before_known_v1; earlier target disclosure unresolved",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/EleutherAI/pythia-2.8b/tree/f20536c52a97faea73b8997cc789bd913853f14a?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://github.com/EleutherAI/pythia/blob/ceb8e5234db499def6759c54195cd87f465cfb3d/README.md",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_historical_repository_revision",
+          "supports": "Contemporaneous April 4 commit preserves April 3 replacement-suite release claim and explicit model links.",
+          "limitations": [
+            "Commit dated April 4; no archived push/visibility log."
+          ]
+        },
+        {
+          "url": "https://arxiv.org/abs/2304.01373v1",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_preprint_record",
+          "supports": "April 3 Pythia v1 paper record and public model-release description.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": false,
+      "model_configuration": {
+        "architectures": [
+          "GPTNeoXForCausalLM"
+        ],
+        "bos_token_id": 0,
+        "eos_token_id": 0,
+        "hidden_act": "gelu",
+        "hidden_size": 2560,
+        "initializer_range": 0.02,
+        "intermediate_size": 10240,
+        "layer_norm_eps": 1e-05,
+        "max_position_embeddings": 2048,
+        "model_type": "gpt_neox",
+        "num_attention_heads": 32,
+        "num_hidden_layers": 32,
+        "rotary_emb_base": 10000,
+        "rotary_pct": 0.25,
+        "tie_word_embeddings": false,
+        "torch_dtype": "float16",
+        "transformers_version": "4.24.0",
+        "use_cache": true,
+        "use_parallel_residual": true,
+        "vocab_size": 50304
+      },
+      "generation_configuration": null,
+      "tokenizer_interface": {
+        "tokenizer_class": "GPTNeoXTokenizer",
+        "chat_template": null,
+        "special_token_map_file_co_located": true,
+        "stale_publisher_cache_path_present": true
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Base Pile pretrained language model; no downstream instruction/chat fine-tuning described.",
+        "posttraining_audit": "Immutable release card explicitly distinguishes this base model from instruction/RLHF-trained chat models.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": false,
+        "tokenizer_policy": "Use all co-located tokenizer artifacts at the same immutable model SHA; do not resolve the external name_or_path against current GPT-NeoX.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "April 2023 retrained replacement suite; distinct from v0 and deduplicated variants."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1477,
+          "git_blob_sha1": "c7d9f3332a950355d5a77d85000f05e6f45435ea",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "f71102c9bde95885fb971aff95a0d09ca06f22c4",
+            "title": "initial commit",
+            "date": "2023-02-13T14:37:12.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "README.md",
+          "bytes": 13438,
+          "git_blob_sha1": "2ddad7a81335321424697df6df624c756b866980",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/README.md",
+          "reported_last_file_commit": {
+            "id": "f42d929bd81e7f98a13a400fd70032e81444ab2e",
+            "title": "create updated readme",
+            "date": "2023-03-29T22:27:07.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "e6313f663950ce1f52044f58f1a27a8eb3c4295a8add315b851c23e0d0b8dddb",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 571,
+          "git_blob_sha1": "490234a04b8fc9587db08c7dbc7d73f99152f697",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/config.json",
+          "reported_last_file_commit": {
+            "id": "6bfa5112f405a90f3747169680459c2a6f2852b1",
+            "title": "Upload config.json",
+            "date": "2023-04-03T18:51:38.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "fe1a9b9550935517588c98f89df24db7d7eadf4c4a00dd32e127a2d4585e9827",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "pytorch_model.bin",
+          "bytes": 5684793945,
+          "git_blob_sha1": "638b8d123113205f03cb8e10591b8120e5baacc7",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/pytorch_model.bin",
+          "reported_last_file_commit": {
+            "id": "68a7388c2529be5516b6474d26915464e8e39053",
+            "title": "Upload pytorch_model.bin",
+            "date": "2023-04-03T18:51:38.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "36f0f93d1f5d44ca9c48a602c0788001a36ec10db9d1b84a40b81799d724c4f6",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "bytes": 99,
+          "git_blob_sha1": "0204ed10c186a4c7c68f55dff8f26087a45898d6",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/special_tokens_map.json",
+          "reported_last_file_commit": {
+            "id": "0c802a14f3792ff331144f7a67a54dc8ece08f9f",
+            "title": "Upload special_tokens_map.json",
+            "date": "2023-04-03T18:51:39.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "6f50ab5a5a509a1c309d6171f339b196a900dc9c99ad0408ff23bb615fdae7ad",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 2113710,
+          "git_blob_sha1": "f74dfbfab8f97770a87769c739fb080c21c8bacc",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "1ffe7dfc708c3392e55d9ab17ddde48fd36aad00",
+            "title": "Upload tokenizer.json",
+            "date": "2023-04-03T18:51:08.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 396,
+          "git_blob_sha1": "f1860edb10f80bcaf7b023fce47c68a23b724c23",
+          "immutable_file_url": "https://huggingface.co/EleutherAI/pythia-2.8b/blob/f20536c52a97faea73b8997cc789bd913853f14a/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "f20536c52a97faea73b8997cc789bd913853f14a",
+            "title": "Upload tokenizer_config.json",
+            "date": "2023-04-03T18:51:39.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "70e38394e494931c6f773ba41e19460dd4436526b852207367f04341b4066d3f",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    },
+    {
+      "audit_id": "qwen3_1_7b_april_2025",
+      "model_id": "Qwen/Qwen3-1.7B",
+      "selected_revision": "d3e258980a49b060055ea9038dad99d75923f7c4",
+      "role": "historical_May_2025_candidate",
+      "selected_revision_recorded_commit_time_utc": "2025-04-29T08:55:53.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "ineligible_postdates_known_target_paper",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper",
+        "MeanFlow_2025": "provisional_date_support_before_known_May19_v1; earlier target disclosure unresolved",
+        "AlphaEvolve_2025": "provisional_date_support_before_known_May14_publisher_announcement; earlier target disclosure unresolved"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B/tree/d3e258980a49b060055ea9038dad99d75923f7c4?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_release_announcement",
+          "supports": "Publisher announcement dated April 29, 2025 names 1.7B and 0.6B release and open weights.",
+          "limitations": []
+        },
+        {
+          "url": "https://github.com/QwenLM/Qwen3",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_repository",
+          "supports": "Publisher release changelog corroborates April 29 series release.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": false,
+      "model_configuration": {
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 6144,
+        "max_position_embeddings": 40960,
+        "max_window_layers": 28,
+        "model_type": "qwen3",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 8,
+        "rms_norm_eps": 1e-06,
+        "rope_scaling": null,
+        "rope_theta": 1000000,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.51.0",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "generation_configuration": {
+        "bos_token_id": 151643,
+        "do_sample": true,
+        "eos_token_id": [
+          151645,
+          151643
+        ],
+        "pad_token_id": 151643,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95,
+        "transformers_version": "4.51.0"
+      },
+      "tokenizer_interface": {
+        "tokenizer_class": "Qwen2Tokenizer",
+        "chat_template": {
+          "characters": 4116,
+          "decoded_utf8_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+          "has_enable_thinking_argument": true,
+          "template_text_committed": false
+        },
+        "tokenizer_config_sha256": "5a7303fcb1a27ede63134a2cbd61d5282c247ca6d769ce4746d4ffa124aedd63"
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Pretraining plus post-training; hybrid thinking/non-thinking model.",
+        "posttraining_audit": "Original release card identifies both stages; family announcement describes a four-stage post-training pipeline. Exact training data/end date not independently audited.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": true,
+        "tokenizer_policy": "Pin tokenizer and decoded chat-template hash to the selected full revision; April and July templates differ.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "Original Qwen3 April 2025 dense hybrid series."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1570,
+          "git_blob_sha1": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "README.md",
+          "bytes": 13876,
+          "git_blob_sha1": "b2778f0c243722e5ec9aaf6cc51ad46c5eaa4687",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/README.md",
+          "reported_last_file_commit": {
+            "id": "d3e258980a49b060055ea9038dad99d75923f7c4",
+            "title": "Update README.md",
+            "date": "2025-04-29T08:55:53.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "d50c7b66b42ffb892a7819f46853a4c6ae97ad07f1f46abf5f13d4a617ae07c0",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 726,
+          "git_blob_sha1": "044a86ecf7cb32238f3fae4184e55d354787edec",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/config.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 239,
+          "git_blob_sha1": "20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/generation_config.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671853,
+          "git_blob_sha1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/merges.txt",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3441185608,
+          "git_blob_sha1": "1414f1bda72e17b63551d847c05c68e3396ba717",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/model-00001-of-00002.safetensors",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 622329984,
+          "git_blob_sha1": "4aab3b30a4b8c6c1d0437a2576e0bea08507f12c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/model-00002-of-00002.safetensors",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "model.safetensors.index.json",
+          "bytes": 25605,
+          "git_blob_sha1": "986d7db875b47d21f68530f6baac038f1b297b39",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/model.safetensors.index.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 11422654,
+          "git_blob_sha1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "publisher_reported_payload_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification",
+          "locally_computed_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "git_blob_identity_matches_download": null
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 9675,
+          "git_blob_sha1": "68a67c7361ebd4d3902071af5eedb50db68115fe",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "5a7303fcb1a27ede63134a2cbd61d5282c247ca6d769ce4746d4ffa124aedd63",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "git_blob_sha1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/vocab.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    },
+    {
+      "audit_id": "qwen3_0_6b_april_2025",
+      "model_id": "Qwen/Qwen3-0.6B",
+      "selected_revision": "6130ef31402718485ca4d80a6234f70d9a4cf362",
+      "role": "historical_May_2025_candidate",
+      "selected_revision_recorded_commit_time_utc": "2025-04-29T08:56:31.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "ineligible_postdates_known_target_paper",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper",
+        "MeanFlow_2025": "provisional_date_support_before_known_May19_v1; earlier target disclosure unresolved",
+        "AlphaEvolve_2025": "provisional_date_support_before_known_May14_publisher_announcement; earlier target disclosure unresolved"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B/tree/6130ef31402718485ca4d80a6234f70d9a4cf362?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_release_announcement",
+          "supports": "Publisher announcement dated April 29, 2025 names 1.7B and 0.6B release and open weights.",
+          "limitations": []
+        },
+        {
+          "url": "https://github.com/QwenLM/Qwen3",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_repository",
+          "supports": "Publisher release changelog corroborates April 29 series release.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": false,
+      "model_configuration": {
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 1024,
+        "initializer_range": 0.02,
+        "intermediate_size": 3072,
+        "max_position_embeddings": 40960,
+        "max_window_layers": 28,
+        "model_type": "qwen3",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 8,
+        "rms_norm_eps": 1e-06,
+        "rope_scaling": null,
+        "rope_theta": 1000000,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.51.0",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "generation_configuration": {
+        "bos_token_id": 151643,
+        "do_sample": true,
+        "eos_token_id": [
+          151645,
+          151643
+        ],
+        "pad_token_id": 151643,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95,
+        "transformers_version": "4.51.0"
+      },
+      "tokenizer_interface": {
+        "tokenizer_class": "Qwen2Tokenizer",
+        "chat_template": {
+          "characters": 4116,
+          "decoded_utf8_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+          "has_enable_thinking_argument": true,
+          "template_text_committed": false
+        },
+        "tokenizer_config_sha256": "bbc2c089e3bef8753f63348c10595767be8998bc6ca7c7ebcaada346d401fba8"
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Pretraining plus post-training; hybrid thinking/non-thinking model.",
+        "posttraining_audit": "Original release card identifies both stages; family announcement describes a four-stage post-training pipeline. Exact training data/end date not independently audited.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": true,
+        "tokenizer_policy": "Pin tokenizer and decoded chat-template hash to the selected full revision; April and July templates differ.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "Original Qwen3 April 2025 dense hybrid series."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1570,
+          "git_blob_sha1": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "README.md",
+          "bytes": 13878,
+          "git_blob_sha1": "ad4976fd50851562e0bd58e83d0ccba7a21055c6",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/README.md",
+          "reported_last_file_commit": {
+            "id": "6130ef31402718485ca4d80a6234f70d9a4cf362",
+            "title": "Update README.md",
+            "date": "2025-04-29T08:56:31.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "389da1124fad5b104ce65d517c55b0e4e3368d155e90c5bf2f46ab0d05fea374",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 726,
+          "git_blob_sha1": "f5c3703b78ae2a478ae15b247e9f855e0ce2107b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/config.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 239,
+          "git_blob_sha1": "20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/generation_config.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671853,
+          "git_blob_sha1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/merges.txt",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "model.safetensors",
+          "bytes": 1503300328,
+          "git_blob_sha1": "a0458bbfda764d86cf930900d5f0f933933da9a3",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/model.safetensors",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 11422654,
+          "git_blob_sha1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "publisher_reported_payload_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification",
+          "locally_computed_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "git_blob_identity_matches_download": null
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 9676,
+          "git_blob_sha1": "b7104cb637a5ac4ccfb8c26922019149cdfb015f",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "16706fc57485378d4ffaf54139b29ccc66ae08fa",
+            "title": "Update tokenizer_config.json",
+            "date": "2025-04-28T17:28:23.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "bbc2c089e3bef8753f63348c10595767be8998bc6ca7c7ebcaada346d401fba8",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "git_blob_sha1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/6130ef31402718485ca4d80a6234f70d9a4cf362/vocab.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    },
+    {
+      "audit_id": "qwen3_1_7b_july_2025",
+      "model_id": "Qwen/Qwen3-1.7B",
+      "selected_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "role": "modern_mechanics_reference",
+      "selected_revision_recorded_commit_time_utc": "2025-07-26T03:46:32.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "ineligible_postdates_known_target_paper",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper",
+        "MeanFlow_2025": "selected_full_revision_postdates_known_disclosure",
+        "AlphaEvolve_2025": "selected_full_revision_postdates_known_disclosure"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B/tree/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_release_announcement",
+          "supports": "Publisher announcement dated April 29, 2025 names 1.7B and 0.6B release and open weights.",
+          "limitations": []
+        },
+        {
+          "url": "https://github.com/QwenLM/Qwen3",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_repository",
+          "supports": "Publisher release changelog corroborates April 29 series release.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": true,
+      "model_configuration": {
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 2048,
+        "initializer_range": 0.02,
+        "intermediate_size": 6144,
+        "max_position_embeddings": 40960,
+        "max_window_layers": 28,
+        "model_type": "qwen3",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 8,
+        "rms_norm_eps": 1e-06,
+        "rope_scaling": null,
+        "rope_theta": 1000000,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.51.0",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "generation_configuration": {
+        "bos_token_id": 151643,
+        "do_sample": true,
+        "eos_token_id": [
+          151645,
+          151643
+        ],
+        "pad_token_id": 151643,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95,
+        "transformers_version": "4.51.0"
+      },
+      "tokenizer_interface": {
+        "tokenizer_class": "Qwen2Tokenizer",
+        "chat_template": {
+          "characters": 4168,
+          "decoded_utf8_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "has_enable_thinking_argument": true,
+          "template_text_committed": false
+        },
+        "tokenizer_config_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Pretraining plus post-training; hybrid thinking/non-thinking model.",
+        "posttraining_audit": "Original release card identifies both stages; family announcement describes a four-stage post-training pipeline. Exact training data/end date not independently audited.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": true,
+        "tokenizer_policy": "Pin tokenizer and decoded chat-template hash to the selected full revision; April and July templates differ.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "Original Qwen3 April 2025 dense hybrid series."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1570,
+          "git_blob_sha1": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 11343,
+          "git_blob_sha1": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/LICENSE",
+          "reported_last_file_commit": {
+            "id": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "title": "Create LICENSE",
+            "date": "2025-07-26T03:46:32.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "README.md",
+          "bytes": 13963,
+          "git_blob_sha1": "88aaef81cfe31bcdfe47203649a69ff12042826a",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/README.md",
+          "reported_last_file_commit": {
+            "id": "0060bc56d46589041c1048efd1a397421b1142b5",
+            "title": "Update README.md",
+            "date": "2025-05-21T06:23:18.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 726,
+          "git_blob_sha1": "044a86ecf7cb32238f3fae4184e55d354787edec",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/config.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 239,
+          "git_blob_sha1": "20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/generation_config.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671853,
+          "git_blob_sha1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/merges.txt",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3441185608,
+          "git_blob_sha1": "1414f1bda72e17b63551d847c05c68e3396ba717",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/model-00001-of-00002.safetensors",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 622329984,
+          "git_blob_sha1": "4aab3b30a4b8c6c1d0437a2576e0bea08507f12c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/model-00002-of-00002.safetensors",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "model.safetensors.index.json",
+          "bytes": 25605,
+          "git_blob_sha1": "986d7db875b47d21f68530f6baac038f1b297b39",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/model.safetensors.index.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 11422654,
+          "git_blob_sha1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "publisher_reported_payload_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification",
+          "locally_computed_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "git_blob_identity_matches_download": null
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 9732,
+          "git_blob_sha1": "417d038a63fa3de29cfde265caedae14d1a58d92",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "0ecc654158dd093daab47fd37c5f122925d93983",
+            "title": "update tokenizer_config.json",
+            "date": "2025-05-19T07:40:08.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "git_blob_sha1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/vocab.json",
+          "reported_last_file_commit": {
+            "id": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:44:48.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    },
+    {
+      "audit_id": "qwen3_0_6b_july_2025",
+      "model_id": "Qwen/Qwen3-0.6B",
+      "selected_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "role": "modern_mechanics_reference",
+      "selected_revision_recorded_commit_time_utc": "2025-07-26T03:46:27.000Z",
+      "weight_release_payload_downloaded": false,
+      "inference_performed": false,
+      "eligibility_relative_to_known_channels": {
+        "DPO_2023": "ineligible_postdates_known_target_paper",
+        "FlashAttention_2022": "ineligible_postdates_known_target_paper",
+        "LoRA_2021": "ineligible_postdates_known_target_paper",
+        "MeanFlow_2025": "selected_full_revision_postdates_known_disclosure",
+        "AlphaEvolve_2025": "selected_full_revision_postdates_known_disclosure"
+      },
+      "fully_clean_historical_item_admitted": false,
+      "source_tree": {
+        "url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B/tree/c1899de289a04d12100db370d81485cdf75e47ca?recursive=true&expand=true",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_public_metadata_api",
+        "supports": "Complete immutable file tree, blob IDs, file sizes, and publisher-reported LFS object identities.",
+        "limitations": [
+          "Git/upload timestamps are not an independently archived public-visibility event.",
+          "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported."
+        ]
+      },
+      "release_evidence": [
+        {
+          "url": "https://qwenlm.github.io/blog/qwen3/",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_release_announcement",
+          "supports": "Publisher announcement dated April 29, 2025 names 1.7B and 0.6B release and open weights.",
+          "limitations": []
+        },
+        {
+          "url": "https://github.com/QwenLM/Qwen3",
+          "accessed_on": "2026-10-11",
+          "kind": "publisher_repository",
+          "supports": "Publisher release changelog corroborates April 29 series release.",
+          "limitations": []
+        }
+      ],
+      "immutable_card": {
+        "url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/README.md",
+        "accessed_on": "2026-10-11",
+        "kind": "publisher_immutable_model_card",
+        "supports": "Training-stage, model identity, license declaration, and interface provenance at selected revision.",
+        "limitations": []
+      },
+      "declared_license": "Apache-2.0",
+      "standalone_license_file_present": true,
+      "model_configuration": {
+        "architectures": [
+          "Qwen3ForCausalLM"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": 151643,
+        "eos_token_id": 151645,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 1024,
+        "initializer_range": 0.02,
+        "intermediate_size": 3072,
+        "max_position_embeddings": 40960,
+        "max_window_layers": 28,
+        "model_type": "qwen3",
+        "num_attention_heads": 16,
+        "num_hidden_layers": 28,
+        "num_key_value_heads": 8,
+        "rms_norm_eps": 1e-06,
+        "rope_scaling": null,
+        "rope_theta": 1000000,
+        "sliding_window": null,
+        "tie_word_embeddings": true,
+        "torch_dtype": "bfloat16",
+        "transformers_version": "4.51.0",
+        "use_cache": true,
+        "use_sliding_window": false,
+        "vocab_size": 151936
+      },
+      "generation_configuration": {
+        "bos_token_id": 151643,
+        "do_sample": true,
+        "eos_token_id": [
+          151645,
+          151643
+        ],
+        "pad_token_id": 151643,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95,
+        "transformers_version": "4.51.0"
+      },
+      "tokenizer_interface": {
+        "tokenizer_class": "Qwen2Tokenizer",
+        "chat_template": {
+          "characters": 4168,
+          "decoded_utf8_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "has_enable_thinking_argument": true,
+          "template_text_committed": false
+        },
+        "tokenizer_config_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      "training_and_posttraining": {
+        "publisher_description": "Pretraining plus post-training; hybrid thinking/non-thinking model.",
+        "posttraining_audit": "Original release card identifies both stages; family announcement describes a four-stage post-training pipeline. Exact training data/end date not independently audited.",
+        "adapter_artifacts_in_selected_tree": [],
+        "chat_template_present": true,
+        "tokenizer_policy": "Pin tokenizer and decoded chat-template hash to the selected full revision; April and July templates differ.",
+        "training_end_date_independently_verified": false,
+        "release_suite": "Original Qwen3 April 2025 dense hybrid series."
+      },
+      "quantization_config_in_selected_tree": false,
+      "file_manifest": [
+        {
+          "path": ".gitattributes",
+          "bytes": 1570,
+          "git_blob_sha1": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/.gitattributes",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": false
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 11343,
+          "git_blob_sha1": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/LICENSE",
+          "reported_last_file_commit": {
+            "id": "c1899de289a04d12100db370d81485cdf75e47ca",
+            "title": "Create LICENSE",
+            "date": "2025-07-26T03:46:27.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "README.md",
+          "bytes": 13965,
+          "git_blob_sha1": "a50b19e76f5274f9ec99f5a5d99873dca5bff25e",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/README.md",
+          "reported_last_file_commit": {
+            "id": "e6de91484c29aa9480d55605af694f39b081c455",
+            "title": "Update README.md",
+            "date": "2025-05-21T06:24:30.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "config.json",
+          "bytes": 726,
+          "git_blob_sha1": "f5c3703b78ae2a478ae15b247e9f855e0ce2107b",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/config.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 239,
+          "git_blob_sha1": "20a8a9156fc8c3f25295ca067f61fdf120d517c5",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/generation_config.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671853,
+          "git_blob_sha1": "31349551d90c7606f325fe0f11bbb8bd5fa0d7c7",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/merges.txt",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "model.safetensors",
+          "bytes": 1503300328,
+          "git_blob_sha1": "a0458bbfda764d86cf930900d5f0f933933da9a3",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/model.safetensors",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": false,
+          "publisher_reported_payload_sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification"
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 11422654,
+          "git_blob_sha1": "cd71f61a15a522601badb3dc960d800d9cb3766c",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/tokenizer.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "publisher_reported_payload_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "hash_source": "Hugging Face public tree LFS metadata; no weight payload verification",
+          "locally_computed_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "git_blob_identity_matches_download": null
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 9732,
+          "git_blob_sha1": "417d038a63fa3de29cfde265caedae14d1a58d92",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/tokenizer_config.json",
+          "reported_last_file_commit": {
+            "id": "7e4ae267688d671ddfca3122e4528ee980cf3234",
+            "title": "update tokenizer_config.json",
+            "date": "2025-05-19T07:39:20.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "git_blob_identity_matches_download": true
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "git_blob_sha1": "4783fe10ac3adce15ac8f358ef5462739852c569",
+          "immutable_file_url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/vocab.json",
+          "reported_last_file_commit": {
+            "id": "167b8104f88905a951069f5f95f9776908da5f68",
+            "title": "Upload folder using huggingface_hub",
+            "date": "2025-04-28T05:19:05.000Z"
+          },
+          "local_byte_hash_verified": true,
+          "locally_computed_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "git_blob_identity_matches_download": true
+        }
+      ],
+      "limitations": [
+        "Git/upload timestamps are not an independently archived public-visibility event.",
+        "No weight payload was downloaded or compared; LFS SHA-256 values are publisher-reported.",
+        "Training corpus, prerequisite competence, numerical replay, and runtime were not empirically audited."
+      ]
+    }
+  ],
+  "observed_public_revision_histories": [
+    {
+      "model_id": "EleutherAI/pythia-1.4b",
+      "source_url": "https://huggingface.co/api/models/EleutherAI/pythia-1.4b/commits/main",
+      "public_refs_source_url": "https://huggingface.co/api/models/EleutherAI/pythia-1.4b/refs",
+      "observed_main_commit": "fedc38a16eea3bd36a96b906d78d11d2ce18ed79",
+      "revision_dates": [
+        {
+          "commit": "fedc38a16eea3bd36a96b906d78d11d2ce18ed79",
+          "recorded_time_utc": "2023-07-09T16:01:57.000Z"
+        },
+        {
+          "commit": "0f5d15909d7b715e83017586c11baf32aa74f52c",
+          "recorded_time_utc": "2023-06-08T10:15:34.000Z"
+        },
+        {
+          "commit": "8f0af839162ddb466006494a08733ee9cfa2d338",
+          "recorded_time_utc": "2023-04-03T18:33:31.000Z"
+        },
+        {
+          "commit": "029df5f65eaf819b873b1a970d6472cfd4646e24",
+          "recorded_time_utc": "2023-04-03T18:33:31.000Z"
+        },
+        {
+          "commit": "1f1a91fb469e6ca0d7d59641bcfc8da9af7e7d80",
+          "recorded_time_utc": "2023-04-03T18:33:31.000Z"
+        },
+        {
+          "commit": "0da31d8fb309463877ed8c40e54a8f911dced3ec",
+          "recorded_time_utc": "2023-04-03T18:33:30.000Z"
+        },
+        {
+          "commit": "4b31af75a4d7733544b1475e165d3607776eebec",
+          "recorded_time_utc": "2023-04-03T18:33:15.000Z"
+        },
+        {
+          "commit": "7e4e774f46d00b09755f23add1fc298b28311a33",
+          "recorded_time_utc": "2023-03-29T22:28:16.000Z"
+        },
+        {
+          "commit": "2209d9929bc5c321611b2d6d1ba63c675ad2b12c",
+          "recorded_time_utc": "2023-02-09T14:08:20.000Z"
+        }
+      ],
+      "complete_API_response_retrieved": true,
+      "historical_public_visibility_independently_archived": false,
+      "step143000": {
+        "observed_head": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+        "source_url": "https://huggingface.co/api/models/EleutherAI/pythia-1.4b/commits/step143000",
+        "recorded_head_date_utc": "2026-02-11T11:46:20.000Z",
+        "revision_dates": [
+          {
+            "commit": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+            "recorded_time_utc": "2026-02-11T11:46:20.000Z"
+          },
+          {
+            "commit": "e29b47b6fe355419f458d8f3f10b544b4597e7f4",
+            "recorded_time_utc": "2026-02-11T11:46:20.000Z"
+          },
+          {
+            "commit": "cb28cff291696076b4f378b7f79add92be79fd2e",
+            "recorded_time_utc": "2026-02-11T11:45:58.000Z"
+          },
+          {
+            "commit": "c735c18ebd5164e6a29ecabe461d86ff6e1cfd27",
+            "recorded_time_utc": "2023-04-03T18:33:14.000Z"
+          },
+          {
+            "commit": "086eda09cc6a0acf883066c677e38ea659132ff8",
+            "recorded_time_utc": "2023-04-03T18:33:13.000Z"
+          },
+          {
+            "commit": "17b500a8bcd385f24335785640c3d6b8c8505841",
+            "recorded_time_utc": "2023-04-03T18:33:13.000Z"
+          },
+          {
+            "commit": "de12561b3486820758d961d4d298303b547be45a",
+            "recorded_time_utc": "2023-04-03T18:33:13.000Z"
+          },
+          {
+            "commit": "c651ac08ae6425991db4cc1ee6bc2790f25994fd",
+            "recorded_time_utc": "2023-04-03T18:33:02.000Z"
+          },
+          {
+            "commit": "2ad6d0261a417271d0ce4bffa5400579c5f2ad81",
+            "recorded_time_utc": "2023-02-09T19:42:46.000Z"
+          },
+          {
+            "commit": "f55fd93f20aae97e1889918216753c10dbfa8a21",
+            "recorded_time_utc": "2023-02-09T19:42:08.000Z"
+          },
+          {
+            "commit": "c21f97471f1d14fe1f4a8896b35cb3e62bdc8543",
+            "recorded_time_utc": "2023-02-09T19:42:07.000Z"
+          },
+          {
+            "commit": "07c1ef6c99a2828a6d2ec2b22522374355d2e99b",
+            "recorded_time_utc": "2023-02-09T19:42:07.000Z"
+          },
+          {
+            "commit": "99a22a40c25c1eae6c2560c463abc81654db80b0",
+            "recorded_time_utc": "2023-02-09T19:42:07.000Z"
+          },
+          {
+            "commit": "2209d9929bc5c321611b2d6d1ba63c675ad2b12c",
+            "recorded_time_utc": "2023-02-09T14:08:20.000Z"
+          }
+        ],
+        "current_weight_object_ids": [
+          {
+            "path": "model-00001-of-00002.safetensors",
+            "publisher_reported_payload_sha256": "2066abb3d75f8938ecac701b0982ed24fdbabaa3924967b583affa8fafdc62eb",
+            "last_file_commit": {
+              "id": "e29b47b6fe355419f458d8f3f10b544b4597e7f4",
+              "title": "Add safetensors for step143000",
+              "date": "2026-02-11T11:46:20.000Z"
+            }
+          },
+          {
+            "path": "model-00002-of-00002.safetensors",
+            "publisher_reported_payload_sha256": "d18df8a16798bb6d069c665c79a7589d3434b33fe2f18bf2637cbe2b35690565",
+            "last_file_commit": {
+              "id": "cb28cff291696076b4f378b7f79add92be79fd2e",
+              "title": "Add safetensors for step143000",
+              "date": "2026-02-11T11:45:58.000Z"
+            }
+          },
+          {
+            "path": "pytorch_model.bin",
+            "publisher_reported_payload_sha256": "056766b124a4ac70afcc722084d7c2b6cab80581e0d066709d72ae5c1a8640d8",
+            "last_file_commit": {
+              "id": "2ad6d0261a417271d0ce4bffa5400579c5f2ad81",
+              "title": "Upload pytorch_model.bin",
+              "date": "2023-02-09T19:42:46.000Z"
+            }
+          }
+        ],
+        "decision": "Do not use mutable final-step branch as historical identity; includes February 2026 payload changes."
+      }
+    },
+    {
+      "model_id": "EleutherAI/pythia-2.8b",
+      "source_url": "https://huggingface.co/api/models/EleutherAI/pythia-2.8b/commits/main",
+      "public_refs_source_url": "https://huggingface.co/api/models/EleutherAI/pythia-2.8b/refs",
+      "observed_main_commit": "2a259cdd96a4beb1cdf467512e3904197345f6a9",
+      "revision_dates": [
+        {
+          "commit": "2a259cdd96a4beb1cdf467512e3904197345f6a9",
+          "recorded_time_utc": "2023-06-09T00:35:37.000Z"
+        },
+        {
+          "commit": "d37e168787d7419ff28a946dc7105b1252f752a7",
+          "recorded_time_utc": "2023-06-08T10:17:26.000Z"
+        },
+        {
+          "commit": "f20536c52a97faea73b8997cc789bd913853f14a",
+          "recorded_time_utc": "2023-04-03T18:51:39.000Z"
+        },
+        {
+          "commit": "0c802a14f3792ff331144f7a67a54dc8ece08f9f",
+          "recorded_time_utc": "2023-04-03T18:51:39.000Z"
+        },
+        {
+          "commit": "6bfa5112f405a90f3747169680459c2a6f2852b1",
+          "recorded_time_utc": "2023-04-03T18:51:38.000Z"
+        },
+        {
+          "commit": "68a7388c2529be5516b6474d26915464e8e39053",
+          "recorded_time_utc": "2023-04-03T18:51:38.000Z"
+        },
+        {
+          "commit": "1ffe7dfc708c3392e55d9ab17ddde48fd36aad00",
+          "recorded_time_utc": "2023-04-03T18:51:08.000Z"
+        },
+        {
+          "commit": "f42d929bd81e7f98a13a400fd70032e81444ab2e",
+          "recorded_time_utc": "2023-03-29T22:27:07.000Z"
+        },
+        {
+          "commit": "f71102c9bde95885fb971aff95a0d09ca06f22c4",
+          "recorded_time_utc": "2023-02-13T14:37:12.000Z"
+        }
+      ],
+      "complete_API_response_retrieved": true,
+      "historical_public_visibility_independently_archived": false,
+      "step143000": {
+        "observed_head": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+        "source_url": "https://huggingface.co/api/models/EleutherAI/pythia-2.8b/commits/step143000",
+        "recorded_head_date_utc": "2026-02-11T09:22:17.000Z",
+        "revision_dates": [
+          {
+            "commit": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+            "recorded_time_utc": "2026-02-11T09:22:17.000Z"
+          },
+          {
+            "commit": "2a259cdd96a4beb1cdf467512e3904197345f6a9",
+            "recorded_time_utc": "2023-06-09T00:35:37.000Z"
+          },
+          {
+            "commit": "d37e168787d7419ff28a946dc7105b1252f752a7",
+            "recorded_time_utc": "2023-06-08T10:17:26.000Z"
+          },
+          {
+            "commit": "f20536c52a97faea73b8997cc789bd913853f14a",
+            "recorded_time_utc": "2023-04-03T18:51:39.000Z"
+          },
+          {
+            "commit": "0c802a14f3792ff331144f7a67a54dc8ece08f9f",
+            "recorded_time_utc": "2023-04-03T18:51:39.000Z"
+          },
+          {
+            "commit": "6bfa5112f405a90f3747169680459c2a6f2852b1",
+            "recorded_time_utc": "2023-04-03T18:51:38.000Z"
+          },
+          {
+            "commit": "68a7388c2529be5516b6474d26915464e8e39053",
+            "recorded_time_utc": "2023-04-03T18:51:38.000Z"
+          },
+          {
+            "commit": "1ffe7dfc708c3392e55d9ab17ddde48fd36aad00",
+            "recorded_time_utc": "2023-04-03T18:51:08.000Z"
+          },
+          {
+            "commit": "f42d929bd81e7f98a13a400fd70032e81444ab2e",
+            "recorded_time_utc": "2023-03-29T22:27:07.000Z"
+          },
+          {
+            "commit": "f71102c9bde95885fb971aff95a0d09ca06f22c4",
+            "recorded_time_utc": "2023-02-13T14:37:12.000Z"
+          }
+        ],
+        "current_weight_object_ids": [
+          {
+            "path": "model.safetensors",
+            "publisher_reported_payload_sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c",
+            "last_file_commit": {
+              "id": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+              "title": "Add HF format checkpoint for step143000",
+              "date": "2026-02-11T09:22:17.000Z"
+            }
+          },
+          {
+            "path": "pytorch_model.bin",
+            "publisher_reported_payload_sha256": "a294bfcf6ff2c091091d04489a3f1c233b4106d74201e152a01f492d24e6fbaf",
+            "last_file_commit": {
+              "id": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+              "title": "Add HF format checkpoint for step143000",
+              "date": "2026-02-11T09:22:17.000Z"
+            }
+          }
+        ],
+        "decision": "Do not use mutable final-step branch as historical identity; includes February 2026 payload changes."
+      }
+    },
+    {
+      "model_id": "Qwen/Qwen3-0.6B",
+      "source_url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B/commits/main",
+      "public_refs_source_url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B/refs",
+      "observed_main_commit": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "revision_dates": [
+        {
+          "commit": "c1899de289a04d12100db370d81485cdf75e47ca",
+          "recorded_time_utc": "2025-07-26T03:46:27.000Z"
+        },
+        {
+          "commit": "e6de91484c29aa9480d55605af694f39b081c455",
+          "recorded_time_utc": "2025-05-21T06:24:30.000Z"
+        },
+        {
+          "commit": "7e4ae267688d671ddfca3122e4528ee980cf3234",
+          "recorded_time_utc": "2025-05-19T07:39:20.000Z"
+        },
+        {
+          "commit": "6130ef31402718485ca4d80a6234f70d9a4cf362",
+          "recorded_time_utc": "2025-04-29T08:56:31.000Z"
+        },
+        {
+          "commit": "a9c98e602b9d36d2a2f7ba1eb0f5f31e4e8e5143",
+          "recorded_time_utc": "2025-04-28T19:11:51.000Z"
+        },
+        {
+          "commit": "f4863e37bee8eb683cd9261b13d9a87957ac7d88",
+          "recorded_time_utc": "2025-04-28T18:58:51.000Z"
+        },
+        {
+          "commit": "75234702817ccb8dd24dcb274e71634fcaf36ca4",
+          "recorded_time_utc": "2025-04-28T18:00:18.000Z"
+        },
+        {
+          "commit": "715e27a98247ec527ede6d19f625dc20eef740bb",
+          "recorded_time_utc": "2025-04-28T17:29:17.000Z"
+        },
+        {
+          "commit": "16706fc57485378d4ffaf54139b29ccc66ae08fa",
+          "recorded_time_utc": "2025-04-28T17:28:23.000Z"
+        },
+        {
+          "commit": "a819064c8d306516bf18ef0d2ff3746f5458e81e",
+          "recorded_time_utc": "2025-04-28T17:27:15.000Z"
+        },
+        {
+          "commit": "e178a197683d44eb9f9037b1483c1e66b04716f5",
+          "recorded_time_utc": "2025-04-28T17:25:44.000Z"
+        },
+        {
+          "commit": "271af0b2cae7bf641ff37011b6a0af0bc9d0ad5b",
+          "recorded_time_utc": "2025-04-28T17:24:55.000Z"
+        },
+        {
+          "commit": "cfa73abb04ab09db43f255c9acf2c6d74c36e9b7",
+          "recorded_time_utc": "2025-04-28T15:38:34.000Z"
+        },
+        {
+          "commit": "ea7997de357ff2cd8acc87aae85d21467dbf65cd",
+          "recorded_time_utc": "2025-04-28T15:35:54.000Z"
+        },
+        {
+          "commit": "5cdf60dec0389cdfcf33990474f65f682f236c3c",
+          "recorded_time_utc": "2025-04-28T13:31:08.000Z"
+        },
+        {
+          "commit": "6fad4ed78287aed0c84adb7f53df570363b697f4",
+          "recorded_time_utc": "2025-04-28T13:05:58.000Z"
+        },
+        {
+          "commit": "ec0dcdfc641f7a94f8e969d459caa772b9c01706",
+          "recorded_time_utc": "2025-04-28T12:31:41.000Z"
+        },
+        {
+          "commit": "a08cec3036ee1085a4863a0b730e5d3f1c2f8d04",
+          "recorded_time_utc": "2025-04-28T08:27:55.000Z"
+        },
+        {
+          "commit": "1c2706d36809b5cc95a4f8c12fa727520e8c174e",
+          "recorded_time_utc": "2025-04-28T05:34:04.000Z"
+        },
+        {
+          "commit": "749a61e849b1b8e882efa25bfa5b0a5d7def8ae6",
+          "recorded_time_utc": "2025-04-28T05:33:57.000Z"
+        },
+        {
+          "commit": "9adc26d8802f11bc21c431e74857666ba81021f2",
+          "recorded_time_utc": "2025-04-28T05:33:39.000Z"
+        },
+        {
+          "commit": "66b95ce14c07166297fcbfb54aa20441af8f9d75",
+          "recorded_time_utc": "2025-04-28T05:19:54.000Z"
+        },
+        {
+          "commit": "167b8104f88905a951069f5f95f9776908da5f68",
+          "recorded_time_utc": "2025-04-28T05:19:05.000Z"
+        },
+        {
+          "commit": "e15642e70ccce3aa9502aa40dfa4a1d5f35e7b2c",
+          "recorded_time_utc": "2025-04-27T03:40:08.000Z"
+        }
+      ],
+      "complete_API_response_retrieved": true,
+      "historical_public_visibility_independently_archived": false
+    },
+    {
+      "model_id": "Qwen/Qwen3-1.7B",
+      "source_url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B/commits/main",
+      "public_refs_source_url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B/refs",
+      "observed_main_commit": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "revision_dates": [
+        {
+          "commit": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+          "recorded_time_utc": "2025-07-26T03:46:32.000Z"
+        },
+        {
+          "commit": "0060bc56d46589041c1048efd1a397421b1142b5",
+          "recorded_time_utc": "2025-05-21T06:23:18.000Z"
+        },
+        {
+          "commit": "0ecc654158dd093daab47fd37c5f122925d93983",
+          "recorded_time_utc": "2025-05-19T07:40:08.000Z"
+        },
+        {
+          "commit": "d3e258980a49b060055ea9038dad99d75923f7c4",
+          "recorded_time_utc": "2025-04-29T08:55:53.000Z"
+        },
+        {
+          "commit": "bf6c947bcec6629e4c0d4b0e82d7a19e686c19a1",
+          "recorded_time_utc": "2025-04-28T19:11:32.000Z"
+        },
+        {
+          "commit": "44c895567ee7eca2993a98be9664adf7245aa1ee",
+          "recorded_time_utc": "2025-04-28T18:55:23.000Z"
+        },
+        {
+          "commit": "33c22367980803f9f97d0f81ecc446b64cc02dfc",
+          "recorded_time_utc": "2025-04-28T17:58:40.000Z"
+        },
+        {
+          "commit": "d725c74310cdd265b5bc7208124d0b0be61261bc",
+          "recorded_time_utc": "2025-04-28T17:58:10.000Z"
+        },
+        {
+          "commit": "b9352fbb8ce704292730cf54b3b1dceb2a808738",
+          "recorded_time_utc": "2025-04-28T17:48:04.000Z"
+        },
+        {
+          "commit": "7794bc70d4bae176d4792c6cbce61a7fedd43c3e",
+          "recorded_time_utc": "2025-04-28T17:47:52.000Z"
+        },
+        {
+          "commit": "9cbdf162e240a9d503f3f4168dad04a80e8e6c9e",
+          "recorded_time_utc": "2025-04-28T17:47:31.000Z"
+        },
+        {
+          "commit": "026ef898ee93472ecf27df9ea89c651fba82ad6a",
+          "recorded_time_utc": "2025-04-28T15:38:56.000Z"
+        },
+        {
+          "commit": "0fa42c2d7d84b04fafae145d7c0263b77225bbc8",
+          "recorded_time_utc": "2025-04-28T15:35:14.000Z"
+        },
+        {
+          "commit": "2fe16eaf483fcfb9a8364d357c1f80709a7962cd",
+          "recorded_time_utc": "2025-04-28T13:05:46.000Z"
+        },
+        {
+          "commit": "442b4a6d6b660ceced0ebf94db6d058e9f5dbca9",
+          "recorded_time_utc": "2025-04-28T12:32:19.000Z"
+        },
+        {
+          "commit": "3f1b00af457d7003d437d3e65dbd0e2c0afb1415",
+          "recorded_time_utc": "2025-04-28T08:24:08.000Z"
+        },
+        {
+          "commit": "8d4744f9e13072f4920c326350fa81eedb74eae9",
+          "recorded_time_utc": "2025-04-28T05:44:48.000Z"
+        },
+        {
+          "commit": "c52c071034e311bc8721ab37965e500f3f4b4ed0",
+          "recorded_time_utc": "2025-04-27T03:41:05.000Z"
+        }
+      ],
+      "complete_API_response_retrieved": true,
+      "historical_public_visibility_independently_archived": false
+    }
+  ],
+  "pythia_original_suite_comparison": [
+    {
+      "model_id": "EleutherAI/pythia-1.4b-v0",
+      "observed_main": "34b668ff0acfe56f2d541aa46b385557ee39eb3f",
+      "history_source": "https://huggingface.co/api/models/EleutherAI/pythia-1.4b-v0/commits/main",
+      "revision_dates": [
+        {
+          "commit": "34b668ff0acfe56f2d541aa46b385557ee39eb3f",
+          "recorded_time_utc": "2023-03-29T18:50:36.000Z"
+        },
+        {
+          "commit": "015d713e5da743c3c517f8707ae0e2ae7b1b6c18",
+          "recorded_time_utc": "2023-02-20T23:04:46.000Z"
+        },
+        {
+          "commit": "fa24ec27fcfe52a5cb927a5e1e78e7294ac92198",
+          "recorded_time_utc": "2023-02-09T04:10:48.000Z"
+        },
+        {
+          "commit": "2026d5473e9c7963e24f198ac228aae6bd1e8c41",
+          "recorded_time_utc": "2022-11-01T00:57:35.000Z"
+        },
+        {
+          "commit": "adbdfa8d6a84fd7bb41d6e0688e8acc54dc4c7e1",
+          "recorded_time_utc": "2022-11-01T00:57:34.000Z"
+        },
+        {
+          "commit": "fcef6971c6fa0614d2d3820f8b614cea4759a782",
+          "recorded_time_utc": "2022-11-01T00:57:33.000Z"
+        },
+        {
+          "commit": "df61359077350339c71dcffe3804d6571e7e8f8f",
+          "recorded_time_utc": "2022-11-01T00:57:01.000Z"
+        },
+        {
+          "commit": "c29fc6abf33c5311529ecd2a5b0f78c605afea61",
+          "recorded_time_utc": "2022-11-01T00:56:54.000Z"
+        },
+        {
+          "commit": "8119f347cc65245b285396385f105a5cc465d8b5",
+          "recorded_time_utc": "2022-11-01T00:56:53.000Z"
+        },
+        {
+          "commit": "37c6f45545592ff4f85380f072a6e4ef44f6ad81",
+          "recorded_time_utc": "2022-11-01T00:56:52.000Z"
+        },
+        {
+          "commit": "29103f90e3be7352928bfd8c1ed8780c052b20b1",
+          "recorded_time_utc": "2022-10-16T18:26:22.000Z"
+        },
+        {
+          "commit": "55bd6e29c3f6e3ba43d30065cb329fbd1fbcbdd0",
+          "recorded_time_utc": "2022-10-16T18:24:39.000Z"
+        }
+      ],
+      "weight_files": [
+        {
+          "path": "pytorch_model.bin",
+          "publisher_reported_payload_sha256": "c8d601215da6c3035ccd48e58746fcf53edd8881afefe7316377dd1848f2302e"
+        }
+      ],
+      "interpretation": "Original suite has distinct weights and 2022 upload history; these timestamps alone do not prove original public release date. No v0 checkpoint admitted here."
+    },
+    {
+      "model_id": "EleutherAI/pythia-2.8b-v0",
+      "observed_main": "b9d8cace80b1a97f5ed380711aea31f2d1b24310",
+      "history_source": "https://huggingface.co/api/models/EleutherAI/pythia-2.8b-v0/commits/main",
+      "revision_dates": [
+        {
+          "commit": "b9d8cace80b1a97f5ed380711aea31f2d1b24310",
+          "recorded_time_utc": "2023-07-10T01:35:41.000Z"
+        },
+        {
+          "commit": "b29f9cc314ed2ac981b68532d8e66c3dd8757865",
+          "recorded_time_utc": "2023-03-29T18:49:26.000Z"
+        },
+        {
+          "commit": "3445c7a8f1b6b6b7c18b63932b48a425327ba5b3",
+          "recorded_time_utc": "2023-02-20T22:59:41.000Z"
+        },
+        {
+          "commit": "c088eac3fcac5f36b8cb88a5387e077fb872071d",
+          "recorded_time_utc": "2023-02-09T04:10:04.000Z"
+        },
+        {
+          "commit": "f217ca34707096f5bdc042ccaee134dbdee89e42",
+          "recorded_time_utc": "2022-11-20T03:57:02.000Z"
+        },
+        {
+          "commit": "3fe8cd4b4f616478179d73d427c33bb329d75a7e",
+          "recorded_time_utc": "2022-11-20T03:57:01.000Z"
+        },
+        {
+          "commit": "1b4fe929a663f1f41192b675cc61d069634179d4",
+          "recorded_time_utc": "2022-11-20T03:57:00.000Z"
+        },
+        {
+          "commit": "d3dfdab50776770bd5fe97fe6715eea9e8c46374",
+          "recorded_time_utc": "2022-11-20T03:56:59.000Z"
+        },
+        {
+          "commit": "33b1737d373fc6bfe3e6a0b41abbbefe77b99ba4",
+          "recorded_time_utc": "2022-11-20T03:56:11.000Z"
+        },
+        {
+          "commit": "7d3227736dfc0fa4b7fc5aac02d53736fbc4b4d8",
+          "recorded_time_utc": "2022-11-20T03:56:10.000Z"
+        }
+      ],
+      "weight_files": [
+        {
+          "path": "model.safetensors",
+          "publisher_reported_payload_sha256": "8a6de790eda6ee8f397c4fc4b3ed3ba4ef88d813b73458ad351bb39871b387a1"
+        },
+        {
+          "path": "pytorch_model.bin",
+          "publisher_reported_payload_sha256": "3cb0c5f54bf1849e91262051b8dc8e3d74ba667a5e2a13c7d92bc982a610a9f8"
+        }
+      ],
+      "interpretation": "Original suite has distinct weights and 2022 upload history; these timestamps alone do not prove original public release date. No v0 checkpoint admitted here."
+    }
+  ],
+  "qwen_interface_revision_conflict": {
+    "original_template_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+    "original_characters": 4116,
+    "modern_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+    "modern_characters": 4168,
+    "change_recorded_on": "2025-05-19",
+    "observed_changes": "Adds string-type handling and adjusts reasoning-content handling.",
+    "decoded_metadata_change_keys": [
+      "chat_template"
+    ],
+    "rendered_prompt_parity_tested": false,
+    "weights_LFS_object_ids_match_between_April_and_July": true,
+    "tensor_equality_tested": false,
+    "rule": "Historical May2025 runs require original full April revision; contemporary tokenizer is a separately named interface intervention."
+  },
+  "target_disclosure_frontiers": [
+    {
+      "target": "DPO algebraic reparameterization and preference-normalizer cancellation",
+      "known_paper_v1": {
+        "url": "https://arxiv.org/abs/2305.18290v1",
+        "submission_time_utc": "2023-05-29T17:57:46Z"
+      },
+      "earliest_verified_target_document": "DPO v1 public preprint version; exact public announcement time not independently reconstructed.",
+      "official_code": {
+        "repository": "https://github.com/eric-mitchell/direct-preference-optimization",
+        "api": "https://api.github.com/repos/eric-mitchell/direct-preference-optimization",
+        "repository_created_at_utc": "2023-06-22T09:27:11Z",
+        "earliest_retained_main_commit": "e05cf705c1d62719a591a647513e8a0acb3b332d",
+        "recorded_commit_time_utc": "2023-06-22T17:51:50Z",
+        "limitation": "Current public repository metadata cannot exclude a prior repository, private/public switch, slides, or earlier equivalent derivation."
+      },
+      "broader_target_prior_art": [
+        {
+          "url": "https://arxiv.org/abs/2304.05302v1",
+          "submission_time_utc": "2023-04-11T15:53:40Z",
+          "conflict": "RRHF predates a generic claim of aligning model probabilities to preference rankings without PPO."
+        },
+        {
+          "url": "https://arxiv.org/abs/2305.10425v1",
+          "submission_time_utc": "2023-05-17T17:57:10Z",
+          "conflict": "SLiC-HF predates a generic preference calibration alternative to PPO; exact DPO algebraic equivalence not asserted."
+        }
+      ],
+      "unresolved_public_channels": [
+        "Earlier mathematically equivalent reward-policy/preference derivations",
+        "Author prerelease slides or talks",
+        "Thesis and patent disclosures",
+        "Alternative or deleted code repositories",
+        "Archived first public announcement"
+      ],
+      "decision": "Use narrow algebra target; Pythia model release support is conditional on this target frontier."
+    },
+    {
+      "target": "FlashAttention IO-aware exact attention",
+      "known_paper_v1": {
+        "url": "https://arxiv.org/abs/2205.14135v1",
+        "submission_time_utc": "2022-05-27T17:53:09Z"
+      },
+      "earliest_verified_target_document": "Known public paper v1; earlier official-code commit candidate dated May20 exists, public visibility then unresolved.",
+      "official_code": {
+        "repository": "https://github.com/Dao-AILab/flash-attention",
+        "api": "https://api.github.com/repos/Dao-AILab/flash-attention",
+        "repository_created_at_utc": "2022-05-19T21:22:06Z",
+        "first_retained_commit": "1fcbe6f0d088d807ba585ddb850eb3497cd7b65b",
+        "recorded_commit_time_utc": "2022-05-20T21:21:58Z",
+        "commit_url": "https://github.com/Dao-AILab/flash-attention/commit/1fcbe6f0d088d807ba585ddb850eb3497cd7b65b",
+        "readme_url": "https://github.com/Dao-AILab/flash-attention/blob/1fcbe6f0d088d807ba585ddb850eb3497cd7b65b/README.md",
+        "tree_api": "https://api.github.com/repos/Dao-AILab/flash-attention/git/trees/1fcbe6f0d088d807ba585ddb850eb3497cd7b65b?recursive=1",
+        "observed_content": "Release README plus attention interfaces and CUDA forward/backward implementation files.",
+        "public_visibility_on_commit_date_verified": false
+      },
+      "prior_art": [
+        {
+          "url": "https://arxiv.org/abs/1805.02867v1",
+          "submission_time_utc": "2018-05-08T07:34:17Z",
+          "contribution": "Running maximum/normalizer softmax update and associative block merge already disclosed."
+        },
+        {
+          "url": "https://arxiv.org/abs/2112.05682v1",
+          "submission_time_utc": "2021-12-10T17:25:07Z",
+          "contribution": "Exact memory-efficient attention with rescaled value/normalizer accumulation, chunking, and memory-efficient differentiation already disclosed."
+        }
+      ],
+      "verified_later_channels": [
+        {
+          "url": "https://haet2022.github.io/schedule",
+          "date": "2022-07-23",
+          "kind": "ICML HAET workshop schedule; later than May paper."
+        },
+        {
+          "url": "https://haet2022.github.io/accepter_papers",
+          "kind": "Workshop accepted-paper page; document publication time not verified."
+        },
+        {
+          "url": "https://mlsys.stanford.edu/",
+          "date": "2023-01-11",
+          "kind": "Stanford MLSys seminar schedule; later than May paper."
+        }
+      ],
+      "unresolved_public_channels": [
+        "May20 code public visibility",
+        "Prior talks or abstract listings before May27",
+        "Author theses or early slides",
+        "Earlier equivalent IO-bound exact-attention kernel work"
+      ],
+      "decision": "Reject generic online-softmax/low-memory exact-attention reconstruction as FlashAttention-specific; narrower IO schedule/bound requires older model and complete disclosure audit."
+    },
+    {
+      "target": "LoRA Transformer low-rank weight adaptation",
+      "known_paper_v1": {
+        "url": "https://arxiv.org/abs/2106.09685v1",
+        "submission_time_utc": "2021-06-17T17:37:18Z"
+      },
+      "earliest_verified_target_document": "LoRA v1 public paper; not proven earliest disclosure across all channels.",
+      "official_code": {
+        "repository": "https://github.com/microsoft/LoRA",
+        "api": "https://api.github.com/repos/microsoft/LoRA",
+        "repository_created_at_utc": "2021-06-18T02:16:35Z",
+        "earliest_retained_main_commit": "2eb74c2dc816ffb89a8217158a837952df7cbcfe",
+        "recorded_commit_time_utc": "2021-09-18T21:50:32Z",
+        "oldest_commit_api": "https://api.github.com/repositories/378010497/commits?per_page=1&page=46",
+        "limitation": "Repository creation and retained main-history disagree on earliest code availability; neither dates an earlier public code release."
+      },
+      "prior_art": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/publication/low-rank-plus-diagonal-adaptation-for-deep-neural-networks/",
+          "date_precision": "2016 publication year; earliest online release day unresolved",
+          "pdf_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/ICASSP2016_LRPD-1.pdf",
+          "contribution": "Trainable low-rank-plus-diagonal/identity speaker-adaptation matrices; not certified identical to LoRA attention-weight updates."
+        },
+        {
+          "url": "https://arxiv.org/abs/1803.10082v1",
+          "submission_time_utc": "2018-03-27T13:55:56Z",
+          "full_text_url": "https://arxiv.org/pdf/1803.10082v1",
+          "sections": [
+            "3.1.2",
+            "3.4"
+          ],
+          "contribution": "Parallel additive adapters, fusion into base filters, and rank-factorized adapter compression/fine-tuning predate generic additive low-rank merging."
+        },
+        {
+          "url": "https://arxiv.org/abs/1804.08838",
+          "submission_time_utc": "2018-04-24T04:29:10Z",
+          "contribution": "Low-dimensional optimization prerequisite; not a claim of LoRA rank-update equivalence."
+        },
+        {
+          "url": "https://arxiv.org/abs/1902.00751v1",
+          "submission_time_utc": "2019-02-02T16:29:47Z",
+          "contribution": "Parameter-efficient NLP adapters prerequisite."
+        },
+        {
+          "url": "https://arxiv.org/abs/2012.13255",
+          "submission_time_utc": "2020-12-22T07:42:30Z",
+          "contribution": "Language-model fine-tuning intrinsic dimensionality; explicitly motivates LoRA v1."
+        }
+      ],
+      "unresolved_public_channels": [
+        "Pre-June17 talks or author slides",
+        "Thesis/technical-report/patent disclosures",
+        "Earliest public code event and history rewrites",
+        "Exact-equivalence comparison against older linear adapters"
+      ],
+      "decision": "Reject generic low-rank adaptation plus merge target; narrower Transformer-specific claim remains exploratory. No audited pre-LoRA checkpoint selected here."
+    },
+    {
+      "target": "MeanFlow average/instantaneous velocity identity",
+      "known_paper_v1": {
+        "url": "https://arxiv.org/abs/2505.13447v1",
+        "submission_time_utc": "2025-05-19T17:59:42Z"
+      },
+      "earliest_verified_target_document": "Known paper v1; broader target-specific audit delegated elsewhere.",
+      "candidate_full_model_revisions": [
+        "qwen3_1_7b_april_2025",
+        "qwen3_0_6b_april_2025"
+      ],
+      "unresolved_public_channels": [
+        "Preprint announcement timing",
+        "Earlier equivalent calculus identities/methods",
+        "Official prerelease code",
+        "Talks/slides/theses before April29"
+      ],
+      "decision": "April Qwen full snapshots precede known v1; no clean historical item certified."
+    },
+    {
+      "target": "AlphaEvolve specified algorithmic result",
+      "known_publisher_announcement": {
+        "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+        "date": "2025-05-14"
+      },
+      "earliest_verified_target_document": "Known publisher announcement; exact target result and broader prior-art audit delegated elsewhere.",
+      "candidate_full_model_revisions": [
+        "qwen3_1_7b_april_2025",
+        "qwen3_0_6b_april_2025"
+      ],
+      "unresolved_public_channels": [
+        "Result-specific earlier equivalent algorithms",
+        "Pre-announcement talks or papers",
+        "Prior public source code",
+        "Thesis and other technical reports"
+      ],
+      "decision": "April Qwen full snapshots precede known announcement; result-specific novelty and public disclosure remain open."
+    }
+  ],
+  "rabe_staats_code_channel": {
+    "url": "https://api.github.com/repos/google-research/google-research/commits?path=memory_efficient_attention&per_page=100",
+    "earliest_retained_path_commit": "db5c5673373434ce3a1264fa3134c8ba5559542d",
+    "author_time_utc": "2022-01-25T00:42:14Z",
+    "committer_time_utc": "2022-01-25T00:50:54Z",
+    "interpretation": "External repository code follows December paper; implementation already appears inside paper v1. First repository public visibility not independently verified."
+  },
+  "online_softmax_code_channel": {
+    "url": "https://api.github.com/repos/NVIDIA/online-softmax",
+    "repository_created_at_utc": "2018-07-26T15:57:06Z",
+    "commit_api": "https://api.github.com/repos/NVIDIA/online-softmax/commits?per_page=1",
+    "initial_retained_commit": "f4c607fa358789d988b1ff346393c483b457e230",
+    "recorded_commit_time_utc": "2018-07-27T06:33:22Z",
+    "interpretation": "Code record follows May8 v1; earliest public visibility not independently verified."
+  },
+  "unresolved_gates": [
+    "Independently archived public-visibility timestamps linking exact selected SHA to release.",
+    "Earliest public disclosure and earlier equivalent result for each precise target.",
+    "Historical prompt and corpus eligibility; explicit hindsight-assistance labels.",
+    "Weight payload hash verification if acquisition is later authorized.",
+    "No adapters/instruction tunes added after target; any later conversion documented and compared.",
+    "Prerequisite competence, local runtime, and numerical/template replay under a pinned stack."
+  ],
+  "retrieval_method": "Unauthenticated public Hugging Face/GitHub HTTP APIs for metadata; byte downloads limited to tokenizer/config/card/license files. Primary paper records and official publisher sites read through web tools. Temporary source bytes stayed under /tmp; only authored research notes and factual evidence are repository deliverables."
+}
