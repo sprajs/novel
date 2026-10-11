@@ -1,0 +1,798 @@
+{
+  "dependency_lock_sha256": "47d5e8d69b9b3cc9c976097cb400048a6501fbb308cae65ddbd5be9dcb4e4590",
+  "environment": {
+    "cpu_count": 5,
+    "git_branch": "gpu/three-research-profiles-20261011",
+    "git_commit": "066ecdd204c9b9150f851e085ef31ea12f790457",
+    "git_dirty": true,
+    "packages": {
+      "huggingface-hub": "0.36.2",
+      "numpy": "2.5.4",
+      "safetensors": "0.8.0",
+      "torch": "2.8.0+cpu",
+      "transformers": "4.57.6"
+    },
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "timestamp_utc": "2026-10-11T12:19:24.287574+00:00"
+  },
+  "hardware": {
+    "cuda_available": false,
+    "cuda_build": null,
+    "device_count": 0,
+    "device_index": 0,
+    "discovery_error": null,
+    "nvidia_smi": null,
+    "torch_version": "2.8.0+cpu"
+  },
+  "investigation": {
+    "followup": "A fresh full CPU profile passed; six same-resident alternating clean/capture forwards had exact agreement. Root cause not established. New exact clean-repeat gate precedes capture.",
+    "followup_script_sha256": "c1a2e0a589d824227970c76f3aba32274e50a72163bb4d0f48ec715bfe84dece",
+    "observation": "One CPU capture-only exact-logit comparison failed at max_abs_error 0.003936767578125. No tolerance widening, silent retry, or discarded failure.",
+    "same_resident_comparisons": [
+      {
+        "capture": false,
+        "max_abs_error": 0.0,
+        "step": 0
+      },
+      {
+        "capture": true,
+        "max_abs_error": 0.0,
+        "step": 1
+      },
+      {
+        "capture": false,
+        "max_abs_error": 0.0,
+        "step": 2
+      },
+      {
+        "capture": true,
+        "max_abs_error": 0.0,
+        "step": 3
+      },
+      {
+        "capture": false,
+        "max_abs_error": 0.0,
+        "step": 4
+      },
+      {
+        "capture": true,
+        "max_abs_error": 0.0,
+        "step": 5
+      }
+    ],
+    "status": "OPEN_LIMITATION"
+  },
+  "model_downloads": [
+    "Qwen3-0.6B at c1899de289a04d12100db370d81485cdf75e47ca; 1519207673 verified bytes"
+  ],
+  "observed_date_utc": "2026-10-11",
+  "reports": [
+    {
+      "checks": {
+        "activation_gradient": {
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "status": "PASS",
+          "wall_seconds": 0.5126867590000757
+        },
+        "cuda_kernel": {
+          "reason": "CPU profile; no CUDA kernel executed",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "status": "PASS"
+        }
+      },
+      "diagnostic_sha256": "75d007aa7b0e6ba58edd28d613fe4870a3d3036d439f4aa77ab5aac0c267863b",
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "invariants": {
+        "activation_gradient": {
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "status": "PASS",
+          "wall_seconds": 0.5126867590000757
+        },
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 1.9073486328125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 3.4809112548828125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_2": {
+          "atol": 0.0001,
+          "max_abs_error": 4.553794860839844e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "global_sampling_rng_unchanged": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "hooks_removed": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "identity_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "parameter_gradients_absent": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "parameters_frozen_unmutated": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "seeded_generation_identity": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "zero_strength_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        }
+      },
+      "local_diagnostic_path": "runs/profile-checks/20261011T120832Z-ca2c7ee9db12/diagnostics.json",
+      "measurements": {
+        "backward_calls": 1,
+        "cuda_memory": {
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "reason": "CPU profile",
+          "status": "SKIP"
+        },
+        "generated_tokens": 32,
+        "generation_forward_calls": 32,
+        "load_seconds": 8.231987253999932,
+        "peak_process_rss_bytes": 4923248640,
+        "total_wall_seconds": 27.193145458000004
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "cloud-cpu",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "run_path": "runs/20261011T120832Z-6abfe5951cdd",
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "ProfileError"
+        },
+        "pretrained_smoke": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        }
+      },
+      "diagnostic_sha256": "af20d141fa4245b8650e89120f2cafcbe125af3eb24bb2984a8257c29a13db13",
+      "error": {
+        "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "ProfileError"
+      },
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "local_diagnostic_path": "runs/profile-checks/20261011T120902Z-dce5bcd9a96a/diagnostics.json",
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": false,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "local-2080ti",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "reason": "CPU profile; no CUDA kernel executed",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "message": "Engineering invariant failed: capture_logits, max_abs_error=0.003936767578125",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "AssertionError"
+        }
+      },
+      "diagnostic_sha256": "4ebd0dab066addc15c51202971fbfc685891f7f088831821bdad42b3b4efd9a8",
+      "error": {
+        "message": "Engineering invariant failed: capture_logits, max_abs_error=0.003936767578125",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "AssertionError"
+      },
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "invariants": {
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.003936767578125,
+          "passed": false,
+          "rtol": 0.0,
+          "status": "FAIL"
+        }
+      },
+      "local_diagnostic_path": "runs/profile-checks/20261011T121557Z-ca59276b6ce9/diagnostics.json",
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "cloud-cpu",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "run_path": "runs/20261011T121557Z-92d81a5e278a",
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "artifact": "gradient.safetensors",
+          "detached": true,
+          "dtype": "torch.float32",
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "shape": [
+            1,
+            1,
+            1024
+          ],
+          "site": {
+            "layer": 14,
+            "positions": [
+              19
+            ]
+          },
+          "status": "PASS",
+          "wall_seconds": 0.6444369860000734
+        },
+        "cuda_kernel": {
+          "reason": "CPU profile; no CUDA kernel executed",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "status": "PASS"
+        }
+      },
+      "diagnostic_sha256": "95a747f28ed0ffc13c03a288b8ba1b0d9f437554d43b7366e266de3bd2725372",
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "invariants": {
+        "activation_gradient": {
+          "artifact": "gradient.safetensors",
+          "detached": true,
+          "dtype": "torch.float32",
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "shape": [
+            1,
+            1,
+            1024
+          ],
+          "site": {
+            "layer": 14,
+            "positions": [
+              19
+            ]
+          },
+          "status": "PASS",
+          "wall_seconds": 0.6444369860000734
+        },
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 1.9073486328125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 3.4809112548828125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_2": {
+          "atol": 0.0001,
+          "max_abs_error": 4.553794860839844e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "global_sampling_rng_unchanged": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "hooks_removed": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "identity_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "parameter_gradients_absent": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "parameters_frozen_unmutated": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "seeded_generation_identity": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "zero_strength_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        }
+      },
+      "local_diagnostic_path": "runs/profile-checks/20261011T121710Z-acf16e04da0b/diagnostics.json",
+      "measurements": {
+        "backward_calls": 1,
+        "cuda_memory": {
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "reason": "CPU profile",
+          "status": "SKIP"
+        },
+        "generated_tokens": 32,
+        "generation_forward_calls": 32,
+        "load_seconds": 2.274876374000087,
+        "peak_process_rss_bytes": 4923174912,
+        "total_wall_seconds": 27.338356529999828
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "cloud-cpu",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "run_path": "runs/20261011T121710Z-3d46ea4eb084",
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "artifact": "gradient.safetensors",
+          "detached": true,
+          "dtype": "torch.float32",
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "shape": [
+            1,
+            1,
+            1024
+          ],
+          "site": {
+            "layer": 14,
+            "positions": [
+              19
+            ]
+          },
+          "status": "PASS",
+          "wall_seconds": 0.7115060030000677
+        },
+        "cuda_kernel": {
+          "reason": "CPU profile; no CUDA kernel executed",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "status": "PASS"
+        }
+      },
+      "diagnostic_sha256": "941b9ca55423a78f7d15f2e62251a8093861ccf0e840e57ecb11967dfd60d032",
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "invariants": {
+        "activation_gradient": {
+          "artifact": "gradient.safetensors",
+          "detached": true,
+          "dtype": "torch.float32",
+          "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+          "gradient_l2": 1.7593083381652832,
+          "negative_token_id": 785,
+          "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+          "passed": true,
+          "positive_token_id": 32,
+          "score": 9.792715072631836,
+          "shape": [
+            1,
+            1,
+            1024
+          ],
+          "site": {
+            "layer": 14,
+            "positions": [
+              19
+            ]
+          },
+          "status": "PASS",
+          "wall_seconds": 0.7115060030000677
+        },
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_0": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_1": {
+          "atol": 0.0001,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_0": {
+          "atol": 0.0001,
+          "max_abs_error": 1.9073486328125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_1": {
+          "atol": 0.0001,
+          "max_abs_error": 3.4809112548828125e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_cache_logits_2": {
+          "atol": 0.0001,
+          "max_abs_error": 4.553794860839844e-05,
+          "passed": true,
+          "rtol": 1e-05,
+          "status": "PASS"
+        },
+        "clean_repeat_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "global_sampling_rng_unchanged": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "hooks_removed": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "identity_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "parameter_gradients_absent": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "parameters_frozen_unmutated": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "seeded_generation_identity": {
+          "passed": true,
+          "status": "PASS"
+        },
+        "zero_strength_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        }
+      },
+      "local_diagnostic_path": "runs/profile-checks/20261011T121924Z-608524a1f390/diagnostics.json",
+      "measurements": {
+        "backward_calls": 1,
+        "cuda_memory": {
+          "peak_allocated_bytes": null,
+          "peak_reserved_bytes": null,
+          "reason": "CPU profile",
+          "status": "SKIP"
+        },
+        "generated_tokens": 32,
+        "generation_forward_calls": 32,
+        "load_seconds": 8.512639028000194,
+        "peak_process_rss_bytes": 4923338752,
+        "total_wall_seconds": 36.678486741999905
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "cloud-cpu",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "run_path": "runs/20261011T121924Z-3bad5af846cb",
+      "status": "PASS"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "ProfileError"
+        },
+        "pretrained_smoke": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        }
+      },
+      "diagnostic_sha256": "f5bb9ebbc4efba6b92f0e6bb3ac366e083bc2c7ea81d8bfd7ad7f63cee8a6583",
+      "error": {
+        "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "ProfileError"
+      },
+      "gpu_kernel_executed": false,
+      "gpu_model_validated": false,
+      "local_diagnostic_path": "runs/profile-checks/20261011T121952Z-7b23033d6745/diagnostics.json",
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": false,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": null,
+        "profile": "rental",
+        "quantization": null,
+        "rental_capacity_gib": 24
+      },
+      "status": "FAIL"
+    }
+  ],
+  "retention": "Raw runs/model weights remain ignored. Public summaries retain passed and failed facts; CPU elapsed times were not controlled performance benchmarks.",
+  "schema_version": 1,
+  "scope": "CPU execution and static/mocked GPU guards only. No CUDA wheel installed, GPU kernel run, rented compute, or GPU benchmark.",
+  "source_files_sha256": {
+    "src/novel/__init__.py": "9a3249059e5354911e3eb784166d83661f7448693b04af52c3fdd14ae800fc60",
+    "src/novel/activation.py": "507608ee59e4a2554482c2f582e5b9bfc2e3b3c1d0886a3e644d7bbdb63a2140",
+    "src/novel/artifacts.py": "3faa4aad352b73529f101ef4e00a80fc0f1b24a6778c00bc70ffbdd50024e1d6",
+    "src/novel/generation.py": "6dbe64e285934f3490f5a0e67ea3c7937a24bac06cdfb6d51ddf533c84dc0569",
+    "src/novel/gradients.py": "de800fbb3395f0070106d7875b811750bcc06e99605413b9a6594d6f5d77cc92",
+    "src/novel/models.py": "e0fb800c23357c89b9efbcb8bcdef66703ca3e84ea3e493d74617fa5f86ec92f",
+    "src/novel/profile_runner.py": "a5e4bbe505d31d2716b3af5631dccc476a3031db676219eea8984594b616d741",
+    "src/novel/profiles.py": "0869fabc8a2634d5d65a7c5515cb068fcebdbbd6aaedfdaf6a03e38ed41c5a66",
+    "src/novel/runner.py": "a97c265a338116b104f538deb0e10b5f9a6ab03e3bc2317ac86a44466244866a",
+    "src/novel/tasks.py": "797af2f9a17aa47e53e62c04325052ad6bf25c79c60e2c3b0d2c88f1b74a8c69"
+  },
+  "stacked_base_commit": "066ecdd204c9b9150f851e085ef31ea12f790457",
+  "static_checks": {
+    "compileall": "src scripts tests passed",
+    "cuda_lock_checks": "cu126 and cu128 uv lock --check passed; metadata resolution only",
+    "ruff": "0.14.14: all changed Python files passed"
+  },
+  "test_result": {
+    "command": "UV_CACHE_DIR=\"$PWD/.cache/uv\" uv run --locked pytest -q",
+    "passed": 128,
+    "skipped": 1,
+    "subtests_passed": 24
+  }
+}

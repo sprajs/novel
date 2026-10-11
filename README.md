@@ -15,8 +15,9 @@ as of 11 October 2026; newer versions are not silently substituted. All direct
 dependencies are exact pins; `uv.lock` fixes transitive dependencies and hashes.
 CPU FP32 is an engineering condition distinct from the prospective RTX 2080 Ti
 FP16 scientific condition. The CPU wheel cannot run CUDA tests.
-These commands select CPU Torch even on a GPU host; the future GPU setup needs
-a separately validated CUDA environment and dependency lock.
+These commands select CPU Torch even on a GPU host. The new
+[three execution profiles](docs/tooling/execution-profiles.md) provide isolated
+CUDA locks and actual GPU code; GPU validation is still awaiting hardware.
 
 From the repository root:
 
@@ -43,7 +44,7 @@ additional space for the roughly 0.9 GB environment and uv caches. CPU runtime
 and RAM measurements are in [validation](docs/validation.md).
 
 The smoke performs capture, identity, zero-strength, earlier-prefix causality,
-and clean cached-versus-uncached logit checks, followed by four seeded
+and three clean cached-versus-uncached logit steps, followed by four seeded
 eight-token generations. It writes a unique ignored `runs/<run_id>/` directory:
 raw prompt/output token IDs and text, rendered template and hash, source/config/
 lock/model hashes, software/device information, checks with measured errors,
@@ -58,16 +59,40 @@ one, eval mode, frozen parameters, eager attention, no quantization or compile.
 Its site is the decoder block output after both residual additions. Additive
 patches use an explicit semantic anchor and fixed absolute prompt positions;
 the full-prefix reference re-applies them at those positions on every forward.
-That is a persistent intervention. Temporary noise, noisy-cache recovery,
-activation gradients, donor learning, broad sweeps, and scientific evaluation
-are not implemented. Clean cached generation is available for parity work and
+That is a persistent intervention. Temporary noise, noisy-cache recovery, donor learning, broad sweeps and scientific
+evaluation are not implemented. A separate optional selected-activation gradient
+checks a local logit contrast; it is mechanics, not learned donor attribution. Clean cached generation is available for parity work and
 explicitly rejects interventions. New architectures require new validation.
 
 The offline suite constructs tiny random Qwen3 models: it downloads nothing and
 tests the mechanics, including a nonzero effect and hook cleanup. GPU-marked
-tests are skipped on this CPU cloud. The separate
-[GPU and optimized-backend plan](docs/tooling/hardware-next.md) describes the
-next bounded hardware checks; there is no measured fastest-backend claim.
+tests are skipped on this CPU cloud. The [GPU profiles and validation commands](docs/tooling/execution-profiles.md)
+implement the next bounded hardware checks; there is no measured GPU or
+fastest-backend claim.
+
+Three modes are available through `scripts/profile_smoke.py`: `cloud-cpu`
+(Qwen3-0.6B FP32), `local-2080ti` (11 GB, Qwen3-1.7B FP16), and `rental`
+(Qwen3-1.7B with a conservative 24 GiB budget). A real RTX5090 has **32 GB**, uses
+the separate Blackwell cu128 environment, and permits an explicit 32 GiB budget.
+The [model suitability analysis](docs/models/hardware-suitability.md) separates
+weights from KV, activations, gradients, logits and working memory. Start GPU
+validation with 0.6B before the primary 1.7B candidate.
+
+```bash
+# CPU diagnostic with selected activation gradient; uses the snapshot above.
+uv run --locked python scripts/profile_smoke.py --profile cloud-cpu --gradient
+# RTX2080Ti installation/preflight; no implicit model download or CPU fallback.
+uv sync --locked --project environments/cu126
+uv run --locked --project environments/cu126 python scripts/profile_smoke.py \
+  --profile local-2080ti --preflight-only
+```
+
+Every execution report includes PASS/FAIL/SKIP facts and a unique shareable
+`runs/profile-checks/<id>/diagnostics.json`. The complete per-device installation,
+download, forward and gradient commands are in the
+[profile guide](docs/tooling/execution-profiles.md). This cloud validated CPU,
+static and mocked paths only; CUDA memory fit, numerics and performance remain
+unverified until those commands run on an actual GPU.
 
 Paper retrieval is an explicit bounded command:
 

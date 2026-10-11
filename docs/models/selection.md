@@ -1,5 +1,7 @@
 # Model selection and immutable provenance
 
+The stacked implementation adds [three hardware profiles and memory analysis](hardware-suitability.md) without changing this registry or its historical meaning. GPU execution remains unvalidated until the user runs the provided commands.
+
 Verified 11 October 2026. Use `qwen3_0_6b` for the current CPU FP32 engineering smoke test. Keep `qwen3_1_7b` as the provisional reference for the later scientific pilot on the RTX 2080 Ti in explicit FP16. Both are ordinary dense text decoders with the same 28-layer attention layout and explicit thinking-mode control. This choice prioritizes interpretable hooks and bounded mechanics; task competence and guided headroom remain unmeasured. The authoritative machine-readable records are [models.json](../../configs/models.json) and [source-evidence.json](source-evidence.json).
 
 The Plan described future setup and did not itself execute it. This increment selects artifacts for the authorized implementation. It makes no inference-quality, scientific-discovery, throughput, or GPU-feasibility claim.
