@@ -1,13 +1,19 @@
-# Novel: frozen-model intervention research
+# Novel: post-freeze idea research
 
-This repository studies whether bridge-conditioned activations transfer useful
-composition to different-answer problems. The first increment provides a small
-CPU reference implementation and provenance, **not a scientific result**.
+This repository studies how a frozen model generates human research ideas first
+publicly disclosed after its exact artifact existed. The current priority is
+corpus admission and observational semantic/likelihood measurement; later
+activation interventions require a separate causal study. No historical idea is
+admitted yet. The existing CPU implementation and provenance are engineering
+assets, **not a scientific result**.
 Start with the [research plan](Plan/research-plan.md), then the
 [tooling comparison](docs/tooling/current-stack.md),
 [model selection](docs/models/selection.md), and [reading notes](papers/README.md).
-The Plan remains the original hypothesis scaffold; tested implementation limits
-and decisions are recorded separately below.
+The active Plan supersedes the earlier bridge-first priority while preserving
+the [original documents](Plan/archive/pre-pr4/provenance.json) and unchanged
+[ground-truth audit](docs/ground_truth/README.md). The
+[measurement protocol](Plan/measurement-protocol.md) separates semantic success
+from reference-string likelihood. Tested implementation limits remain below.
 
 The locked environment targets Linux x86-64, Python 3.12.14, uv 0.12.23,
 PyTorch 2.8.0+cpu and Transformers 4.57.6. Current alternatives were researched
@@ -109,14 +115,18 @@ not downloaded full papers. Public availability alone does not imply permission
 to redistribute. No repository-wide software license has been selected on the
 owner's behalf; model and paper licenses are recorded independently.
 
-For sibling integration use the [dataset handoff v1](docs/dataset-interface.md).
-The separate ground-truth branch owns `data/ground_truth/`, `docs/ground_truth/`,
-and `tests/ground_truth/`; this increment does not replace or duplicate those
-assets. Hidden answers are excluded from the public generation interface.
+For existing runtime integration use the [dataset handoff v1](docs/dataset-interface.md).
+The merged ground-truth collection remains under `data/ground_truth/`,
+`docs/ground_truth/`, and `tests/ground_truth/`. The new
+[post-freeze admission specification](data/post_freeze/README.md) is separate;
+it does not promote those exploratory fixtures to historical ground truth.
+Hidden answers are excluded from the public generation interface.
 
-Before the first causal study, choose a calibrated task/model combination,
-thinking mode, donor/recipient policy, worthwhile effect and compute budget.
-Freeze those choices before confirmation. Qwen3-1.7B remains a candidate, not a
-downloaded or validated scientific baseline. Historical eligibility must audit
-the exact checkpoint/template date and target disclosure; a family launch date
-or undocumented training cutoff is insufficient.
+Before the first observational study, admit scoped claims through independent
+domain/temporal review, validate an eligible model bundle and freeze the prompt,
+decoder, semantic rubric, sample budget and analysis. Qwen3-1.7B remains a
+candidate, not a downloaded or validated scientific baseline. Historical
+eligibility must audit the exact checkpoint/template date and earlier equivalent
+disclosures; a family launch date or undocumented training cutoff is insufficient.
+See the [research programme](Plan/research-plan.md) for remaining decisions and
+the conditions for a later causal study.

@@ -1,0 +1,31 @@
+{
+  "schema_version": "post-freeze-measurement-example-v0.1",
+  "purpose": "Hand-enumerated finite probability law illustrating the measurement protocol; no model observations or scientific labels are asserted.",
+  "protocol_ref": "Plan/measurement-protocol.md",
+  "development_only": true,
+  "model_evaluated": false,
+  "law": "Six distinct complete stopped abstract token trajectories under one fixed illustrative prompt, decoder, and budget.",
+  "trajectories": [
+    {"tokens": ["DESIGN", "A", "EOS"], "probability": "1/100", "target_recovery": true, "scientifically_valid": true},
+    {"tokens": ["DESIGN", "B", "EOS"], "probability": "9/100", "target_recovery": true, "scientifically_valid": true},
+    {"tokens": ["REASON", "DESIGN", "C", "EOS"], "probability": "1/5", "target_recovery": true, "scientifically_valid": true},
+    {"tokens": ["OLDER", "METHOD", "EOS"], "probability": "1/4", "target_recovery": false, "scientifically_valid": true},
+    {"tokens": ["INVALID", "EOS"], "probability": "2/5", "target_recovery": false, "scientifically_valid": false},
+    {"tokens": ["ABSTAIN", "EOS"], "probability": "1/20", "target_recovery": false, "scientifically_valid": false}
+  ],
+  "canonical_target_tokens": ["DESIGN", "A", "EOS"],
+  "expected_exact_path_mass": "1/100",
+  "expected_target_event_mass": "3/10",
+  "expected_valid_event_mass": "11/20",
+  "overlapping_prefixes": [["DESIGN"], ["DESIGN", "A"]],
+  "expected_prefix_union_mass": "1/10",
+  "zero_success_examples": {
+    "assumption": "Fixed allocation of independent Bernoulli trials for one frozen event; these are hypothetical calculations, not observed failures.",
+    "nominal_error": "1/20",
+    "sample_counts": [64, 299],
+    "simultaneous_event_count": 12,
+    "expected_upper_64": 0.045729702330762456,
+    "expected_upper_299": 0.00996914679289927,
+    "expected_simultaneous_upper_64": 0.08207077031264796
+  }
+}

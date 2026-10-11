@@ -1,0 +1,11 @@
+{
+  "source_commit": "ea86c6608a0a32c695b6a02122da62767c0fe151",
+  "archive_status": "superseded_planning_preserved_byte_for_byte",
+  "sha256": {
+    "README.md": "9f85a6b0cbe7bc7a4c6e03af4601f586da01a234fc45b83b81a8ddaa3cf59e4e",
+    "research-plan.md": "94e5967b34fc91b4d961f98c064c41cdd816d9cb8c59ef11b738e18e58a7e632",
+    "first-day-plan.md": "7871943c463064ccbd03cf9e04756d7943640fa30dbc3d8d364ce93d1aaa690a",
+    "reading-list.md": "d0e388f8cf9bd0fa71431f94de21285a069ca8fea2cd839a2f9017681964a7b5",
+    "causal-review.md": "8545226c6053aa758c8b6f067b7df703d7959d515dc3feaac1577310b3762c3a"
+  }
+}
