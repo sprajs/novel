@@ -1,0 +1,25 @@
+[project]
+name = "novel-cu126-reference"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "torch==2.8.0+cu126",
+  "transformers==4.57.6",
+  "huggingface-hub==0.36.2",
+  "safetensors==0.8.0",
+  "numpy==2.5.4",
+  "pytest==9.1.1",
+]
+
+[tool.uv]
+required-version = "==0.12.23"
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+exclude-newer = "2026-10-12T00:00:00Z"
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }

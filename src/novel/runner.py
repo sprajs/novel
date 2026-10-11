@@ -16,6 +16,8 @@ from .activation import (AdditiveIntervention, IdentityIntervention, ResidualSit
                          SemanticAnchor, forward_reference, prepare_reference_model)
 from .artifacts import RunStore, environment_record, sha256_file, strict_json
 from .generation import generate_reference
+from .gradients import activation_gradient
+from .profiles import ResolvedProfile, memory_record, synchronize
 from .models import model_entry, snapshot_path, verify_snapshot
 from .tasks import TaskInput
 
@@ -58,8 +60,21 @@ def load_config(path: Path) -> dict:
     return config
 
 
-def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
+def run(config_path: Path, registry: Path, cache: Path, runs: Path,
+        *, execution: ResolvedProfile | None = None) -> Path:
     config = load_config(config_path)
+    device, dtype = "cpu", "float32"
+    if execution is not None:
+        device, dtype = execution.device, execution.dtype
+        config.update(model_key=execution.request.model_key, device=device, dtype=dtype,
+                      name=f"{execution.request.profile}_{execution.request.model_key}_{dtype}_mechanics",
+                      max_input_tokens=execution.request.max_input_tokens,
+                      max_new_tokens=execution.request.max_new_tokens)
+        config["budget"]["maximum_total_generated_tokens"] = 4 * config["max_new_tokens"]
+        # Prospective numerical guardrails, not a calibration or cross-device guarantee.
+        if dtype != "float32":
+            config.update(atol=0.02 if dtype == "float16" else 0.1,
+                          rtol=0.002 if dtype == "float16" else 0.01)
     entry = model_entry(registry, config["model_key"])
     snapshot = snapshot_path(cache, config["model_key"], entry)
     store = RunStore(runs, max_bytes=config["max_artifact_bytes"])
@@ -75,19 +90,25 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
         tokenizer = AutoTokenizer.from_pretrained(snapshot, local_files_only=True, trust_remote_code=False)
         model = AutoModelForCausalLM.from_pretrained(
             snapshot, local_files_only=True, trust_remote_code=False,
-            use_safetensors=True, dtype=torch.float32, attn_implementation="eager",
+            use_safetensors=True, dtype=getattr(torch, dtype), attn_implementation="eager",
         )
+        model.to(device)
         prepare_reference_model(model)
+        synchronize(device)
         actual_dtypes = sorted({str(p.dtype) for p in model.parameters()})
         actual_devices = sorted({str(p.device) for p in model.parameters()})
-        if actual_dtypes != ["torch.float32"] or actual_devices != ["cpu"]:
-            raise ValueError("Loaded parameters do not match the declared CPU FP32 condition")
+        if actual_dtypes != [f"torch.{dtype}"] or actual_devices != [device]:
+            raise ValueError("Loaded parameters do not match the declared device/precision")
+        if any(str(buffer.device) != device for buffer in model.buffers()):
+            raise ValueError("Loaded buffers do not match the declared device")
+        if sum(p.numel() for p in model.parameters()) != entry["parameters"]["unique_config_implied"]:
+            raise ValueError("Loaded unique parameter count differs from the pinned registry")
         load_seconds = time.perf_counter() - load_started
         parameter_state = [(id(p), p._version) for p in model.parameters()]
         task = TaskInput.from_dict({"schema_version": 1, **config["task"], "prompt": config["prompt"]})
         template_args = {"tokenize": False, "add_generation_prompt": True, "enable_thinking": False}
         rendered = tokenizer.apply_chat_template([{"role": "user", "content": task.prompt}], **template_args)
-        inputs = tokenizer(rendered, add_special_tokens=False, return_tensors="pt").input_ids
+        inputs = tokenizer(rendered, add_special_tokens=False, return_tensors="pt").input_ids.to(device)
         if inputs.shape[1] > config["max_input_tokens"]:
             raise ValueError("Prompt exceeds input cap; no silent truncation")
         position = inputs.shape[1] - 1
@@ -98,59 +119,102 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
             rationale="Final template token at the assistant response boundary, before any generated continuation. Single-input mechanics only; not a certified donor alignment.",
         )
 
-        def compare(name, left, right):
+        def compare(name, left, right, *, exact=False):
             error = float((left.float() - right.float()).abs().max())
-            passed = bool(torch.allclose(left, right, atol=config["atol"], rtol=config["rtol"]))
-            checks[name] = {"passed": passed, "max_abs_error": error, "atol": config["atol"], "rtol": config["rtol"]}
+            atol, rtol = (0.0, 0.0) if exact else (config["atol"], config["rtol"])
+            passed = bool(torch.allclose(left, right, atol=atol, rtol=rtol))
+            checks[name] = {"passed": passed, "max_abs_error": error, "atol": atol, "rtol": rtol, "status": "PASS" if passed else "FAIL"}
             if not passed:
                 raise AssertionError(f"Engineering invariant failed: {name}, max_abs_error={error}")
 
         baseline = forward_reference(model, inputs)
+        compare("clean_repeat_logits", baseline.logits, forward_reference(model, inputs).logits, exact=True)
         captured = forward_reference(model, inputs, capture_site=site)
-        compare("capture_logits", baseline.logits, captured.logits)
+        compare("capture_logits", baseline.logits, captured.logits, exact=True)
         identity = IdentityIntervention(site)
-        zero = AdditiveIntervention(site, torch.ones(model.config.hidden_size), anchor, strength=0.0)
-        compare("identity_logits", baseline.logits, forward_reference(model, inputs, intervention=identity).logits)
-        compare("zero_strength_logits", baseline.logits, forward_reference(model, inputs, intervention=zero).logits)
+        zero = AdditiveIntervention(site, torch.ones(model.config.hidden_size, device=device), anchor, strength=0.0)
+        compare("identity_logits", baseline.logits, forward_reference(model, inputs, intervention=identity).logits, exact=True)
+        compare("zero_strength_logits", baseline.logits, forward_reference(model, inputs, intervention=zero).logits, exact=True)
         suffixes = [tokenizer.encode(text, add_special_tokens=False) for text in (" A", " B")]
         if suffixes[0] == suffixes[1]:
             raise ValueError("Causal prefix probe suffixes must differ")
         for i, suffix in enumerate(suffixes):
-            extended = torch.cat([inputs, torch.tensor([suffix], dtype=torch.long)], dim=1)
+            extended = torch.cat([inputs, torch.tensor([suffix], dtype=torch.long, device=device)], dim=1)
             later = forward_reference(model, extended, capture_site=site)
             compare(f"causal_prefix_residual_{i}", captured.residual, later.residual)
             compare(f"causal_prefix_logits_{i}", baseline.logits, later.logits[:, :inputs.shape[1]])
 
-        # Same forced token prefix; this measures numerical parity, not sampled-text agreement.
-        token = suffixes[0][0]
-        positions = torch.arange(inputs.shape[1])
+        # Multiple teacher-forced cache steps; sampled text agreement is not parity evidence.
+        positions = torch.arange(inputs.shape[1], device=device)
+        extended = inputs
         with torch.no_grad():
             prefill = model(input_ids=inputs, attention_mask=torch.ones_like(inputs),
                             position_ids=positions[None], cache_position=positions,
                             use_cache=True, logits_to_keep=1)
-            cached = model(input_ids=torch.tensor([[token]]), past_key_values=prefill.past_key_values,
-                           attention_mask=torch.ones((1, inputs.shape[1] + 1), dtype=torch.long),
-                           position_ids=torch.tensor([[inputs.shape[1]]]),
-                           cache_position=torch.tensor([inputs.shape[1]]), use_cache=True,
-                           logits_to_keep=1)
-        extended = torch.cat([inputs, torch.tensor([[token]])], dim=1)
-        compare("clean_cache_logits", forward_reference(model, extended, last_logits_only=True).logits, cached.logits)
+            past = prefill.past_key_values
+            del prefill
+            for step, token in enumerate([suffixes[0][0], suffixes[1][0], suffixes[0][0]]):
+                length = extended.shape[1]
+                current = torch.tensor([[token]], dtype=torch.long, device=device)
+                extended = torch.cat([extended, current], dim=1)
+                cached = model(input_ids=current, past_key_values=past,
+                               attention_mask=torch.ones_like(extended),
+                               position_ids=torch.tensor([[length]], device=device),
+                               cache_position=torch.tensor([length], device=device),
+                               use_cache=True, logits_to_keep=1)
+                past = cached.past_key_values
+                compare(f"clean_cache_logits_{step}",
+                        forward_reference(model, extended, last_logits_only=True).logits, cached.logits)
+            del cached, past
+        gradient = None
+        if execution is not None and execution.request.gradient:
+            objective_tokens = baseline.logits[0, -1].topk(2).indices.tolist()
+            synchronize(device)
+            gradient_started = time.perf_counter()
+            try:
+                gradient = activation_gradient(model, inputs, site, *objective_tokens)
+            except Exception as exc:
+                exc.validation_stage = "activation_gradient"
+                checks["activation_gradient"] = {"passed": False, "status": "FAIL", "message": str(exc)}
+                raise
+            synchronize(device)
+            checks["activation_gradient"] = {
+                "passed": True, "status": "PASS", "score": gradient.score,
+                "objective": "last-position top-1 minus top-2 clean logit; diagnostic only",
+                "positive_token_id": gradient.positive_token_id, "negative_token_id": gradient.negative_token_id,
+                "gradient_l2": float(gradient.gradient.float().norm()),
+                "site": asdict(site), "shape": list(gradient.gradient.shape),
+                "dtype": str(gradient.gradient.dtype), "detached": True,
+                "artifact": "gradient.safetensors",
+                "wall_seconds": time.perf_counter() - gradient_started,
+                "finite_difference": "SKIP: checked on tiny FP32 model in offline tests; not calibrated on this pretrained/device condition",
+            }
+            store.write_bytes("gradient.safetensors", save_tensors({"selected_block_output_gradient": gradient.gradient.contiguous()}))
+        del baseline
         eos = model.generation_config.eos_token_id
         eos = tuple(eos if isinstance(eos, list) else [eos]) if eos is not None else ()
         generations = []
         global_rng = torch.random.get_rng_state().clone()
+        cuda_rng = torch.cuda.get_rng_state(device).clone() if device.startswith("cuda:") else None
         for name, intervention in [("clean", None), ("clean_repeat", None), ("identity", identity), ("zero_strength", zero)]:
+            synchronize(device)
             generation_started = time.perf_counter()
             result = generate_reference(model, inputs, seed=config["seeds"]["sampling"],
                                         max_new_tokens=config["max_new_tokens"], eos_token_ids=eos,
                                         intervention=intervention, **config["sampling"])
+            synchronize(device)
             generations.append({"condition": name, **asdict(result),
                                 "raw_text": tokenizer.decode(result.generated_ids, skip_special_tokens=False),
                                 "wall_seconds": time.perf_counter() - generation_started})
         checks["seeded_generation_identity"] = {"passed": all(g["generated_ids"] == generations[0]["generated_ids"] for g in generations)}
         checks["global_sampling_rng_unchanged"] = {"passed": bool(torch.equal(global_rng, torch.random.get_rng_state()))}
+        if cuda_rng is not None:
+            checks["global_cuda_rng_unchanged"] = {"passed": bool(torch.equal(cuda_rng, torch.cuda.get_rng_state(device)))}
+        checks["parameter_gradients_absent"] = {"passed": all(p.grad is None for p in model.parameters())}
         checks["parameters_frozen_unmutated"] = {"passed": parameter_state == [(id(p), p._version) for p in model.parameters()] and all(not p.requires_grad for p in model.parameters())}
         checks["hooks_removed"] = {"passed": all(not layer._forward_hooks for layer in model.model.layers)}
+        for check in checks.values():
+            check.setdefault("status", "PASS" if check["passed"] else "FAIL")
         if not all(check["passed"] for check in checks.values()):
             raise AssertionError("Engineering invariant failed")
         tensor_record = store.write_bytes("residual.safetensors", save_tensors({"block_output": captured.residual.contiguous()}))
@@ -179,7 +243,14 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
             "model_key": config["model_key"], "model_repo": entry["repo_id"], "model_revision": entry["revision"],
             "tokenizer_revision": entry["tokenizer_revision"], "snapshot_files_sha256": hashes,
             "unique_parameter_count": sum(p.numel() for p in model.parameters()),
-            "device": "cpu", "dtype": "float32", "gpu_tested": False, "quantization": None,
+            "device": device, "dtype": dtype, "gpu_tested": device.startswith("cuda:"), "quantization": None,
+            "execution_profile": execution.to_dict() if execution is not None else None,
+            "dependency_lock_path": execution.lock_path if execution else "uv.lock",
+            "dependency_lock_sha256": sha256_file(Path(execution.lock_path if execution else "uv.lock")),
+            "effective_config_sha256": sha256_file(store.path / "config.json"),
+            "buffer_dtypes": sorted({str(b.dtype) for b in model.buffers()}),
+            "cuda_memory": memory_record(device),
+            "tolerance_note": "GPU tolerances are prospective guardrails; record errors and calibrate before causal studies. No-op comparisons are exact.",
             "actual_parameter_dtypes": actual_dtypes, "actual_parameter_devices": actual_devices,
             "attention_implementation": "eager", "deterministic_algorithms": True,
             "seeds": config["seeds"], "unused_seed_streams": ["perturbation", "donor_selection", "world_generation"],
@@ -188,7 +259,7 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
             "generated_tokens": sum(len(g["generated_ids"]) for g in generations),
             "generation_forward_calls": sum(g["forward_calls"] for g in generations),
             "generation_processed_tokens": sum(g["processed_tokens"] for g in generations),
-            "validation_forward_calls": 9, "backward_calls": 0, "verifier_calls": 0,
+            "validation_forward_calls": 14 + int(gradient is not None), "backward_calls": int(gradient is not None), "verifier_calls": 0,
             "donor_ids": [], "parent_experiment_id": None,
             "storage_limit_bytes": config["max_artifact_bytes"], "max_files": store.max_files,
             "source_files_sha256": {str(path): sha256_file(path) for path in sorted(Path("src/novel").glob("*.py"))},
@@ -196,6 +267,7 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path) -> Path:
         store.write_json("run.json", record)
         store.write_json("inventory.json", {"artifacts": list(store.inventory), "note": "Inventory excludes its own checksum"})
     except BaseException as exc:
+        exc.run_path = store.path
         try:
             store.write_json("error.json", {"status": "failed", "type": type(exc).__name__, "message": str(exc),
                                             "wall_seconds": time.perf_counter() - started, "checks_completed": checks})
