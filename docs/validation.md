@@ -19,8 +19,8 @@ transitive dependency/hash record is [uv.lock](../uv.lock). This is an intention
 tested reference stack; the [tooling report](tooling/current-stack.md) records
 newer upstream releases and incompatible dependency combinations.
 
-`uv run --locked pytest -q`: **73 passed, one skipped, 23 subtests passed** in
-3.05 seconds. The skip is the CUDA/FP16 test, because this cloud has no CUDA
+`uv run --locked pytest -q`: **73 passed, one skipped, 24 subtests passed** in
+3.21 seconds. The skip is the CUDA/FP16 test, because this cloud has no CUDA
 device or wheel. The CPU tests use random tiny Qwen3 models and no network.
 They verify hook-site meaning, capture independence, nonzero patch effects,
 identity and zero-strength behavior, RNG separation, exception cleanup, causal
