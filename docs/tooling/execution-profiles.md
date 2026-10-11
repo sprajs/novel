@@ -127,6 +127,11 @@ programmatic config. No ground-truth records or confirmation splits are opened.
 
 ## What the report means
 
+The [open CPU repeatability investigation](../validation/cpu-repeatability-investigation.md)
+limits stability claims even when an individual smoke passes. Before forwards,
+`execution.json` now preserves exact input and runtime context; failed comparisons
+retain bounded raw differing values and tensor hashes.
+
 Every valid invocation prints the unique path to
 `runs/profile-checks/<id>/diagnostics.json`, including execution failures.
 Exit 0 means the requested checks passed; exit 1 means failure. `--preflight-only`

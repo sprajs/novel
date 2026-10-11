@@ -136,3 +136,107 @@ def test_later_generation_failure_preserves_successful_gradient(prepared, monkey
     assert code == 1
     assert report["checks"]["activation_gradient"]["status"] == "PASS"
     assert report["checks"]["pretrained_smoke"]["status"] == "FAIL"
+
+
+@pytest.mark.parametrize("condition,call_number", [("clean_repeat_logits", 2), ("capture_logits", 3)])
+def test_numerical_failure_preserves_replay_context_and_raw_errors(prepared, monkeypatch, condition, call_number):
+    kwargs, _model = prepared
+    forward = runner.forward_reference
+    calls = 0
+
+    def altered(*args, **kw):
+        nonlocal calls
+        calls += 1
+        result = forward(*args, **kw)
+        if calls == call_number:
+            from dataclasses import replace
+            logits = result.logits.clone()
+            logits[0, -1, 0] += 0.125
+            return replace(result, logits=logits)
+        return result
+
+    monkeypatch.setattr(runner, "forward_reference", altered)
+    generation = Mock(side_effect=AssertionError("sampling must not start"))
+    monkeypatch.setattr(runner, "generate_reference", generation)
+    code, path = profile_runner.validate_profile(ProfileRequest(gradient=True), **kwargs)
+    report = json.loads(path.read_text())
+    assert code == 1 and calls == call_number  # No retry or warmup bypass.
+    assert report["checks"]["activation_gradient"]["status"] == "SKIP"
+    check = report["invariants"][condition]
+    assert check["status"] == "FAIL" and check["atol"] == check["rtol"] == 0
+    evidence = check["failure_evidence"]
+    assert evidence["mismatch_count"] == 1
+    assert evidence["largest_failing_values"][0]["index"] == [0, 3, 0]
+    assert evidence["largest_failing_values"][0]["abs_error"] == pytest.approx(.125)
+    run_path = Path(report["run_path"])
+    context = json.loads((run_path / "execution.json").read_text())
+    assert context["input_ids"] == [1, 3, 7, 2]
+    assert context["model_revision"] == context["tokenizer_revision"]
+    assert context["snapshot_files_sha256"]
+    assert context["runtime"]["threads"] == 5
+    assert report["partial_run"]["state_at_failure"] == context["initial_state"]
+    assert report["partial_run"]["execution_context"] == "execution.json"
+    generation.assert_not_called()
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf")])
+@pytest.mark.parametrize("condition,call_number", [("clean_repeat_logits", 2), ("capture_logits", 3)])
+def test_nonfinite_comparison_still_saves_the_failed_report(prepared, monkeypatch, bad, condition, call_number):
+    kwargs, _model = prepared
+    forward, calls = runner.forward_reference, 0
+
+    def altered(*args, **kw):
+        nonlocal calls
+        calls += 1
+        result = forward(*args, **kw)
+        if calls == call_number:
+            from dataclasses import replace
+            logits = result.logits.clone()
+            logits[0, -1, 0] = bad
+            return replace(result, logits=logits)
+        return result
+
+    monkeypatch.setattr(runner, "forward_reference", altered)
+    code, path = profile_runner.validate_profile(ProfileRequest(), **kwargs)
+    report = json.loads(path.read_text())
+    assert code == 1 and report["error"]["type"] == "AssertionError"
+    check = report["invariants"][condition]
+    assert check["status"] == "FAIL"
+    assert check["max_abs_error"] in ("nan", "inf")
+    assert check["failure_evidence"]["largest_failing_values"][0]["right"] in ("nan", "inf")
+    assert report["partial_run"]["execution_context"] == "execution.json"
+    assert calls == call_number
+
+
+@pytest.mark.parametrize("exception", [MemoryError, TypeError])
+def test_diagnostic_errors_cannot_mask_the_original_assertion(prepared, monkeypatch, exception):
+    kwargs, _model = prepared
+    forward, calls = runner.forward_reference, 0
+
+    def altered(*args, **kw):
+        nonlocal calls
+        calls += 1
+        result = forward(*args, **kw)
+        if calls == 2:
+            from dataclasses import replace
+            return replace(result, logits=result.logits + .125)
+        return result
+
+    state, state_calls = runner.reference_state, 0
+
+    def failing_state(*args):
+        nonlocal state_calls
+        state_calls += 1
+        if state_calls > 1:
+            raise exception("diagnostic unavailable")
+        return state(*args)
+
+    monkeypatch.setattr(runner, "forward_reference", altered)
+    monkeypatch.setattr(runner, "reference_state", failing_state)
+    monkeypatch.setattr(runner, "comparison_failure", Mock(side_effect=exception("diagnostic unavailable")))
+    code, path = profile_runner.validate_profile(ProfileRequest(), **kwargs)
+    report = json.loads(path.read_text())
+    assert code == 1 and report["error"]["type"] == "AssertionError"
+    assert report["invariants"]["clean_repeat_logits"]["failure_evidence_error"] == exception.__name__
+    assert report["partial_run"]["state_at_failure_error"] == exception.__name__
+    assert calls == 2

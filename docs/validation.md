@@ -160,3 +160,18 @@ No model larger than 0.6B was downloaded in this cloud, and no compute was rente
 The requested independent GPT-6.1 Sol review found and helped fix partial-failure
 status propagation and installed-versus-locked dependency checking. Its final
 review found no remaining blocking code issue; this does not replace GPU testing.
+
+
+### Bounded repeatability follow-up
+
+The [CPU repeatability investigation](validation/cpu-repeatability-investigation.md)
+reconstructs the original failure, retains its exact config/error, and reports
+six fresh-process probes (four original five-thread, two one-thread controls).
+All 36 nontrivial within-process comparisons were exact, with recorded state
+unchanged. The discrepancy was **not reproduced; stability is not established**.
+The failure-evidence gap is repaired and covered by injected-mismatch tests;
+no numerical defaults or tolerances changed. The original root cause remains an
+explicit scientific repeatability blocker. Follow-up results: **143 tests passed,
+24 subtests passed, 1 GPU skip**, plus the full pinned CPU gradient smoke and
+static checks. See the investigation evidence for exact data and wheel-source
+verification; no GPU-runtime claim is made.

@@ -4,6 +4,7 @@ import argparse
 from dataclasses import asdict
 import hashlib
 import json
+import math
 from pathlib import Path
 import resource
 import time
@@ -15,6 +16,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from .activation import (AdditiveIntervention, IdentityIntervention, ResidualSite,
                          SemanticAnchor, forward_reference, prepare_reference_model)
 from .artifacts import RunStore, environment_record, sha256_file, strict_json
+from .diagnostics import comparison_failure, numerical_runtime, reference_state
 from .generation import generate_reference
 from .gradients import activation_gradient
 from .profiles import ResolvedProfile, memory_record, synchronize
@@ -80,6 +82,7 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path,
     store = RunStore(runs, max_bytes=config["max_artifact_bytes"])
     started = time.perf_counter()
     checks = {}
+    model = None
     store.write_json("config.json", config)
     try:
         hashes = verify_snapshot(snapshot, entry)  # No implicit network/model download.
@@ -119,12 +122,28 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path,
             rationale="Final template token at the assistant response boundary, before any generated continuation. Single-input mechanics only; not a certified donor alignment.",
         )
 
+        # Persist replay/context evidence before the first invariant can fail.
+        store.write_json("execution.json", {
+            "model_revision": entry["revision"], "tokenizer_revision": entry["tokenizer_revision"],
+            "snapshot_files_sha256": hashes, "runtime": numerical_runtime(),
+            "initial_state": reference_state(model, device),
+            "rendered_prompt": rendered, "input_ids": inputs[0].tolist(),
+            "template_arguments": template_args,
+            "chat_template_sha256": hashlib.sha256(tokenizer.chat_template.encode()).hexdigest(),
+            "validation_cache_policy": "full_prefix_cache_disabled; no past supplied",
+            "sampling_occurs_after_forward_checks": True,
+        })
+
         def compare(name, left, right, *, exact=False):
             error = float((left.float() - right.float()).abs().max())
             atol, rtol = (0.0, 0.0) if exact else (config["atol"], config["rtol"])
             passed = bool(torch.allclose(left, right, atol=atol, rtol=rtol))
-            checks[name] = {"passed": passed, "max_abs_error": error, "atol": atol, "rtol": rtol, "status": "PASS" if passed else "FAIL"}
+            checks[name] = {"passed": passed, "max_abs_error": error if math.isfinite(error) else str(error), "atol": atol, "rtol": rtol, "status": "PASS" if passed else "FAIL"}
             if not passed:
+                try:
+                    checks[name]["failure_evidence"] = comparison_failure(left, right, atol=atol, rtol=rtol)
+                except Exception as diagnostic_error:
+                    checks[name]["failure_evidence_error"] = type(diagnostic_error).__name__
                 raise AssertionError(f"Engineering invariant failed: {name}, max_abs_error={error}")
 
         baseline = forward_reference(model, inputs)
@@ -268,9 +287,18 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path,
         store.write_json("inventory.json", {"artifacts": list(store.inventory), "note": "Inventory excludes its own checksum"})
     except BaseException as exc:
         exc.run_path = store.path
+        failure_state = None
+        failure_state_error = None
+        if model is not None:
+            try:
+                failure_state = reference_state(model, device)
+            except Exception as diagnostic_error:
+                failure_state_error = type(diagnostic_error).__name__
         try:
             store.write_json("error.json", {"status": "failed", "type": type(exc).__name__, "message": str(exc),
-                                            "wall_seconds": time.perf_counter() - started, "checks_completed": checks})
+                                            "wall_seconds": time.perf_counter() - started, "checks_completed": checks,
+                                            "state_at_failure": failure_state, "state_at_failure_error": failure_state_error,
+                                            "execution_context": "execution.json" if (store.path / "execution.json").is_file() else None})
         except (ValueError, OSError):
             pass
         raise
