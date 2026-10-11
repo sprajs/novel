@@ -156,8 +156,9 @@ execution. The report includes:
   CUDA bytes, host peak RSS, and raw token/output/provenance artifact paths.
 
 Share the diagnostic JSON and, if appropriate, the corresponding bounded run
-folder (contains your prompt/raw generations). It records hardware/software and
-public experiment inputs, not environment variables, credentials or home paths.
+folder (contains your prompt/raw generations). It records hardware/software,
+public experiment inputs and an explicit allowlist of numerical thread/CUBLAS
+controls; it does not dump arbitrary environment variables, credentials or home paths.
 No automatic upload occurs. Ignored run folders and model weights stay out of Git.
 
 The allocator cap is 80% of `min(free VRAM at preflight, declared capacity)`.
