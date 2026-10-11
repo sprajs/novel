@@ -1,28 +1,44 @@
-# Reading syllabus for frozen model intervention research
+# Reading tied to the observational study
 
-Prepared 11 October 2026
+Prepared 11 October 2026. These are primary sources and decision aids, not
+certifications of our corpus or reproductions of their experiments. Read the
+local protocol first, then inspect methods relevant to the decision at hand.
 
-The core route is about five to seven hours across several days. Read methods and limitations with a concrete question in mind; full-paper reading is unnecessary at the start. Times below are planning estimates for a reader familiar with scientific research and ML engineering.
+| Decision | Primary reading | Use and limit |
+| --- | --- | --- |
+| What counts as the same idea? | [Kuhn et al., Semantic Uncertainty, v3](https://arxiv.org/abs/2302.09664v3); [Farquhar et al., authors' account](https://oatml.cs.ox.ac.uk/blog/2024/06/19/detecting_hallucinations_2024.html) | Separate wording from meaning. Sample clustering does not enumerate all unseen scientific alternatives or certify validity. |
+| What does reference likelihood measure? | [Holtzman et al., Surface Form Competition](https://aclanthology.org/2021.emnlp-main.564/); [Wiegreffe et al., Increasing Probability Mass](https://arxiv.org/abs/2305.14596) | Inspect surface-form and normalization effects. A calibrated or normalized score is not an idea probability. |
+| How should research ideas be judged? | [Si et al., expert idea study, v1](https://arxiv.org/abs/2409.04109v1); [Si et al., ideation/execution study, v1](https://arxiv.org/abs/2506.20803v1) | Distinguish expert ratings of novelty/feasibility from realized research outcomes. Neither admits a historical target for this study. |
+| What does repeated generation estimate? | [Chen et al., code evaluation, v2](https://arxiv.org/abs/2107.03374v2) | Understand candidate-count and pass@k estimands. An oracle's ability to find a correct candidate is different from deployable self-selection. |
+| Can we stop after a promising batch? | [Howard et al., confidence sequences](https://arxiv.org/abs/1810.08240) | A future adaptive study needs valid sequential inference. This initial proposal uses fixed counts and cannot reuse fixed-N bounds after outcome-dependent stopping. |
+| Can expressed reasoning explain a success? | [Turpin et al.](https://arxiv.org/abs/2305.04388); [Lanham et al., v1](https://arxiv.org/abs/2307.13702v1); [Chen et al., reasoning-model study, v1](https://arxiv.org/abs/2505.05410v1) | Motivates separate behavioral annotation and later causal tests. Faithfulness is task/condition dependent, not guaranteed by plausible prose; the newer study tests whether reasoning traces reveal hint use. |
+| Which existing corpus is usable? | [ResearchBench](https://aclanthology.org/2026.findings-acl.644/); [DiscoveryBench](https://arxiv.org/abs/2407.01725); [CUSP v2](https://arxiv.org/html/2605.22681v2); [Reconstruction v3](https://arxiv.org/html/2608.16645v3) | Use as candidate/protocol sources. Read the [version/license audit](../docs/ground_truth/benchmark_audit.md); no item is automatically eligible. |
+| Which exact model predates the claim? | [Existing artifact audit](../docs/ground_truth/model_audit.md), linked immutable cards/trees; [Qwen3 release](https://qwenlm.github.io/blog/qwen3/) | A family release/cutoff does not replace byte and interface identity. Do not use a current card to silently replace the historical template. |
+| When can internal association become a causal experiment? | [Patching best practices](https://arxiv.org/abs/2309.16042); [patching interpretation](https://arxiv.org/abs/2404.15255) | State the intervention, metric, controls and conditional interpretation before patching. See [later causal gate](causal-review.md). |
 
-| No | Source and sections | Expected learning | Time |
-| --- | --- | --- | --- |
-| 1 | [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html): transformer overview, residual stream, attention composition | Map familiar transformer operations to the objects being patched; the simplified models do not cover every Qwen detail | 45–60 min |
-| 2 | [How to use and interpret activation patching](https://arxiv.org/abs/2404.15255): sections 2–4 | Distinguish restoration, disruption, redundancy, and metric pitfalls | 35–45 min |
-| 3 | [Towards Best Practices of Activation Patching](https://arxiv.org/abs/2309.16042): metrics, corruption experiments, recommendations | Choose meaningful diagnostics and identify conclusions sensitive to setup | 35–45 min |
-| 4 | [Function Vectors](https://arxiv.org/abs/2310.15213): extraction, causal tests, transfer, composition | Understand the closest antecedent to the bridge-transfer claim | 60–90 min |
-| 5 | [ActAdd](https://arxiv.org/abs/2308.10248) and [CAA](https://arxiv.org/abs/2312.06681): methods, one experiment each | Specify simple contrastive-vector baselines before elaborate spectral methods | 35–50 min |
-| 6 | [Noise Steering](https://aclanthology.org/2026.bea-1.41/): methods, evaluation, limitations | Recognize direct overlap and improve the sampling comparison | 30–40 min |
-| 7 | [Soft Reasoning](https://proceedings.mlr.press/v267/zhu25ae.html): method, ablations, evaluation appendix; [FIRE](https://arxiv.org/abs/2410.21236): method skim | Separate noise, search, verification, and token-space branching | 45–60 min |
-| 8 | [Qwen3 card](https://huggingface.co/Qwen/Qwen3-1.7B) and [Transformers cache explanation](https://huggingface.co/docs/transformers/en/cache_explanation) | Fix decoding, templates, and cache semantics before implementation | 25–35 min |
+Suggested order is corpus protocol and one worked case, semantic measurement,
+human adjudication, sampling/statistics, then internal diagnostics. A first pass
+should yield one written decision per source, not a requirement to read an
+entire library before qualifying the first claim.
 
-## Later reading
+## Source access and boundaries
 
-- [In-Context Learning Creates Task Vectors](https://arxiv.org/abs/2310.15916), method and intervention experiments, 25–35 minutes: a second view of task compression and a useful generic task-vector control.
-- [AtP*](https://arxiv.org/abs/2403.00745), approximation failures and exact-validation experiments, 45–60 minutes, then [IOI](https://arxiv.org/abs/2211.00593), path patching and faithfulness/completeness/minimality, 60–90 minutes: move from localization to a tested circuit hypothesis.
-- [PPLM](https://arxiv.org/abs/1912.02164), hidden-state optimization method, 20 minutes: establish older inference-time gradient-steering precedent before claiming a new gradient approach.
-- [ResearchBench](https://aclanthology.org/2026.findings-acl.644/) task construction, [DiscoveryBench](https://arxiv.org/abs/2407.01725) task/verifier design, and [Reconstruction](https://arxiv.org/abs/2608.16645) limitations, 60–90 minutes combined: decide which naturalistic task each benchmark actually measures. Read [CUSP](https://arxiv.org/html/2605.22681v1) Track II and its contamination algorithm for 15 minutes before adopting any temporal scoring rule.
-- [CreativityNeuro](https://arxiv.org/abs/2607.01433), methods, human evaluation, Appendix F, 35–45 minutes: examine the difference between originality effects and an established utility improvement.
-- [LatentTTS](https://aclanthology.org/2026.acl-long.2069/) and [GTS](https://arxiv.org/abs/2602.14077), methods and training details, 45–60 minutes combined: understand why trained latent-model results do not transfer automatically to this frozen text model.
-- [FunSearch](https://www.nature.com/articles/s41586-023-06924-6), evaluator and search loop, and [MAP-Elites](https://arxiv.org/abs/1504.04909), archive/descriptor definitions, 45–60 minutes combined: design a useful-rule assay after choosing a real problem.
+PR #4 checked public primary pages and version histories, building on the
+unchanged 11 October ground-truth audits. The new documents link claims to their
+sources; the corpus casebook records candidate-specific uncertainties. No full
+paper or restricted benchmark is redistributed. No upstream license is adopted
+as the repository's license.
 
-Optional later reading notes should answer five questions per paper: exact intervention; supervision and compute; strongest baseline; what the result actually establishes; and one control to borrow. Do not turn reading into a prerequisite for starting the small behavioral specification.
+The Nature landing page for semantic entropy failed to render in the main
+research pass; the authors' public OATML account was read successfully. This is
+sufficient for the limited wording/meaning distinction used here, not a claim
+of rechecking every experiment. The CUSP HTML browser omitted its full auditor
+block, so the existing source-version audit and a direct public HTML inspection
+are used for that narrow correction. Some arXiv renderings contain version/date
+ambiguities; those remain explicit in the casebook rather than becoming clean
+historical evidence. Author claims about performance are not independent
+replications.
+
+The original intervention syllabus remains [archived](archive/pre-pr4/reading-list.md).
+Its existence does not establish that every historical citation has been
+re-audited for a future intervention experiment.

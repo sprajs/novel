@@ -1,0 +1,494 @@
+{
+  "schema_version": "post-freeze-admission-v0.1",
+  "record_id": "post-freeze-meanflow-admission-dev-001",
+  "case_id": "meanflow-training-design-2025",
+  "status": "exploratory",
+  "status_reason": "Method-level candidate linked to public development prose; no historical or scientific admission is certified.",
+  "prepared_on": "2026-10-11",
+  "structural_check_only": true,
+  "protocol_refs": {
+    "corpus": "Plan/corpus-protocol.md",
+    "casebook": "Plan/candidate-casebook.md",
+    "measurement": "Plan/measurement-protocol.md"
+  },
+  "target": {
+    "domain": "generative modeling / scientific method design",
+    "contribution_level": "method",
+    "scoped_contribution": "Design an interval-conditioned average-velocity generative field with a self-contained derivative-based training objective supporting a single learned displacement step, plus boundary and approximation analysis.",
+    "excluded_claims": [
+      "Derivation of the classical product/material-derivative identity alone.",
+      "Recovery of the complete paper from a supplied average-velocity definition.",
+      "Independent historical novelty, empirically competitive image quality, optimization stability, or practical runtime from symbolic arithmetic."
+    ],
+    "human_origin": {
+      "attribution": "The human-authored Mean Flows for One-step Generative Modeling paper is the attributed target source; the attribution has not received independent human review.",
+      "verification_status": "unverified",
+      "evidence_refs": [
+        "meanflow-v1"
+      ]
+    }
+  },
+  "exposure": {
+    "split": "development",
+    "public": true,
+    "evaluator_metadata_only": true,
+    "confirmation_eligible": false,
+    "visible_problem_ref": "Plan/candidate-casebook.md#meanflow-training-design-2025",
+    "caveats": [
+      "The author-visible draft, source references, and all prior calculus examples are exposed development material.",
+      "This file is admission metadata and is never an input to a prompt renderer; no executable prompt is supplied here."
+    ]
+  },
+  "model_snapshot": {
+    "audit_path": "data/ground_truth/model_audit.json",
+    "audit_id": "qwen3_1_7b_april_2025",
+    "model_id": "Qwen/Qwen3-1.7B",
+    "full_revision": "d3e258980a49b060055ea9038dad99d75923f7c4",
+    "tokenizer_revision": "d3e258980a49b060055ea9038dad99d75923f7c4",
+    "chat_template_revision": "d3e258980a49b060055ea9038dad99d75923f7c4",
+    "tokenizer_config_sha256": "5a7303fcb1a27ede63134a2cbd61d5282c247ca6d769ce4746d4ffa124aedd63",
+    "decoded_chat_template_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+    "weights_downloaded_for_this_record": false,
+    "recorded_git_commit": {
+      "kind": "recorded_git_commit",
+      "value": "2025-04-29T08:55:53Z",
+      "precision": "second",
+      "evidence_refs": [
+        "qwen-april-card"
+      ],
+      "caveats": [
+        "A recorded full revision commit is not an independently archived public release event."
+      ]
+    },
+    "publisher_release_announcement": {
+      "kind": "publisher_release_announcement",
+      "value": "2025-04-29",
+      "precision": "day",
+      "evidence_refs": [
+        "qwen-release-notice"
+      ],
+      "caveats": [
+        "A day-level family announcement corroborates release but does not prove public accessibility of every exact snapshot byte at a particular hour."
+      ]
+    },
+    "verified_full_public_release": null,
+    "training_end": null,
+    "posttraining": "Original release card identifies both stages; family announcement describes a four-stage post-training pipeline. Exact training data/end date not independently audited.",
+    "adapters": [],
+    "interface_policy": "Use the complete literal April revision for weights and co-located tokenizer/chat template. Do not substitute main, the July revision, or a modern template.",
+    "timing_caveats": [
+      "The exact full-snapshot first public visibility remains unresolved.",
+      "Training end and every training example, including post-training, are not independently audited.",
+      "No adapter artifact in the selected tree does not exclude undocumented operations.",
+      "April and July tokenizer/chat templates differ although publisher weight object IDs match; tensor equality and rendered-prompt parity were not tested.",
+      "No weights were acquired for this fixture, and publisher LFS hashes are not local weight verification.",
+      "Any later quantization, conversion, adapter, or prompting interface must be a separate explicitly dated condition.",
+      "Earlier public disclosure of an equivalent target contribution has not been excluded."
+    ]
+  },
+  "chronology": {
+    "eligibility": "unresolved",
+    "submission": {
+      "kind": "submission",
+      "value": "2025-05-19T17:59:42Z",
+      "precision": "second",
+      "evidence_refs": [
+        "meanflow-v1"
+      ],
+      "caveats": [
+        "arXiv submission history is a proxy; neither the exact first public visibility time nor exclusion of earlier channels is established."
+      ]
+    },
+    "first_public_disclosure": null,
+    "known_channels": [
+      {
+        "kind": "submission",
+        "value": "2025-05-19T17:59:42Z",
+        "precision": "second",
+        "evidence_refs": [
+          "meanflow-v1"
+        ],
+        "caveats": [
+          "arXiv submission history is a proxy; neither the exact first public visibility time nor exclusion of earlier channels is established."
+        ]
+      }
+    ],
+    "earlier_channel_search_complete": false,
+    "caveats": [
+      "A submission timestamp, journal date, or retained Git timestamp cannot stand in for a verified first public disclosure.",
+      "The April/May date ordering alone does not establish model eligibility for this method-level target.",
+      "Chronological eligibility is independent of prerequisite competence and scientific outcomes."
+    ]
+  },
+  "provenance": {
+    "audit_refs": [
+      "data/ground_truth/candidate_registry.json",
+      "data/ground_truth/model_audit.json",
+      "docs/ground_truth/model_audit.md",
+      "docs/ground_truth/lead_temporal_audit.md",
+      "docs/ground_truth/packets/meanflow.md",
+      "docs/ground_truth/protocol.md"
+    ],
+    "sources": [
+      {
+        "source_id": "meanflow-v1",
+        "url": "https://arxiv.org/abs/2505.13447v1",
+        "version": "v1",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Recorded v1 submission and attributed average-velocity generative modeling method."
+        ],
+        "limitations": [
+          "Source facts are inherited from repository audits; no source bytes were fetched for this new record.",
+          "The paper date is a submission proxy, not a certified earliest contribution disclosure."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": "CC-BY-4.0",
+          "status": "source_declared",
+          "scope": "Paper; declaration recorded by the existing packet audit.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "meanflow-method-text",
+        "url": "https://arxiv.org/html/2505.13447v1",
+        "version": "v1",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Section 4.1 average field, derivative expansion and regression construction; Appendix B.3 boundary discussion."
+        ],
+        "limitations": [
+          "The exact method-equivalence comparison against preceding research remains unperformed.",
+          "Source assertions and empirical results have not been independently reproduced."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": "CC-BY-4.0",
+          "status": "source_declared",
+          "scope": "Paper HTML; declaration recorded by the existing packet audit.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "qwen-april-card",
+        "url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/d3e258980a49b060055ea9038dad99d75923f7c4/README.md",
+        "version": "d3e258980a49b060055ea9038dad99d75923f7c4",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Selected full original April model revision, post-training declaration and interface provenance."
+        ],
+        "limitations": [
+          "The retained commit does not independently date original public accessibility.",
+          "No exact training-data/end-date audit or scientific competence test was performed."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": "Apache-2.0",
+          "status": "source_declared",
+          "scope": "Model-card declaration at the pinned snapshot.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "qwen-release-notice",
+        "url": "https://qwenlm.github.io/blog/qwen3/",
+        "version": "unversioned_web_page",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Publisher family release announcement dated 29 April 2025."
+        ],
+        "limitations": [
+          "The live release page is not an archived exact-byte public-visibility event.",
+          "The day-level series release statement does not date all exact snapshot artifacts."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": null,
+          "status": "unresolved",
+          "scope": "Release-page content rights have not been independently established.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "flow-matching-v1",
+        "url": "https://arxiv.org/abs/2210.02747v1",
+        "version": "v1",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Earlier instantaneous velocity generative-model context; exact method equivalence is unresolved."
+        ],
+        "limitations": [
+          "This antecedent was recorded in the bounded candidate registry, not a complete prior-art search."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": null,
+          "status": "unresolved",
+          "scope": "Underlying paper terms require a separate source-specific check.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "shortcut-v1",
+        "url": "https://arxiv.org/abs/2410.12557v1",
+        "version": "v1",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Earlier finite-time step-conditioned transport; an equivalence audit remains open."
+        ],
+        "limitations": [
+          "The existing registry identifies a comparison lead and does not certify non-equivalence."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": null,
+          "status": "unresolved",
+          "scope": "Underlying paper terms require a separate source-specific check.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      },
+      {
+        "source_id": "meanflow-code-license",
+        "url": "https://github.com/Gsunshine/meanflow/blob/d70cb55d298ee03c53bf6da67bec281082e4e2d9/LICENSE",
+        "version": "d70cb55d298ee03c53bf6da67bec281082e4e2d9",
+        "accessed_on": "2026-10-11",
+        "access_basis": "inherited_repository_audit",
+        "claims_supported": [
+          "Observed MIT license for the original JAX code at this retained commit."
+        ],
+        "limitations": [
+          "The commit is not evidence of first public code availability.",
+          "Code terms do not clear ImageNet, pretrained components, generated weights, or other training data."
+        ],
+        "bytes_fetched_for_this_record": false,
+        "content_sha256": null,
+        "license": {
+          "identifier": "MIT",
+          "status": "source_declared",
+          "scope": "Code at the observed retained commit.",
+          "limitations": [
+            "The source declaration does not clear upstream datasets, weights, derivative content, or this authored fixture."
+          ]
+        }
+      }
+    ],
+    "prior_art_search_complete": false,
+    "prior_art_log": [
+      {
+        "query_or_action": "Mean Flows for One-step Generative Modeling",
+        "status": "inherited_audit",
+        "searched_on": "2026-10-11",
+        "channels": [
+          "Primary web search and direct arXiv version pages"
+        ],
+        "evidence_refs": [
+          "data/ground_truth/candidate_registry.json",
+          "meanflow-v1"
+        ],
+        "outcome": "The existing bounded registry inspected v1 history and selected method text; this record performs no new web search.",
+        "limitations": [
+          "Talks, theses, patents, and first-public code histories were not comprehensively searched."
+        ]
+      },
+      {
+        "query_or_action": "Compare derivative-based interval-conditioned training with shortcut, consistency, IMM, and exact earlier equivalent objectives; inspect pre-April-29 talks, slides, code, announcements, theses, and patents.",
+        "status": "planned",
+        "searched_on": null,
+        "channels": [
+          "Versioned papers",
+          "Archived announcements",
+          "Code/public visibility",
+          "Talks/slides",
+          "Theses/patents"
+        ],
+        "evidence_refs": [],
+        "outcome": "Not performed; this entry preserves the next required search without representing it as completed evidence.",
+        "limitations": [
+          "No absence-of-prior-art claim or negative search result can be inferred."
+        ]
+      }
+    ]
+  },
+  "assistance": {
+    "authoring": "AI-assisted schema and admission-record authoring from the existing source audits and the new casebook; no human scientific review has been arranged or performed.",
+    "model_assistance_status": "not_run",
+    "hindsight_dependencies": [
+      "Authors have seen the method paper and public calculus reconstruction packet.",
+      "The target and rubric were selected with knowledge of the eventual method.",
+      "The method name, source dates, admission status, gold method, and evaluator judgments are evaluator metadata."
+    ],
+    "prompt_assistance_policy": "Problem-only and guided conditions must disclose information content separately. A supplied average field, derivative identity, network parameterization, or training recipe constitutes explicit method assistance. Independent alternatives receive their own validity and usefulness assessment.",
+    "leakage_review_status": "not_assessed"
+  },
+  "judgment": {
+    "target_equivalence_criteria": [
+      "A domain reviewer must compare a complete proposed parameterization, objective, inference operation, boundary behavior, assumptions, and validation plan against the scoped method.",
+      "An isolated identity, correct name, or supplied recipe does not meet method-level target equivalence."
+    ],
+    "valid_alternative_criteria": [
+      "Accept a scientifically valid alternative meeting the same generative design problem even if it differs from the historical target.",
+      "Assess validity and utility independently of historical target matching; verify assumptions, boundary conditions, approximation limitations, and a defensible validation plan."
+    ],
+    "rubric_dimensions": [
+      "Scientific validity under stated assumptions",
+      "Method-level completeness and coherence",
+      "Contribution novelty relative to audited literature",
+      "Plausible usefulness with an explicit validation boundary",
+      "Feasibility, resource and failure-mode analysis",
+      "Information sufficiency and disclosed authoring assistance"
+    ],
+    "scientific_competence": "not_measured",
+    "competence_evidence_refs": [],
+    "scientific_results": "not_run",
+    "result_evidence_refs": [],
+    "caveats": [
+      "No model was evaluated; prerequisite competence, training behavior, image quality and runtime remain unmeasured.",
+      "Historical eligibility or a checker pass cannot establish scientific competence, efficacy, novelty, or absence of contamination.",
+      "The prior exact calculus verifier supplies no method-level scientific judgment."
+    ]
+  },
+  "independent_human_reviews": {
+    "domain": null,
+    "temporal": null
+  },
+  "admission_gates": {
+    "human_origin": {
+      "status": "unresolved",
+      "evidence_refs": [],
+      "blockers": [
+        "Human authorship is attributed by the paper; no independent human-origin assessment has been recorded."
+      ]
+    },
+    "contribution_novelty": {
+      "status": "unresolved",
+      "evidence_refs": [],
+      "blockers": [
+        "Compare the full method with shortcut, consistency, IMM, and equivalent earlier objectives; calculus is not the novel target."
+      ]
+    },
+    "disclosure_chronology": {
+      "status": "unresolved",
+      "evidence_refs": [],
+      "blockers": [
+        "Earlier talks, slides, code visibility, announcements, theses, and equivalent methods remain unresolved."
+      ]
+    },
+    "model_snapshot_chronology": {
+      "status": "unresolved",
+      "evidence_refs": [],
+      "blockers": [
+        "The April commit and publisher announcement do not independently establish public accessibility of every exact selected artifact."
+      ]
+    },
+    "input_provenance": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "The neutral draft and its complete hindsight dependencies still need an independent provenance assessment."
+      ]
+    },
+    "rights_and_publication": {
+      "status": "unresolved",
+      "evidence_refs": [],
+      "blockers": [
+        "Paper/code/model licenses have separate scopes; generated fixture ownership and any upstream data rights remain open."
+      ]
+    },
+    "problem_well_posedness": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "Human experts must establish that the method-design prompt has sufficient information and a defensible evaluation boundary."
+      ]
+    },
+    "domain_judgment": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "No independent human domain expert review has been performed."
+      ]
+    },
+    "temporal_judgment": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "No independent human temporal/provenance expert review has been performed."
+      ]
+    },
+    "leakage_review": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "No independent semantic leakage review of the new problem-only prompt has been performed."
+      ]
+    },
+    "preregistration_and_split": {
+      "status": "not_assessed",
+      "evidence_refs": [],
+      "blockers": [
+        "Public authored examples are development; a custodian, new sealed cases, and a frozen scoring protocol remain to be established."
+      ]
+    }
+  },
+  "unresolved_blockers": [
+    "Human authorship is attributed by the paper; no independent human-origin assessment has been recorded.",
+    "Compare the full method with shortcut, consistency, IMM, and equivalent earlier objectives; calculus is not the novel target.",
+    "Earlier talks, slides, code visibility, announcements, theses, and equivalent methods remain unresolved.",
+    "The April commit and publisher announcement do not independently establish public accessibility of every exact selected artifact.",
+    "The neutral draft and its complete hindsight dependencies still need an independent provenance assessment.",
+    "Paper/code/model licenses have separate scopes; generated fixture ownership and any upstream data rights remain open.",
+    "Human experts must establish that the method-design prompt has sufficient information and a defensible evaluation boundary.",
+    "No independent human domain expert review has been performed.",
+    "No independent human temporal/provenance expert review has been performed.",
+    "No independent semantic leakage review of the new problem-only prompt has been performed.",
+    "Public authored examples are development; a custodian, new sealed cases, and a frozen scoring protocol remain to be established."
+  ],
+  "prior_admission_ref": null,
+  "frozen_artifacts": {
+    "visible_input": {
+      "path": "Plan/candidate-casebook.md",
+      "sha256": null
+    },
+    "rubric": {
+      "path": "Plan/measurement-protocol.md",
+      "sha256": null
+    },
+    "provenance": {
+      "path": "data/ground_truth/model_audit.json",
+      "sha256": null
+    }
+  },
+  "split_custody": {
+    "event_lineage_id": "meanflow-interval-average-generative-method",
+    "ever_public": true,
+    "custodian_id": null,
+    "custody_record_ref": null,
+    "sealed_input_sha256": null,
+    "protocol_frozen_on": null
+  }
+}
