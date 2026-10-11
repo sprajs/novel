@@ -15,11 +15,14 @@ as of 11 October 2026; newer versions are not silently substituted. All direct
 dependencies are exact pins; `uv.lock` fixes transitive dependencies and hashes.
 CPU FP32 is an engineering condition distinct from the prospective RTX 2080 Ti
 FP16 scientific condition. The CPU wheel cannot run CUDA tests.
+These commands select CPU Torch even on a GPU host; the future GPU setup needs
+a separately validated CUDA environment and dependency lock.
 
 From the repository root:
 
 ```bash
 # Requires uv 0.12.23; bootstrap separately if needed: python -m pip install uv==0.12.23
+export UV_CACHE_DIR="$PWD/.cache/uv"
 uv sync --locked
 uv run --locked python scripts/check_environment.py
 uv run --locked pytest -q
@@ -27,6 +30,10 @@ uv run --locked novel-model inspect
 uv run --locked novel-model download
 uv run --locked novel-smoke
 ```
+
+Set `UV_CACHE_DIR` in each new shell before using uv. This project-local cache
+is writable in the cloud workspace and is already ignored by `.gitignore`;
+the cloud's default `/home/agent/.cache/uv` is read-only.
 
 Only `novel-model download` acquires the pinned Qwen3-0.6B snapshot (1.52 GB,
 3 GiB default cap). It checks expected lengths and SHA256 before inference.

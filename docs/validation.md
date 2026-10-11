@@ -85,6 +85,7 @@ redistribution rights are not assumed. Reading notes distinguish full-method
 inspection from abstract-only context sources.
 
 ```bash
+export UV_CACHE_DIR="$PWD/.cache/uv"
 uv sync --locked
 uv run --locked pytest -q
 uv run --locked novel-model verify
