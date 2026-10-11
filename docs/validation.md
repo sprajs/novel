@@ -114,3 +114,90 @@ promised. The final public branch may add documentation after the smoke commit.
   require their own protocols and checks.
 - The repository owner still needs to choose a license for original project
   code; upstream software, checkpoint and paper terms are recorded separately.
+
+## Stacked CPU/CUDA profiles increment
+
+The new [profile guide](tooling/execution-profiles.md) supplies actual GPU code,
+complete separate cu126/cu128 locks and shareable diagnostic reports. The
+[model analysis](models/hardware-suitability.md) preserves original pins and
+separates weight arithmetic from runtime/backward memory.
+
+Validation on 11 October 2026: **128 tests passed, 24 subtests passed, 1 explicit
+GPU test skipped**. Changed Python files passed Ruff 0.14.14; `compileall` and
+`git diff --check` passed. Both CUDA locks pass `uv lock --check` through metadata
+resolution; no CUDA wheel payloads were installed and no GPU validation is
+inferred from lock resolution. At this stage the root CPU lock, exact registry
+and dataset contract were unchanged from PR1 (`066ecdd`). The later 8B addition
+below preserves both original model entries and the CPU/dataset contracts.
+
+The real pinned 0.6B CPU model passed the legacy `novel-smoke` command and the
+new `cloud-cpu --gradient` profile, including raw seeded generation, selected
+capture, exact clean repeat/no-op/zero-strength checks, prefix causality,
+three-step forced cache parity, selected gradient, frozen parameters and hook
+cleanup. The offline gradient test matches a central finite difference on a
+tiny FP32 Qwen3 model. These are mechanics checks, not scientific task scores.
+The public [evidence summary](validation/profile-evidence.json) retains actual
+measurements and all completed profile attempts; raw tensors/tokens remain in
+ignored run directories.
+
+**Unresolved repeatability observation:** one CPU full-profile attempt failed
+an exact capture-logit check with maximum error `0.003936767578125`. An earlier
+attempt and two later full attempts passed; a separate bounded same-resident
+probe found exact agreement in six alternating clean/capture forwards. The root
+cause was not established. There is no automatic retry, warmup exclusion or
+widened tolerance. A new exact clean-forward-repeat gate runs before capture so
+future reports can distinguish baseline drift from an observer effect. Preserve
+and investigate any recurrence before interpreting causal results; this draft
+does not claim unconditional CPU bitwise stability.
+
+Hardware discovery found torch `2.8.0+cpu`, CUDA build null, availability false,
+zero CUDA devices, no `nvidia-smi` and no visible NVIDIA device files. Actual
+`local-2080ti` and `rental` preflight requests therefore correctly produced FAIL
+reports with downstream GPU/model checks SKIP, without model loading or CPU
+fallback. RTX2080Ti/3090/4090/5090 memory fit, native precision numerics, driver
+compatibility and performance remain **unverified** until run on actual hardware.
+No model larger than 0.6B was downloaded in this cloud, and no compute was rented.
+
+The requested independent GPT-6.1 Sol review found and helped fix partial-failure
+status propagation and installed-versus-locked dependency checking. Its final
+review found no remaining blocking code issue; this does not replace GPU testing.
+
+
+### Bounded repeatability follow-up
+
+The [CPU repeatability investigation](validation/cpu-repeatability-investigation.md)
+reconstructs the original failure, retains its exact config/error, and reports
+six fresh-process probes (four original five-thread, two one-thread controls).
+All 36 nontrivial within-process comparisons were exact, with recorded state
+unchanged. The discrepancy was **not reproduced; stability is not established**.
+The failure-evidence gap is repaired and covered by injected-mismatch tests;
+no numerical defaults or tolerances changed. The original root cause remains an
+explicit scientific repeatability blocker. Follow-up results: **143 tests passed,
+24 subtests passed, 1 GPU skip**, plus the full pinned CPU gradient smoke and
+static checks. See the investigation evidence for exact data and wheel-source
+verification; no GPU-runtime claim is made.
+
+### Full-capacity RTX 5090 correction
+
+The rental default now targets **RTX 5090 32 GB and pinned Qwen3-8B**, with a
+32 GiB ceiling clamped to detected CUDA bytes and 20% allocation headroom.
+24 GiB is only an explicit custom rental; CPU and 2080 Ti model/precision/token
+defaults are unchanged. The [updated commands](tooling/execution-profiles.md)
+start with 0.6B mechanics, then explicitly download and validate the 8B candidate.
+
+Validation: **156 tests passed, 24 subtests passed, 1 GPU skip**. Ruff 0.14.14,
+compilation, diff checks and both CUDA lock checks passed. Tests cover the new
+default, GPU identity/architecture, decimal GB versus GiB, actual available
+memory, gradient/context bounds and the legacy CPU bypass guard. Constructing
+all three full architectures on the PyTorch metadata-only device confirmed
+parameter counts and embedding ties without allocating weights. The pinned
+8B config/index hashes and the five allowlisted index shards were independently
+checked against official metadata. Original small-model entries, CPU lock and
+scientific data contract are unchanged.
+
+Current cloud preflight passed for CPU with model checks SKIP; rental correctly
+failed for unavailable CUDA with GPU/model checks SKIP. The [new evidence](models/rtx5090-evidence.json)
+records these results and the metadata-only acquisition. No new pretrained
+execution was performed for this correction, no 8B weights were downloaded,
+and no GPU compute was used or rented. 8B memory envelopes are estimates only;
+actual GPU numerics/fit and the original CPU repeatability anomaly remain open.

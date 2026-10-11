@@ -1,5 +1,8 @@
 """Seeded free-generation, KV parity, and fixed-position causal patch checks."""
 
+import os
+from pathlib import Path
+
 import pytest
 import torch
 from transformers import Qwen3Config, Qwen3ForCausalLM
@@ -186,30 +189,39 @@ def test_cached_interventions_are_explicitly_rejected(model, ids, identity):
 
 
 @pytest.mark.gpu
-@pytest.mark.skipif(not torch.cuda.is_available(), reason="requires a separate CUDA/FP16 reference environment")
+@pytest.mark.skipif(os.environ.get("NOVEL_RUN_GPU_TESTS") != "1" or not torch.cuda.is_available(),
+                    reason="requires NOVEL_RUN_GPU_TESTS=1 and a separate CUDA/FP16 reference environment")
 def test_cuda_fp16_eager_noop_and_clean_cache_gate(model, ids):
-    # Prospective hardware gate only: it is skipped in this CPU-only environment.
+    from novel.models import model_entry
+    from novel.profiles import ProfileRequest, configure_determinism, initialize_device, inspect_hardware, resolve_profile
+    configure_determinism()
+    request = ProfileRequest(os.environ.get("NOVEL_GPU_PROFILE", "local-2080ti"), model="qwen3_0_6b",
+                             device_index=int(os.environ.get("NOVEL_GPU_DEVICE_INDEX", "0")))
+    resolved = resolve_profile(request, inspect_hardware(request.device_index), model_entry(Path("configs/models.json"), request.model_key))
+    initialize_device(resolved)
+    device = resolved.device
+    # Prospective hardware gate only: skipped unless explicitly enabled.
     # These initial numerical tolerances must be recorded/reviewed on real hardware.
-    with torch.random.fork_rng(devices=[]):
+    with torch.random.fork_rng(devices=[request.device_index]):
         torch.manual_seed(183)
-        gpu_model = prepare_reference_model(Qwen3ForCausalLM(model.config)).to(device="cuda", dtype=torch.float16)
-    gpu_ids = ids.to("cuda")
+        gpu_model = prepare_reference_model(Qwen3ForCausalLM(model.config)).to(device=device, dtype=torch.float16)
+    gpu_ids = ids.to(device)
     baseline = forward_reference(gpu_model, gpu_ids)
     identity = forward_reference(gpu_model, gpu_ids, intervention=IdentityIntervention(ResidualSite(1, (4,))))
     zero = forward_reference(gpu_model, gpu_ids, intervention=AdditiveIntervention(
-        ResidualSite(1, (4,)), torch.ones(32, device="cuda", dtype=torch.float16), anchor_for(ids), strength=0))
+        ResidualSite(1, (4,)), torch.ones(32, device=device, dtype=torch.float16), anchor_for(ids), strength=0))
     torch.testing.assert_close(identity.logits, baseline.logits, rtol=0, atol=0)
     torch.testing.assert_close(zero.logits, baseline.logits, rtol=0, atol=0)
     assert baseline.logits.dtype == torch.float16
     prefix = gpu_ids[:, :-1]
     with torch.no_grad():
         prefill = gpu_model(input_ids=prefix, attention_mask=torch.ones_like(prefix),
-                            position_ids=torch.arange(prefix.shape[1], device="cuda").unsqueeze(0),
-                            cache_position=torch.arange(prefix.shape[1], device="cuda"),
+                            position_ids=torch.arange(prefix.shape[1], device=device).unsqueeze(0),
+                            cache_position=torch.arange(prefix.shape[1], device=device),
                             use_cache=True, return_dict=True, logits_to_keep=1)
         cached = gpu_model(input_ids=gpu_ids[:, -1:], attention_mask=torch.ones_like(gpu_ids),
-                           position_ids=torch.tensor([[gpu_ids.shape[1] - 1]], device="cuda"),
-                           cache_position=torch.tensor([gpu_ids.shape[1] - 1], device="cuda"),
+                           position_ids=torch.tensor([[gpu_ids.shape[1] - 1]], device=device),
+                           cache_position=torch.tensor([gpu_ids.shape[1] - 1], device=device),
                            past_key_values=prefill.past_key_values, use_cache=True,
                            return_dict=True, logits_to_keep=1)
     torch.testing.assert_close(cached.logits, baseline.logits[:, -1:], rtol=1e-2, atol=2e-3)

@@ -1,9 +1,27 @@
 import hashlib
 import json
+from pathlib import Path
 
 import pytest
 
 from novel.models import download_snapshot, model_entry, verify_snapshot
+
+
+@pytest.mark.parametrize("key", ["qwen3_0_6b", "qwen3_1_7b", "qwen3_8b"])
+def test_pinned_architecture_matches_unique_parameter_count_without_weights(key):
+    import torch
+    from transformers import Qwen3Config, Qwen3ForCausalLM
+
+    entry = model_entry(Path("configs/models.json"), key)
+    config = Qwen3Config(**entry["model_config"])
+    config._attn_implementation = "eager"
+    with torch.device("meta"):
+        model = Qwen3ForCausalLM(config)
+    assert all(p.device.type == "meta" for p in model.parameters())
+    assert sum(p.numel() for p in model.parameters()) == entry["parameters"]["unique_config_implied"]
+    assert len(model.model.layers) == entry["model_config"]["num_hidden_layers"]
+    tied = model.get_input_embeddings().weight is model.get_output_embeddings().weight
+    assert tied == entry["model_config"]["tie_word_embeddings"]
 
 
 def manifest():
