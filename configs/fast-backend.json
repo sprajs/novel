@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/ggml-org/llama.cpp.git",
+  "tag": "v0.6.0",
+  "commit": "d81235049384534c167caea52b85a694f6103d14",
+  "profiles": {
+    "cloud-cpu": {"model": "qwen3_0_6b", "cuda_arch": null, "cuda_release": null, "gpu_layers": 0, "context": 512, "threads": 5},
+    "local-2080ti": {"model": "qwen3_1_7b", "cuda_arch": "75", "cuda_release": "12.8.1", "gpu_layers": 99, "context": 2048, "threads": 4},
+    "rental": {"model": "qwen3_8b", "cuda_arch": "120", "cuda_release": "12.8.1", "gpu_layers": 99, "context": 2048, "threads": 4}
+  }
+}

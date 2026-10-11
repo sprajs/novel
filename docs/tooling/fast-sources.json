@@ -1,0 +1,251 @@
+{
+  "verified_at_utc": "2026-10-11T23:32:26.028388+00:00",
+  "sources": {
+    "llama_release": {
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/releases/latest",
+      "bytes": 35128,
+      "sha256": "237661e7837f93648061af6af20bf12fd85f4739bf14b5cf869e7ba0a7e288d6",
+      "observation": {
+        "tag_name": "v0.6.0",
+        "published_at": "2026-10-05T16:56:22Z",
+        "target_commitish": "8345f333951c661d166b00e6f9362e553768f292"
+      }
+    },
+    "llama_tag": {
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/git/ref/tags/v0.6.0",
+      "bytes": 331,
+      "sha256": "3a103563bc3ac7c584973ee036f7e6437b39040a2c67e0266f3aa8bda87fd056",
+      "observation": {
+        "object": {
+          "sha": "69ecae922d2b60c1fa8c590279f4e2099af75111",
+          "type": "tag",
+          "url": "https://api.github.com/repos/ggml-org/llama.cpp/git/tags/69ecae922d2b60c1fa8c590279f4e2099af75111"
+        }
+      }
+    },
+    "llama_annotated_tag": {
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/git/tags/69ecae922d2b60c1fa8c590279f4e2099af75111",
+      "bytes": 698,
+      "sha256": "b6fcc3883168d96d442a8ec06cedbbc5c1ab8a7eb2903f7cb49fc9db6ccea3a2",
+      "observation": {
+        "sha": "69ecae922d2b60c1fa8c590279f4e2099af75111",
+        "object": {
+          "sha": "d81235049384534c167caea52b85a694f6103d14",
+          "type": "commit",
+          "url": "https://api.github.com/repos/ggml-org/llama.cpp/git/commits/d81235049384534c167caea52b85a694f6103d14"
+        },
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    "vllm_release": {
+      "url": "https://api.github.com/repos/vllm-project/vllm/releases/latest",
+      "bytes": 60449,
+      "sha256": "dad639172e89e3150cf3983f7f359a95c8255568c4c496ead87270f78e6e6221",
+      "observation": {
+        "tag_name": "v0.31.0",
+        "published_at": "2026-10-05T06:44:55Z",
+        "target_commitish": "main"
+      }
+    },
+    "sglang_release": {
+      "url": "https://api.github.com/repos/sgl-project/sglang/releases/latest",
+      "bytes": 85534,
+      "sha256": "f30d0effcddaa0284a557e7bd3747c79839d9852042afea05ab790f240c920f0",
+      "observation": {
+        "tag_name": "v0.5.21",
+        "published_at": "2026-10-02T01:09:04Z",
+        "target_commitish": "main"
+      }
+    },
+    "ollama_release": {
+      "url": "https://api.github.com/repos/ollama/ollama/releases/latest",
+      "bytes": 30473,
+      "sha256": "393fd45a7beffff110d2479499b8b8aae6145bb1827891f4a72a61233a8c8bbc",
+      "observation": {
+        "tag_name": "v0.40.3",
+        "published_at": "2026-10-11T01:39:04Z",
+        "target_commitish": "main"
+      }
+    },
+    "vllm_metadata": {
+      "url": "https://pypi.org/pypi/vllm/0.31.0/json",
+      "bytes": 13297,
+      "sha256": "1ad5502041857a269d134ad3d9ab053da460136b38e2179ec5b1c20951ded320",
+      "dependencies": [
+        "transformers<5.18.0,>=5.10.4",
+        "torch==2.13.0",
+        "torchaudio==2.11.0",
+        "torchvision==0.28.0",
+        "torchcodec>=0.14",
+        "flashinfer-python==0.7.0.post1",
+        "zentorch==2.13.0.1; extra == \"zen\""
+      ],
+      "version": "0.31.0"
+    },
+    "sglang_metadata": {
+      "url": "https://pypi.org/pypi/sglang/0.5.21/json",
+      "bytes": 37870,
+      "sha256": "7da8ed218ea976908ae6015dd0a68991b9e91b3e58d3d9acc1f3dcce1a5fccfa",
+      "dependencies": [
+        "flash-attn-4>=4.0.0b18",
+        "flashinfer_python[cu13]==0.6.18",
+        "torch==2.13.0",
+        "torch_memory_saver>=0.0.9.post1",
+        "torchaudio==2.11.0",
+        "torchcodec==0.15.0; sys_platform != \"linux\" or (sys_platform == \"linux\" and platform_machine != \"aarch64\" and platform_machine != \"arm64\" and platform_machine != \"armv7l\")",
+        "torchvision",
+        "transformers==5.12.1",
+        "sentence_transformers; extra == \"test\""
+      ],
+      "version": "0.5.21"
+    },
+    "qwen_cuda_source": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/ggml/src/ggml-cuda/CMakeLists.txt",
+      "bytes": 11145,
+      "sha256": "758913e522a4280ac1f27e62111b5773d47babea319cbae58ff8606fe24fde60"
+    },
+    "qwen_model_source": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/src/models/qwen3.cpp",
+      "bytes": 5872,
+      "sha256": "06f400665980d30fd357886a5d14b541adda06d159a5b7f0ce929ca36788778c"
+    },
+    "conversion_source": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/conversion/qwen.py",
+      "bytes": 48254,
+      "sha256": "1fab554607c647b5aae453759a8e17c96ff1dea5af2ec28885793fa87ecc18be"
+    },
+    "probability_source": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/tools/server/server-common.cpp",
+      "bytes": 73456,
+      "sha256": "74181b0fa4ac076debdffaac77c61f371bf1176836fa6743a1a6692f92104401"
+    },
+    "probability_serialization_source": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/tools/server/server-task.cpp",
+      "bytes": 67587,
+      "sha256": "aa752f0ba1ce4be15c65dbce43b769fdeeb5b0f72286005ef40028eea1f56e95"
+    },
+    "official_gguf_0.6B": {
+      "url": "https://huggingface.co/api/models/Qwen/Qwen3-0.6B-GGUF?blobs=true",
+      "sha": "23749fefcc72300e3a2ad315e1317431b06b590a",
+      "bytes_downloaded": false,
+      "files": [
+        {
+          "rfilename": "Qwen3-0.6B-Q8_0.gguf",
+          "blobId": "11bf194c8059f3b03e4454376ac67813a1e0eb52",
+          "size": 639446688,
+          "lfs": {
+            "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+            "size": 639446688,
+            "pointerSize": 134
+          }
+        }
+      ]
+    },
+    "official_gguf_1.7B": {
+      "url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B-GGUF?blobs=true",
+      "sha": "90862c4b9d2787eaed51d12237eafdfe7c5f6077",
+      "bytes_downloaded": false,
+      "files": [
+        {
+          "rfilename": "Qwen3-1.7B-Q8_0.gguf",
+          "blobId": "53cddf830ca488f735739d5e0b43591544e9ad82",
+          "size": 1834426016,
+          "lfs": {
+            "sha256": "061b54daade076b5d3362dac252678d17da8c68f07560be70818cace6590cb1a",
+            "size": 1834426016,
+            "pointerSize": 135
+          }
+        }
+      ]
+    },
+    "official_gguf_8B": {
+      "url": "https://huggingface.co/api/models/Qwen/Qwen3-8B-GGUF?blobs=true",
+      "sha": "7c41481f57cb95916b40956ab2f0b139b296d974",
+      "bytes_downloaded": false,
+      "files": [
+        {
+          "rfilename": "Qwen3-8B-Q4_K_M.gguf",
+          "blobId": "d4ee8ae7f4de3a5046b1a29776a3f011ba28017e",
+          "size": 5027783488,
+          "lfs": {
+            "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+            "size": 5027783488,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "Qwen3-8B-Q5_0.gguf",
+          "blobId": "30579e89cbc651608cbceb3cfe3214adad1cfead",
+          "size": 5720761152,
+          "lfs": {
+            "sha256": "c034cdfb0ad5b3edc5cf4ac07bff3b1b214aa541e633b37191c19c3a7b119727",
+            "size": 5720761152,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "Qwen3-8B-Q5_K_M.gguf",
+          "blobId": "d07d0f09f9be1d32eae9af8649341bf3daac7d0b",
+          "size": 5851112224,
+          "lfs": {
+            "sha256": "068bae163faa96ad48032daf4e071a6a28fe67d8dcc95367609c2ff165e52738",
+            "size": 5851112224,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "Qwen3-8B-Q6_K.gguf",
+          "blobId": "cc106e2fa13d91c507999ceacf0b4ea87fcc708b",
+          "size": 6725899040,
+          "lfs": {
+            "sha256": "cb042ccd76795a8830d6be6bd4165245847cc68e41797b13bd61aed4c2cfbce6",
+            "size": 6725899040,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "Qwen3-8B-Q8_0.gguf",
+          "blobId": "954c5db9f4cce8f400022addeb8d7baa1f5e30f6",
+          "size": 8709518112,
+          "lfs": {
+            "sha256": "408b955510e196121c1c375201744783b5c9a43c7956d73fc78df54c66e883d6",
+            "size": 8709518112,
+            "pointerSize": 135
+          }
+        }
+      ]
+    },
+    "nvidia_capabilities": {
+      "url": "https://developer.nvidia.com/cuda/gpus",
+      "observation": "RTX2080Ti CC7.5; RTX5090 CC12.0; accessed with browser",
+      "raw_byte_hash": null
+    },
+    "nvidia_cuda_12_8_1": {
+      "url": "https://docs.nvidia.com/cuda/archive/12.8.1/cuda-toolkit-release-notes/index.html",
+      "observation": "Toolkit12.8 Update1, NVCC12.8.90, Linux driver570.124.06; accessed with browser",
+      "raw_byte_hash": null
+    },
+    "nvidia_turing": {
+      "url": "https://docs.nvidia.com/cuda/turing-tuning-guide/index.html",
+      "observation": "Turing FP16/integer tensor-core support; accessed with browser",
+      "raw_byte_hash": null
+    },
+    "sentencepiece_pin": {
+      "url": "https://pypi.org/pypi/sentencepiece/0.2.1/json",
+      "observation": "Version0.2.1 verified; wheel hashes in converter uv.lock",
+      "raw_byte_hash": null
+    },
+    "vllm_requirements": {
+      "url": "https://docs.vllm.ai/en/latest/getting_started/installation/gpu/",
+      "observation": "Current requirements include SM75; accessed with browser",
+      "raw_byte_hash": null
+    }
+  },
+  "raw_retrieval_limitation": "Direct urllib request to NVIDIA capabilities returned HTTP403; browser read succeeded. No hash invented for browser-only source observations."
+}

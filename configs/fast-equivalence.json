@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "max_abs_logprob": 0.1,
+  "max_kl_reference_to_fast": 0.0001,
+  "max_abs_sequence_logprob_delta": 0.05,
+  "max_repeat_abs_logprob": 0.0,
+  "cases": [
+    {"id":"bridge","messages":[{"role":"user","content":"Briefly describe what a bridge connects."}],"continuation":"A bridge"},
+    {"id":"unicode","messages":[{"role":"user","content":"Write one short sentence about café tables."}],"continuation":"Café tables"}
+  ]
+}
