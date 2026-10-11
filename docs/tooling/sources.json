@@ -1,0 +1,1462 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-11",
+  "purpose": "Primary-source tooling comparison and minimal reference-stack decision",
+  "scope": "Current releases, licenses, architecture/hardware support, dependency constraints, configurations and reproducibility",
+  "latest_definition": "PyPI info.version and GitHub releases/latest designate observed stable versions; newer prereleases are reported separately. These are dated observations, not universal compatibility claims.",
+  "selected_environment": {
+    "path": "/workspace/research-environment/.venv",
+    "python": "3.12.14",
+    "uv": "0.12.23",
+    "packages": {
+      "torch": "2.8.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.8.0",
+      "huggingface-hub": "0.36.2",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.4"
+    },
+    "observation_method": "Python sys.version and importlib.metadata.version; uv --version",
+    "validation_scope": "Version inventory plus inspected actual pretrained Qwen3-0.6B CPU FP32 eager smoke; no GPU validation.",
+    "cpu_dtype": "float32",
+    "future_gpu_dtype": "float16",
+    "gpu_target": "RTX 2080 Ti, 11 GB VRAM, SM75; not present in selected environment"
+  },
+  "decision": {
+    "reference": "HF eager + plain PyTorch hooks",
+    "configuration": "JSON with explicit validation",
+    "records": "Per-run JSON implemented; dataset input JSONL; append-only JSONL events are a later option.",
+    "selected_tensor_storage": "safetensors",
+    "environment_manager": "uv",
+    "deferred": [
+      "NNsight",
+      "TransformerLens",
+      "pyvene",
+      "vLLM",
+      "SGLang",
+      "llama.cpp",
+      "Hydra/OmegaConf",
+      "Pydantic",
+      "MLflow",
+      "Weights & Biases"
+    ],
+    "upgrade_rule": "Use a separate locked candidate environment and rerun architecture/invariant/parity checks before changing the research reference."
+  },
+  "sources": [
+    {
+      "id": "pypi_torch",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/torch/json",
+      "exact_version_url": "https://pypi.org/pypi/torch/2.14.1/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "2.14.1",
+      "first_artifact_upload_utc": "2026-09-30T17:43:48.426734Z",
+      "requires_python": ">=3.10",
+      "license_observation": "BSD-3-Clause-style upstream; see tagged LICENSE and mixed bundled SPDX expression",
+      "publisher_license_expression": "Apache-2.0 AND Apache-2.0 WITH LLVM-exception AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND MIT",
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [
+        "cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == \"Linux\"",
+        "cuda-bindings<14,>=13.0.3; platform_system == \"Linux\" and python_version < \"3.15\"",
+        "triton~=3.8.0; platform_system == \"Linux\" and python_version < \"3.15\""
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_transformers",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/transformers/json",
+      "exact_version_url": "https://pypi.org/pypi/transformers/5.19.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "5.19.0",
+      "first_artifact_upload_utc": "2026-10-06T16:38:56.794667Z",
+      "requires_python": ">=3.10.0",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [
+        "numpy>=1.17"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_nnsight",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/nnsight/json",
+      "exact_version_url": "https://pypi.org/pypi/nnsight/0.7.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.7.0",
+      "first_artifact_upload_utc": "2026-05-05T05:40:20.691612Z",
+      "requires_python": ">=3.10",
+      "license_observation": "MIT",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "relevant_requires_dist": [
+        "transformers",
+        "torch>=2.4.0"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_transformer_lens",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/transformer-lens/json",
+      "exact_version_url": "https://pypi.org/pypi/transformer-lens/4.2.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "4.2.0",
+      "first_artifact_upload_utc": "2026-10-10T07:04:23.037131Z",
+      "requires_python": "<4.0,>=3.10",
+      "license_observation": "MIT",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [
+        "numpy>=1.24; python_version >= \"3.10\" and python_version < \"3.12\"",
+        "numpy>=1.26; python_version >= \"3.12\" and python_version < \"3.13\"",
+        "torch>=2.6",
+        "transformers-stream-generator<0.1,>=0.0.5",
+        "transformers>=5.9.0"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_pyvene",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/pyvene/json",
+      "exact_version_url": "https://pypi.org/pypi/pyvene/0.1.8/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.1.8",
+      "first_artifact_upload_utc": "2025-05-26T05:19:25.771816Z",
+      "requires_python": ">=3.9",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "relevant_requires_dist": [
+        "numpy>1.24.4",
+        "torch>=2.0.0",
+        "transformers>=4.45.1"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_vllm",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/vllm/json",
+      "exact_version_url": "https://pypi.org/pypi/vllm/0.31.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.31.0",
+      "first_artifact_upload_utc": "2026-10-05T07:40:41.009965Z",
+      "requires_python": "<3.15,>=3.10",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": "Apache-2.0",
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [
+        "numpy",
+        "transformers<5.18.0,>=5.10.4",
+        "torch==2.13.0",
+        "torchaudio==2.11.0",
+        "torchvision==0.28.0",
+        "torchcodec>=0.14",
+        "flashinfer-python==0.7.0.post1"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_sglang",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/sglang/json",
+      "exact_version_url": "https://pypi.org/pypi/sglang/0.5.21/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.5.21",
+      "first_artifact_upload_utc": "2026-10-01T07:45:09.006773Z",
+      "requires_python": ">=3.10",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "relevant_requires_dist": [
+        "cuda-python>=13.0",
+        "cuda-tile==1.6.0rc5",
+        "flash-attn-4>=4.0.0b18",
+        "flashinfer_python[cu13]==0.6.18",
+        "numpy",
+        "torch==2.13.0",
+        "torch_memory_saver>=0.0.9.post1",
+        "torchaudio==2.11.0",
+        "torchcodec==0.15.0; sys_platform != \"linux\" or (sys_platform == \"linux\" and platform_machine != \"aarch64\" and platform_machine != \"arm64\" and platform_machine != \"armv7l\")",
+        "torchvision",
+        "transformers==5.12.1"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_uv",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/uv/json",
+      "exact_version_url": "https://pypi.org/pypi/uv/0.13.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.13.0",
+      "first_artifact_upload_utc": "2026-10-09T19:45:18.048001Z",
+      "requires_python": ">=3.8",
+      "license_observation": "MIT OR Apache-2.0",
+      "publisher_license_expression": "MIT OR Apache-2.0",
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_safetensors",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/safetensors/json",
+      "exact_version_url": "https://pypi.org/pypi/safetensors/0.8.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.8.0",
+      "first_artifact_upload_utc": "2026-06-09T07:52:07.624876Z",
+      "requires_python": ">=3.10",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_hydra_core",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/hydra-core/json",
+      "exact_version_url": "https://pypi.org/pypi/hydra-core/1.3.7/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "1.3.7",
+      "first_artifact_upload_utc": "2026-09-14T18:02:53.661387Z",
+      "requires_python": null,
+      "license_observation": "MIT",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_omegaconf",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/omegaconf/json",
+      "exact_version_url": "https://pypi.org/pypi/omegaconf/2.4.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "2.4.0",
+      "first_artifact_upload_utc": "2026-10-09T12:43:59.764841Z",
+      "requires_python": ">=3.10",
+      "license_observation": "BSD family (publisher classifier; exact variant not established here)",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_pydantic",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/pydantic/json",
+      "exact_version_url": "https://pypi.org/pypi/pydantic/2.14.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "2.14.0",
+      "first_artifact_upload_utc": "2026-10-08T14:34:46.864517Z",
+      "requires_python": ">=3.10",
+      "license_observation": "MIT",
+      "publisher_license_expression": "MIT",
+      "publisher_license_classifiers": [],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_mlflow",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/mlflow/json",
+      "exact_version_url": "https://pypi.org/pypi/mlflow/3.17.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "3.17.0",
+      "first_artifact_upload_utc": "2026-10-07T06:07:39.737861Z",
+      "requires_python": ">=3.10",
+      "license_observation": "Apache-2.0",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "relevant_requires_dist": [
+        "numpy<3"
+      ],
+      "compatibility_tested": false
+    },
+    {
+      "id": "pypi_wandb",
+      "publisher": "package maintainer via PyPI",
+      "url": "https://pypi.org/pypi/wandb/json",
+      "exact_version_url": "https://pypi.org/pypi/wandb/0.30.0/json",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "publisher_release_metadata",
+      "mutable": true,
+      "observed_version": "0.30.0",
+      "first_artifact_upload_utc": "2026-09-09T00:16:20.505498Z",
+      "requires_python": ">=3.10",
+      "license_observation": "MIT",
+      "publisher_license_expression": null,
+      "publisher_license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "relevant_requires_dist": [],
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_pytorch_pytorch",
+      "publisher": "pytorch/pytorch",
+      "url": "https://api.github.com/repos/pytorch/pytorch/releases/latest",
+      "release_url": "https://github.com/pytorch/pytorch/releases/tag/v2.14.1",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v2.14.1",
+      "published_at_utc": "2026-09-30T19:14:48Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_huggingface_transformers",
+      "publisher": "huggingface/transformers",
+      "url": "https://api.github.com/repos/huggingface/transformers/releases/latest",
+      "release_url": "https://github.com/huggingface/transformers/releases/tag/v5.19.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v5.19.0",
+      "published_at_utc": "2026-10-06T16:39:23Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_ndif-team_nnsight",
+      "publisher": "ndif-team/nnsight",
+      "url": "https://api.github.com/repos/ndif-team/nnsight/releases/latest",
+      "release_url": "https://github.com/ndif-team/nnsight/releases/tag/v0.7.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v0.7.0",
+      "published_at_utc": "2026-05-05T05:31:34Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_TransformerLensOrg_TransformerLens",
+      "publisher": "TransformerLensOrg/TransformerLens",
+      "url": "https://api.github.com/repos/TransformerLensOrg/TransformerLens/releases/latest",
+      "release_url": "https://github.com/TransformerLensOrg/TransformerLens/releases/tag/v4.2.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v4.2.0",
+      "published_at_utc": "2026-10-10T06:07:03Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_stanfordnlp_pyvene",
+      "publisher": "stanfordnlp/pyvene",
+      "url": "https://api.github.com/repos/stanfordnlp/pyvene/releases/latest",
+      "release_url": "https://github.com/stanfordnlp/pyvene/releases/tag/v0.1.8",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v0.1.8",
+      "published_at_utc": "2025-05-26T05:18:58Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_vllm-project_vllm",
+      "publisher": "vllm-project/vllm",
+      "url": "https://api.github.com/repos/vllm-project/vllm/releases/latest",
+      "release_url": "https://github.com/vllm-project/vllm/releases/tag/v0.31.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v0.31.0",
+      "published_at_utc": "2026-10-05T06:44:55Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_sgl-project_sglang",
+      "publisher": "sgl-project/sglang",
+      "url": "https://api.github.com/repos/sgl-project/sglang/releases/latest",
+      "release_url": "https://github.com/sgl-project/sglang/releases/tag/v0.5.21",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v0.5.21",
+      "published_at_utc": "2026-10-02T01:09:04Z",
+      "prerelease": false,
+      "target_commitish": "main",
+      "compatibility_tested": false
+    },
+    {
+      "id": "github_release_ggml-org_llama.cpp",
+      "publisher": "ggml-org/llama.cpp",
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/releases/latest",
+      "release_url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.6.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "v0.6.0",
+      "published_at_utc": "2026-10-05T16:56:22Z",
+      "prerelease": false,
+      "target_commitish": "8345f333951c661d166b00e6f9362e553768f292",
+      "compatibility_tested": false,
+      "observation": "GitHub designated latest stable is distinct from newer rolling prereleases."
+    },
+    {
+      "id": "github_release_astral-sh_uv",
+      "publisher": "astral-sh/uv",
+      "url": "https://api.github.com/repos/astral-sh/uv/releases/latest",
+      "release_url": "https://github.com/astral-sh/uv/releases/tag/0.13.0",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_stable_release_api",
+      "mutable": true,
+      "observed_version": "0.13.0",
+      "published_at_utc": "2026-10-09T19:49:55Z",
+      "prerelease": false,
+      "target_commitish": "4ecd0eff2a81e3ffdcd7cfee10d08936e4747c17",
+      "compatibility_tested": false
+    },
+    {
+      "url": "https://api.github.com/repos/pytorch/pytorch/license",
+      "license_spdx": "NOASSERTION",
+      "html_url": "https://github.com/pytorch/pytorch/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/pytorch/pytorch/main/LICENSE",
+      "git_blob_sha": "c23172f7aff0254e4f0f163fb2e6e355cbaec5f4",
+      "sha256": "bd018feef8825e88181c84eb7e3aa4eafb8f08a20d9fd6ef948569610c4a3e43",
+      "id": "license_pytorch_pytorch",
+      "publisher": "pytorch/pytorch",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/huggingface/transformers/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/huggingface/transformers/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/huggingface/transformers/main/LICENSE",
+      "git_blob_sha": "68b7d66c97d66c58de883ed0c451af2b3183e6f3",
+      "sha256": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049",
+      "id": "license_huggingface_transformers",
+      "publisher": "huggingface/transformers",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/ndif-team/nnsight/license",
+      "license_spdx": "MIT",
+      "html_url": "https://github.com/ndif-team/nnsight/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/ndif-team/nnsight/main/LICENSE",
+      "git_blob_sha": "2e3d670eb70b05e89b9b76f8e022f5c55314c8a8",
+      "sha256": "6ed5c61579da08ebdafdd9983eee9defd90a0b1c65b3f0dba1d4a8f1f0421066",
+      "id": "license_ndif-team_nnsight",
+      "publisher": "ndif-team/nnsight",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/TransformerLensOrg/TransformerLens/license",
+      "license_spdx": "MIT",
+      "html_url": "https://github.com/TransformerLensOrg/TransformerLens/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/main/LICENSE",
+      "git_blob_sha": "0d1ba77b316af43db7eb1ad23b6252c3a7443b26",
+      "sha256": "46924225aa2a7325d9d4bf47a8add940844d8d7e2d342a6f07baeeeaf4b66a43",
+      "id": "license_TransformerLensOrg_TransformerLens",
+      "publisher": "TransformerLensOrg/TransformerLens",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/stanfordnlp/pyvene/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/stanfordnlp/pyvene/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/main/LICENSE",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "id": "license_stanfordnlp_pyvene",
+      "publisher": "stanfordnlp/pyvene",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/vllm-project/vllm/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/vllm-project/vllm/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/vllm-project/vllm/main/LICENSE",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "id": "license_vllm-project_vllm",
+      "publisher": "vllm-project/vllm",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/sgl-project/sglang/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/sgl-project/sglang/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/sgl-project/sglang/main/LICENSE",
+      "git_blob_sha": "9c422689c8f5c317c7c65153b1209349ec57007e",
+      "sha256": "1495e1e757ef4d0925a2350563cf5754bb23c51701a8ec4fb3c5cdcbedae6747",
+      "id": "license_sgl-project_sglang",
+      "publisher": "sgl-project/sglang",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/license",
+      "license_spdx": "MIT",
+      "html_url": "https://github.com/ggml-org/llama.cpp/blob/master/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/LICENSE",
+      "git_blob_sha": "e7dca554bcb802f98408383a864404e3aa4eacca",
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+      "id": "license_ggml-org_llama.cpp",
+      "publisher": "ggml-org/llama.cpp",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/astral-sh/uv/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/astral-sh/uv/blob/main/LICENSE-APACHE",
+      "download_url": "https://raw.githubusercontent.com/astral-sh/uv/main/LICENSE-APACHE",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "id": "license_astral-sh_uv",
+      "publisher": "astral-sh/uv",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "url": "https://api.github.com/repos/huggingface/safetensors/license",
+      "license_spdx": "Apache-2.0",
+      "html_url": "https://github.com/safetensors/safetensors/blob/main/LICENSE",
+      "download_url": "https://raw.githubusercontent.com/safetensors/safetensors/main/LICENSE",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "id": "license_huggingface_safetensors",
+      "publisher": "huggingface/safetensors",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_license_api",
+      "mutable": true
+    },
+    {
+      "id": "torch_hooks_2_8",
+      "url": "https://docs.pytorch.org/docs/2.8/generated/torch.nn.Module.html",
+      "final_url": "https://docs.pytorch.org/docs/2.8/generated/torch.nn.Module.html",
+      "http_status": 200,
+      "sha256": "2845fcc18c9ea7c74c495d6e211ebba2104677625faaa1f861a08b7709ed6384",
+      "bytes": 236508,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "register_forward_hook and register_forward_pre_hook expose module boundaries; hooks can return replacement outputs."
+      ]
+    },
+    {
+      "id": "torch_repro_2_8",
+      "url": "https://docs.pytorch.org/docs/2.8/notes/randomness.html",
+      "final_url": "https://docs.pytorch.org/docs/2.8/notes/randomness.html",
+      "http_status": 200,
+      "sha256": "f6858e037b66cba7db6b2b1e3b9b58eda1cf28c0a59d274ac775e9b93ce7a993",
+      "bytes": 93710,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "PyTorch does not promise complete reproducibility across releases, platforms or CPU/GPU; deterministic algorithms can cost performance."
+      ]
+    },
+    {
+      "id": "torch_autograd_2_8",
+      "url": "https://docs.pytorch.org/docs/2.8/notes/autograd.html",
+      "final_url": "https://docs.pytorch.org/docs/2.8/notes/autograd.html",
+      "http_status": 200,
+      "sha256": "811bca4837639ab2ea26ec7e2907cfbd9de7118b5a60ca1720da7c24b159affe",
+      "bytes": 442407,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Inference/no-grad modes exclude operations from a backward graph; activation gradients require relevant differentiable inputs."
+      ]
+    },
+    {
+      "id": "torch_license_2_14_1",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/v2.14.1/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/pytorch/pytorch/v2.14.1/LICENSE",
+      "http_status": 200,
+      "sha256": "bd018feef8825e88181c84eb7e3aa4eafb8f08a20d9fd6ef948569610c4a3e43",
+      "bytes": 3464,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Upstream license has three redistribution conditions including non-endorsement. GitHub automatic SPDX classification returned NOASSERTION."
+      ]
+    },
+    {
+      "id": "torch_license_2_8_0",
+      "url": "https://raw.githubusercontent.com/pytorch/pytorch/v2.8.0/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/pytorch/pytorch/v2.8.0/LICENSE",
+      "http_status": 200,
+      "sha256": "a8a2c6b67cf8a597ffaa5c82380a6bd1b82629c0417e00673d8013d662eb500a",
+      "bytes": 3464,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Selected-release upstream LICENSE matches observed v2.14.1 LICENSE SHA256."
+      ]
+    },
+    {
+      "id": "transformers_qwen3_source_4_57_6",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/v4.57.6/src/transformers/models/qwen3/modeling_qwen3.py",
+      "final_url": "https://raw.githubusercontent.com/huggingface/transformers/v4.57.6/src/transformers/models/qwen3/modeling_qwen3.py",
+      "http_status": 200,
+      "sha256": "4b95c371fd26d40c69083dab36ac1eafd8cf82b415a0bb827275097c5ad2305b",
+      "bytes": 23067,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Qwen3DecoderLayer returns hidden_states as a Tensor after both residual additions. Dense causal model decoder layer paths are model.layers."
+      ]
+    },
+    {
+      "id": "transformers_qwen3_5_source_5_19",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/v5.19.0/src/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "final_url": "https://raw.githubusercontent.com/huggingface/transformers/v5.19.0/src/transformers/models/qwen3_5/modeling_qwen3_5.py",
+      "http_status": 200,
+      "sha256": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+      "bytes": 88051,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Native Qwen3.5 implementation exists in v5.19.0; hybrid state handling differs from dense Qwen3."
+      ]
+    },
+    {
+      "id": "transformers_qwen3_5_doc_5_19",
+      "url": "https://raw.githubusercontent.com/huggingface/transformers/v5.19.0/docs/source/en/model_doc/qwen3_5.md",
+      "final_url": "https://raw.githubusercontent.com/huggingface/transformers/v5.19.0/docs/source/en/model_doc/qwen3_5.md",
+      "http_status": 200,
+      "sha256": "ac4297f186800b63e0ae4025c13ecd17e5be46b61830069fb9e2b690a38f92fa",
+      "bytes": 6448,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Hybrid stack combines Gated DeltaNet linear attention and full attention; optional fast kernels have a PyTorch fallback."
+      ]
+    },
+    {
+      "id": "transformers_cache_4_57",
+      "url": "https://huggingface.co/docs/transformers/v4.57.1/en/cache_explanation",
+      "final_url": "https://huggingface.co/docs/transformers/v4.57.1/en/cache_explanation",
+      "http_status": 200,
+      "sha256": "2e48be93cdf888693759b2371edb625558d1cd7df27b35f26cfad1264ae433b1",
+      "bytes": 260673,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Incremental decoding reuses internal cached states; masks and positions require alignment with the full sequence."
+      ]
+    },
+    {
+      "id": "nnsight_readme_0_7",
+      "url": "https://raw.githubusercontent.com/ndif-team/nnsight/v0.7.0/README.md",
+      "final_url": "https://raw.githubusercontent.com/ndif-team/nnsight/v0.7.0/README.md",
+      "http_status": 200,
+      "sha256": "8aa7868f9474fd2a5ceed91df037fd5a08f7a5c01ea9725dc54c4ffd07a0b818",
+      "bytes": 15807,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Local model tracing exposes activation save/edit operations; an additional tracing runtime is required."
+      ]
+    },
+    {
+      "id": "nnsight_release_candidate",
+      "url": "https://api.github.com/repos/ndif-team/nnsight/releases/tags/v0.8.0.rc1",
+      "final_url": "https://api.github.com/repos/ndif-team/nnsight/releases/tags/v0.8.0.rc1",
+      "http_status": 200,
+      "sha256": "298d299e7f585d10e868deea1b66a610ac0cce0f586b2fbaeb662156bf5e71b8",
+      "bytes": 25897,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "v0.8.0.rc1 published 2026-09-09T20:53:05Z is explicitly prerelease; its execution engine is rewritten."
+      ],
+      "observed_version": "v0.8.0.rc1",
+      "published_at_utc": "2026-09-09T20:53:05Z",
+      "prerelease": true
+    },
+    {
+      "id": "tl_readme_4_2",
+      "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/README.md",
+      "final_url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/README.md",
+      "http_status": 200,
+      "sha256": "3cbf244645c060d67db1ae8a1fbdf1524422a43081ba35522e43188811a211cd",
+      "bytes": 13193,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "TransformerBridge is recommended, preserves raw HF weights by default, and optionally enables compatibility mode; legacy HookedTransformer.from_pretrained was removed in v4.0."
+      ]
+    },
+    {
+      "id": "tl_qwen3_4_2",
+      "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/qwen3.py",
+      "final_url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/qwen3.py",
+      "http_status": 200,
+      "sha256": "57d87912d4441e98d770a75968fed5304fa48855a599ff4e3af7a94778c0a46f",
+      "bytes": 3914,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Dense Qwen3 architecture adapter is present."
+      ]
+    },
+    {
+      "id": "tl_qwen3_5_4_2",
+      "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/qwen3_5.py",
+      "final_url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/qwen3_5.py",
+      "http_status": 200,
+      "sha256": "96b450ab858da34dd2a016eb7bac05f97e5b0fa6c2bd5716b7ede75b424a858b",
+      "bytes": 3006,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Qwen3.5 hybrid adapter treats attention components as optional per layer and accounts for RMSNorm offset; dense text-only adapter rejects multimodal wrappers."
+      ]
+    },
+    {
+      "id": "tl_lfm2_4_2",
+      "url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/lfm2.py",
+      "final_url": "https://raw.githubusercontent.com/TransformerLensOrg/TransformerLens/v4.2.0/transformer_lens/model_bridge/supported_architectures/lfm2.py",
+      "http_status": 200,
+      "sha256": "db42da65b9bd1d31d8944f0b7cb4f1932acfe9cc07289f7414f689642692d089",
+      "bytes": 4404,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "LFM2 adapter includes short convolution and attention components; first layer may be convolution, so dense attention assumptions are invalid."
+      ]
+    },
+    {
+      "id": "tl_migration",
+      "url": "https://transformerlensorg.github.io/TransformerLens/content/migrating_to_v4.html",
+      "final_url": "https://transformerlensorg.github.io/TransformerLens/content/migrating_to_v4.html",
+      "http_status": 200,
+      "sha256": "3c0b60a00101d353fcb8d2312050c5b5762a9a48de44374e303223b7edfffc5f",
+      "bytes": 120260,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Working maintainer-linked migration guide is migrating_to_v4.html."
+      ]
+    },
+    {
+      "id": "pyvene_readme_0_1_8",
+      "url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/README.md",
+      "final_url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/README.md",
+      "http_status": 200,
+      "sha256": "89d01c78bdb1dc8d9f130f0496c7e2cd8015207bf10142f72fa3cb44ea557152",
+      "bytes": 3294,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Intervention configuration/model abstractions support interchange and trainable interventions."
+      ]
+    },
+    {
+      "id": "pyvene_model_registry_0_1_8",
+      "url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/pyvene/models/constants.py",
+      "final_url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/pyvene/models/constants.py",
+      "http_status": 200,
+      "sha256": "953450b4e3871fb8c29ee40f380cb57e646862844d8bac00a190293774649985",
+      "bytes": 788,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Tagged constants inspected; dedicated Qwen3/hybrid support was not established by this file."
+      ]
+    },
+    {
+      "id": "pyvene_qwen2_0_1_8",
+      "url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/pyvene/models/qwen2/modelings_intervenable_qwen2.py",
+      "final_url": "https://raw.githubusercontent.com/stanfordnlp/pyvene/v0.1.8/pyvene/models/qwen2/modelings_intervenable_qwen2.py",
+      "http_status": 200,
+      "sha256": "969aebf2dc555692acbbf8b55ed83d03f08e12c302775df7c34fbff08293da12",
+      "bytes": 3468,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Tagged released Qwen mapping is explicitly for Qwen2 module classes. A similar module path does not certify Qwen3 support."
+      ]
+    },
+    {
+      "id": "vllm_gpu_install",
+      "url": "https://docs.vllm.ai/en/latest/getting_started/installation/gpu/",
+      "final_url": "https://docs.vllm.ai/en/latest/getting_started/installation/gpu/",
+      "http_status": 200,
+      "sha256": "e638ecf4e9ba46621032cd3eb80cc398f4412f5910dbc970453b698740b22576",
+      "bytes": 365551,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Current requirements explicitly include NVIDIA compute capability 7.5 and RTX20xx. Compiled binaries depend on Torch/CUDA build combination."
+      ]
+    },
+    {
+      "id": "vllm_attention_backends",
+      "url": "https://docs.vllm.ai/en/latest/design/attention_backends/",
+      "final_url": "https://docs.vllm.ai/en/latest/design/attention_backends/",
+      "http_status": 200,
+      "sha256": "5bc3dcdca80ec92e7ad24b68065c477e4b14a713fd72d5611b853bb01388c08a",
+      "bytes": 235405,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Attention backends have distinct hardware and feature support; general engine support does not certify a particular kernel."
+      ]
+    },
+    {
+      "id": "vllm_repro",
+      "url": "https://docs.vllm.ai/en/latest/usage/reproducibility/",
+      "final_url": "https://docs.vllm.ai/en/latest/usage/reproducibility/",
+      "http_status": 200,
+      "sha256": "c9098a2cbe715ed2ce5cdbc6a26e7da07f1a34dba28346ac9bd7b5834f75ffb6",
+      "bytes": 188988,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Reproducibility requires attention to random seeds, scheduling and execution configuration; serving output is not a cross-engine bitwise identity guarantee."
+      ]
+    },
+    {
+      "id": "vllm_models",
+      "url": "https://docs.vllm.ai/en/latest/models/supported_models/",
+      "final_url": "https://docs.vllm.ai/en/latest/models/supported_models/",
+      "http_status": 200,
+      "sha256": "b3fe72b294e5e155a062883a21d253ed197c4fddeaff49fa533c4e3b8659abe1",
+      "bytes": 326806,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Model architecture support is documented separately from hardware and attention-backend support."
+      ]
+    },
+    {
+      "id": "sglang_install",
+      "url": "https://docs.sglang.io/docs/get-started/install",
+      "final_url": "https://docs.sglang.io/docs/get-started/install",
+      "http_status": 200,
+      "sha256": "a1456d3b2234070b52e2da207d70e15e2992d12c47822bba9a7012516fe8b17e",
+      "bytes": 508078,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Current installation offers compiled serving dependencies; this page does not independently establish a complete validated SM75 configuration."
+      ]
+    },
+    {
+      "id": "sglang_turing_issue",
+      "url": "https://api.github.com/repos/sgl-project/sglang/issues/6006",
+      "final_url": "https://api.github.com/repos/sgl-project/sglang/issues/6006",
+      "http_status": 200,
+      "sha256": "71ba8e0de288e5248b86dce6feaa868736ef6f8c668fab3ebdca0458e56e8c43",
+      "bytes": 3640,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Contributor RFC proposed SM75 deprecation in v0.5; issue closed 2025-07-17. An RFC and closure are not proof of final support policy."
+      ]
+    },
+    {
+      "id": "llama_build_0_6",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/docs/build.md",
+      "final_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/docs/build.md",
+      "http_status": 200,
+      "sha256": "af682686b967d62f06514edddcbbfb0f4d83a6f730ec6ce1432b015a5212032a",
+      "bytes": 44252,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Tagged build documentation supports GGML_CUDA and CMAKE_CUDA_ARCHITECTURES selection. A build target of 75 is proposed, not executed."
+      ]
+    },
+    {
+      "id": "llama_server_0_6",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/tools/server/README.md",
+      "final_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/tools/server/README.md",
+      "http_status": 200,
+      "sha256": "0aeee5367fd4f5b9f9c93053469729f3db14bbb85b818bcd13c185f95bc54b58",
+      "bytes": 116089,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Tagged server documents F16 K/V cache selection, no-context-shift, no-cache-prompt and chat-template-kwargs."
+      ]
+    },
+    {
+      "id": "llama_readme_0_6",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/README.md",
+      "final_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/v0.6.0/README.md",
+      "http_status": 200,
+      "sha256": "dc2d34687c844ecf929d9e9a9c9c78e8023b52abf3b2b3d039600c79016673b6",
+      "bytes": 7470,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Generation in GGUF/C++ is a separate backend and numerical condition from HF eager instrumentation."
+      ]
+    },
+    {
+      "id": "uv_torch",
+      "url": "https://docs.astral.sh/uv/guides/integration/pytorch/",
+      "final_url": "https://docs.astral.sh/uv/guides/integration/pytorch/",
+      "http_status": 200,
+      "sha256": "c45b57a49a7059cda7977875bd3d8f1c6cc5f0440a75449404cb6fceb4ab783a",
+      "bytes": 138953,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Explicit PyTorch indexes and package source mappings can select CPU/CUDA wheel families."
+      ]
+    },
+    {
+      "id": "uv_lock",
+      "url": "https://docs.astral.sh/uv/concepts/projects/sync/",
+      "final_url": "https://docs.astral.sh/uv/concepts/projects/sync/",
+      "http_status": 200,
+      "sha256": "4bd4a89338543bf671bd036a52bc666a295986c7c72ea175d95d1c2ac228e0cf",
+      "bytes": 81839,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "uv automatically resolves/syncs unless controlled; --locked rejects stale lock metadata, while --frozen bypasses freshness checks."
+      ]
+    },
+    {
+      "id": "uv_license_mit",
+      "url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.0/LICENSE-MIT",
+      "final_url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.0/LICENSE-MIT",
+      "http_status": 200,
+      "sha256": "860e3d7a86b84e6a7012c7a635fc64df475cebc6cce34dfeb73a5982ec58176c",
+      "bytes": 1077,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "MIT license is present in uv 0.13.0."
+      ]
+    },
+    {
+      "id": "uv_license_apache",
+      "url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.0/LICENSE-APACHE",
+      "final_url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.0/LICENSE-APACHE",
+      "http_status": 200,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Apache-2.0 license is present in uv 0.13.0; dual license is also publisher-declared."
+      ]
+    },
+    {
+      "id": "safetensors_readme",
+      "url": "https://raw.githubusercontent.com/safetensors/safetensors/v0.8.0/README.md",
+      "final_url": "https://raw.githubusercontent.com/safetensors/safetensors/v0.8.0/README.md",
+      "http_status": 200,
+      "sha256": "0a932f120de5c2477b286cae5517b6fec5e1d3ed64a19b99ccfc0a8504db7b13",
+      "bytes": 10630,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Tensor serialization format stores a JSON header and tensor byte buffers rather than Python pickle objects."
+      ]
+    },
+    {
+      "id": "safetensors_license",
+      "url": "https://raw.githubusercontent.com/safetensors/safetensors/v0.8.0/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/safetensors/safetensors/v0.8.0/LICENSE",
+      "http_status": 200,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Apache-2.0 license is present in v0.8.0."
+      ]
+    },
+    {
+      "id": "python_json",
+      "url": "https://docs.python.org/3.12/library/json.html",
+      "final_url": "https://docs.python.org/3.12/library/json.html",
+      "http_status": 200,
+      "sha256": "1a5e4ba18342b32f5f174d129f9c226a21a9445a89384f13a3f33ec327c2b68f",
+      "bytes": 107891,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "allow_nan=False rejects nonfinite floats; object_pairs_hook permits explicit duplicate-key checking."
+      ]
+    },
+    {
+      "id": "python_logging",
+      "url": "https://docs.python.org/3.12/library/logging.html",
+      "final_url": "https://docs.python.org/3.12/library/logging.html",
+      "http_status": 200,
+      "sha256": "97bd4695e33d0bd328dff45ea1217da4324dfa30db21cf14dc6e78fc0b7cb7b5",
+      "bytes": 190614,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": false,
+      "observed_facts": [
+        "Standard-library logging provides local handlers and formatters; structured run-record fields remain a project responsibility."
+      ]
+    },
+    {
+      "id": "hydra_intro",
+      "url": "https://hydra.cc/docs/intro/",
+      "final_url": "https://hydra.cc/docs/intro/",
+      "http_status": 200,
+      "sha256": "476cc41b8a64071f4563f8d8ea029848cafe1f1857abb02306ccf60ddefae3d7",
+      "bytes": 42706,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Hydra provides hierarchical configuration composition and command-line overrides."
+      ]
+    },
+    {
+      "id": "pydantic_models",
+      "url": "https://docs.pydantic.dev/latest/concepts/models/",
+      "final_url": "https://pydantic.dev/docs/validation/latest/concepts/models/",
+      "http_status": 200,
+      "sha256": "205fc769c04ee3c54bf7dcb432c3229443dd8d408d136faa852e9ed6109c0a13",
+      "bytes": 214916,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Pydantic models provide typed validation; coercion/strictness must be configured deliberately."
+      ]
+    },
+    {
+      "id": "mlflow_tracking",
+      "url": "https://mlflow.org/docs/latest/ml/tracking/",
+      "final_url": "https://mlflow.org/docs/latest/ml/tracking/",
+      "http_status": 200,
+      "sha256": "f8512a4bebbfdb9e71d704d9a438dc484a938d50dc141d62a1c04a1ae80eeaa4",
+      "bytes": 105352,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "MLflow provides experiment, run, metric and artifact tracking; it is optional for the small local increment."
+      ]
+    },
+    {
+      "id": "wandb_offline",
+      "url": "https://docs.wandb.ai/models/track/run",
+      "final_url": "https://docs.coreweave.com/login?redirect=%2Fmodels%2Ftrack%2Frun",
+      "http_status": 200,
+      "sha256": "fb4007daed65a28edd092c36f76ee8be0ba70cac1177e3b0e59fc1305b895753",
+      "bytes": 36859,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "W&B run tracking is an optional additional dependency and synchronization policy, not selected for this increment."
+      ]
+    },
+    {
+      "id": "nvidia_turing",
+      "url": "https://docs.nvidia.com/cuda/turing-tuning-guide/index.html",
+      "final_url": "https://docs.nvidia.com/cuda/turing-tuning-guide/index.html",
+      "http_status": 200,
+      "sha256": "3df06988a112dfb2030afb1ceda3f6aa74cc4c48c4d49aa5ec3aab991416472c",
+      "bytes": 28181,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Turing is compute capability 7.5 with FP16 Tensor Core multiplication and FP16/FP32 accumulation."
+      ]
+    },
+    {
+      "id": "nvidia_legacy_gpus",
+      "url": "https://developer.nvidia.com/cuda-legacy-gpus",
+      "final_url": "https://developer.nvidia.com/cuda/gpus/legacy",
+      "http_status": 200,
+      "sha256": "9d187a29e73e03b24afeaf9c41257737183932e4ef766362307fe7f81fac02db",
+      "bytes": 31033,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "GPU catalog endpoint accessed; it was not used to assert a specific listed RTX2080Ti row."
+      ]
+    },
+    {
+      "id": "flash_attention_readme",
+      "url": "https://raw.githubusercontent.com/Dao-AILab/flash-attention/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/Dao-AILab/flash-attention/main/README.md",
+      "http_status": 200,
+      "sha256": "0dbaba56da1c8372d460956e2609bfb89acf8f3aadd65d132b1697d221069619",
+      "bytes": 25270,
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_documentation_or_tagged_source",
+      "mutable": true,
+      "observed_facts": [
+        "Mainstream FlashAttention-2 NVIDIA support targets Ampere/Ada/Hopper; maintainer links a separate Turing subset implementation. BF16 requires newer architecture."
+      ]
+    },
+    {
+      "id": "selected_metadata_llama_recent",
+      "url": "https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=3",
+      "releases": [
+        {
+          "tag": "b11552",
+          "published_at": "2026-10-10T19:52:01Z",
+          "prerelease": true,
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b11552",
+          "target_commitish": "23b0202a189c44a54625aadcb37a946dd1d6278d"
+        },
+        {
+          "tag": "b11551",
+          "published_at": "2026-10-10T19:09:59Z",
+          "prerelease": true,
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b11551",
+          "target_commitish": "69f201a2051ea9b9e9b50c3cc56afd9e2ae64414"
+        },
+        {
+          "tag": "b11550",
+          "published_at": "2026-10-10T18:29:25Z",
+          "prerelease": true,
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b11550",
+          "target_commitish": "abee0c8476b585b0d081d580b5ce21d0addc22c4"
+        }
+      ],
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "maintainer_rolling_release_list"
+    },
+    {
+      "id": "selected_metadata_torch_2_8",
+      "url": "https://pypi.org/pypi/torch/2.8.0/json",
+      "version": "2.8.0",
+      "requires_python": ">=3.9.0",
+      "published_at": "2025-08-06T14:53:10.919891Z",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "exact_selected_release_metadata"
+    },
+    {
+      "id": "selected_metadata_transformers_4_57_6",
+      "url": "https://pypi.org/pypi/transformers/4.57.6/json",
+      "version": "4.57.6",
+      "requires_python": ">=3.9.0",
+      "published_at": "2026-01-16T10:38:31.289337Z",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "exact_selected_release_metadata"
+    },
+    {
+      "id": "selected_metadata_uv_0_12_23",
+      "url": "https://pypi.org/pypi/uv/0.12.23/json",
+      "version": "0.12.23",
+      "requires_python": ">=3.8",
+      "published_at": "2026-10-03T17:31:15.723804Z",
+      "checked_on": "2026-10-11",
+      "access_status": "retrieved",
+      "source_kind": "exact_selected_release_metadata"
+    }
+  ],
+  "limitations": [
+    {
+      "url": "https://huggingface.co/docs/transformers/v5.19.0/en/model_doc/qwen3_5",
+      "access_method": "web browser",
+      "access_status": "inaccessible_via_browser",
+      "resolved_by": "transformers_qwen3_5_doc_5_19",
+      "note": "Exact tagged Markdown source and model implementation were successfully fetched over HTTPS."
+    },
+    {
+      "url": "https://transformerlensorg.github.io/TransformerLens/content/migration_v4.html",
+      "access_method": "web browser",
+      "access_status": "failed_initial_guessed_url",
+      "resolved_by": "tl_migration",
+      "note": "Maintainer README linked the working migrating_to_v4.html page."
+    },
+    {
+      "scope": "gpu_execution",
+      "access_status": "not_available",
+      "note": "Selected environment has no GPU. No driver, wheel architecture, VRAM, FP16 runtime, serving kernel or throughput validation was performed."
+    },
+    {
+      "scope": "framework_execution",
+      "access_status": "bounded_cpu_smoke_passed",
+      "note": "Actual pretrained0.6B CPU FP32 eager engineering smoke inspected; latest alternative frameworks/backends and GPU compatibility remain untested."
+    }
+  ],
+  "execution_evidence": {
+    "run_id": "20261011T102648Z-e94a5c040d65",
+    "path": "runs/20261011T102648Z-e94a5c040d65",
+    "validation_document": "docs/validation.md",
+    "status": "passed",
+    "model_repo": "Qwen/Qwen3-0.6B",
+    "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "source_commit": "501b96add89625b0bcf788e4530ec27d0ce23b37",
+    "source_dirty": true,
+    "source_files_sha256": {
+      "src/novel/__init__.py": "9a3249059e5354911e3eb784166d83661f7448693b04af52c3fdd14ae800fc60",
+      "src/novel/activation.py": "507608ee59e4a2554482c2f582e5b9bfc2e3b3c1d0886a3e644d7bbdb63a2140",
+      "src/novel/artifacts.py": "9e3c2c53954d7abf2f91afe05b2e49c4762639052289aaf4a3523e026436f78e",
+      "src/novel/generation.py": "6dbe64e285934f3490f5a0e67ea3c7937a24bac06cdfb6d51ddf533c84dc0569",
+      "src/novel/models.py": "5f257d6b863b32b55c72ea8633ea625e1a02787dbc50c8aabebabe4372dc204b",
+      "src/novel/runner.py": "074af1f81bc414961357daf184e43b25fcfac0f61299b5099721fb258138deda",
+      "src/novel/tasks.py": "60bc1e80755c389ac54822e51c84d1ddd77ff0ba2a8ded682022eef4a01d9a3f"
+    },
+    "uv_lock_sha256": "47d5e8d69b9b3cc9c976097cb400048a6501fbb308cae65ddbd5be9dcb4e4590",
+    "dtype": "float32",
+    "device": "cpu",
+    "attention_implementation": "eager",
+    "generated_tokens": 32,
+    "total_wall_seconds": 20.729082753999933,
+    "peak_process_rss_bytes": 4899332096,
+    "checks": {
+      "capture_logits": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "causal_prefix_logits_0": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "causal_prefix_logits_1": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "causal_prefix_residual_0": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "causal_prefix_residual_1": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "clean_cache_logits": {
+        "atol": 0.0001,
+        "max_abs_error": 1.9073486328125e-05,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "global_sampling_rng_unchanged": {
+        "passed": true
+      },
+      "hooks_removed": {
+        "passed": true
+      },
+      "identity_logits": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      },
+      "parameters_frozen_unmutated": {
+        "passed": true
+      },
+      "seeded_generation_identity": {
+        "passed": true
+      },
+      "zero_strength_logits": {
+        "atol": 0.0001,
+        "max_abs_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05
+      }
+    },
+    "artifacts_sha256": {
+      "run.json": "65298c5c8da04bf13eee9dadf1b28e517eb6579bb7eb8b5af9df34c5bfba68ee",
+      "checks.json": "1a7f977db0a7a8dff4ff72dcfd5f989a5307de508d695102973bad67d0bf644a",
+      "config.json": "d8f6eeedc5731116004e42482b869a4b51dc23339a486c75aa971b941d129160",
+      "tensor-index.json": "57f349386ef95197986ac9af750878266f947f3a1734fa9d667b431c7f72dc6c"
+    },
+    "gpu_tested": false,
+    "scope": "engineering only; no transfer, reasoning-accuracy, or novelty claim"
+  }
+}
