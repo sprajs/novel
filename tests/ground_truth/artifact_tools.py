@@ -219,7 +219,7 @@ def make_manifest(root=ROOT):
         "schema_version": VERSION,
         "collection_id": "ground-truth-research-2026-10-11",
         "base_revision": BASE_REVISION,
-        "base_verification": "origin/main fetched and compared on 2026-10-11; plan files preserved",
+        "base_verification": "origin/main fetched and compared on 2026-10-11; Plan/research-plan.md has a narrow CUSP evidence correction",
         "scope": list(OWNED),
         "public_content": "calibration_and_development_only",
         "model_runs_performed": False,

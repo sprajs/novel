@@ -31,7 +31,7 @@ The [infrastructure adapter](../../tests/ground_truth/infrastructure_adapter.py)
 | The scalar speculative residual sampler already appears in 2017 maximal coupling; SOAP points to an essentially equivalent older optimizer | Reject the later-paper attribution of those narrow identities; retain as precise method controls |
 | CUSP's detailed auditor explicitly exempts correct predictions/methodologies matching the paper | Correct the plan's overly broad contamination critique; output similarity alone must not invalidate a rediscovery |
 
-Evidence and exact revisions are in the [model audit](model_audit.md), [lead temporal audit](lead_temporal_audit.md), [survey](candidate_survey.md), and [benchmark audit](benchmark_audit.md). The original `Plan/` documents are preserved. These corrections supplement them rather than rewriting their history. Dates reflect inspected primary records and bounded searches; commit timestamps alone do not prove historical public visibility.
+Evidence and exact revisions are in the [model audit](model_audit.md), [lead temporal audit](lead_temporal_audit.md), [survey](candidate_survey.md), and [benchmark audit](benchmark_audit.md). A narrow CUSP evidence correction is also applied to [Plan/research-plan.md](../../Plan/research-plan.md); unrelated plan sections remain unchanged. Dates reflect inspected primary records and bounded searches; commit timestamps alone do not prove historical public visibility.
 
 ## What changes make the deductions valid
 

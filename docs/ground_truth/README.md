@@ -29,4 +29,4 @@ python tests/ground_truth/artifact_tools.py manifest --check
 
 `manifest` without `--check` rebuilds the inventory after an intentional change. It hashes raw bytes, not a reserialized approximation. Do not regenerate it to hide unexpected drift. Source URLs and revision identifiers refer to upstream evidence; local file hashes attest to this collection, not to the truth of the historical claims. No paper PDFs, restricted datasets, checkpoint weights, or model responses are included.
 
-The original plan files remain unchanged. Current-main verification and the base revision are recorded in the manifest. Code and data licensing for these new original artifacts remains an explicit repository-owner decision; no upstream paper or model license is inherited automatically.
+The collection includes a narrow CUSP evidence correction in [Plan/research-plan.md](../../Plan/research-plan.md); unrelated plan sections remain unchanged. Current-main verification and the base revision are recorded in the manifest. Code and data licensing for these new original artifacts remains an explicit repository-owner decision; no upstream paper or model license is inherited automatically.

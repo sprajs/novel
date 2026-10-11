@@ -2,7 +2,7 @@
   "schema_version": "ground-truth-v0.1",
   "collection_id": "ground-truth-research-2026-10-11",
   "base_revision": "36b7f6bff70f79642b1ab6d65e591c1b96a44738",
-  "base_verification": "origin/main fetched and compared on 2026-10-11; plan files preserved",
+  "base_verification": "origin/main fetched and compared on 2026-10-11; Plan/research-plan.md has a narrow CUSP evidence correction",
   "scope": [
     "data/ground_truth",
     "docs/ground_truth",
@@ -78,18 +78,18 @@
     },
     {
       "path": "docs/ground_truth/README.md",
-      "bytes": 3146,
-      "sha256": "60c5fcf249cae6b8eb1338f83d8e6d815e068ac861bec80123c92b3902657c91"
+      "bytes": 3261,
+      "sha256": "183993ad5a5c34cc52fd875a863f76bf1cb7bdfc163e8839bb5c8307e1205c70"
     },
     {
       "path": "docs/ground_truth/adversarial_review.md",
-      "bytes": 15541,
-      "sha256": "8441bda9ae6711c515bd66cf7eae13a7e45f8764b6fe225715b5b606e0797784"
+      "bytes": 15937,
+      "sha256": "a79b1840a0523dd78289874eccefa8d9eca9b40ee1e3c6dc8bd58fb279586089"
     },
     {
       "path": "docs/ground_truth/benchmark_audit.md",
-      "bytes": 11896,
-      "sha256": "24096bf8034c5b49f86f85a4acfaf881a67521b84a2425fe7f330ec4b46adfc1"
+      "bytes": 11940,
+      "sha256": "5537f59970afc123d6d9ccf88e68210e50575d65a49d7d6d5d199aa158ff9d57"
     },
     {
       "path": "docs/ground_truth/calibration.md",
@@ -103,8 +103,8 @@
     },
     {
       "path": "docs/ground_truth/decision_report.md",
-      "bytes": 13025,
-      "sha256": "022a769e622f4b9d84a6bcb5a71dc9c11c00d987fe7f5a3ca94e50702a7cc19c"
+      "bytes": 13057,
+      "sha256": "4d2c4d1f658252104e57d8894c22dda695f98a7c640755091c52cc5ea6314169"
     },
     {
       "path": "docs/ground_truth/evidence_and_annotation.md",
@@ -173,8 +173,8 @@
     },
     {
       "path": "tests/ground_truth/artifact_tools.py",
-      "bytes": 14335,
-      "sha256": "68e9b2fe2b6fec943d542eeea03c40e27f8f8526b20663f93f296cfeff18d57e"
+      "bytes": 14374,
+      "sha256": "3c0dcbf4a31fa558c8b0d787100e28f5bad9344bd22df83be660f3326ac44ebb"
     },
     {
       "path": "tests/ground_truth/calibration.py",
