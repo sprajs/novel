@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-11",
+  "selection_scope": "Ten primary sources for exact activation patching, task-vector transfer, perturbation/search, and interventional tooling; a bounded selection rather than an exhaustive or guaranteed latest survey.",
+  "cache_policy": {
+    "path": ".cache/papers",
+    "max_cache_bytes": 90000000,
+    "max_file_bytes": 25000000,
+    "commit_pdfs": false,
+    "redistribution": "No PDFs are distributed by this repository, regardless of public access or license."
+  },
+  "verification": {
+    "metadata": "Exact-version arXiv pages checked on 2026-10-11; PDF identity and method/limit notes checked after bounded retrieval.",
+    "checksums": "Observed SHA-256 of locally retrieved bytes, not a publisher-signed checksum.",
+    "retrieval_result": {
+      "date": "2026-10-11",
+      "papers_downloaded": 10,
+      "total_pdf_bytes": 39121949,
+      "network_evidence": "All ten pinned arXiv PDF URLs returned HTTP 200 via urllib; file signatures and version labels were inspected. No PDF was committed."
+    }
+  },
+  "papers": [
+    {
+      "id": "patching-interpretation",
+      "title": "How to use and interpret activation patching",
+      "authors": [
+        "Heimersheim, Stefan",
+        "Nanda, Neel"
+      ],
+      "version": "arXiv:2404.15255v1",
+      "version_date": "2024-04-23T17:42:29Z",
+      "first_submitted": "2024-04-23",
+      "source_url": "https://arxiv.org/abs/2404.15255v1",
+      "pdf_url": "https://arxiv.org/pdf/2404.15255v1",
+      "doi": "10.48550/arXiv.2404.15255",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "source_url": "https://arxiv.org/abs/2404.15255v1",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Publisher versions and third-party material can have separate rights; this record applies only to the selected arXiv version. The arXiv nonexclusive license grants distribution rights to arXiv, not a general redistribution license to this repository."
+      },
+      "sha256": "6c21b4bfe7f5306ca8d3bf9f48c91270ce86ae76fe6e455894bf852b1d8c3025",
+      "bytes": 425830,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 2-4; targeted method/interpretation reading, not an exhaustive appendix review.",
+        "claims": [
+          "Restoration and disruption answer different conditional sufficiency/necessity questions; redundant or serial circuits can make results asymmetric."
+        ],
+        "controls_to_borrow": [
+          "Run both patch directions, vary controlled corruptions, and retain logit-difference diagnostics alongside verified generation."
+        ],
+        "limits": [
+          "A patch effect depends on the changed prompt features, metric, and surrounding computation; it does not identify a unique native mechanism."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    },
+    {
+      "id": "patching-best-practices",
+      "title": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods",
+      "authors": [
+        "Zhang, Fred",
+        "Nanda, Neel"
+      ],
+      "version": "arXiv:2309.16042v2",
+      "version_date": "2024-01-17T04:07:06Z",
+      "first_submitted": "2023-09-27",
+      "source_url": "https://arxiv.org/abs/2309.16042v2",
+      "pdf_url": "https://arxiv.org/pdf/2309.16042v2",
+      "doi": "10.48550/arXiv.2309.16042",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2309.16042v2",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "8ba9f928e321ad2f319bf0ac62ae582d8a70befbe88d0f85773302d64252d396",
+      "bytes": 1332169,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-5; targeted corruption/metric comparison reading.",
+        "claims": [
+          "Gaussian corruption, counterfactual token replacement, and output metrics can produce substantially different localization maps."
+        ],
+        "controls_to_borrow": [
+          "Compare semantically specified counterfactuals, inspect corruption severity, and rerun important sites under multiple metrics."
+        ],
+        "limits": [
+          "Gaussian corruption can create abnormal computation; probability saturation hides some effects. Results from the studied tasks do not guarantee a universally best metric."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    },
+    {
+      "id": "function-vectors",
+      "title": "Function Vectors in Large Language Models",
+      "authors": [
+        "Todd, Eric",
+        "Li, Millicent L.",
+        "Sharma, Arnab Sen",
+        "Mueller, Aaron",
+        "Wallace, Byron C.",
+        "Bau, David"
+      ],
+      "version": "arXiv:2310.15213v2",
+      "version_date": "2024-02-25T18:32:18Z",
+      "first_submitted": "2023-10-23",
+      "source_url": "https://arxiv.org/abs/2310.15213v2",
+      "pdf_url": "https://arxiv.org/pdf/2310.15213v2",
+      "doi": "10.48550/arXiv.2310.15213",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "source_url": "https://arxiv.org/abs/2310.15213v2",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Publisher versions and third-party material can have separate rights; this record applies only to the selected arXiv version. The arXiv nonexclusive license grants distribution rights to arXiv, not a general redistribution license to this repository."
+      },
+      "sha256": "ebf5f9730e782766bb0f9ecb5188dd89d599a6ce8b1619eebbd2e24dde142346",
+      "bytes": 3236102,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 2-3 and 5; targeted extraction/transfer/composition reading.",
+        "claims": [
+          "Causal mediation ranks attention heads whose mean task activations can be injected to induce tasks in fresh contexts; some vector compositions work."
+        ],
+        "controls_to_borrow": [
+          "Use shuffled demonstrations, zero-shot recipients, altered prompt templates, output-space controls, and disjoint donor/recipient examples."
+        ],
+        "limits": [
+          "Extraction selects successful demonstration prompts and depends on labels/head selection. Partial task composition is not general bridge discovery or a complete account of in-context learning."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    },
+    {
+      "id": "caa",
+      "title": "Steering Llama 2 via Contrastive Activation Addition",
+      "authors": [
+        "Panickssery, Nina",
+        "Gabrieli, Nick",
+        "Schulz, Julian",
+        "Tong, Meg",
+        "Hubinger, Evan",
+        "Turner, Alexander Matt"
+      ],
+      "version": "arXiv:2312.06681v4",
+      "version_date": "2024-07-05T15:30:45Z",
+      "first_submitted": "2023-12-09",
+      "source_url": "https://arxiv.org/abs/2312.06681v4",
+      "pdf_url": "https://arxiv.org/pdf/2312.06681v4",
+      "doi": "10.48550/arXiv.2312.06681",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2312.06681v4",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "1394cef5a24c0c7e5b8bea7d66ad398bae5d4d222cefe060cdc99b50bd66e798",
+      "bytes": 4858484,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-5 and 10; targeted extraction/free-generation/limitations reading.",
+        "claims": [
+          "Averaged paired residual differences at answer positions steer Llama 2 behavior when applied after the instruction."
+        ],
+        "controls_to_borrow": [
+          "Balance contrast labels, compare prompting and finetuning, test held-out free generation, and sweep layer and multiplier jointly."
+        ],
+        "limits": [
+          "Answer-conditioned donor activations require explicit leakage controls in a pre-answer bridge study. Open-ended scores use an LLM judge; layer comparisons depend on intervention scale."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": [
+        "https://aclanthology.org/2024.acl-long.828/"
+      ]
+    },
+    {
+      "id": "atp-star",
+      "title": "AtP*: An efficient and scalable method for localizing LLM behaviour to components",
+      "authors": [
+        "Kramár, János",
+        "Lieberum, Tom",
+        "Shah, Rohin",
+        "Nanda, Neel"
+      ],
+      "version": "arXiv:2403.00745v1",
+      "version_date": "2024-03-01T18:43:51Z",
+      "first_submitted": "2024-03-01",
+      "source_url": "https://arxiv.org/abs/2403.00745v1",
+      "pdf_url": "https://arxiv.org/pdf/2403.00745v1",
+      "doi": "10.48550/arXiv.2403.00745",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2403.00745v1",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "5901032cdd20d347602bfb9ce1fa2641c30ae20f5f3f4567828d1b272c2624f8",
+      "bytes": 16033713,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-5; targeted approximation/failure-mode/diagnostics reading.",
+        "claims": [
+          "AtP* improves gradient attribution estimates by addressing saturated attention and cancellation between direct and indirect effects."
+        ],
+        "controls_to_borrow": [
+          "Confirm candidate sites with exact patches and sample low-ranked sites; use the paper diagnostics to assess remaining false negatives."
+        ],
+        "limits": [
+          "Fine-grained nodes and a limited set of prompt distributions were evaluated. Whole-residual interventions can be more nonlinear; ranking alone is not causal validation."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    },
+    {
+      "id": "soft-reasoning",
+      "title": "Soft Reasoning: Navigating Solution Spaces in Large Language Models through Controlled Embedding Exploration",
+      "authors": [
+        "Zhu, Qinglin",
+        "Zhao, Runcong",
+        "Yan, Hanqi",
+        "He, Yulan",
+        "Chen, Yudong",
+        "Gui, Lin"
+      ],
+      "version": "arXiv:2505.24688v4",
+      "version_date": "2025-09-13T17:45:08Z",
+      "first_submitted": "2025-05-30",
+      "source_url": "https://arxiv.org/abs/2505.24688v4",
+      "pdf_url": "https://arxiv.org/pdf/2505.24688v4",
+      "doi": "10.48550/arXiv.2505.24688",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2505.24688v4",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "154dc10e7c3fcde9d2062bb8591cbdcf91408a21c33206a958be6e58777cef51",
+      "bytes": 1890104,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 4-5 and verifier-noise discussion; targeted method/evaluation reading.",
+        "claims": [
+          "Perturbing the initial generated-token embedding and greedily decoding creates a continuous search interface; Bayesian optimization uses same-model verification and coherence rewards."
+        ],
+        "controls_to_borrow": [
+          "Separate random perturbation from adaptive search and selection; charge generator/verifier calls and compare first-token sampling at equal budgets."
+        ],
+        "limits": [
+          "The combined method does not isolate a noise benefit. Self-verification can be wrong; a deterministic embedding-to-output map does not guarantee distinct outputs for distinct embeddings."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": [
+        "https://proceedings.mlr.press/v267/zhu25ae.html"
+      ]
+    },
+    {
+      "id": "noise-steering",
+      "title": "Noise Steering for Controlled Text Generation: Improving Diversity and Reading-Level Fidelity in Arabic Educational Story Generation",
+      "authors": [
+        "Khalid, Haziq Mohammad",
+        "Shapsough, Salsabeel",
+        "Zualkernan, Imran"
+      ],
+      "version": "arXiv:2604.03380v2",
+      "version_date": "2026-05-02T22:39:40Z",
+      "first_submitted": "2026-04-03",
+      "source_url": "https://arxiv.org/abs/2604.03380v2",
+      "pdf_url": "https://arxiv.org/pdf/2604.03380v2",
+      "doi": "10.48550/arXiv.2604.03380",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2604.03380v2",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "5375d160d8e6a4d498e88104b8383e19881f1e7ca9a84faf9674d6dacd8d2212",
+      "bytes": 299473,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 4-6 and Limitations; targeted injection/calibration/evaluation reading.",
+        "claims": [
+          "Decode-only embedding, attention, or residual perturbations with decay are evaluated on Arabic educational stories; residual noise best preserves reported diversity/quality tradeoffs."
+        ],
+        "controls_to_borrow": [
+          "Calibrate scale against decode activations, include no-noise and tuned sampling controls, and distinguish retained KV cache from clean re-prefill."
+        ],
+        "limits": [
+          "Fixed high-temperature baselines were not tuned per model; quality partly depends on LLM judging. Educational diversity is not verified reasoning or discovery. Section 4.5 gives both base-scale and recursive decay expressions; declare the implemented schedule explicitly."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": [
+        "https://aclanthology.org/2026.bea-1.41/"
+      ]
+    },
+    {
+      "id": "creativity-neuro",
+      "title": "CreativityNeuro: Steering Language Model Weights to Improve Divergent Thinking and Reduce Mode Collapse",
+      "authors": [
+        "Schapiro, Samuel",
+        "Park, Core Francisco",
+        "Sosa, Felix",
+        "Varshney, Lav R."
+      ],
+      "version": "arXiv:2607.01433v1",
+      "version_date": "2026-07-01T19:54:39Z",
+      "first_submitted": "2026-07-01",
+      "source_url": "https://arxiv.org/abs/2607.01433v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.01433v1",
+      "doi": "10.48550/arXiv.2607.01433",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2607.01433v1",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "b46e4c8d49e7cc543560633aab891f70596ac6eaa4cbe69fbd55a73a369c151f",
+      "bytes": 8180293,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-8 and Appendix F; targeted weight-scoring/human-evaluation/tradeoff reading.",
+        "claims": [
+          "Contrastive prompt importance masks rescale selected weights and improve reported divergent-thinking originality and reduce output collapse."
+        ],
+        "controls_to_borrow": [
+          "Evaluate originality and utility separately, use blinded ratings or objective checks, and measure unrelated factual competence after intervention."
+        ],
+        "limits": [
+          "The paper reports reduced Alternative Uses utility and entanglement with factual reasoning. Prompt construction and hyperparameter selection remain assistance; divergent-thinking ratings do not certify useful discoveries."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    },
+    {
+      "id": "nnsight-ndif",
+      "title": "NNsight and NDIF: Democratizing Access to Open-Weight Foundation Model Internals",
+      "authors": [
+        "Fiotto-Kaufman, Jaden",
+        "Loftus, Alexander R.",
+        "Todd, Eric",
+        "Brinkmann, Jannik",
+        "Pal, Koyena",
+        "Troitskii, Dmitrii",
+        "Ripa, Michael",
+        "Belfki, Adam",
+        "Rager, Can",
+        "Juang, Caden",
+        "Mueller, Aaron",
+        "Marks, Samuel",
+        "Sharma, Arnab Sen",
+        "Lucchetti, Francesca",
+        "Prakash, Nikhil",
+        "Brodley, Carla",
+        "Guha, Arjun",
+        "Bell, Jonathan",
+        "Wallace, Byron C.",
+        "Bau, David"
+      ],
+      "version": "arXiv:2407.14561v4",
+      "version_date": "2025-04-01T16:04:53Z",
+      "first_submitted": "2024-07-18",
+      "source_url": "https://arxiv.org/abs/2407.14561v4",
+      "pdf_url": "https://arxiv.org/pdf/2407.14561v4",
+      "doi": "10.48550/arXiv.2407.14561",
+      "doi_status": "listed by arXiv",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2407.14561v4",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Metadata license link verified; third-party material may have separate rights. No independent rights-clearance audit."
+      },
+      "sha256": "2c35fd544822638d7b839bfa3cde56ce834425608470c4a6b6503ac0f0c02049",
+      "bytes": 1742619,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-5 and framework examples; targeted architecture/benchmark reading.",
+        "claims": [
+          "An intervention graph separates experiment specification from execution, enabling activation access and interventions on local or shared remote models."
+        ],
+        "controls_to_borrow": [
+          "Keep saved-site names and explicit intervention timing reviewable; compare an intervention wrapper with direct hooks and a no-intervention execution path."
+        ],
+        "limits": [
+          "The 2025 paper describes an earlier API; the verified 2026 release changes execution details. Published remote benchmarks do not establish local Qwen3 or cache correctness in this repository."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": [
+        "https://nnsight.net/blog/2026/02/26/introducing-nnsight-06/"
+      ]
+    },
+    {
+      "id": "targeted-feature-learning",
+      "title": "Gradients for Interventions and Activations for Detection: Targeted Feature Learning in Language Models",
+      "authors": [
+        "Drechsel, Jonathan",
+        "Herbold, Steffen"
+      ],
+      "version": "arXiv:2609.32355v1",
+      "version_date": "2026-09-26T08:22:46Z",
+      "first_submitted": "2026-09-26",
+      "source_url": "https://arxiv.org/abs/2609.32355v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.32355v1",
+      "doi": "10.48550/arXiv.2609.32355",
+      "doi_status": "pending registration on source page",
+      "license": {
+        "id": "LicenseRef-arXiv-nonexclusive-distrib-1.0",
+        "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
+        "source_url": "https://arxiv.org/abs/2609.32355v1",
+        "observed_at": "2026-10-11",
+        "evidence": "The view license link on this exact version page points to this license.",
+        "uncertainty": "Publisher versions and third-party material can have separate rights; this record applies only to the selected arXiv version. The arXiv nonexclusive license grants distribution rights to arXiv, not a general redistribution license to this repository."
+      },
+      "sha256": "5f90407575095caf6da54613a331decf617cb87ff447f4d7a9e3c9af1c14a72e",
+      "bytes": 1123162,
+      "retrieved_at": "2026-10-11T10:26:05.946679Z",
+      "reading": {
+        "scope": "Sections 3-4, 6 Limitations and Appendix B selection protocol; targeted full-method reading.",
+        "claims": [
+          "A controlled three-signal/two-estimator comparison finds different rankings for detection and intervention across 15 tasks and three models."
+        ],
+        "controls_to_borrow": [
+          "Separate train/validation/test splits, test strengthening and weakening, constrain unrelated language-model loss, and audit whether targets enter the extraction signal."
+        ],
+        "limits": [
+          "Activation contrasts fill in targets; gradient contrasts use label-conditioned objectives. Intervention scores concern target-token probabilities rather than free generation, and trained estimators add supervision. This September 2026 preprint does not establish bridge transfer."
+        ]
+      },
+      "identity_check": "PDF first-page arXiv identifier/version and title/authors checked against the selected metadata page.",
+      "related_official_urls": []
+    }
+  ],
+  "context_only_sources": [
+    {
+      "id": "gts",
+      "title": "GTS: Inference-Time Scaling of Latent Reasoning with a Learnable Gaussian Thought Sampler",
+      "authors": [
+        "Wang, Minghan",
+        "Bai, Ye",
+        "Vu, Thuy-Trang",
+        "Shareghi, Ehsan",
+        "Haffari, Gholamreza"
+      ],
+      "version": "arXiv:2602.14077v2",
+      "version_date": "2026-03-18T07:35:39Z",
+      "first_submitted": "2026-02-15",
+      "source_url": "https://arxiv.org/abs/2602.14077v2",
+      "doi": "10.48550/arXiv.2602.14077",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2602.14077v2",
+        "observed_at": "2026-10-11",
+        "uncertainty": "Selected version metadata license link checked; PDF license/identity and method details were not independently inspected."
+      },
+      "retrieved_pdf": false,
+      "sha256": null,
+      "bytes": null,
+      "reading": {
+        "scope": "Abstract and exact-version metadata only; excluded from the download selection.",
+        "claim": "GTS trains a context-dependent Gaussian sampler using GRPO-style policy optimization with a frozen backbone.",
+        "control_to_borrow": "Track auxiliary training, verifier information and candidate-selection costs separately from frozen-backbone inference.",
+        "limit": "Abstract-level evidence does not establish plug-and-play transfer to Qwen3 or the bridge assay."
+      }
+    },
+    {
+      "id": "latent-tts",
+      "title": "Parallel Test-Time Scaling for Latent Reasoning Models",
+      "authors": [
+        "You, Runyang",
+        "Li, Yongqi",
+        "Liu, Meng",
+        "Wang, Wenjie",
+        "Nie, Liqiang",
+        "Li, Wenjie"
+      ],
+      "version": "arXiv:2510.07745v4",
+      "version_date": "2026-04-19T13:14:11Z",
+      "first_submitted": "2025-10-09",
+      "source_url": "https://arxiv.org/abs/2510.07745v4",
+      "doi": "10.48550/arXiv.2510.07745",
+      "license": {
+        "id": "CC-BY-4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source_url": "https://arxiv.org/abs/2510.07745v4",
+        "observed_at": "2026-10-11",
+        "uncertainty": "Selected version metadata license link checked; PDF license/identity and method details were not independently inspected."
+      },
+      "retrieved_pdf": false,
+      "sha256": null,
+      "bytes": null,
+      "reading": {
+        "scope": "Abstract and exact-version metadata only; excluded from the download selection.",
+        "claim": "LatentTTS combines dropout/Gaussian trajectory sampling with a trained latent reward model for selection.",
+        "control_to_borrow": "Track auxiliary training, verifier information and candidate-selection costs separately from frozen-backbone inference.",
+        "limit": "Abstract-level evidence does not establish plug-and-play transfer to Qwen3 or the bridge assay."
+      }
+    }
+  ],
+  "official_tool_update": {
+    "title": "Introducing NNsight 0.6",
+    "author": "Jaden Fiotto-Kaufman",
+    "date": "2026-02-26",
+    "version": "0.6.0 release described by the author",
+    "source_url": "https://nnsight.net/blog/2026/02/26/introducing-nnsight-06/",
+    "observed_at": "2026-10-11",
+    "reading_scope": "Release article; execution implementation and environment compatibility were not tested.",
+    "license": "No license inferred from public access; reference link only, no redistributed source content.",
+    "note": "The release reports execution/API changes, vLLM integration, and NNterp standardization; this is a capability lead, not a local compatibility result."
+  }
+}
