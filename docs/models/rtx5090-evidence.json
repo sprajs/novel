@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "scope": "RTX 5090 default correction; metadata, CPU/static/mocked validation only",
+  "checked_at_utc": "2026-10-11T14:57:15.996246+00:00",
+  "parent_base_sha": "066ecdd204c9b9150f851e085ef31ea12f790457",
+  "previous_pr_head": "52197d28ba329fe729a7acf45a8bb39863aadb5d",
+  "hardware_target": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "advertised_memory_gb": 32,
+    "capability": [
+      12,
+      0
+    ],
+    "source_url": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+    "requested_ceiling_gib": 32,
+    "effective_capacity": "min(detected total bytes, 32 * 2**30)",
+    "allocator_limit": "0.8 * min(detected free bytes, effective capacity)",
+    "unit_caveat": "Product GB is not assumed equal to GiB; actual CUDA byte counts determine the usable budget."
+  },
+  "model": {
+    "key": "qwen3_8b",
+    "repo_id": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "parameters": {
+      "unique_config_implied": 8190735360,
+      "official_hub_stored_tensor_elements": 8190735360,
+      "embedding_elements": 622329856,
+      "note": "Embeddings and language-model head are untied (tie_word_embeddings=false); include both. Configuration arithmetic agrees with official Hub tensor-element metadata."
+    },
+    "license": {
+      "spdx_id": "Apache-2.0",
+      "verified": true,
+      "evidence": "Pinned LICENSE bytes contain Apache License Version 2.0; pinned model-card metadata agrees.",
+      "file": "LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "url": "https://huggingface.co/Qwen/Qwen3-8B/blob/b968826d9c46dd6066d109eabc6255188de91218/LICENSE"
+    },
+    "release_evidence": {
+      "family_announcement": {
+        "url": "https://qwenlm.github.io/blog/qwen3/",
+        "date": "2025-04-29",
+        "kind": "official_family_announcement",
+        "scope": "Qwen3 family; does not date every later repository artifact"
+      },
+      "selected_snapshot_commit": {
+        "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+        "timestamp_utc": "2025-07-26T03:49:13.000Z",
+        "title": "Create LICENSE",
+        "url": "https://huggingface.co/Qwen/Qwen3-8B/commit/b968826d9c46dd6066d109eabc6255188de91218"
+      },
+      "conservative_snapshot_public_date": "2025-07-26",
+      "repository_created_at_utc": "2025-04-27T03:42:21.000Z",
+      "repository_created_at_is_public_release_evidence": false,
+      "caveat": "Commit timestamps and a current public repository are evidence, not a cryptographic proof of historical public visibility. Later tokenizer and license metadata differ from April upload; use conservative selected-snapshot date unless a dated public archive proves required artifacts earlier."
+    },
+    "advertised_training_cutoff": null,
+    "total_snapshot_bytes": 16397459696,
+    "total_weight_bytes": 16381516776,
+    "memory_estimates_bytes": {
+      "unique_weights_fp16": 16381470720,
+      "unique_weights_fp32": 32762941440,
+      "kv_fp16_per_token_batch_one": 147456
+    },
+    "metadata_api_url": "https://huggingface.co/api/models/Qwen/Qwen3-8B/revision/b968826d9c46dd6066d109eabc6255188de91218?blobs=true",
+    "config_sha256": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "index_sha256": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+    "index_tensor_bytes": 16381470720,
+    "index_tensor_count": 399,
+    "index_shards_match_allowlist": true,
+    "parameters_arithmetic": {
+      "embedding_or_head": 622329856,
+      "attention_projection_per_layer": 41943040,
+      "mlp_per_layer": 150994944,
+      "norms_per_layer": 8448,
+      "layers": 36,
+      "final_norm": 4096,
+      "untied_embeddings": true,
+      "unique_total": 8190735360
+    },
+    "metadata_payload_bytes": 15942920,
+    "weight_payloads_downloaded": false,
+    "shard_integrity": "Expected SHA256 and sizes from immutable official Hub metadata; payloads must verify when user downloads them."
+  },
+  "comparison_4b": {
+    "repo_id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "metadata_api_url": "https://huggingface.co/api/models/Qwen/Qwen3-4B/revision/1cfa9a7208912126459214e8b04321603b3df60c?blobs=true",
+    "config_url": "https://huggingface.co/Qwen/Qwen3-4B/resolve/1cfa9a7208912126459214e8b04321603b3df60c/config.json",
+    "config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+    "unique_parameters": 4022468096,
+    "official_hub_stored_tensor_elements": 4022468096
+  },
+  "bounded_workload_components": {
+    "batch_size": 1,
+    "input_tokens": 128,
+    "max_new_tokens": 8,
+    "canonical_dtype": "float16",
+    "canonical_attention": "eager",
+    "model_parameters_frozen": true,
+    "activation_gradient_only": true,
+    "weights_fp16_bytes": 16381470720,
+    "weights_fp16_gib": 15.256433486938477,
+    "all_layers_attention_maps_fp16_at128_bytes": 37748736,
+    "all_layer_residual_streams_fp16_at128_bytes": 37748736,
+    "kv_cache_fp16_at136_bytes": 20054016,
+    "all_token_logits_fp16_at128_bytes": 38895616,
+    "parameter_gradient_fp16_if_unfrozen_bytes": 16381470720,
+    "estimate_caveat": "These are component tensor arithmetic, not measured CUDA allocated/reserved peaks or a fit guarantee. Gradients target selected activation tensors with frozen model parameters; CUDA workspaces, autograd saved intermediates, graph retention, loader transients, and allocator reservation need actual validation."
+  },
+  "validation": {
+    "suite": {
+      "passed": 156,
+      "subtests_passed": 24,
+      "gpu_skipped": 1
+    },
+    "ruff_version": "0.14.14",
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "cuda_lock_checks": "PASS",
+    "meta_device_architecture": "PASS: full architectures for all three pins; no weight tensors allocated",
+    "prior_small_model_entries_and_registry_fields_unchanged": true,
+    "cuda_execution": "NOT PERFORMED",
+    "pretrained_8b_execution": "NOT PERFORMED",
+    "new_pretrained_cpu_execution": "NOT PERFORMED; existing prior evidence preserved",
+    "preflights": [
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/profile_smoke.py",
+          "--profile",
+          "cloud-cpu",
+          "--preflight-only"
+        ],
+        "exit_code": 0,
+        "path": "runs/profile-checks/20261011T150232Z-a8dd658c56aa/diagnostics.json",
+        "diagnostic_sha256": "f0c1f63474e4323f32eb283cab3a4e3b2c0e79abc21fd85c24cef718de0333ab",
+        "status": "PASS",
+        "request": {
+          "attention_backend": "eager",
+          "batch_size": 1,
+          "device_index": 0,
+          "dtype": null,
+          "gradient": false,
+          "max_input_tokens": 128,
+          "max_new_tokens": 8,
+          "model": null,
+          "profile": "cloud-cpu",
+          "quantization": null,
+          "rental_capacity_gib": 32
+        },
+        "model": {
+          "key": "qwen3_0_6b",
+          "license": "Apache-2.0",
+          "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+          "tokenizer_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+        },
+        "hardware": {
+          "cuda_available": false,
+          "cuda_build": null,
+          "device_count": 0,
+          "device_index": 0,
+          "discovery_error": null,
+          "nvidia_smi": null,
+          "torch_version": "2.8.0+cpu"
+        },
+        "checks": {
+          "activation_gradient": {
+            "reason": "--preflight-only: no snapshot loaded",
+            "status": "SKIP"
+          },
+          "cuda_kernel": {
+            "reason": "CPU profile; no CUDA kernel executed",
+            "status": "SKIP"
+          },
+          "preflight": {
+            "status": "PASS"
+          },
+          "pretrained_smoke": {
+            "reason": "--preflight-only: no snapshot loaded",
+            "status": "SKIP"
+          }
+        },
+        "error": null,
+        "gpu_kernel_executed": false,
+        "gpu_model_validated": false
+      },
+      {
+        "command": [
+          "uv",
+          "run",
+          "--locked",
+          "python",
+          "scripts/profile_smoke.py",
+          "--profile",
+          "rental",
+          "--preflight-only"
+        ],
+        "exit_code": 1,
+        "path": "runs/profile-checks/20261011T150236Z-99504dc5c51d/diagnostics.json",
+        "diagnostic_sha256": "4915b7dbb982f860b4d282c678c7ce04e4caa3e4bcccaaa9b9b2f860cb7d490c",
+        "status": "FAIL",
+        "request": {
+          "attention_backend": "eager",
+          "batch_size": 1,
+          "device_index": 0,
+          "dtype": null,
+          "gradient": false,
+          "max_input_tokens": 128,
+          "max_new_tokens": 8,
+          "model": null,
+          "profile": "rental",
+          "quantization": null,
+          "rental_capacity_gib": 32
+        },
+        "model": {
+          "key": "qwen3_8b",
+          "license": "Apache-2.0",
+          "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+          "tokenizer_revision": "b968826d9c46dd6066d109eabc6255188de91218"
+        },
+        "hardware": {
+          "cuda_available": false,
+          "cuda_build": null,
+          "device_count": 0,
+          "device_index": 0,
+          "discovery_error": null,
+          "nvidia_smi": null,
+          "torch_version": "2.8.0+cpu"
+        },
+        "checks": {
+          "activation_gradient": {
+            "reason": "Not reached",
+            "status": "SKIP"
+          },
+          "cuda_kernel": {
+            "reason": "Not reached",
+            "status": "SKIP"
+          },
+          "preflight": {
+            "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+            "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+            "out_of_memory": false,
+            "status": "FAIL",
+            "type": "ProfileError"
+          },
+          "pretrained_smoke": {
+            "reason": "Not reached",
+            "status": "SKIP"
+          }
+        },
+        "error": {
+          "message": "CUDA requested but unavailable. Use the separate cu126/cu128 environment, check driver and GPU visibility; no CPU fallback",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "ProfileError"
+        },
+        "gpu_kernel_executed": false,
+        "gpu_model_validated": false
+      }
+    ]
+  },
+  "remaining_limits": [
+    "Actual GPU fit, numerics, driver/runtime operation and performance remain unverified.",
+    "Original CPU exact capture-logit discrepancy remains unresolved; follow-up passes do not certify stability.",
+    "Planning envelopes are estimates, not bounds or benchmarks; frozen parameter gradients and optimizer state remain absent.",
+    "Historical target eligibility needs item-level audit; training cutoff remains undocumented."
+  ],
+  "planning_envelopes_unmeasured": [
+    {
+      "input_token_cap": 128,
+      "new_token_cap": 8,
+      "gradient": false,
+      "dtype": "float16",
+      "estimate": {
+        "weight_bytes": 16381470720,
+        "kv_cache_bytes": 20054016,
+        "live_logits_allowance_bytes": 495919104,
+        "attention_workspace_estimate_bytes": 9469952,
+        "activation_estimate_bytes": 53477376,
+        "backward_activation_estimate_bytes": 0,
+        "runtime_reserve_bytes": 2147483648,
+        "planning_bytes": 19107874816,
+        "parameter_gradient_bytes": 0,
+        "optimizer_bytes": 0,
+        "note": "Estimate only; includes KV parity although canonical forwards disable cache. Actual peaks and fit require this exact device/run."
+      }
+    },
+    {
+      "input_token_cap": 128,
+      "new_token_cap": 8,
+      "gradient": true,
+      "dtype": "float16",
+      "estimate": {
+        "weight_bytes": 16381470720,
+        "kv_cache_bytes": 20054016,
+        "live_logits_allowance_bytes": 495919104,
+        "attention_workspace_estimate_bytes": 9469952,
+        "activation_estimate_bytes": 53477376,
+        "backward_activation_estimate_bytes": 2266103808,
+        "runtime_reserve_bytes": 4294967296,
+        "planning_bytes": 23521462272,
+        "parameter_gradient_bytes": 0,
+        "optimizer_bytes": 0,
+        "note": "Estimate only; includes KV parity although canonical forwards disable cache. Actual peaks and fit require this exact device/run."
+      }
+    },
+    {
+      "input_token_cap": 256,
+      "new_token_cap": 8,
+      "gradient": false,
+      "dtype": "float16",
+      "estimate": {
+        "weight_bytes": 16381470720,
+        "kv_cache_bytes": 38928384,
+        "live_logits_allowance_bytes": 962666496,
+        "attention_workspace_estimate_bytes": 35684352,
+        "activation_estimate_bytes": 103809024,
+        "backward_activation_estimate_bytes": 0,
+        "runtime_reserve_bytes": 2147483648,
+        "planning_bytes": 19670042624,
+        "parameter_gradient_bytes": 0,
+        "optimizer_bytes": 0,
+        "note": "Estimate only; includes KV parity although canonical forwards disable cache. Actual peaks and fit require this exact device/run."
+      }
+    },
+    {
+      "input_token_cap": 256,
+      "new_token_cap": 8,
+      "gradient": true,
+      "dtype": "float16",
+      "estimate": {
+        "weight_bytes": 16381470720,
+        "kv_cache_bytes": 38928384,
+        "live_logits_allowance_bytes": 962666496,
+        "attention_workspace_estimate_bytes": 35684352,
+        "activation_estimate_bytes": 103809024,
+        "backward_activation_estimate_bytes": 5021761536,
+        "runtime_reserve_bytes": 4294967296,
+        "planning_bytes": 26839287808,
+        "parameter_gradient_bytes": 0,
+        "optimizer_bytes": 0,
+        "note": "Estimate only; includes KV parity although canonical forwards disable cache. Actual peaks and fit require this exact device/run."
+      }
+    }
+  ]
+}

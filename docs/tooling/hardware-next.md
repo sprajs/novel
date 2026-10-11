@@ -5,14 +5,17 @@ strict detected-device/runtime/capacity checks, CUDA loading, capture/patching,
 raw-token generation, cache validation, optional activation gradients and
 shareable PASS/FAIL/SKIP diagnostics. Follow the executable
 [profile guide](execution-profiles.md) and [model sizing](../models/hardware-suitability.md).
-The CPU lock and exact model snapshots are preserved.
+The CPU lock and original model snapshots are preserved; rental adds a pinned 8B snapshot.
 
 Real GPU validation remains open: this cloud exposes no CUDA device. Run the
 provided preflight and 0.6B forward commands on the selected host, then optional
-0.6B gradients and 1.7B forward. Review exact no-op checks, numerical parity
+0.6B gradients and 1.7B forward on the 2080 Ti or 8B forward on the RTX 5090.
+Review exact no-op checks, numerical parity
 errors and allocated/reserved peaks before expanding. Prospective FP16/BF16
 tolerances are not empirical calibration. No GPU throughput or largest-fit claim
-is supported. A real RTX5090 is 32 GB; rental defaults deliberately budget 24 GiB.
+is supported. Rental defaults target the real RTX5090's full 32 GB capacity,
+clamped to detected CUDA bytes with normal allocation headroom. The optional
+24 GiB custom profile is explicit and separate from that primary recommendation.
 
 Fast inference can wait: there is no GPU evidence that justifies an extra large
 backend install now. The minimal later comparison is HF unquantized eager FP16,

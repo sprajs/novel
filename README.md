@@ -72,11 +72,13 @@ fastest-backend claim.
 
 Three modes are available through `scripts/profile_smoke.py`: `cloud-cpu`
 (Qwen3-0.6B FP32), `local-2080ti` (11 GB, Qwen3-1.7B FP16), and `rental`
-(Qwen3-1.7B with a conservative 24 GiB budget). A real RTX5090 has **32 GB**, uses
-the separate Blackwell cu128 environment, and permits an explicit 32 GiB budget.
+(RTX 5090 **32 GB**, Qwen3-8B FP16). The rental uses the separate Blackwell cu128
+environment and the full detected capacity up to a 32 GiB ceiling, with normal
+runtime headroom. Marketing GB and CUDA-reported bytes/GiB are recorded separately.
 The [model suitability analysis](docs/models/hardware-suitability.md) separates
 weights from KV, activations, gradients, logits and working memory. Start GPU
-validation with 0.6B before the primary 1.7B candidate.
+validation with 0.6B before the primary 1.7B candidate on the 2080 Ti or 8B on
+the RTX 5090.
 
 ```bash
 # CPU diagnostic with selected activation gradient; uses the snapshot above.

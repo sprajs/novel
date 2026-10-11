@@ -31,8 +31,10 @@ def hardware(capability=(7, 5), total=11, free=10, **overrides):
 
 def test_profile_defaults_preserve_models_and_precisions():
     assert ProfileRequest().model_key == "qwen3_0_6b"
-    for profile in ("local-2080ti", "rental"):
-        assert ProfileRequest(profile).model_key == "qwen3_1_7b"
+    assert ProfileRequest("local-2080ti").model_key == "qwen3_1_7b"
+    assert ProfileRequest("rental").model_key == "qwen3_8b"
+    assert ProfileRequest("rental").rental_capacity_gib == 32
+    assert ProfileRequest("rental", rental_capacity_gib=24).model_key == "qwen3_1_7b"
     result = resolve_profile(ProfileRequest("local-2080ti"), hardware(), entry())
     assert result.dtype == "float16" and result.device == "cuda:0"
     assert result.allocator_limit_bytes == int(10 * GIB * 0.8)
@@ -42,7 +44,8 @@ def test_profile_defaults_preserve_models_and_precisions():
     dict(device_index=-1), dict(device_index=True), dict(batch_size=2), dict(max_input_tokens=257),
     dict(max_new_tokens=17), dict(max_new_tokens=0), dict(attention_backend="flash_attention_2"),
     dict(attention_backend="sdpa"), dict(quantization="int4"), dict(gradient=1),
-    dict(rental_capacity_gib=32), dict(profile="rental", rental_capacity_gib=48)])
+    dict(rental_capacity_gib=24), dict(profile="rental", rental_capacity_gib=48),
+    dict(profile="local-2080ti", model="qwen3_8b"), dict(profile="rental", model="qwen3_14b")])
 def test_invalid_or_unbounded_request(kwargs):
     with pytest.raises(ProfileError):
         ProfileRequest(**kwargs)
@@ -71,7 +74,7 @@ def test_cuda_index_and_dtype_guards():
 
 @pytest.mark.parametrize("capability", [(8, 6), (8, 9), (12, 0)])
 def test_rental_uses_actual_architecture_not_card_label(capability):
-    resolved = resolve_profile(ProfileRequest("rental"), hardware(capability, 32, 30, name="arbitrary provider label"), entry())
+    resolved = resolve_profile(ProfileRequest("rental", rental_capacity_gib=24), hardware(capability, 32, 30, name="arbitrary provider label"), entry())
     assert resolved.capacity_budget_bytes == 24 * GIB
     assert resolved.stack == ("cu128" if capability == (12, 0) else "cu126")
     assert resolved.allocator_limit_bytes == int(24 * GIB * .8)
@@ -82,9 +85,47 @@ def test_blackwell_cannot_use_turing_wheel_and_32_requires_capacity():
         resolve_profile(ProfileRequest("rental"), hardware((12, 0), 32, 30, torch_version="2.8.0+cu126", cuda_build="12.6"), entry())
     with pytest.raises(ProfileError, match="capacity"):
         resolve_profile(ProfileRequest("rental", rental_capacity_gib=32), hardware((8, 9), 24, 23), entry())
-    result = resolve_profile(ProfileRequest("rental", rental_capacity_gib=32), hardware((12, 0), 32, 30), entry())
+    result = resolve_profile(ProfileRequest("rental"), hardware((12, 0), 32, 30, name="NVIDIA GeForce RTX 5090"), entry("qwen3_8b"))
     assert result.capacity_budget_bytes == 32 * GIB
     assert result.allocator_limit_bytes == int(30 * GIB * .8)
+
+
+@pytest.mark.parametrize("total_bytes", [32 * 10**9 - 256 * 1024**2, 32 * GIB - 256 * 1024**2])
+def test_5090_full_detected_capacity_is_not_a_marketing_unit_conversion(total_bytes):
+    free_bytes = total_bytes - GIB
+    h = hardware((12, 0), name="NVIDIA GeForce RTX 5090", total_bytes=total_bytes, free_bytes=free_bytes)
+    result = resolve_profile(ProfileRequest("rental", gradient=True), h, entry("qwen3_8b"))
+    assert result.capacity_budget_bytes == total_bytes
+    assert result.allocator_limit_bytes == int(free_bytes * .8)
+    assert result.capacity_budget_bytes > 24 * GIB
+    assert result.estimate["planning_bytes"] < result.allocator_limit_bytes
+    policy = result.to_dict()["capacity_policy"]
+    assert policy["requested_ceiling_gib"] == 32
+    assert policy["detected_total_gib"] == total_bytes / GIB
+
+
+@pytest.mark.parametrize("capability,name", [((8, 9), "NVIDIA GeForce RTX 5090"),
+                                            ((12, 0), "NVIDIA GeForce RTX 5090D"),
+                                            ((12, 0), "unverified provider label")])
+def test_default_rental_checks_actual_5090_identity_and_architecture(capability, name):
+    with pytest.raises(ProfileError, match="detected RTX 5090"):
+        resolve_profile(ProfileRequest("rental"), hardware(capability, 32, 30, name=name), entry("qwen3_8b"))
+
+
+def test_8b_memory_guard_includes_untied_weights_and_selected_backward():
+    request = ProfileRequest("rental", gradient=True)
+    large = entry("qwen3_8b")
+    estimate = memory_estimate(large, request, "float16")
+    assert estimate["weight_bytes"] == 8_190_735_360 * 2
+    assert estimate["kv_cache_bytes"] == 147_456 * 136
+    assert estimate["backward_activation_estimate_bytes"] > 0
+    assert estimate["parameter_gradient_bytes"] == estimate["optimizer_bytes"] == 0
+    h = hardware((12, 0), 32, 30, name="NVIDIA GeForce RTX 5090")
+    resolve_profile(request, h, large)
+    with pytest.raises(ProfileError, match="Estimated"):
+        resolve_profile(request, {**h, "free_bytes": 24 * GIB}, large)
+    with pytest.raises(ProfileError, match="Estimated"):
+        resolve_profile(replace(request, max_input_tokens=256), h, large)
 
 
 def test_unknown_architecture_and_wrong_direction_cubins_rejected():

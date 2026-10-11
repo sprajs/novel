@@ -77,6 +77,8 @@ def run(config_path: Path, registry: Path, cache: Path, runs: Path,
         if dtype != "float32":
             config.update(atol=0.02 if dtype == "float16" else 0.1,
                           rtol=0.002 if dtype == "float16" else 0.01)
+    if config["model_key"] == "qwen3_8b" and (execution is None or execution.request.profile != "rental"):
+        raise ValueError("Qwen3-8B requires the rental profile and its CUDA/memory preflight; CPU/2080 Ti models are unchanged")
     entry = model_entry(registry, config["model_key"])
     snapshot = snapshot_path(cache, config["model_key"], entry)
     store = RunStore(runs, max_bytes=config["max_artifact_bytes"])

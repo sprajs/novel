@@ -4,6 +4,7 @@ from dataclasses import asdict, dataclass
 import importlib.metadata
 from pathlib import Path
 import platform
+import re
 import tomllib
 import os
 import shutil
@@ -13,7 +14,7 @@ import torch
 
 GIB = 1024**3
 PROFILE_NAMES = ("cloud-cpu", "local-2080ti", "rental")
-MODEL_KEYS = ("qwen3_0_6b", "qwen3_1_7b")
+MODEL_KEYS = ("qwen3_0_6b", "qwen3_1_7b", "qwen3_8b")
 
 
 class ProfileError(ValueError):
@@ -26,7 +27,7 @@ class ProfileRequest:
     model: str | None = None
     device_index: int = 0
     dtype: str | None = None
-    rental_capacity_gib: int = 24
+    rental_capacity_gib: int = 32
     max_input_tokens: int = 128
     max_new_tokens: int = 8
     batch_size: int = 1
@@ -38,7 +39,9 @@ class ProfileRequest:
         if self.profile not in PROFILE_NAMES:
             raise ProfileError(f"Choose a profile from {PROFILE_NAMES}")
         if self.model is not None and self.model not in MODEL_KEYS:
-            raise ProfileError("Only the two immutable, licensed registry models are enabled")
+            raise ProfileError("Only immutable, licensed registry models are enabled")
+        if self.model == "qwen3_8b" and self.profile != "rental":
+            raise ProfileError("The 8B candidate is enabled only for rental; CPU/2080 Ti models are unchanged")
         for name, lo, hi in (("device_index", 0, 63), ("max_input_tokens", 1, 256),
                              ("max_new_tokens", 1, 16), ("batch_size", 1, 1)):
             value = getattr(self, name)
@@ -46,8 +49,8 @@ class ProfileRequest:
                 raise ProfileError(f"{name} must be an integer in [{lo}, {hi}]")
         if type(self.rental_capacity_gib) is not int or self.rental_capacity_gib not in (24, 32):
             raise ProfileError("Rental capacity must be an explicit 24 or 32 GiB budget")
-        if self.profile != "rental" and self.rental_capacity_gib != 24:
-            raise ProfileError("The 32 GiB capacity override applies only to rental")
+        if self.profile != "rental" and self.rental_capacity_gib != 32:
+            raise ProfileError("The custom capacity override applies only to rental")
         if self.dtype not in (None, "float32", "float16", "bfloat16"):
             raise ProfileError("Unknown precision")
         if self.attention_backend != "eager" or self.quantization is not None:
@@ -59,7 +62,13 @@ class ProfileRequest:
 
     @property
     def model_key(self):
-        return self.model or ("qwen3_0_6b" if self.profile == "cloud-cpu" else "qwen3_1_7b")
+        if self.model is not None:
+            return self.model
+        if self.profile == "cloud-cpu":
+            return "qwen3_0_6b"
+        if self.profile == "rental" and self.rental_capacity_gib == 32:
+            return "qwen3_8b"
+        return "qwen3_1_7b"
 
 
 def configure_determinism() -> dict:
@@ -137,7 +146,17 @@ class ResolvedProfile:
     hardware: dict
 
     def to_dict(self):
-        return asdict(self)
+        result = asdict(self)
+        if self.request.profile == "rental":
+            result["capacity_policy"] = {
+                "target": "RTX 5090, advertised 32 GB" if self.request.rental_capacity_gib == 32 else "explicit custom 24 GiB ceiling",
+                "requested_ceiling_gib": self.request.rental_capacity_gib,
+                "detected_total_gib": self.hardware["total_bytes"] / GIB,
+                "detected_free_gib": self.hardware["free_bytes"] / GIB,
+                "allocator_fraction_of_available_budget": 0.8,
+                "note": "GB product label is not converted to usable GiB. Budget is clamped to measured CUDA bytes; runtime headroom remains reserved.",
+            }
+        return result
 
 
 def resolve_profile(request: ProfileRequest, hardware: dict, entry: dict) -> ResolvedProfile:
@@ -172,10 +191,16 @@ def resolve_profile(request: ProfileRequest, hardware: dict, entry: dict) -> Res
                    and int(candidate[3:]) <= capability[0] * 10 + capability[1]
                    for candidate in hardware["arch_list"]):
             raise ProfileError(f"Installed wheel lacks a compatible native cubin for {arch}; install environments/{stack}. PTX JIT is not silently substituted")
-        capacity = (11 if request.profile == "local-2080ti" else request.rental_capacity_gib) * GIB
-        # CUDA-reported usable memory may be slightly below the nominal capacity.
-        if hardware["total_bytes"] < capacity * 0.95:
+        ceiling = (11 if request.profile == "local-2080ti" else request.rental_capacity_gib) * GIB
+        # Preserve the local guard. For rental, distinguish the advertised GB
+        # class from the GiB ceiling and actually detected CUDA-usable bytes.
+        minimum = ceiling * 0.95 if request.profile == "local-2080ti" else request.rental_capacity_gib * 10**9 * 0.95
+        if hardware["total_bytes"] < minimum:
             raise ProfileError("Detected VRAM is below the requested capacity budget; choose the matching profile/capacity")
+        if request.profile == "rental" and request.rental_capacity_gib == 32:
+            if capability != (12, 0) or not re.search(r"\brtx\s*5090\b", hardware["name"], re.IGNORECASE):
+                raise ProfileError("Default rental requires a detected RTX 5090 (SM120, 32 GB class); use --rental-capacity-gib 24 only for an explicit custom rental")
+        capacity = ceiling if request.profile == "local-2080ti" else min(ceiling, hardware["total_bytes"])
         if not 0 < hardware["free_bytes"] <= hardware["total_bytes"]:
             raise ProfileError("Invalid or exhausted free VRAM; close other GPU jobs and retry")
         limit = int(min(capacity, hardware["free_bytes"]) * 0.80)

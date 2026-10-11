@@ -3,25 +3,34 @@
 Verified official sources on 11 October 2026. This increment implements GPU code;
 **no GPU was available in the cloud and no CUDA execution or GPU benchmark was
 performed here**. CPU/static/mocked results are in [validation](../validation.md).
-The original CPU `pyproject.toml`, `uv.lock`, model registry and dataset handoff
-are preserved. There is no rental, driver installer or machine-security change.
+The original CPU `pyproject.toml`, `uv.lock`, two model entries and dataset handoff
+are preserved. The registry adds an immutable Qwen3-8B rental candidate. There is
+no rental, driver installer or machine-security change.
 
 | Mode / CLI profile | Default model | Canonical precision/backend | Dependency environment |
 | --- | --- | --- | --- |
 | Small cloud CPU / `cloud-cpu` | Pinned Qwen3-0.6B | FP32, eager | Root CPU lock, torch 2.8.0+cpu |
 | Local 11 GB / `local-2080ti` | Pinned Qwen3-1.7B; first validate 0.6B | FP16, eager | `environments/cu126`, torch 2.8.0+cu126 |
-| Rented capacity / `rental` | Pinned Qwen3-1.7B; first validate 0.6B | FP16, eager; explicit native BF16 is a separate condition | cu126 for supported pre-Blackwell cards; cu128 for SM120 |
+| RTX 5090 32 GB / `rental` | Pinned Qwen3-8B; first validate 0.6B | FP16, eager; explicit native BF16 is a separate condition | `environments/cu128`, torch 2.8.0+cu128 |
 
 [NVIDIA specifies 11 GB for RTX 2080 Ti](https://www.nvidia.com/en-us/geforce/graphics-cards/compare/?section=compare-20),
 [24 GB for RTX 3090](https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/),
 [24 GB for RTX 4090](https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/),
 and **[32 GB GDDR7 for RTX 5090](https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/)**.
 The verified product is RTX 5090; this design does not assume a “5090 Ti.”
-The rental default is a **24 GiB conservative capacity budget**, including on a
-32 GB RTX 5090. `--rental-capacity-gib 32` explicitly raises that budget only
-when detected usable capacity supports it. Hardware name, actual total/free
-bytes and chosen budget remain separate report fields. No provider label is
-trusted as proof of hardware or fit.
+The rental default targets the **full RTX 5090 32 GB**, requiring its detected
+name, SM120 architecture and capacity class. The default 32 GiB binary ceiling
+is clamped to CUDA's actual total bytes; the product's GB label is not assumed
+to equal 32 GiB. For example, 32,000,000,000 detected bytes means 29.80 GiB,
+whereas 32 × 2^30 bytes means 32 GiB. Both retain the normal 20% allocator
+headroom against available memory. Reports separate the product target,
+requested ceiling, detected total/free bytes and effective allocation limit.
+The nominal-class guard allows a small amount of device-reserved memory; it
+does not use a provider label as proof of hardware or fit.
+
+`--rental-capacity-gib 24` is an explicit optional custom rental for supported
+3090/4090 or other supported architectures. Its default model remains 1.7B and
+its ceiling is 24 GiB. It does not set the primary RTX 5090 recommendation.
 
 ## Compatible isolated dependencies
 
@@ -71,7 +80,7 @@ uv sync --locked
 uv run --locked novel-model download
 uv run --locked python scripts/profile_smoke.py --profile cloud-cpu --gradient
 
-# Local RTX 2080 Ti, or a supported 24 GB 3090/4090 rental.
+# Local RTX 2080 Ti.
 uv sync --locked --project environments/cu126
 uv run --locked --project environments/cu126 python scripts/profile_smoke.py \
   --profile local-2080ti --preflight-only
@@ -79,7 +88,7 @@ PYTHONPATH=src uv run --locked --project environments/cu126 python -m novel.mode
 uv run --locked --project environments/cu126 python scripts/profile_smoke.py \
   --profile local-2080ti --model qwen3_0_6b
 
-# RTX 5090: the separate Blackwell environment, conservative 24 GiB budget.
+# RTX 5090: the separate Blackwell environment, full detected 32 GB class.
 uv sync --locked --project environments/cu128
 uv run --locked --project environments/cu128 python scripts/profile_smoke.py \
   --profile rental --preflight-only
@@ -89,8 +98,8 @@ uv run --locked --project environments/cu128 python scripts/profile_smoke.py \
 ```
 
 After the first 0.6B forward smoke passes, run its optional gradient check and
-then the 1.7B primary forward candidate. Commands below show the 2080 Ti; use
-`--profile rental` for a rental, and `--project environments/cu128` for RTX5090.
+then the larger primary candidate. The 2080 Ti remains on 1.7B; RTX 5090 now
+defaults to 8B. A download happens only when explicitly requested:
 
 ```bash
 uv run --locked --project environments/cu126 python scripts/profile_smoke.py \
@@ -100,21 +109,42 @@ PYTHONPATH=src uv run --locked --project environments/cu126 python -m novel.mode
 uv run --locked --project environments/cu126 python scripts/profile_smoke.py \
   --profile local-2080ti
 
-# Optional full-capacity RTX5090 condition, still batch one and short-context.
+# RTX 5090: 0.6B gradient mechanics, then the 8B default forward candidate.
 uv run --locked --project environments/cu128 python scripts/profile_smoke.py \
-  --profile rental --rental-capacity-gib 32 --gradient
+  --profile rental --model qwen3_0_6b --gradient
+PYTHONPATH=src uv run --locked --project environments/cu128 python -m novel.models \
+  download --model qwen3_8b --max-bytes 19327352832
+uv run --locked --project environments/cu128 python scripts/profile_smoke.py \
+  --profile rental
+# Optional selected-activation gradient after the 8B forward report passes.
+uv run --locked --project environments/cu128 python scripts/profile_smoke.py \
+  --profile rental --gradient
 
 # Optional tiny random-model GPU regression; downloads no weights.
 NOVEL_RUN_GPU_TESTS=1 NOVEL_GPU_PROFILE=local-2080ti PYTHONPATH=src \
   uv run --locked --project environments/cu126 python -m pytest -q -m gpu
 ```
 
-For the last command on a rental, use `NOVEL_GPU_PROFILE=rental` and the matching
-project. `NOVEL_GPU_DEVICE_INDEX` selects a device for that test; `--device-index`
+For the last command on an RTX 5090, use `NOVEL_GPU_PROFILE=rental` and
+`--project environments/cu128`. That opt-in test uses the primary 32 GB rental;
+custom 24 GiB rentals use the smoke CLI's explicit capacity option instead.
+`NOVEL_GPU_DEVICE_INDEX` selects a device for that test; `--device-index`
 selects a logical CUDA device for the smoke (respecting CUDA_VISIBLE_DEVICES).
-The 1.7B snapshot is about 4.08 GB; the explicit 5 GiB cap is a download budget,
-not VRAM. We downloaded only 0.6B in this cloud. Model loading is always local,
-hash verified, SafeTensors only, and `trust_remote_code=False`.
+The 1.7B snapshot is about 4.08 GB; its explicit 5 GiB cap is a download budget.
+The 8B snapshot is 16,397,459,696 bytes (16.40 GB / 15.27 GiB), with an explicit
+18 GiB download cap above. These caps are disk/download budgets, not VRAM.
+Provision host RAM for approximately 15.26 GiB of 8B FP16 weights plus loading,
+conversion and process overhead; at least 32 GiB host RAM is a planning starting
+point, not a measured guarantee. Only 0.6B weights were downloaded in this cloud;
+8B research fetched bounded metadata/tokenizer files and no weight payloads.
+Model loading is always local, hash verified, SafeTensors only, and
+`trust_remote_code=False`.
+
+For an explicit custom 24 GB 3090/4090 rental, install `environments/cu126`, use
+`--profile rental --rental-capacity-gib 24`, and start with `--model qwen3_0_6b`.
+After mechanics checks and the explicit 1.7B download above, omitting `--model`
+selects 1.7B for this custom condition. A 5090 explicitly capped at 24 GiB still
+requires cu128. Hardware detection selects the required wheel; a mismatch fails.
 
 The CLI defaults to batch one, input cap 128, eight generated tokens, one layer
 and one selected position. Its maximum input/generation caps are 256/16; use
@@ -161,7 +191,8 @@ public experiment inputs and an explicit allowlist of numerical thread/CUBLAS
 controls; it does not dump arbitrary environment variables, credentials or home paths.
 No automatic upload occurs. Ignored run folders and model weights stay out of Git.
 
-The allocator cap is 80% of `min(free VRAM at preflight, declared capacity)`.
+The allocator cap is 80% of `min(free VRAM at preflight, effective capacity)`;
+the rental effective capacity is `min(detected total bytes, requested GiB ceiling)`.
 The planning envelope must fit below that cap before loading. Other processes
 can allocate later; CUDA contexts, external allocations and fragmentation are
 not a mathematical fit guarantee. OOM produces FAIL and guidance to shorten the
@@ -186,6 +217,8 @@ A local final-token logit contrast gradient is a mechanics check, not a bridge
 direction or proof of selective transfer. Parameter gradients/optimizer state
 remain absent; backward intermediates still require memory. A tiny token cap
 may end before an answer; that is not a reasoning failure.
+The default layer remains the explicitly configured layer 14, now within 36
+decoder blocks for 8B; this is a mechanics site, not a model-relative causal claim.
 
 Canonical instrumentation is eager, uncompiled, unquantized and uses full-prefix
 recomputation. The existing `generate_reference(..., use_cache=True)` is an

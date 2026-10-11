@@ -13,6 +13,19 @@ from novel.models import model_entry
 from novel.profiles import ProfileRequest
 
 
+def test_cli_rental_defaults_to_full_5090_and_8b(monkeypatch, tmp_path, capsys):
+    validate = Mock(return_value=(0, tmp_path / "diagnostics.json"))
+    monkeypatch.setattr(profile_runner, "validate_profile", validate)
+    monkeypatch.setattr("sys.argv", ["profile_smoke.py", "--profile", "rental", "--preflight-only"])
+    with pytest.raises(SystemExit) as result:
+        profile_runner.main()
+    assert result.value.code == 0
+    request = validate.call_args.args[0]
+    assert request.model_key == "qwen3_8b" and request.rental_capacity_gib == 32
+    assert validate.call_args.kwargs["preflight_only"]
+    assert json.loads(capsys.readouterr().out)["status"] == "PASS"
+
+
 @pytest.fixture
 def prepared(tmp_path, monkeypatch):
     with torch.random.fork_rng():
@@ -83,6 +96,17 @@ def test_preflight_skip_never_claims_model_validation(prepared):
     report = json.loads(path.read_text())
     assert code == 0
     assert report["checks"]["pretrained_smoke"]["status"] == "SKIP"
+    runner.AutoModelForCausalLM.from_pretrained.assert_not_called()
+
+
+def test_legacy_cpu_config_cannot_bypass_8b_rental_preflight(prepared):
+    kwargs, _model = prepared
+    config_path = kwargs["config"]
+    config = json.loads(config_path.read_text())
+    config["model_key"] = "qwen3_8b"
+    config_path.write_text(json.dumps(config))
+    with pytest.raises(ValueError, match="rental profile"):
+        runner.run(config_path, kwargs["registry"], kwargs["cache"], kwargs["runs"])
     runner.AutoModelForCausalLM.from_pretrained.assert_not_called()
 
 

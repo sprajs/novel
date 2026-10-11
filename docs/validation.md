@@ -126,8 +126,9 @@ Validation on 11 October 2026: **128 tests passed, 24 subtests passed, 1 explici
 GPU test skipped**. Changed Python files passed Ruff 0.14.14; `compileall` and
 `git diff --check` passed. Both CUDA locks pass `uv lock --check` through metadata
 resolution; no CUDA wheel payloads were installed and no GPU validation is
-inferred from lock resolution. The root CPU lock, exact registry and dataset
-contract remain unchanged from PR1 (`066ecdd`).
+inferred from lock resolution. At this stage the root CPU lock, exact registry
+and dataset contract were unchanged from PR1 (`066ecdd`). The later 8B addition
+below preserves both original model entries and the CPU/dataset contracts.
 
 The real pinned 0.6B CPU model passed the legacy `novel-smoke` command and the
 new `cloud-cpu --gradient` profile, including raw seeded generation, selected
@@ -175,3 +176,28 @@ explicit scientific repeatability blocker. Follow-up results: **143 tests passed
 24 subtests passed, 1 GPU skip**, plus the full pinned CPU gradient smoke and
 static checks. See the investigation evidence for exact data and wheel-source
 verification; no GPU-runtime claim is made.
+
+### Full-capacity RTX 5090 correction
+
+The rental default now targets **RTX 5090 32 GB and pinned Qwen3-8B**, with a
+32 GiB ceiling clamped to detected CUDA bytes and 20% allocation headroom.
+24 GiB is only an explicit custom rental; CPU and 2080 Ti model/precision/token
+defaults are unchanged. The [updated commands](tooling/execution-profiles.md)
+start with 0.6B mechanics, then explicitly download and validate the 8B candidate.
+
+Validation: **156 tests passed, 24 subtests passed, 1 GPU skip**. Ruff 0.14.14,
+compilation, diff checks and both CUDA lock checks passed. Tests cover the new
+default, GPU identity/architecture, decimal GB versus GiB, actual available
+memory, gradient/context bounds and the legacy CPU bypass guard. Constructing
+all three full architectures on the PyTorch metadata-only device confirmed
+parameter counts and embedding ties without allocating weights. The pinned
+8B config/index hashes and the five allowlisted index shards were independently
+checked against official metadata. Original small-model entries, CPU lock and
+scientific data contract are unchanged.
+
+Current cloud preflight passed for CPU with model checks SKIP; rental correctly
+failed for unavailable CUDA with GPU/model checks SKIP. The [new evidence](models/rtx5090-evidence.json)
+records these results and the metadata-only acquisition. No new pretrained
+execution was performed for this correction, no 8B weights were downloaded,
+and no GPU compute was used or rented. 8B memory envelopes are estimates only;
+actual GPU numerics/fit and the original CPU repeatability anomaly remain open.

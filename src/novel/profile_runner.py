@@ -92,7 +92,8 @@ def main():
     parser.add_argument("--model", choices=MODEL_KEYS)
     parser.add_argument("--device-index", type=int, default=0)
     parser.add_argument("--dtype", choices=("float32", "float16", "bfloat16"))
-    parser.add_argument("--rental-capacity-gib", type=int, choices=(24, 32), default=24)
+    parser.add_argument("--rental-capacity-gib", type=int, choices=(24, 32), default=32,
+                        help="Default: RTX 5090, up to 32 GiB clamped to detected VRAM. 24 selects an explicit custom rental.")
     parser.add_argument("--max-input-tokens", type=int, default=128)
     parser.add_argument("--max-new-tokens", type=int, default=8)
     parser.add_argument("--gradient", action="store_true")
