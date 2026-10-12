@@ -1,5 +1,16 @@
 # Curriculum changes
 
+## 12 October 2026 — parent beginner-readability review
+
+Read all 13 expanded chapters without relying on paper text for the teaching
+steps. Add a plain-language opening explaining Novel's first historical
+experiment before the maths, and define the remaining assumed terms at their
+point of use: prefix, forward pass, stopping, seeds, entailment, prior/posterior,
+fine-tuning, reward model, supervision/probe and latent reasoning. Clarify the
+scope of a likelihood ranking example. Simplify the home-page terminology and
+add three glossary entries. Record the assessment and its limits in
+`TEACHING-REVIEW.md`. The source inventory and research design are unchanged.
+
 ## 12 October 2026 — connected explanations and worked foundations
 
 Review every chapter and source card for an interested beginner. Develop

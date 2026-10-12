@@ -14,11 +14,20 @@
       "id": "tokens",
       "title": "From text to a probability distribution",
       "kicker": "01 · Text and chance",
-      "summary": "Understand what a language model predicts before asking what an idea costs in probability.",
+      "summary": "How a language model builds an answer, and why next-token probability matters to Novel.",
       "whyNow": "The first assay needs exact prompts, token IDs and a declared decoder. These define the experiment. ",
       "status": "core",
       "prerequisites": [],
       "sections": [
+        {
+          "id": "why-novel-starts-with-a-known-result",
+          "title": "What Novel is trying to find out",
+          "paragraphs": [
+            "Novel studies how AI systems produce useful scientific ideas. Its first experiment asks a concrete question: can a fixed language model recover a human contribution first publicly disclosed after that complete model existed? A language model is a system trained on examples of text to assign probabilities to continuations. It produces an answer by repeatedly choosing the next token, a small piece of text, rather than choosing a complete answer in one step.",
+            "The later human result gives the experiment a known contribution to compare against. The model receives a problem statement without that solution. Its response might recover the contribution, offer a valid alternative, or fail to solve the problem. The comparison concerns the scientific content, so different wording can still count as the same contribution. The exact model, information supplied, generation procedure and number of attempts define what is being measured.",
+            "This is historical reconstruction: using a known result to make the first experiment assessable. It is a starting point for the larger discovery programme. The guide connects the small numerical operations inside a model with the question of what a complete answer achieves. An assay is simply the repeatable measurement procedure used to answer that question. Later experiments can deliberately change internal states to investigate why an outcome changes."
+          ]
+        },
         {
           "title": "What a probability distribution describes",
           "paragraphs": [
@@ -59,7 +68,8 @@
           "paragraphs": [
             "A prompt is the text and conversation structure supplied to a model before it generates a continuation. A tokenizer maps text into a sequence of integers called token IDs. A token can represent a word, a fragment of a word, punctuation, whitespace, or a special control marker. The same sentence can have different token sequences under different tokenizers. Never count words and silently call them tokens.",
             "A chat template adds structure around a conversation: who is speaking, where the user message ends, and where the assistant should begin. Those markers are part of the model input. Changing a template can change behavior even when every model weight stays the same. Novel therefore stores the rendered prompt and its token IDs.",
-            "A token ID is a label, not a numerical magnitude: token 900 is not “more blue” than token 20. An embedding lookup uses the ID to select a learned vector. As an invented illustration only, a tokenizer might split “measure” into “meas” and “ure”, assigning labels 17 and 204. Novel records actual tokenizer outputs; these fictional fragments and IDs are not a claim about Qwen3 tokenization."
+            "A token ID is a label, not a numerical magnitude: token 900 is not “more blue” than token 20. An embedding lookup uses the ID to select a learned vector. As an invented illustration only, a tokenizer might split “measure” into “meas” and “ure”, assigning labels 17 and 204. Novel records actual tokenizer outputs; these fictional fragments and IDs are not a claim about Qwen3 tokenization.",
+            "The prefix is everything available before the next prediction: the prompt plus any continuation tokens already produced. A forward pass is one execution of the model on an input to compute its intermediate values and output scores. Later chapters unpack those intermediate values; at this point, the useful distinction is input tokens → computation → next-token scores."
           ],
           "id": "words-become-tokens"
         },
@@ -108,7 +118,7 @@
           "title": "The decoder is part of the system",
           "paragraphs": [
             "The model supplies scores; the decoder decides how to turn them into a token. Greedy decoding takes a highest-scoring token. Sampling draws randomly. Temperature rescales logits before sampling: at temperature τ (tau) greater than zero, use z_j/τ. Higher temperature flattens differences; lower temperature sharpens them. Top-k keeps only k candidates, while top-p keeps a prefix of ranked candidates reaching a probability threshold, then renormalizes.",
-            "Novel distinguishes the raw model law p from the executed sampling law q. A reference token can have positive probability under p but be removed by a top-k filter under q. An end-of-sequence token and an administrative output cap are different stopping events. Seeds help reproduce draws; they do not define the probability distribution by themselves.",
+            "Novel distinguishes the raw model distribution p from the executed sampling distribution q. A reference token can have positive probability under p but be removed by a top-k filter under q. An end-of-sequence token is a special marker the model can emit to finish its response. An output cap is a limit imposed by the program even if the model has not chosen to stop. A seed initializes the program’s random-number generator and helps reproduce draws when the rest of the setup is fixed; it does not define the distribution by itself.",
             "In the red/blue/stop distribution 0.50/0.30/0.20, top-k with k = 2 removes stop and rescales the survivors: red becomes 0.50/0.80 = 0.625 and blue becomes 0.30/0.80 = 0.375. Greedy decoding always chooses red for that same step. Repeating greedy decoding does not explore the original 50/30/20 distribution. Temperature and filtering are therefore substantive choices in Novel’s definition of one attempt."
           ],
           "id": "the-decoder-is-part-of-the-system"
@@ -144,7 +154,7 @@
         {
           "title": "Vectors are working representations",
           "paragraphs": [
-            "An embedding maps each token ID to a vector, an ordered list of numbers. A tensor is a multidimensional array of such numbers. During a forward pass the model repeatedly transforms these arrays. Learned weights are the relatively persistent transformation parameters; activations are the intermediate values produced for this particular input.",
+            "An embedding maps each token ID to a vector, an ordered list of numbers. A tensor is a multidimensional array of such numbers. A forward pass is one run of the model’s computation on an input; it repeatedly transforms these arrays. Learned weights are the model’s transformation parameters, while activations are the intermediate values produced for this particular input. The numerical examples below make those distinctions concrete.",
             "A vector dimension is not automatically a named concept. Information can be distributed across many coordinates, and a coordinate can participate in several behaviors. Calling a direction a discovery feature requires evidence beyond a suggestive plot or a few readable completions."
           ],
           "id": "vectors-are-working-representations"
@@ -321,7 +331,7 @@
         {
           "title": "Inference can be complex without training",
           "paragraphs": [
-            "Training adjusts learned parameters using an objective and data. Inference runs a chosen model on an input. A frozen model can still produce different outputs because prompts, decoding randomness or activations differ. In-context examples change its computation without necessarily updating its weights. Fine-tuning or training a separate reward model creates additional learned artifacts that need provenance.",
+            "Training adjusts learned parameters using an objective and data. Inference runs a chosen model on an input. A frozen model can still produce different outputs because prompts, decoding randomness or activations differ. In-context examples change its computation without necessarily updating its weights. Fine-tuning means further training an existing model, usually on a chosen task or dataset. A reward model is a separately trained predictor that assigns scores to candidate outputs. Both introduce learned files and data choices that must be recorded alongside the main model.",
             "A gradient is a derivative of a selected scalar quantity with respect to numbers in the computation. It can be measured without applying a weight update. Novel’s selected-activation gradient diagnostic asks how a local output contrast changes near one activation; it is not evidence that the model learned a scientific concept or transferred a donor mechanism."
           ],
           "id": "inference-can-be-complex-without-training"
@@ -587,7 +597,8 @@
           "title": "Equivalence needs the problem’s assumptions",
           "paragraphs": [
             "“Average the measurements” and “take their arithmetic mean” can describe the same operation. “Use an inverse-variance weighted mean” is different when measurement uncertainty varies. Shared keywords or embedding similarity are therefore helpful search aids, but insufficient judges of scientific equivalence. Define the invariances you intend to allow: notation changes, reordered explanation and equivalent implementations may count; missing hypotheses may not.",
-            "Semantic Uncertainty motivates grouping different phrasings by meaning. Its uncertainty signal concerns sampled answers and an operational equivalence test. Agreement is not truth: a model can repeat the same incorrect mechanism confidently. A small collection of paraphrases does not enumerate all ways an idea could be expressed."
+            "Semantic Uncertainty motivates grouping different phrasings by meaning. Its uncertainty signal concerns sampled answers and an operational equivalence test. Agreement is not truth: a model can repeat the same incorrect mechanism confidently. A small collection of paraphrases does not enumerate all ways an idea could be expressed.",
+            "One way to test equivalence is bidirectional entailment. A entails B when A’s being true is enough to make B true in the stated context. “The sample contains exactly two observations” entails “the sample contains at least two observations”; the reverse does not hold, because three observations satisfy the second statement. “There are exactly two observations” and “the sample has two observations in total” express the same claim in this context and entail each other. Checking both directions helps distinguish a paraphrase from a weaker or stronger claim. The semantic-uncertainty method uses an automatic text judge for this comparison; its decisions can be wrong, so Novel still needs a scientific rubric and validity review."
           ],
           "id": "equivalence-needs-the-problem-s-assumptions"
         },
@@ -763,7 +774,7 @@
         {
           "title": "Two wordings can reverse a ranking",
           "paragraphs": [
-            "Suppose three mutually exclusive complete answers have probabilities 0.18, 0.12 and 0.07 and all express valid mechanism A. Together they contribute 0.37 to A. A single answer expressing mechanism B has probability 0.25. The most likely individual answer is B, but the known total for A is larger. This is an invented miniature example of surface-form competition.",
+            "Suppose three mutually exclusive complete answers have probabilities 0.18, 0.12 and 0.07 and all express valid mechanism A. Together they contribute 0.37 to A. A single answer expressing mechanism B has probability 0.25. Among these four answers, the most likely individual answer is B, but the known total for A is larger. This is an invented miniature example of surface-form competition.",
             "The Surface Form Competition paper reweights multiple-choice strings relative to their likelihood in a task context. Its follow-up asks whether concentrating probability on listed answer choices reliably improves accuracy. These are ranking methods and evaluations on specified tasks, not an enumeration of every scientifically equivalent explanation. Novel’s free-generation target probability still requires counting semantic outcomes from the declared decoder.",
             "For a terminated path, include the chance of the stopping token under the stated law. For an administrative cap, termination is imposed by the procedure; it is not an extra sampled token. Prefix A and prefix AC overlap, so adding their probabilities double-counts the AC trajectories. Summing semantic mass requires disjoint outcomes such as complete bounded trajectories, not an arbitrary list of overlapping references."
           ],
@@ -876,7 +887,7 @@
           "title": "Sampling uncertainty is variation across possible batches",
           "paragraphs": [
             "Picture repeating the same 64-attempt experiment many times. Even if the underlying chance stays fixed, each batch can produce a different count. A confidence procedure converts each count into an interval. A 95% coverage guarantee means that, under its assumptions, at least 95% of intervals produced across repeated studies cover the fixed generating probability. The probability refers to the procedure’s varying outputs, not to a probability distribution assigned to a fixed unknown parameter.",
-            "This differs from a Bayesian credible interval, which uses a prior distribution and observed data to assign posterior probability to parameter ranges. Both can be useful, but the calculations answer different questions. Novel’s fixed-N proposal uses frequentist binomial intervals; no prior is silently being introduced when it reports a confidence bound.",
+            "This differs from a Bayesian credible interval. A prior is a probability distribution over possible parameter values before the current data are used; a posterior is the distribution after updating with those data under a specified model. A credible interval contains a chosen share of posterior probability. Both approaches can be useful, but they answer different questions. Novel’s fixed-N proposal uses frequentist binomial intervals; it does not silently introduce a prior when reporting a confidence bound.",
             "Sampling uncertainty is only one source of uncertainty. Judges may disagree on validity, historical sources may have unresolved dates, and a decoder implementation may fail parity checks. Collecting more completions narrows a sampling interval under the model, but does not automatically resolve any of those other problems."
           ],
           "id": "sampling-uncertainty-is-variation-across-possible-batches"
@@ -1346,6 +1357,7 @@
         {
           "title": "Detection is not intervention",
           "paragraphs": [
+            "A label is the known outcome used for comparison, such as which task an example belongs to. Supervision means using these supplied labels or target answers to fit a method. A probe is an additional predictor trained on saved model states to predict a label. If a probe succeeds, the states contain information the probe can use; it does not follow that the original model uses the same predictor or that changing its inputs will improve the answer.",
             "A feature that predicts a label need not be a useful control knob. The targeted feature-learning study compares activation values and gradient signals with different estimators, finding different strengths for detection and intervention. Its targets provide supervision and its intervention scores concern target-token probabilities. Free scientific generation is a further test.",
             "Every fitted encoder, probe, reward model or selected direction adds an artifact and a selection procedure to the system. Record training data, target information, validation choices and compute. Novel currently implements a bounded selected-activation gradient diagnostic, not donor learning or a trained attribution pipeline. A nonzero gradient establishes local numerical sensitivity only."
           ],
@@ -1421,7 +1433,7 @@
           "paragraphs": [
             "A useful comparison might include ordinary sampling, prompting variants, clean refinement, random perturbation, and adaptive perturbation search. Give them equal selection information and a justified total compute budget. If the perturbation arm gets a verifier while the baseline does not, the intervention comparison also includes verification. If an oracle sees hidden correctness labels, that is an oracle-assisted condition.",
             "Bayesian optimization uses outcomes from previous candidates to choose future candidates under a statistical surrogate. Those candidates are dependent on the search history; they are not independent draws from the original frozen decoder. Do not apply the original per-draw binomial analysis to an adaptive search process without defining a new endpoint and analysis.",
-            "GTS and LatentTTS are context readings only here. Their abstracts describe learned sampling or reward components around latent reasoning. A frozen backbone does not mean the whole system is training-free. Any attempted reuse would need a new architecture, objective, data-provenance and compatibility audit."
+            "Latent reasoning here means working with internal numerical states rather than expressing every step as readable text. GTS and LatentTTS are context readings only here. Their abstracts describe learned sampling or reward components around latent reasoning. A frozen backbone does not mean the whole system is training-free. Any attempted reuse would need an audit of its architecture, training objective, data sources and compatibility."
           ],
           "visual": {
             "type": "flow",
@@ -2329,6 +2341,24 @@
       "definition": "A model predicting candidate outcomes, and a rule using that prediction and uncertainty to select the next candidate.",
       "example": "Adaptive perturbation search uses earlier verifier scores to choose another setting.",
       "chapter": "search"
+    },
+    {
+      "term": "Assay",
+      "definition": "A repeatable procedure for measuring a specified outcome.",
+      "example": "Novel’s assay combines a historical challenge, generation settings and judgment of the resulting proposal.",
+      "chapter": "observational"
+    },
+    {
+      "term": "Entailment",
+      "definition": "A relationship in which one statement being true is sufficient for another to be true in context.",
+      "example": "Exactly two observations entails at least two; the reverse need not hold.",
+      "chapter": "meaning"
+    },
+    {
+      "term": "Supervision and probe",
+      "definition": "Supervision supplies known labels or targets; a probe is an extra predictor trained to recover labels from model states.",
+      "example": "A probe might predict which task an activation came from without showing that the original model uses that predictor.",
+      "chapter": "vectors"
     }
   ]
 }

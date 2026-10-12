@@ -4,7 +4,7 @@ Audit date: 12 October 2026. Repository baseline: `3c962e0e26e53f2b33dc6eae4c6f9
 
 ## Coverage
 
-- 13 teaching chapters, 30 source records and 38 glossary entries. All four planned interactive types occur once: timeline, likelihood, sampling and intervention.
+- 13 teaching chapters, 30 source records and 41 glossary entries. All four planned interactive types occur once: timeline, likelihood, sampling and intervention.
 - All 18 distinct external primary readings in `Plan/reading-list.md` are covered. The two activation-patching references also occur in the paper manifest.
 - All ten selected papers and both context-only papers in `papers/manifest.json` are covered at their pinned versions. The manifest’s NNsight 0.6 release account is also included.
 - One additional foundational primary reading, *Attention Is All You Need* v7, supports the architecture explanation. It is explicitly distinguished from the decoder-only Qwen3 implementation.
@@ -156,3 +156,13 @@ illustrations, including the cache-policy explorer moved into the inference
 lesson. No quizzes, declarations, checkboxes, progress state or reading-order
 enforcement were introduced. Browser and deployment verification are recorded
 in `learning/publication.json` after the actual checks and deployment.
+
+## Parent beginner-readability review — 12 October 2026
+
+After the second task finished, the parent agent read all 13 chapters against
+the requirement that a beginner should not need to open the papers first.
+`TEACHING-REVIEW.md` records the assessment and the remaining prerequisites
+addressed in that review. This adds one introductory section and three glossary
+entries, with definitions at their point of use. It does not add a paper or
+claim another primary-method inspection. The access labels and scientific
+qualification limits above remain applicable.

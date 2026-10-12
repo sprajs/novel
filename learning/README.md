@@ -8,6 +8,7 @@ general computer-science syllabus.
 
 - `content.json`: original lessons, paper summaries, source access labels and glossary.
 - `source-audit.md`: primary-source verification and reading-inventory coverage.
+- `TEACHING-REVIEW.md`: parent review of beginner readability and addressed prerequisites.
 - `baseline.json`: reviewed research revision, input hashes and content hash.
 - `site/`: dependency-free HTML, CSS and JavaScript, plus the stable hosting identity.
 - `MAINTENANCE.md`: when to add, defer, retire and publish reading.
