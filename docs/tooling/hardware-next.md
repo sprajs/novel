@@ -1,5 +1,9 @@
 # GPU implementation and remaining hardware gates
 
+The requested [separate fast prediction setup](fast-prediction.md) is now
+implemented and CPU-tested. The earlier deferral below is historical; GPU
+measurement and scientific equivalence remain separate open gates.
+
 The stacked profiles increment now implements separate cu126/cu128 locks,
 strict detected-device/runtime/capacity checks, CUDA loading, capture/patching,
 raw-token generation, cache validation, optional activation gradients and

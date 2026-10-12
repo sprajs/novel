@@ -1,5 +1,9 @@
 # Three reproducible execution modes
 
+For the separate native llama.cpp/GGUF prediction path on the same three hosts,
+see [fast prediction setup](fast-prediction.md). These eager reference profiles
+continue to own activation captures, gradients and interventions.
+
 Verified official sources on 11 October 2026. This increment implements GPU code;
 **no GPU was available in the cloud and no CUDA execution or GPU benchmark was
 performed here**. CPU/static/mocked results are in [validation](../validation.md).

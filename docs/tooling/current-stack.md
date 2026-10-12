@@ -1,5 +1,11 @@
 # Tooling decision for the first research increment
 
+The separately implemented [fast prediction runtime](fast-prediction.md) now
+provides llama.cpp builds, exact GGUF conversion, repeated predictions and
+likelihood gates. Its verified stable tag peels to `d81235049384534c167caea52b85a694f6103d14`;
+the older `8345f333...` observation below was the release API's target field,
+not the tag commit. The reference path and historical validation remain intact.
+
 Checked on **11 October 2026** against maintainer documentation, tagged source,
 GitHub release APIs, and package-publisher PyPI metadata. The machine for this
 increment has five CPU cores, about 17 GiB RAM, 30 GB disk, and no GPU. The later
@@ -95,7 +101,7 @@ incremental state before changing the reference model.
 | Backend | Current release / license | Hardware and architecture evidence | Decision |
 | --- | --- | --- | --- |
 | HF eager | Selected versions above | Dense Qwen3 in tagged source; ordinary CPU and CUDA tensors/hooks | Canonical causal reference. First use CPU FP32; later validate GPU FP16 separately. |
-| llama.cpp | Latest designated stable `v0.6.0` (5 October), MIT; newer rolling prerelease `b11552` observed (10 October) | Tagged build docs permit explicit CUDA architecture selection; serving and GGUF conversion are separate from HF instrumentation | First later efficient-generation candidate. Pin stable commit `8345f333951c661d166b00e6f9362e553768f292`, conversion recipe and GGUF hashes; initially compare F16, then label quantization separately. |
+| llama.cpp | Latest designated stable `v0.6.0` (5 October), MIT; newer rolling prerelease `b11552` observed (10 October) | Tagged build docs permit explicit CUDA architecture selection; serving and GGUF conversion are separate from HF instrumentation | First later efficient-generation candidate. Pin stable commit `d81235049384534c167caea52b85a694f6103d14`, conversion recipe and GGUF hashes; initially compare F16, then label quantization separately. |
 | vLLM | `0.31.0` (5 October), Apache-2.0 | Current official GPU requirements include compute capability 7.5 and RTX20xx; model and attention-backend support require their own checks | Conditional GPU benchmark only, in a separate environment. The release pins `torch==2.13.0` and `transformers>=5.10.4,<5.18.0`; latest Transformers 5.19.0 cannot be combined with it. |
 | SGLang | `0.5.21` (GitHub: 2 October; PyPI: 1 October), Apache-2.0 | Current installation has substantial compiled dependencies; an upstream SM75 deprecation RFC exists | Defer. Metadata pins torch 2.13.0, Transformers 5.12.1, CUDA/FlashInfer/FlashAttention dependencies. Neither installation docs nor a closed RFC certify a working complete SM75 stack. |
 
