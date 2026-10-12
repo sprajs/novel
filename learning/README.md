@@ -27,3 +27,10 @@ Open `http://127.0.0.1:8765`. The generated `dist/` is ignored and reproducible;
 the source, bibliography and review receipts are committed. Examples are
 illustrations, not experimental observations. Readers choose their own order;
 there are no quizzes or progress tracking. No papers, weights or private experiment data are served.
+
+Each section has an explicit stable `id`, used in routes such as
+`#/learn/likelihood/why-log-probabilities-are-added`. Preserve these IDs when
+editing a heading. Chapter `connections` pair a chapter ID with a reason to
+follow the link; glossary entries link back to a fuller explanation. The builder
+validates those references, primary method URLs and worked figure structures.
+Diagrams can be flows, V/M matrices, worked tables or a residual bypass schematic.

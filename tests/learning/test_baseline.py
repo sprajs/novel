@@ -59,6 +59,36 @@ class BaselineContract(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "out of order"):
             build.validate(content)
 
+    def test_broken_reference_links_cannot_publish(self):
+        for kind in ("chapter", "glossary", "method"):
+            content = copy.deepcopy(self.content)
+            if kind == "chapter":
+                content["chapters"][0]["connections"][0]["chapter"] = "missing-chapter"
+                message = "Broken connections"
+            elif kind == "glossary":
+                content["glossary"][0]["chapter"] = "missing-chapter"
+                message = "Broken glossary"
+            else:
+                content["papers"][0]["methodUrl"] = "javascript:alert(1)"
+                message = "HTTPS method"
+            with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, message):
+                build.validate(content)
+
+    def test_duplicate_section_anchors_cannot_publish(self):
+        content = copy.deepcopy(self.content)
+        sections = content["chapters"][0]["sections"]
+        sections[1]["id"] = sections[0]["id"]
+        with self.assertRaisesRegex(ValueError, "section anchors"):
+            build.validate(content)
+
+    def test_ragged_worked_table_cannot_publish(self):
+        content = copy.deepcopy(self.content)
+        table = next(s["visual"] for c in content["chapters"] for s in c["sections"]
+                     if s.get("visual", {}).get("type") == "table")
+        table["rows"][0].pop()
+        with self.assertRaisesRegex(ValueError, "worked table"):
+            build.validate(content)
+
     def test_artifact_hashes_match_and_stale_assets_disappear(self):
         baseline = build.check_baseline(self.content)
         with tempfile.TemporaryDirectory() as directory:

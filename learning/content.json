@@ -1,37 +1,84 @@
 {
   "title": "Learning to study machine discovery",
-  "subtitle": "A guided reading path from next-token probabilities to defensible experiments in Novel.",
+  "subtitle": "A connected reference from next-token probabilities to defensible experiments in Novel.",
   "asOf": "2026-10-12",
   "baselineRevision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
   "overview": [
     "Novel asks how a fixed AI system can produce a correct, useful scientific contribution, how to measure that behavior, and eventually how to improve it. Historical reconstruction is its first controlled assay: recovering a contribution first publicly disclosed after an exact model artifact existed.",
     "Current evidence is engineering evidence. No historical idea has been admitted and no scientific model-performance result is reported. Local Qwen3 inference and activation probes work under recorded conditions; strict FP16 cache parity and cross-backend likelihood comparisons still fail. A working instrument is necessary, but it does not qualify a discovery claim.",
-    "Read the core chapters in order. Each begins with ordinary language, develops one experimental distinction, and ends with a question you can answer before opening the source paper. Later chapters explain possible interventions without treating them as the next authorized experiment.",
+    "Use this as an open reference. The contents offer a useful route from foundations to experiments, but every chapter is freely accessible. Worked examples introduce the notation, and connections let you follow a question across chapters. The paper links are optional further reading; the explanations here do not require reading the papers first.",
     "The paper library covers every external primary reading in Plan/reading-list.md and all ten selected papers and two context sources in papers/manifest.json. Reading scope is explicit: targeted full-text passages, abstract/metadata checks, and a dated author account are different kinds of evidence. Examples here are teaching examples, never model results."
   ],
   "chapters": [
     {
       "id": "tokens",
       "title": "From text to a probability distribution",
-      "kicker": "01 · Start here",
+      "kicker": "01 · Text and chance",
       "summary": "Understand what a language model predicts before asking what an idea costs in probability.",
       "whyNow": "The first assay needs exact prompts, token IDs and a declared decoder. These define the experiment. ",
       "status": "core",
       "prerequisites": [],
       "sections": [
         {
+          "title": "What a probability distribution describes",
+          "paragraphs": [
+            "A probability describes how much chance a specified outcome has under a specified process. For the finite token choices used here, probability 0 excludes that choice under the declared process, and 1 assigns it all the probability. The decimal 0.25, the fraction 1/4 and 25% express the same number. A distribution lists the possible outcomes and assigns their probabilities. For alternatives that cannot happen together and cover every possibility, the probabilities add to 1.",
+            "Imagine an invented next-token vocabulary containing only “red”, “blue” and a stop marker. Suppose their probabilities are 0.50, 0.30 and 0.20. Sampling once chooses exactly one of them. Over many repetitions with the same input, about half the choices would be red; ten repetitions need not contain exactly five reds. A probability is a property of the sampling process, while a frequency is what a finite set of repetitions happened to produce.",
+            "The information already supplied matters. Write p(blue | x) for “the probability of blue given input x”; the vertical bar means given. Change x from “The sky looks” to “The paint is labelled”, and the probabilities can change. A language model repeatedly makes this kind of conditional prediction. A high probability of a word means that the model favors that continuation in this context; it does not by itself measure whether a scientific assertion is true."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Possible next token",
+              "Probability",
+              "Share of the whole"
+            ],
+            "rows": [
+              [
+                "red",
+                "0.50",
+                "50 of 100 probability units"
+              ],
+              [
+                "blue",
+                "0.30",
+                "30 of 100"
+              ],
+              [
+                "stop",
+                "0.20",
+                "20 of 100"
+              ]
+            ],
+            "caption": "An invented complete distribution: 0.50 + 0.30 + 0.20 = 1. The counts describe proportions, not a promised outcome of 100 actual draws."
+          },
+          "id": "what-a-probability-distribution-describes"
+        },
+        {
           "title": "Words become tokens",
           "paragraphs": [
             "A prompt is the text and conversation structure supplied to a model before it generates a continuation. A tokenizer maps text into a sequence of integers called token IDs. A token can represent a word, a fragment of a word, punctuation, whitespace, or a special control marker. The same sentence can have different token sequences under different tokenizers. Never count words and silently call them tokens.",
-            "A chat template adds structure around a conversation: who is speaking, where the user message ends, and where the assistant should begin. Those markers are part of the model input. Changing a template can change behavior even when every model weight stays the same. Novel therefore stores the rendered prompt and its token IDs."
-          ]
+            "A chat template adds structure around a conversation: who is speaking, where the user message ends, and where the assistant should begin. Those markers are part of the model input. Changing a template can change behavior even when every model weight stays the same. Novel therefore stores the rendered prompt and its token IDs.",
+            "A token ID is a label, not a numerical magnitude: token 900 is not “more blue” than token 20. An embedding lookup uses the ID to select a learned vector. As an invented illustration only, a tokenizer might split “measure” into “meas” and “ure”, assigning labels 17 and 204. Novel records actual tokenizer outputs; these fictional fragments and IDs are not a claim about Qwen3 tokenization."
+          ],
+          "id": "words-become-tokens"
+        },
+        {
+          "title": "Exponentials and logarithms, before softmax",
+          "paragraphs": [
+            "Exponentiation means repeated multiplication when the exponent is a whole number: 2³ = 2 × 2 × 2 = 8. The exponential function exp(z), also written e^z, extends this operation smoothly to any real number, using the base e, approximately 2.718. It is always positive: exp(0) = 1, exp(1) ≈ 2.718 and exp(−1) ≈ 0.368. A negative score can therefore become a positive weight.",
+            "A logarithm asks the reverse question: which exponent produced this number? The natural logarithm, written ln or log here, reverses exp. Thus log(1) = 0 and log(2) ≈ 0.693 because exp(0.693) ≈ 2. A number between 0 and 1 has a negative logarithm. For example, log(0.5) ≈ −0.693. More negative log probability means a smaller probability, not a negative chance.",
+            "Softmax first converts arbitrary scores into positive weights using exp, then divides each weight by their total. You can picture dividing a fixed pie in proportion to weights. Scores need not themselves add to one or lie between zero and one. The normalization step gives them the required probability scale."
+          ],
+          "id": "exponentials-and-logarithms-before-softmax"
         },
         {
           "title": "Scores become probabilities",
           "paragraphs": [
             "At each step the model produces a logit: one real-valued score for each token in its vocabulary. Let z_j be the score for vocabulary token j. Softmax converts those scores to probabilities: p_j = exp(z_j) / sum_r exp(z_r), where exp is the exponential function and the sum covers every vocabulary token r. The probabilities sum to one. Adding a shared constant offset to every logit leaves the softmax probabilities unchanged; rescaling logits generally changes them.",
             "For a toy vocabulary with scores log(2), 0 and 0, exponentiation gives weights 2, 1 and 1. Dividing by their total, 4, gives probabilities 0.50, 0.25 and 0.25. That is a distribution over the next token, not a 50% scientific confidence in the entire answer. Here log means the natural logarithm.",
-            "Autoregressive generation repeats this operation: predict one token, choose it, append it, and predict again. Later probabilities depend on the actual earlier choices. A wrong first assumption can therefore change the entire continuation."
+            "Autoregressive generation repeats this operation: predict one token, choose it, append it, and predict again. Later probabilities depend on the actual earlier choices. A wrong first assumption can therefore change the entire continuation.",
+            "The subscript j simply selects one vocabulary entry, such as the token for blue. The sum_r notation means add the weight for every entry r. Softmax compares all scores together; a token’s probability can fall even when its own score stays fixed, if competing scores rise. This connection becomes important when comparing exact wording with the total probability of an idea."
           ],
           "visual": {
             "type": "flow",
@@ -54,26 +101,33 @@
               }
             ],
             "caption": "This is a schematic generation loop, not a trace from a Novel run."
-          }
+          },
+          "id": "scores-become-probabilities"
         },
         {
           "title": "The decoder is part of the system",
           "paragraphs": [
-            "The model supplies scores; the decoder decides how to turn them into a token. Greedy decoding takes a highest-scoring token. Sampling draws randomly. Temperature rescales logits before sampling: at temperature T greater than zero, use z_j/T. Higher T flattens differences; lower T sharpens them. Top-k keeps only k candidates, while top-p keeps a prefix of ranked candidates reaching a probability threshold, then renormalizes.",
-            "Novel distinguishes the raw model law p from the executed sampling law q. A reference token can have positive probability under p but be removed by a top-k filter under q. An end-of-sequence token and an administrative output cap are different stopping events. Seeds help reproduce draws; they do not define the probability distribution by themselves."
-          ]
-        },
-        {
-          "title": "The same weights can give different answers after a template change",
-          "paragraphs": [
-            "Changing the template changes input tokens and therefore the conditional distribution. The difference can be expected behavior. Compare the rendered inputs and decoder before diagnosing an implementation error."
-          ]
+            "The model supplies scores; the decoder decides how to turn them into a token. Greedy decoding takes a highest-scoring token. Sampling draws randomly. Temperature rescales logits before sampling: at temperature τ (tau) greater than zero, use z_j/τ. Higher temperature flattens differences; lower temperature sharpens them. Top-k keeps only k candidates, while top-p keeps a prefix of ranked candidates reaching a probability threshold, then renormalizes.",
+            "Novel distinguishes the raw model law p from the executed sampling law q. A reference token can have positive probability under p but be removed by a top-k filter under q. An end-of-sequence token and an administrative output cap are different stopping events. Seeds help reproduce draws; they do not define the probability distribution by themselves.",
+            "In the red/blue/stop distribution 0.50/0.30/0.20, top-k with k = 2 removes stop and rescales the survivors: red becomes 0.50/0.80 = 0.625 and blue becomes 0.30/0.80 = 0.375. Greedy decoding always chooses red for that same step. Repeating greedy decoding does not explore the original 50/30/20 distribution. Temperature and filtering are therefore substantive choices in Novel’s definition of one attempt."
+          ],
+          "id": "the-decoder-is-part-of-the-system"
         }
       ],
       "takeaway": "A model, tokenizer, template, decoder and stopping rule jointly define what can be sampled.",
       "sources": [
         "transformer",
         "qwen3-release"
+      ],
+      "connections": [
+        {
+          "chapter": "likelihood",
+          "reason": "Follow one token choice into an exact-path score."
+        },
+        {
+          "chapter": "sampling",
+          "reason": "Connect a token distribution with a complete attempt’s success rate."
+        }
       ]
     },
     {
@@ -92,56 +146,133 @@
           "paragraphs": [
             "An embedding maps each token ID to a vector, an ordered list of numbers. A tensor is a multidimensional array of such numbers. During a forward pass the model repeatedly transforms these arrays. Learned weights are the relatively persistent transformation parameters; activations are the intermediate values produced for this particular input.",
             "A vector dimension is not automatically a named concept. Information can be distributed across many coordinates, and a coordinate can participate in several behaviors. Calling a direction a discovery feature requires evidence beyond a suggestive plot or a few readable completions."
-          ]
+          ],
+          "id": "vectors-are-working-representations"
+        },
+        {
+          "title": "Read a vector as coordinates, and a tensor as indexed storage",
+          "paragraphs": [
+            "A scalar is one number. A vector is an ordered collection of numbers, such as h = [2, −1]. The first coordinate is 2 and the second is −1; changing their order changes the vector. Addition and scaling work coordinate by coordinate: [2, −1] + [1, 3] = [3, 2], and 0.5 × [2, −1] = [1, −0.5]. The symbol h is just a name for this particular list.",
+            "A matrix is a rectangular table of numbers. It can represent a transformation from one vector to another. For a concrete two-coordinate example, let the transformation turn [a, b] into [2a + b, a − b]. It sends [2, −1] to [3, 3]. The coefficients 2, 1, 1 and −1 are the matrix’s entries. This is a linear map: it forms weighted sums of the input coordinates. A neural network learns many such coefficients rather than assigning every coordinate a meaning by hand.",
+            "A dot product produces one scalar by multiplying matching coordinates and adding: [2, −1] · [3, 4] = 2 × 3 + (−1) × 4 = 2. It is one way to measure compatibility between vectors in a shared coordinate system. A positive dot product is not a truth score; its significance depends on how the vectors were constructed.",
+            "A tensor generalizes a vector or matrix to any number of axes. A hidden-state tensor can have shape [batch, positions, width]. Shape [1, 3, 4] means one sequence, three token positions, and four coordinates at each position: 12 stored numbers. Layer is often a separate selection rather than an axis in that individual tensor. An attention cache has additional head and key/value structure. Shape tells you how to locate a number, not what concept it encodes."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Token position",
+              "Four illustrative hidden coordinates"
+            ],
+            "rows": [
+              [
+                "0",
+                "[2, −1, 0, 3]"
+              ],
+              [
+                "1",
+                "[0, 4, 1, −2]"
+              ],
+              [
+                "2",
+                "[1, 1, −3, 0]"
+              ]
+            ],
+            "caption": "One invented sequence gives a [1, 3, 4] tensor. Reading position 1 selects a vector; reading its third coordinate selects the scalar 1. Positions here are indexed from zero."
+          },
+          "id": "read-a-vector-as-coordinates-and-a-tensor-as-indexed-storage"
         },
         {
           "title": "Attention routes information between positions",
           "paragraphs": [
-            "An attention head forms queries, keys and values from the current representations. A query describes what the current position will read; keys determine its compatibility with other positions; values are the information to be mixed. Compatibility scores are normalized, and a weighted sum of the values becomes the head output. Multiple heads provide several learned routes. A causal mask prevents a position from reading future text.",
+            "An attention head constructs three kinds of vectors from the current states using learned maps: queries, keys and values. A query at the reading position is compared with a key at each permitted source position. Those comparisons determine mixing weights; the values supply what gets mixed. This is a learned numerical operation. The names are a useful reading analogy, not literal database queries or human requests.",
+            "For one head, take the dot product of the query with each key, divide by the square root of the query/key width, mask disallowed positions, and apply softmax across the allowed positions. The square root of 4 is 2, since 2 × 2 = 4. Dividing by this scale helps control the size of scores as width grows. A causal mask allows a token position to read itself and earlier positions, but prevents it from reading later tokens. Otherwise training could reveal the very answer it is supposed to predict.",
+            "Suppose an invented head assigns weights 0.75 and 0.25 to values [2, 0] and [0, 4]. Its mixture is 0.75 × [2, 0] + 0.25 × [0, 4] = [1.5, 1]. Several heads construct different mixtures. Their results are combined and transformed by an output projection into an update with the residual stream’s width. Attention weights describe one mixing operation; later projections and other pathways can amplify, cancel or bypass it.",
             "Imagine the prefix: “The instrument was calibrated yesterday. It now reports …”. Attention can allow the representation near “It” to use information at “instrument”. This is a teaching analogy, not proof that a particular head implements pronoun resolution. High attention weight alone does not establish the importance of that input to the final answer.",
             "The original Transformer paper explains these components in an encoder-decoder translation system. Novel uses a decoder-only Qwen3 implementation, so do not copy the original architecture diagram as an exact map of its layers."
-          ]
-        },
-        {
-          "title": "The residual stream carries a changing state",
-          "paragraphs": [
-            "A residual connection adds a computed update to the existing representation. In a simplified block, attention contributes one update and a feed-forward network contributes another. The feed-forward network applies learned transformations independently at each position, after the attention route has mixed information across positions. Normalization and the exact order of operations depend on the architecture.",
-            "Novel captures the decoder block output after both residual additions. Capturing the block input, an individual attention-head output, or the feed-forward output would answer a different question. Store the site name, layer index, absolute token position, shape and dtype with every tensor. The last prompt position is especially useful because it precedes the first generated answer token."
           ],
           "visual": {
             "type": "flow",
             "nodes": [
               {
-                "title": "Incoming state",
-                "text": "One representation at each position"
+                "title": "Compare",
+                "text": "Query · permitted keys → scaled scores"
               },
               {
-                "title": "Attention update",
-                "text": "Read permitted earlier positions"
+                "title": "Normalize",
+                "text": "Softmax → weights 0.75, 0.25"
               },
               {
-                "title": "Feed-forward update",
-                "text": "Transform the resulting representation"
+                "title": "Mix",
+                "text": "0.75[2, 0] + 0.25[0, 4] = [1.5, 1]"
               },
               {
-                "title": "Block output",
-                "text": "Novel’s selected residual boundary"
+                "title": "Project",
+                "text": "Combine heads and map to a residual update"
               }
             ],
-            "caption": "Schematic only; consult the pinned Qwen3 implementation for normalization and exact submodule details."
-          }
+            "caption": "An original schematic of one attention operation. The numbers illustrate the weighted sum, not measured Qwen3 activations."
+          },
+          "id": "attention-routes-information-between-positions"
         },
         {
-          "title": "Why “layer 12” is not a complete address",
+          "title": "How the model knows order",
           "paragraphs": [
-            "A layer contains several distinct states, and each sequence position has its own state. A reproducible intervention identifies the complete site, including the input/output boundary and exact token alignment."
-          ]
+            "Without position information, a content-mixing operation has no explicit description of how far apart tokens are. “A follows B” and “B follows A” must be distinguishable. The original Transformer adds positional encodings to token embeddings. Qwen3 uses rotary position information in attention: pairs of query/key coordinates are rotated by angles determined by position. You do not need the trigonometry to see its role: query-key compatibility now depends on relative placement as well as content.",
+            "This is why an intervention needs exact token alignment. Moving the same text, changing a template, or inserting an earlier marker changes positions and can change the computation. A layer number and a word name are insufficient to identify the same internal state across runs."
+          ],
+          "id": "how-the-model-knows-order"
+        },
+        {
+          "title": "The residual stream carries a changing state",
+          "paragraphs": [
+            "A residual connection adds a computed update to the existing representation. In a simplified block, attention contributes one update and a feed-forward network contributes another. The feed-forward network applies learned transformations separately at each position using the same parameters, after the attention route has mixed information across positions. Normalization and the exact order of operations depend on the architecture.",
+            "Write a simplified residual substep as h_new = h + u(h). Here h is the incoming state and u(h) is the computed update. If h = [2, −1] and u(h) = [1, 3], the outgoing state is [3, 2]. The incoming state travels along a direct route as well as through the update calculation. Removing the update leaves h, rather than erasing the entire state. This bypass is central to interpreting ablations.",
+            "A feed-forward network mixes coordinates within each position. It includes nonlinear operations: transformations whose effect is not just a fixed weighted sum. These let later computations depend on combinations of features. Normalization controls numerical scale. Qwen3 normalizes before its attention and feed-forward substeps; the original paper’s ordering differs. The drawing below intentionally shows only one additive substep, not every implementation detail.",
+            "Novel captures the decoder block output after both residual additions. Capturing the block input, an individual attention-head output, or the feed-forward output would answer a different question. Store the site name, layer index, absolute token position, shape and dtype with every tensor. The last prompt position is especially useful because it precedes the first generated answer token."
+          ],
+          "visual": {
+            "type": "residual",
+            "nodes": [
+              {
+                "title": "Incoming h",
+                "text": "[2, −1]"
+              },
+              {
+                "title": "Computed update u(h)",
+                "text": "[1, 3]"
+              },
+              {
+                "title": "Add h + u(h)",
+                "text": "[3, 2]"
+              }
+            ],
+            "caption": "One residual substep. The direct path carries the incoming state to the addition while the other path computes an update. A decoder block has attention and feed-forward additions; Novel captures after both."
+          },
+          "id": "the-residual-stream-carries-a-changing-state"
+        },
+        {
+          "title": "From the last state back to next-token scores",
+          "paragraphs": [
+            "The stack of blocks produces a final hidden vector for each position. A final normalization and vocabulary readout map that vector to one logit per possible next token. Softmax then makes the distribution introduced in the text-and-chance chapter. This closes the loop: token IDs become vectors, vectors are transformed, and a readout produces scores for the next token.",
+            "At the last prompt position, the readout predicts the first continuation token. After that token is chosen and appended, its new final state predicts the following token. A decoder-only model uses the same stack throughout this process; it does not need the separate translation encoder from the original Transformer paper. Novel’s dense Qwen3 adapter is a specific implementation, so component names from another model are a starting point for comparison, not interchangeable hook addresses."
+          ],
+          "id": "from-the-last-state-back-to-next-token-scores"
         }
       ],
       "takeaway": "A saved residual is a precisely located numerical state, not a self-explanatory thought.",
       "sources": [
         "transformer",
         "nnsight-ndif"
+      ],
+      "connections": [
+        {
+          "chapter": "tokens",
+          "reason": "Connect the vocabulary readout with softmax probabilities."
+        },
+        {
+          "chapter": "patching",
+          "reason": "See why the precise residual address matters for intervention."
+        }
       ]
     },
     {
@@ -157,17 +288,49 @@
       ],
       "sections": [
         {
+          "title": "Three kinds of things that can change",
+          "paragraphs": [
+            "Think of weights as the settings of a machine, activations as the intermediate readings during one use, and tokens as the written record supplied to or emitted by it. This analogy helps separate timescales. The weights can remain fixed while every new input produces new activations and different text. A longer conversation can therefore change behavior without changing the trained model.",
+            "Training uses examples and an objective to revise parameters. A common language-model objective is negative log probability of reference next tokens: assigning low probability to a reference incurs a larger loss. A loss is a scalar score to minimize. A forward pass computes the predictions and loss; a backward pass computes derivatives; an optimizer uses those derivatives to update parameters. Real training combines many examples and further techniques, but these are the three distinct operations.",
+            "In ordinary inference there is a forward computation and token choice, with no optimizer update. Evaluation mode also turns off certain training-time randomness, such as dropout where present; it does not turn sampling into greedy decoding. Computing a derivative for analysis requires tracking relevant operations, but a derivative alone does not update anything. Novel freezes parameters while optionally measuring a derivative with respect to a selected activation."
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Forward",
+                "text": "Input + current weights → activations and scores"
+              },
+              {
+                "title": "Loss",
+                "text": "A training objective compares scores with targets"
+              },
+              {
+                "title": "Backward",
+                "text": "Derivatives measure local sensitivity"
+              },
+              {
+                "title": "Update",
+                "text": "Only an explicit optimizer step changes weights"
+              }
+            ],
+            "caption": "Training uses all these stages. Ordinary generation uses forward computations and decoding; an activation-gradient diagnostic can use backward computation without a weight update."
+          },
+          "id": "three-kinds-of-things-that-can-change"
+        },
+        {
           "title": "Inference can be complex without training",
           "paragraphs": [
             "Training adjusts learned parameters using an objective and data. Inference runs a chosen model on an input. A frozen model can still produce different outputs because prompts, decoding randomness or activations differ. In-context examples change its computation without necessarily updating its weights. Fine-tuning or training a separate reward model creates additional learned artifacts that need provenance.",
             "A gradient is a derivative of a selected scalar quantity with respect to numbers in the computation. It can be measured without applying a weight update. Novel’s selected-activation gradient diagnostic asks how a local output contrast changes near one activation; it is not evidence that the model learned a scientific concept or transferred a donor mechanism."
-          ]
+          ],
+          "id": "inference-can-be-complex-without-training"
         },
         {
           "title": "Prefill, decode and cached history",
           "paragraphs": [
             "Prefill processes the prompt. Decode then extends it token by token. In ordinary causal attention, the key and value representations of earlier positions can be saved in a KV cache and reused. This avoids recomputing the entire prefix for every new token. The intended clean cached and full-prefix computations should agree within a justified numerical tolerance on the declared backend.",
-            "Changing a hidden state can alter values later retained in the cache. Turning a perturbation off does not erase those entries or retract words already emitted. Continuing with retained altered history, recomputing a clean cache from the realized text, and starting a fresh clean refinement are three different treatments. Current clean cached generation explicitly rejects interventions; the implemented persistent patch uses full-prefix replay at fixed prompt positions."
+            "Changing a hidden state can alter downstream keys or values later retained in the cache. Patching a block output does not retroactively rewrite that block’s already computed cache entries; the layer and boundary determine which entries can change. Turning a perturbation off does not erase those entries or retract words already emitted. Continuing with retained altered history, recomputing a clean cache from the realized text, and starting a fresh clean refinement are three different treatments. Current clean cached generation explicitly rejects interventions; the implemented persistent patch uses full-prefix replay at fixed prompt positions."
           ],
           "visual": {
             "type": "flow",
@@ -190,27 +353,78 @@
               }
             ],
             "caption": "A clean generation loop. The cache stores computations, not just the visible words. Intervening on those computations changes the experiment."
-          }
+          },
+          "id": "prefill-decode-and-cached-history"
+        },
+        {
+          "title": "Follow a cached run through three tokens",
+          "paragraphs": [
+            "Suppose the prompt token positions are A and B, and generation chooses C and then D. In full-prefix execution, the model processes [A, B] to choose C, then [A, B, C] to choose D. In cached execution it first processes [A, B] and saves each layer’s keys and values. To predict D it processes the new position C using the saved history. Both routes are intended to compute the same clean conditional prediction.",
+            "Why can earlier entries be reused? Under a causal mask, A cannot depend on B, C or D, and B cannot depend on later C or D. Appending C therefore does not change the earlier clean states in the mathematical model when positions and execution settings stay fixed. The new query still attends over the saved keys and values: caching avoids rebuilding the old entries; it does not avoid reading relevant history.",
+            "A cache is numerical storage, not a separate learned memory or a second model. Floating-point arithmetic represents numbers with limited precision. Reordering operations or using a different kernel can introduce small numerical differences even for mathematically equivalent calculations. Whether those differences are acceptable depends on a declared tolerance and the intended measurement. Short token agreement is weaker than agreement of the full scores."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Prediction being made",
+              "Full-prefix route",
+              "Cached route"
+            ],
+            "rows": [
+              [
+                "Choose C",
+                "Process A and B",
+                "Process A and B; retain their K/V"
+              ],
+              [
+                "Choose D",
+                "Process A, B and C again",
+                "Process C; read retained A/B K/V"
+              ],
+              [
+                "Choose next token",
+                "Process A, B, C and D again",
+                "Process D; read retained A/B/C K/V"
+              ]
+            ],
+            "caption": "A schematic clean run. Every layer has its own cache. The letters stand for token positions; actual tokens can be fragments rather than whole words."
+          },
+          "id": "follow-a-cached-run-through-three-tokens"
+        },
+        {
+          "title": "Two histories survive a temporary change",
+          "paragraphs": [
+            "Imagine temporary noise encourages the model to write “Assume friction is zero.” Later you turn the noise off. There are two possible carriers of its effect: the altered numerical cache and that already emitted sentence. Recomputing a clean cache from the same text removes the first carrier but retains the second. Future clean computation still conditions on the frictionless assumption.",
+            "A fresh refinement is a new clean prompt that includes the earlier draft and asks for revision; the draft remains assistance, with new framing. Restarting from the original prompt discards the draft entirely. The four policies below answer different experimental questions and consume different amounts of work. They illustrate possible designs; Novel’s current intervention code uses persistent full-prefix patches, and its clean cache path rejects interventions."
+          ],
+          "interactive": "intervention",
+          "id": "two-histories-survive-a-temporary-change"
         },
         {
           "title": "What has actually passed",
           "paragraphs": [
+            "A backend is the software and hardware route used to execute the arithmetic. A dtype is a numerical storage format: FP32 typically uses 32 bits per floating-point number, while FP16 uses 16 and has less precision and range. Parity asks whether two intended-equivalent routes agree. A tolerance is a declared allowance for numerical error, such as an absolute or relative score difference. Passing parity is specific to the tested route, precision, inputs and threshold.",
             "The dated local validation records show successful uncached operational probes on Qwen3-0.6B and Qwen3-1.7B: repeatability, no-op capture, finite activations and a nonzero patch effect under short workloads. The CPU FP32 mechanics smoke has a recorded passing condition. These establish bounded engineering behavior.",
             "The 12 October RTX 2080 Ti report retains failing strict FP16 cache comparisons, and failing cross-backend likelihood gates even where short greedy outputs match. Identical chosen tokens do not imply identical distributions: probabilities 0.51 and 0.99 can both select the same token. The failure is a reason to keep the conditions separate, not to relabel the threshold after seeing the error.",
             "Some older model-selection and tooling prose predates local installation. For execution status, use the dated local-2080ti validation report; for scientific maturity, use the research and measurement protocols. No historical claim is admitted and scientific competence remains unmeasured by these probes."
-          ]
-        },
-        {
-          "title": "The same chosen token can hide different probabilities",
-          "paragraphs": [
-            "Two backends can choose the same highest-scoring token while assigning it very different probabilities. Likelihoods should be pooled only after the prospectively defined distributional checks pass. The recorded local likelihood gates currently fail."
-          ]
+          ],
+          "id": "what-has-actually-passed"
         }
       ],
       "takeaway": "A runtime check validates a particular computational condition; scientific qualification requires a separate assay.",
       "sources": [
         "qwen3-release",
         "nnsight-release"
+      ],
+      "connections": [
+        {
+          "chapter": "transformer",
+          "reason": "See how causal attention makes cache reuse possible."
+        },
+        {
+          "chapter": "search",
+          "reason": "Compare recovery policies as parts of a larger search system."
+        }
       ]
     },
     {
@@ -225,11 +439,21 @@
       ],
       "sections": [
         {
+          "title": "Why reconstruction is a useful starting experiment",
+          "paragraphs": [
+            "To study discovery, we need a way to recognize a worthwhile answer. Historical reconstruction supplies a known human contribution and asks whether an earlier fixed model can recover it from a justified problem statement. The evaluator knows the target; the model’s visible input must not contain the answer. This resembles giving someone a scientific problem as it stood before a particular solution was published, then comparing what they propose with the later solution.",
+            "The experiment does not recreate the entire historical world. The chosen prompt, prerequisites and model interface form a controlled condition. A successful result would show recovery in that condition. A failure could reflect missing prerequisites, weak general competence, an overly restrictive format or genuinely low recovery probability. Those possibilities motivate separate checks rather than a single sweeping judgment about creativity.",
+            "Provenance means a record of where something came from and which transformations produced it. For a model this includes the exact files and interface; for a prompt, the sources of its information; for a contribution, the earliest supported public claim. A cryptographic hash is a fingerprint of bytes: it helps identify an artifact, but does not establish what the artifact knew or when an idea became public."
+          ],
+          "id": "why-reconstruction-is-a-useful-starting-experiment"
+        },
+        {
           "title": "Define the contribution before dating it",
           "paragraphs": [
             "An event is one scoped contribution with assumptions, a mechanism and a useful consequence. A whole paper may contain several contributions, and different papers may describe the same one. Novel compares the target with the strongest earlier equivalent. Reproducing an old identity that occurs inside a new method does not recover that method’s new contribution.",
             "Consider an invented fast algorithm. Its algebraic identity may have been known for decades; the later contribution might be a memory-access schedule and a proved resource bound. A prompt that asks only for the identity cannot test the later contribution. This is why the current DPO, DoRA, FlashAttention, speculative-decoding and MeanFlow fixtures are development material, not admitted historical discoveries."
-          ]
+          ],
+          "id": "define-the-contribution-before-dating-it"
         },
         {
           "title": "A family launch is not an artifact freeze",
@@ -237,7 +461,8 @@
             "The historical bundle includes exact weights, configuration, tokenizer, chat template, adapters, post-training, retrieval and other learned components. A July snapshot containing a May template cannot be called an April interface just because its weight values descend from an April release. A current model card is useful evidence about the current artifact, not a substitute for the older bytes.",
             "Let A be the latest supported date at which the complete model bundle became available and D the earliest supported claim-bearing public disclosure. Admission needs A < D. With uncertain dates, compare intervals conservatively. If the model’s availability interval overlaps the disclosure interval, ordering is unresolved. Earlier code, talks, theses and equivalent results matter even when the journal article appeared later."
           ],
-          "interactive": "timeline"
+          "interactive": "timeline",
+          "id": "a-family-launch-is-not-an-artifact-freeze"
         },
         {
           "title": "Prompts also carry history",
@@ -245,13 +470,38 @@
             "A model can be old while its prompt leaks the solution. Novel labels P0 as a justified historical problem; P1 adds selected historical prerequisites; P2 adds a structural hint to the same prerequisites; P3 supplies the construction. Choosing two old papers because a later paper combined them is still hindsight assistance. A target name can be removed while its defining idea remains in the wording.",
             "ResearchBench, DiscoveryBench, CUSP and Reconstruction offer candidates or evaluation designs. None automatically admits an event for Novel. In particular, CUSP’s output auditor exempts coincidentally matching methods and numerical predictions. A correct reconstruction is the intended success, so a match alone cannot be treated as proof of contamination.",
             "Admission needs independent human domain and provenance assessments, source rights and custody, an earlier-equivalent search, and a frozen visible-input projection. Search records establish what was checked; they cannot prove that no obscure precursor ever existed. Unknown gates stay unresolved rather than becoming passes."
-          ]
+          ],
+          "id": "prompts-also-carry-history"
         },
         {
-          "title": "A journal date can be misleading",
+          "title": "A miniature chronology and assistance audit",
           "paragraphs": [
-            "Suppose the journal article appeared in 2026, its claim-bearing preprint appeared in 2024, and the model bundle existed in 2025. The target fails the historical timing condition: the earlier disclosure predates the model bundle. The journal date does not reset that boundary."
-          ]
+            "Consider an invented chronology. A complete model bundle was publicly available on 1 March. A preprint described the target construction on 15 April, while its journal version appeared in September. A February workshop slide might already contain the same construction. If that slide really is claim-bearing and equivalent, the target predates the model and fails this condition. If its content or date cannot be resolved, admission stays unresolved. The convenient September date cannot decide the case.",
+            "Now imagine a historically justified challenge: “Compute this quantity within the memory limit.” P1 supplies an older algebraic identity relevant to many approaches. P2 additionally says to reorganize memory access around blocks. P3 supplies the actual construction. Each can be useful to study, but success means something different as more of the solution is provided. The same input ledger is needed for learned steering vectors later: assistance can arrive as text, training data, donor states or selection information."
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Problem and prior art",
+                "text": "What could a solver justifiably be given?"
+              },
+              {
+                "title": "Artifact",
+                "text": "Which exact complete model existed, and when?"
+              },
+              {
+                "title": "First disclosure",
+                "text": "When did the particular contribution become public?"
+              },
+              {
+                "title": "Visible challenge",
+                "text": "Which information and hints reach this run?"
+              }
+            ],
+            "caption": "Chronology and assistance are complementary parts of the historical condition. The dates in this lesson are invented."
+          },
+          "id": "a-miniature-chronology-and-assistance-audit"
         }
       ],
       "takeaway": "Historical eligibility is a claim-level audit of the entire information path.",
@@ -261,6 +511,16 @@
         "discoverybench",
         "cusp",
         "reconstruction"
+      ],
+      "connections": [
+        {
+          "chapter": "meaning",
+          "reason": "Define which contribution the historical audit is dating."
+        },
+        {
+          "chapter": "vectors",
+          "reason": "Audit assistance carried by donor states as well as prompts."
+        }
       ]
     },
     {
@@ -275,10 +535,21 @@
       ],
       "sections": [
         {
+          "title": "An idea is a set of scientifically relevant commitments",
+          "paragraphs": [
+            "Suppose two answers say “add the observations and divide by their number” and “take the arithmetic mean.” Their wording differs, but they prescribe the same operation. A third answer says “weight observations by inverse variance.” That is a different operation when uncertainties differ. Meaning in this assay is therefore about the assumptions, mechanism and consequence that a proposal commits to, rather than matching a sentence.",
+            "An assumption is a condition under which an argument is meant to work, such as independent measurement errors. A mechanism is the operative construction or explanation, such as weighting precise observations more heavily. A consequence is what follows, such as a particular estimate or resource bound. A rubric states which of these commitments a valid answer must contain. A fluent answer can omit a necessary assumption; a terse equation can contain the right mechanism if its interpretation is clear.",
+            "A trajectory is the whole generated continuation up to its declared stopping point, including any expressed reasoning. The endorsed proposal is the answer the procedure selects for judgment. It matters whether an idea is recommended, merely mentioned, or explicitly rejected. Counting every passing phrase anywhere in a long trace would define a different outcome from judging one endorsed proposal.",
+            "For the measurement examples, an unbiased estimator has the correct average value over repeated noisy measurements, under its assumptions. Variance measures spread around an average through squared deviations. Errors with zero mean can still vary widely. Independence means that learning one error does not change the distribution of another. These are properties of a measurement model, not something established by the word “average”."
+          ],
+          "id": "an-idea-is-a-set-of-scientifically-relevant-commitments"
+        },
+        {
           "title": "Two questions about one proposal",
           "paragraphs": [
             "Let H denote a complete generated trajectory, including any expressed reasoning and final proposal. Define V(H) as “the endorsed proposal validly solves the posed problem at the required evidence tier”. Define M(H) as “it contains the target event’s particular contribution”. Target recovery is T(H) = V(H) AND M(H). These are rubric decisions, not quantities the model can certify about itself.",
-            "A valid older method can satisfy V but fail M. A proposal that names the target mechanism yet violates a crucial assumption can satisfy M but fail V. A valid target satisfies both. Reporting only T would hide useful alternatives; reporting only V would overstate recovery of the specified historical contribution. Consequently, target recoveries can never outnumber valid solutions."
+            "A valid older method can satisfy V but fail M. A proposal that names the target mechanism yet violates a crucial assumption can satisfy M but fail V. A valid target satisfies both. Reporting only T would hide useful alternatives; reporting only V would overstate recovery of the specified historical contribution. Consequently, target recoveries can never outnumber valid solutions.",
+            "Here is a fully invented rubric example: estimate a shared mean without bias from independent, zero-mean measurement errors with known strictly positive variances. The scoped target ingredient is the choice of inverse-variance weights. Validity additionally requires dividing the weighted sum by the total weight to obtain an unbiased estimator. Arithmetic averaging is also unbiased under these assumptions, though it misses this chosen target. This is a teaching target, not a claimed historical invention."
           ],
           "visual": {
             "type": "matrix",
@@ -293,43 +564,67 @@
             "nodes": [
               {
                 "title": "Neither endpoint",
-                "text": "The answer does not solve the problem and does not contain the target."
+                "text": "“Return zero whatever the measurements.” Generally biased; target absent."
               },
               {
-                "title": "Target mentioned, solution invalid",
-                "text": "The mechanism appears, but an assumption or required evidence is missing."
+                "title": "Target present, invalid result",
+                "text": "“Add inverse-variance-weighted readings without dividing by total weight.” Target weighting appears, but the general result is biased."
               },
               {
                 "title": "Valid alternative",
-                "text": "The answer solves the problem through a different contribution."
+                "text": "“Add the readings and divide by their count.” Unbiased under the stated assumptions; chosen target absent."
               },
               {
                 "title": "Valid target recovery",
-                "text": "Both conditions hold: T = V AND M."
+                "text": "“Use inverse-variance weights and divide their weighted sum by total weight.” Both the rubric and target are satisfied."
               }
             ],
-            "caption": "Two independent questions about an answer. Historical and current novelty are further assessments, not additional meanings of V."
-          }
+            "caption": "Two separate questions about an answer. Historical and current novelty are further assessments, not additional meanings of V."
+          },
+          "id": "two-questions-about-one-proposal"
         },
         {
           "title": "Equivalence needs the problem’s assumptions",
           "paragraphs": [
             "“Average the measurements” and “take their arithmetic mean” can describe the same operation. “Use an inverse-variance weighted mean” is different when measurement uncertainty varies. Shared keywords or embedding similarity are therefore helpful search aids, but insufficient judges of scientific equivalence. Define the invariances you intend to allow: notation changes, reordered explanation and equivalent implementations may count; missing hypotheses may not.",
             "Semantic Uncertainty motivates grouping different phrasings by meaning. Its uncertainty signal concerns sampled answers and an operational equivalence test. Agreement is not truth: a model can repeat the same incorrect mechanism confidently. A small collection of paraphrases does not enumerate all ways an idea could be expressed."
-          ]
+          ],
+          "id": "equivalence-needs-the-problem-s-assumptions"
         },
         {
           "title": "Novel is relative to a reference history",
           "paragraphs": [
             "Validity, novelty and utility answer different questions. A valid solution can be old. A novel idea can be wrong. A correct novel proposal can still have little value. Novel records valid alternatives with separate historical/current-novelty tags and unresolved cases. A historically new reconstruction is not automatically new to today’s scientific community.",
             "The primary assay judges one endorsed proposal under a frozen selection rule, rather than letting an evaluator hunt through a long list for anything promising. Mentioning an idea and later rejecting it in the trace is an interesting annotation; it is not automatically an endorsed successful answer. The expected evidence tier also matters: a testable empirical hypothesis is not a demonstrated empirical improvement."
-          ]
+          ],
+          "id": "novel-is-relative-to-a-reference-history"
         },
         {
-          "title": "A useful answer can miss the historical target",
+          "title": "How semantic uncertainty differs from correctness",
           "paragraphs": [
-            "A model might propose a correct alternative algorithm without reaching the target contribution. Then V is true, M is false and T is false. Record the valid alternative and assess its novelty separately; the attempt can still be scientifically useful."
-          ]
+            "Imagine ten invented samples: six recommend the same arithmetic mean, three recommend the same weighted mean, and one recommends discarding all observations. There are ten texts but only three meaning groups under this simple rubric, with observed shares 0.6, 0.3 and 0.1. Entropy summarizes how spread out such a distribution is: for group shares w, add −w log(w) over groups, taking the zero-share contribution as zero. A single group has entropy zero; more balanced groups have higher entropy.",
+            "For these shares, −0.6 log(0.6) − 0.3 log(0.3) − 0.1 log(0.1) ≈ 0.898 in natural-log units called nats. The exact number is less important than the distinction: ten differently worded copies of one claim have little semantic diversity, while incompatible recommendations can have much more. Group definitions and finite sampling affect the estimate.",
+            "This is a simple empirical group-frequency illustration, not a reimplementation of the Semantic Uncertainty paper’s likelihood-based estimator. That method uses sampled strings, semantic grouping and model probabilities. Both require an operational rule for deciding equivalence. Neither makes agreement into truth: all ten answers could share the same scientifically invalid assumption. Novel still needs an independent validity judgment."
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Ten texts",
+                "text": "Different words and reasoning routes"
+              },
+              {
+                "title": "Three meaning groups",
+                "text": "Arithmetic / weighted / discard"
+              },
+              {
+                "title": "Separate validity review",
+                "text": "Which proposals satisfy the posed assumptions?"
+              }
+            ],
+            "caption": "Grouping measures variation in meaning. Validity asks whether the proposed meaning is acceptable for the scientific problem."
+          },
+          "id": "how-semantic-uncertainty-differs-from-correctness"
         }
       ],
       "takeaway": "Use semantic validity and scoped mechanism recovery as separate outcomes; preserve plausible alternatives for review.",
@@ -339,6 +634,16 @@
         "surface-form",
         "ideation-study",
         "execution-study"
+      ],
+      "connections": [
+        {
+          "chapter": "likelihood",
+          "reason": "Add probability across equivalent, disjoint trajectories."
+        },
+        {
+          "chapter": "judgment",
+          "reason": "Turn semantic commitments into an inspectable rubric."
+        }
       ]
     },
     {
@@ -354,55 +659,115 @@
       ],
       "sections": [
         {
+          "title": "Read the probability tree one branch at a time",
+          "paragraphs": [
+            "Start with a tiny invented generator. It chooses A with probability 0.5 or B with probability 0.5. After A, it chooses C with probability 0.2 or D with probability 0.8. The probability of the two-token prefix AC is 0.5 × 0.2 = 0.1; AD has probability 0.5 × 0.8 = 0.4. The children of A add back to A’s probability: 0.1 + 0.4 = 0.5.",
+            "Multiplication along a path is the chain rule for conditional probability. It does not assume the token choices are independent. The second choice explicitly depends on the first. Addition has a different job: it combines mutually exclusive paths into an event. If AC and AD both satisfy a rubric, their joint contribution to that event is 0.1 + 0.4. A path and a set of acceptable paths are different objects."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Path or event",
+              "Calculation",
+              "Probability"
+            ],
+            "rows": [
+              [
+                "First token A",
+                "Given at first step",
+                "0.50"
+              ],
+              [
+                "Prefix AC",
+                "0.50 × 0.20",
+                "0.10"
+              ],
+              [
+                "Prefix AD",
+                "0.50 × 0.80",
+                "0.40"
+              ],
+              [
+                "Either AC or AD",
+                "0.10 + 0.40",
+                "0.50"
+              ]
+            ],
+            "caption": "A probability tree shown as a table. No stopping probability is included, so these are prefix events."
+          },
+          "id": "read-the-probability-tree-one-branch-at-a-time"
+        },
+        {
           "title": "Multiply along a specified path",
           "paragraphs": [
             "Let x be the fixed prompt and y_1 through y_L a particular L-token continuation. The raw model probability of that exact continuation prefix is the product of p(y_t | x, y_1,…,y_(t−1)) across positions t. Here the vertical bar means “given”, and each factor conditions on the preceding tokens. Log probability turns this product into a sum, which is easier to compute without numerical underflow.",
             "In a toy three-token path with conditional probabilities 0.5, 0.2 and 0.1, the product is 0.01 and its natural log is about −4.605. A low product can arise simply because many exact choices are being specified. If the claim is about a terminated complete sequence, the stopping token or declared terminal rule must also be included; scoring just its visible words is a prefix event."
-          ]
+          ],
+          "id": "multiply-along-a-specified-path"
+        },
+        {
+          "title": "Why log probabilities are added",
+          "paragraphs": [
+            "The logarithm identity log(a × b) = log(a) + log(b) turns a long product into a sum. For two conditional probabilities of 0.5, the product is 0.25. Their logs add to −0.693 − 0.693 ≈ −1.386, which is log(0.25). The sum retains the same information: exponentiating it returns the probability.",
+            "Computers have a smallest representable positive number in a chosen numerical format. A product of many small factors can round to zero, called underflow, even when its mathematical value is positive. Adding logarithms avoids forming that tiny product. A log score of −100 is perfectly usable even though exp(−100) is extremely small. A probability truly equal to zero has log probability −infinity.",
+            "Dividing a sequence log score by its token count gives an average log probability. Exponentiating that average gives the geometric mean token probability. If every factor is 0.5, the geometric mean remains 0.5 for two tokens or two hundred tokens; the average log probability remains approximately −0.693, while the exact prefix probabilities are 0.5² and 0.5²⁰⁰. Length normalization is useful description, but it has deliberately removed the probability cost of specifying that many choices."
+          ],
+          "id": "why-log-probabilities-are-added"
         },
         {
           "title": "Teacher forcing supplies the previous token",
           "paragraphs": [
-            "Teacher forcing means evaluating a reference continuation while feeding its correct earlier tokens to the model instead of sampling them. To score token y_t, use the model prediction after its prefix, before feeding y_t. An off-by-one shift can produce plausible-looking but incorrect likelihoods. Token boundaries and the chat suffix also need an explicit policy.",
-            "Suppose the difficult scientific insight is the first sentence. If we force that sentence into the input and find the remaining calculation likely, we have measured execution after being supplied the insight. We have not measured how often the model invents the insight. A score for a later span is conditional on every earlier forced word."
+            "Teacher forcing means evaluating a reference continuation while feeding its specified reference earlier tokens to the model instead of sampling them. To score token y_t, use the model prediction after its prefix, before feeding y_t. An off-by-one shift can produce plausible-looking but incorrect likelihoods. Token boundaries and the chat suffix also need an explicit policy.",
+            "Suppose the difficult scientific insight is the first sentence. If we force that sentence into the input and find the remaining calculation likely, we have measured execution after being supplied the insight. We have not measured how often the model invents the insight. A score for a later span is conditional on every earlier forced word.",
+            "The reference need not be true: teacher forcing can score a false scientific sentence just as it can score a true one. Full-path scoring remains a valid calculation for that specified path. The mistake would be interpreting a later span, whose earlier insight was supplied, as the unassisted probability of producing the insight."
           ],
           "interactive": "likelihood",
           "visual": {
-            "type": "flow",
-            "nodes": [
-              {
-                "title": "Reference text",
-                "text": "A particular answer chosen for scoring"
-              },
-              {
-                "title": "Supplied prefix",
-                "text": "Feed its earlier tokens to the model"
-              },
-              {
-                "title": "Next-token score",
-                "text": "Read the probability of the next reference token"
-              },
-              {
-                "title": "Path score",
-                "text": "Multiply the conditional probabilities, or add their logs"
-              }
+            "type": "table",
+            "headers": [
+              "Input used for this prediction",
+              "Reference token scored next",
+              "Illustrative conditional probability"
             ],
-            "caption": "Teacher forcing follows the supplied path. A model is not asked to discover that path during this calculation."
-          }
+            "rows": [
+              [
+                "Prompt x",
+                "A",
+                "0.50"
+              ],
+              [
+                "Prompt x + A",
+                "C",
+                "0.20"
+              ],
+              [
+                "Prompt x + A + C",
+                "stop",
+                "0.10"
+              ]
+            ],
+            "caption": "Teacher-forcing alignment for an invented terminated path. Each token is scored before it is fed as history. The complete AC+stop probability is 0.50 × 0.20 × 0.10 = 0.01."
+          },
+          "id": "teacher-forcing-supplies-the-previous-token"
         },
         {
           "title": "A semantic event contains many paths",
           "paragraphs": [
             "An idea can appear through multiple notations, explanations, reasoning routes and valid implementations. Its probability under the executed decoder q is the sum of q(H | x) over complete trajectories H that pass the semantic rubric. Scoring one canonical reference gives one path, not this sum. A finite list of paraphrases usually remains a small, curator-chosen subset.",
             "Surface-form competition explains one reason string ranking can mislead. Probability normalization can change rankings without yielding a calibrated probability of an idea; the follow-up paper shows that reducing this competition need not improve accuracy. Report full-path log probability, length and span conditions separately. Average log probability per token is a descriptive normalization, not the probability that an idea occurs.",
-            "Raw p and decoder q must stay distinct here too. If top-k removes a reference token, that path has zero probability under that decoder even though teacher-forced raw scoring remains finite. Conversely, summing a few scores from overlapping prefix events can double-count; a rigorous event probability needs clearly defined disjoint outcomes."
-          ]
+            "Raw p and decoder q must stay distinct here too. If top-k removes a reference token, that path has zero probability under that decoder even though teacher-forced raw scoring remains finite. Conversely, summing a few scores from overlapping prefix events can double-count; a rigorous event probability needs clearly defined disjoint outcomes.",
+            "There are three levels here: an exact token path, the text it decodes to, and the scientific meaning judged from that text. Different token paths can sometimes decode to the same visible text. Different visible texts can express the same mechanism. Scores and equivalence judgments must identify which level they concern."
+          ],
+          "id": "a-semantic-event-contains-many-paths"
         },
         {
-          "title": "A likely final equation after a supplied derivation",
+          "title": "Two wordings can reverse a ranking",
           "paragraphs": [
-            "Forcing the derivation into the input changes the conditioning information. A likely final equation then measures execution with that help, rather than discovery of the derivation. Describe the difficult mechanism span separately and use free generation to estimate bounded recovery."
-          ]
+            "Suppose three mutually exclusive complete answers have probabilities 0.18, 0.12 and 0.07 and all express valid mechanism A. Together they contribute 0.37 to A. A single answer expressing mechanism B has probability 0.25. The most likely individual answer is B, but the known total for A is larger. This is an invented miniature example of surface-form competition.",
+            "The Surface Form Competition paper reweights multiple-choice strings relative to their likelihood in a task context. Its follow-up asks whether concentrating probability on listed answer choices reliably improves accuracy. These are ranking methods and evaluations on specified tasks, not an enumeration of every scientifically equivalent explanation. Novel’s free-generation target probability still requires counting semantic outcomes from the declared decoder.",
+            "For a terminated path, include the chance of the stopping token under the stated law. For an administrative cap, termination is imposed by the procedure; it is not an extra sampled token. Prefix A and prefix AC overlap, so adding their probabilities double-counts the AC trajectories. Summing semantic mass requires disjoint outcomes such as complete bounded trajectories, not an arbitrary list of overlapping references."
+          ],
+          "id": "two-wordings-can-reverse-a-ranking"
         }
       ],
       "takeaway": "Reference likelihood tells you about a named string under named conditions; semantic yield requires sampling and adjudication.",
@@ -410,6 +775,16 @@
         "surface-form",
         "probability-mass",
         "semantic-uncertainty"
+      ],
+      "connections": [
+        {
+          "chapter": "tokens",
+          "reason": "Review logarithms, softmax and the decoder law."
+        },
+        {
+          "chapter": "sampling",
+          "reason": "Estimate semantic recovery by free-generation trials."
+        }
       ]
     },
     {
@@ -425,39 +800,65 @@
       ],
       "sections": [
         {
+          "title": "Define the quantity before estimating it",
+          "paragraphs": [
+            "An estimand is the quantity we want to learn. Here it can be the chance that one complete attempt recovers a valid target, for one admitted event under one frozen model, prompt and decoder. Call that chance s to distinguish it from the next-token law p and executed decoder law q. The rubric maps a generated trajectory to success or failure. Many token decisions can lead to the same success label.",
+            "A binary trial is often called a Bernoulli trial: it has two labels, success and failure. A binomial model describes the number of successes in n independent trials that share the same chance s. Independent means that one trial’s outcome does not change the chance of another’s; identical means the setup and probability remain the same. Fresh random streams under a frozen sampler are intended to approximate this design. Distinct seeds alone do not prove it, and repeated deterministic greedy runs do not supply independent evidence about a sampling distribution.",
+            "Imagine s = 0.1 and n = 20. The expected count is n × s = 2, an average over repeated batches, not a guarantee of two successes. A particular batch may contain none or several. If its count is 3, the observed fraction is 3/20 = 0.15. This estimate can differ from the assumed generating probability simply through sampling variation.",
+            "The expected success count adds the individual success probabilities. This uses linearity of expectation and does not itself require independence. The formula for the chance of at least one success uses a product of failure probabilities and does require the independence assumption. Similar-looking outputs can still be independent draws; adaptation or reused random streams, rather than repeated wording alone, are the concern."
+          ],
+          "id": "define-the-quantity-before-estimating-it"
+        },
+        {
           "title": "Freeze the trial before counting it",
           "paragraphs": [
-            "For one event, fix the model bundle, prompt condition, decoder, stopping rule and output budget B. An independently seeded completion is one sampling trial under that setup. If n trials contain c definite target recoveries, c/n is the observed recovery fraction. Duplicate text still counts as repeated draws; deleting duplicates changes the statistical experiment.",
+            "For one event, fix the model bundle, prompt condition, decoder, stopping rule and output budget B. A completion drawn using the declared independent random stream is one intended trial under that setup; the sampling implementation still needs checks. If n trials contain c definite target recoveries, c/n is the observed recovery fraction. Duplicate text still counts as repeated draws; deleting duplicates changes the statistical experiment.",
             "A sample budget is not an event budget. Sixty-four completions of one contribution tell you more about that contribution’s probability, but do not supply sixty-four independent scientific discoveries. Correlated variants, shared source papers and mechanism families must stay together when splitting development and confirmation."
-          ]
+          ],
+          "id": "freeze-the-trial-before-counting-it"
         },
         {
           "title": "What pass@k assumes",
           "paragraphs": [
-            "Imagine an oracle that perfectly recognizes success among k independent candidates. If the true one-draw success probability is p, the chance that the pool contains at least one success is 1 − (1 − p)^k: all k must fail for the pool to fail. With p = 0.1 and k = 5, this is about 0.410. This is a mathematical illustration, not a measured Novel probability.",
-            "In a dataset of n independent candidates with c successes, the standard unbiased pass@k estimator is 1 − C(n−c,k)/C(n,k), for k ≤ n. C(a,b) means the number of ways to choose b items from a without order; when there are fewer than k failures the numerator is zero. The formula averages over subsets of the observed sample. Plugging c/n into the previous true-p formula is generally a different, biased estimator.",
+            "Imagine an oracle that perfectly recognizes success among k independent candidates. If the true one-draw success probability is s, the chance that the pool contains at least one success is 1 − (1 − s)^k: all k must fail for the pool to fail. With s = 0.1 and k = 5, this is about 0.410. This is a mathematical illustration, not a measured Novel probability.",
+            "In a dataset of n independent candidates with c successes, the standard unbiased pass@k estimator is 1 − C(n−c,k)/C(n,k), for k ≤ n. C(a,b) means the number of ways to choose b items from a without order; when there are fewer than k failures the numerator is zero. The formula averages over subsets of the observed sample. Plugging c/n into the previous known-s formula is generally a different, biased estimator.",
             "An actual selector can choose a wrong candidate even when the pool contains a correct one. Oracle availability, human selection, model self-selection and majority voting are separate systems. Chen and colleagues introduced this evaluation distinction in code generation; Novel must define an equally explicit success rubric for scientific proposals."
           ],
-          "interactive": "sampling"
+          "interactive": "sampling",
+          "id": "what-pass-k-assumes"
+        },
+        {
+          "title": "Derive the pool probability and its sample estimator",
+          "paragraphs": [
+            "If each candidate fails with probability 1 − s, then two independent candidates both fail with probability (1 − s) × (1 − s). For k candidates this becomes (1 − s)^k. The pool either contains a success or contains only failures, so subtracting all-failure probability from 1 gives the oracle availability formula. For s = 0.1, a five-candidate pool has availability 1 − 0.9⁵ ≈ 0.40951.",
+            "Usually s is unknown. Suppose we observed five candidates, of which two succeeded. There are ten unordered pairs that can be selected from five items: C(5,2) = 10. Only three pairs contain two failures, because there are three failures and C(3,2) = 3. Seven pairs contain at least one success, so the pass@2 estimate is 7/10 = 0.7. Plugging 2/5 into 1 − (1 − s)² would instead give 0.64. The subset calculation avoids that particular plug-in bias under the independent sampling assumptions.",
+            "An oracle is an ideal evaluator that can identify success perfectly. A real selector has limited information. It may prefer a polished wrong answer over a rough correct one. Oracle availability describes what was somewhere in the pool; selected success describes what the complete procedure actually returned. Novel needs both quantities if it studies candidate search."
+          ],
+          "id": "derive-the-pool-probability-and-its-sample-estimator"
         },
         {
           "title": "Selection consumes information and compute",
           "paragraphs": [
             "If one condition gets twenty candidates plus expert inspection and another gets one unselected answer, a gain cannot be attributed solely to its internal intervention. Count generated and scored tokens, prefill, verifier calls, rejected candidates, tuning and human review. A practical improvement should increase valid yield under a declared total budget.",
             "Freeze a selection policy before confirmation. If an evaluator reads all answers, changes the rubric, and then chooses the most appealing answer, both the policy and endpoint have changed. Preserve that result as exploratory evidence, then test the revised procedure on a new held-out set."
-          ]
-        },
-        {
-          "title": "A candidate pool and a selector can have different outcomes",
-          "paragraphs": [
-            "Five candidates can contain one valid answer while the selector chooses an invalid one. Oracle availability succeeded, but the deployed selection procedure failed. Report both facts and account for all five generations and selection."
-          ]
+          ],
+          "id": "selection-consumes-information-and-compute"
         }
       ],
       "takeaway": "Always state whether you measured one attempt, oracle candidate availability or a real selection procedure.",
       "sources": [
         "code-evaluation",
         "reconstruction"
+      ],
+      "connections": [
+        {
+          "chapter": "uncertainty",
+          "reason": "Put uncertainty around a finite success count."
+        },
+        {
+          "chapter": "search",
+          "reason": "See why adaptive search changes the trial design."
+        }
       ]
     },
     {
@@ -472,38 +873,81 @@
       ],
       "sections": [
         {
-          "title": "An estimate is not the unknown probability",
+          "title": "Sampling uncertainty is variation across possible batches",
           "paragraphs": [
-            "The observed fraction changes across repeated studies even when the underlying probability stays fixed. A confidence interval is a procedure with a stated long-run coverage property under its assumptions. It is not a guarantee that the labels or historical audit are correct, nor a posterior probability that this particular interval contains the truth.",
-            "For independent trials with a constant success probability p, the chance of observing zero successes in n attempts is (1−p)^n. Let alpha be the allowed one-sided error probability. Setting that chance to alpha gives the exact zero-success upper bound U = 1 − alpha^(1/n). At alpha = 0.05 and n = 64, U is about 0.04573. Thus 0/64 supports a one-sided 95% upper bound near 4.57%, not a claim of zero probability.",
-            "To make the same zero-success bound smaller than 1%, at least 299 trials are needed. Smaller target probabilities demand substantially more trials. These are calculations under the model assumptions, not a claim that any Novel experiment has run. The two-sided 95% interval used in a descriptive table has a different upper endpoint."
-          ]
+            "Picture repeating the same 64-attempt experiment many times. Even if the underlying chance stays fixed, each batch can produce a different count. A confidence procedure converts each count into an interval. A 95% coverage guarantee means that, under its assumptions, at least 95% of intervals produced across repeated studies cover the fixed generating probability. The probability refers to the procedure’s varying outputs, not to a probability distribution assigned to a fixed unknown parameter.",
+            "This differs from a Bayesian credible interval, which uses a prior distribution and observed data to assign posterior probability to parameter ranges. Both can be useful, but the calculations answer different questions. Novel’s fixed-N proposal uses frequentist binomial intervals; no prior is silently being introduced when it reports a confidence bound.",
+            "Sampling uncertainty is only one source of uncertainty. Judges may disagree on validity, historical sources may have unresolved dates, and a decoder implementation may fail parity checks. Collecting more completions narrows a sampling interval under the model, but does not automatically resolve any of those other problems."
+          ],
+          "id": "sampling-uncertainty-is-variation-across-possible-batches"
+        },
+        {
+          "title": "Build the zero-success bound from a surprise calculation",
+          "paragraphs": [
+            "Suppose the true success chance were 10%. The chance of seeing no successes in 64 independent trials would be 0.9⁶⁴ ≈ 0.00118, or about 0.118%. Zero successes would be quite surprising at that assumed rate. If the true chance were 1%, the same zero count would have probability 0.99⁶⁴ ≈ 0.526, or 52.6%. Zero is entirely unsurprising at that rate. This is why an empty batch distinguishes some probabilities much more strongly than others.",
+            "For a one-sided 95% bound, set the all-failure probability to 0.05 and solve for the largest rate at this boundary: (1 − U)^n = 0.05. Taking an nth root gives 1 − U = 0.05^(1/n), hence U = 1 − 0.05^(1/n). Alpha names the tolerated error level, here 0.05. One-sided means we are bounding only the upper end, rather than allocating error to both ends. At n = 64 the bound is about 0.04573, or 4.57%. This is a one-sided 95% upper bound, not zero probability. A two-sided 95% interval allocates error differently and has a different upper endpoint.",
+            "To plan a desired upper bound r after zero successes, solve n ≥ log(alpha)/log(1 − r), then round up to a whole number of trials. At r = 0.01 and alpha = 0.05, this gives 299. It is a planning calculation conditional on observing zero; it does not promise that a real study will observe zero or yield a decisive result.",
+            "To reach a one-sided 95% upper bound below 0.1% after zero successes requires at least 2,995 independent trials. More ambitious rarity claims therefore have substantial generation and adjudication costs, even before correcting for multiple endpoints."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Assumed true success rate",
+              "Chance of 0 successes in 64",
+              "What a zero count suggests"
+            ],
+            "rows": [
+              [
+                "10%",
+                "About 0.118%",
+                "Hard to reconcile with this high a rate"
+              ],
+              [
+                "4.573%",
+                "About 5%",
+                "The one-sided 95% boundary"
+              ],
+              [
+                "1%",
+                "About 52.6%",
+                "Still compatible with a zero count"
+              ]
+            ],
+            "caption": "Original binomial calculations for one frozen independent-trial condition. They concern the assumed success rate, not an actual Novel result."
+          },
+          "id": "build-the-zero-success-bound-from-a-surprise-calculation"
         },
         {
           "title": "Many endpoints and uncertain labels",
           "paragraphs": [
-            "If twelve event-level rarity claims must hold simultaneously, spending the full 5% error budget on each does not give 95% simultaneous coverage. One conservative solution assigns alpha/12 to each endpoint. For zero successes in 64 trials this raises each upper bound to about 8.21%. More prompts, models or chosen endpoints require further planned accounting.",
+            "If twelve event-level rarity claims must hold simultaneously, spending the full 5% error budget on each does not give 95% simultaneous coverage. One conservative solution assigns alpha/12 to each endpoint. For zero successes in 64 trials this raises each upper bound to about 8.21%. More prompts, models or chosen endpoints require further planned accounting. The chance that any endpoint fails is at most the sum of its error allowances, here 12 × (0.05/12) = 0.05. This union-bound argument does not require endpoint independence, though it can be conservative.",
             "Suppose n = 64, two outputs definitely recover the target, and three are unresolved. Preserve a sensitivity range from 2/64 to 5/64, with appropriate statistical bounds on the definite and possible counts. Removing unresolved answers would conceal uncertainty in the measuring instrument. An unresolved historical admission gate is different: that event stays outside the admitted historical summary."
-          ]
+          ],
+          "id": "many-endpoints-and-uncertain-labels"
         },
         {
           "title": "Decide when to stop before seeing success",
           "paragraphs": [
-            "Fixed-N inference means committing to a total number N of trials in advance. Stopping when an attractive result first appears can break the coverage of a method derived for a fixed total. Howard and colleagues develop confidence sequences valid uniformly over time under specified conditions. They are a possible future design, not a permission to improvise optional stopping.",
+            "Fixed-N inference means committing to a total number N of trials in advance. Stopping when an attractive result first appears can break the coverage of a method derived for a fixed total. Howard and colleagues develop confidence sequences valid uniformly over time under specified conditions. They are a possible future design, not a permission to improvise optional stopping. Rechecking an ordinary fixed-N interval after every new attempt and reporting a favorable moment creates many opportunities for a misleading statement; the time-uniform guarantee is designed for this different use.",
             "Novel’s initial proposal uses fixed allocations. An infrastructure failure or resource ceiling can stop execution, but the incomplete allocation must remain visible. An unfinished proposal at the output cap is a bounded-endpoint failure under the frozen rubric, whereas a crash is an infrastructure event governed by the preregistered rerun policy."
-          ]
-        },
-        {
-          "title": "Zero out of 64 is still a wide bound",
-          "paragraphs": [
-            "Zero target recoveries in 64 trials gives a one-sided 95% upper bound of about 4.57% under the binomial assumptions. It does not support a bound of 0.1%. Reaching that smaller upper bound requires at least 2,995 zero-success trials under the same assumptions."
-          ]
+          ],
+          "id": "decide-when-to-stop-before-seeing-success"
         }
       ],
       "takeaway": "Zero observed recoveries bounds a probability under a fixed setup; it does not demonstrate a missing idea or impossibility.",
       "sources": [
         "confidence-sequences",
         "code-evaluation"
+      ],
+      "connections": [
+        {
+          "chapter": "sampling",
+          "reason": "Review independent trials and the unknown success rate."
+        },
+        {
+          "chapter": "judgment",
+          "reason": "Separate sampling variation from uncertain labels."
+        }
       ]
     },
     {
@@ -519,32 +963,47 @@
       ],
       "sections": [
         {
+          "title": "Turn a scientific requirement into an inspectable rubric",
+          "paragraphs": [
+            "For an invented measurement task, suppose the requirement is an unbiased estimate from independent, zero-mean errors with known unequal variances. A rubric might require a concrete estimator, a statement of those assumptions, and a derivation of the claimed property. An answer that says “use statistics” supplies no mechanism; an answer that derives a property under equal variance may solve a different problem. The rubric makes these differences visible before ratings begin.",
+            "An evidence tier states what kind of support is required. An algebraic result may need a checked argument under its assumptions. An empirical proposal may only be a plausible, testable hypothesis until a real experiment is run. If Novel asks for a proposal, judge a proposal; if it claims demonstrated improvement, require the evidence for that stronger endpoint. Feasibility ratings and execution results should therefore remain separate.",
+            "Blinding means hiding irrelevant information that could sway judgment, such as whether an output came from a favored intervention. Independent judgment means reviewers decide before reconciling their labels, rather than copying a shared conclusion. Record initial judgments and reasons, then adjudicate disagreements according to the declared policy. A third reviewer can resolve a case; agreement still cannot replace missing scientific evidence."
+          ],
+          "id": "turn-a-scientific-requirement-into-an-inspectable-rubric"
+        },
+        {
           "title": "What a judge must decide",
           "paragraphs": [
             "A rubric states the required assumptions, mechanism, acceptable alternatives, evidence tier and failure conditions before seeing model results. Blind judges to model, condition, seed and favored intervention where possible. Record abstention and disagreement instead of forcing every scientific question into an automatic binary label. Independent human expertise remains an admission requirement; agreement among AI agents is not independent human review.",
             "A symbolic checker can establish an algebraic consequence under its encoded assumptions. A unit test checks particular cases. An expert rating of feasibility assesses a proposal. None automatically proves an untested empirical benefit. Match the strength of the claim to the validation actually performed.",
             "The ideation study and its execution follow-up are useful together: expert ratings of an idea and outcomes after carrying it out are different endpoints. Novel should preserve this distinction when an attractive proposal requires experiments beyond the assay."
-          ]
+          ],
+          "id": "what-a-judge-must-decide"
         },
         {
           "title": "A trace is generated behavior",
           "paragraphs": [
             "Expressed chain-of-thought is text the model emits. It can provide assumptions, intermediate claims, corrections and clues for a future hypothesis. Its being readable or logically coherent does not guarantee that it names every influence on the answer. Conversely, evidence of unfaithfulness in one setup does not show that every trace is useless.",
             "Turpin and colleagues investigate explanations under biasing prompt features. Lanham and colleagues intervene on the expressed reasoning itself. The newer reasoning-model study asks whether traces reveal use of supplied hints. Together they motivate condition-specific tests; they do not license inferring a hidden causal route from fluent prose."
-          ]
+          ],
+          "id": "a-trace-is-generated-behavior"
         },
         {
           "title": "A worked adjudication example",
           "paragraphs": [
-            "Imagine a model writes a correct-looking derivation, then endorses an equation missing a boundary condition. Judge the endorsed proposal for validity and annotate the missing condition. Separately record whether the trace earlier stated it, contradicted it or never addressed it. A trace can contain useful work while the final proposal fails.",
+            "Imagine the task asks for every solution of b·u = b for real numbers b and u. An answer divides by b and endorses “u = 1 is the only solution.” That is valid only when b is nonzero. If b = 0, every real u is a solution. The endorsed all-cases answer therefore fails validity. If the target rubric specifically requires handling the degenerate b = 0 case, it also misses that target. A trace that briefly mentions b = 0 before discarding it can be annotated separately; it does not repair the endorsed claim.",
             "If the model names the intended mechanism only after the prompt supplies a bridge, that is guided behavior. A later internal hypothesis might ask whether the bridge changes a particular computation. The observational annotation cannot answer that causal question by itself. Likewise, asking the model afterward why it answered something produces a new explanation, not a recovered recording of the original forward pass."
-          ]
+          ],
+          "id": "a-worked-adjudication-example"
         },
         {
-          "title": "A silent trace can still be influenced by a hint",
+          "title": "A trace can both affect an answer and omit its causes",
           "paragraphs": [
-            "A hint can change an answer without being mentioned in the reasoning trace. The behavioral comparison provides evidence that it mattered; silence in the trace is an incomplete measure of its influence."
-          ]
+            "Once reasoning text is emitted, later token predictions condition on it. A wrong intermediate equation can therefore influence the final answer, and editing that equation can test a particular dependence. But the explanation of how that equation was chosen can remain incomplete. The text is part of the computation’s observable history, not a full log of every internal operation.",
+            "Three paper designs clarify different questions. Turpin changes biasing prompt features and compares answers with explanations. Lanham modifies or truncates reasoning text to test how later answers depend on it. The newer reasoning-model study compares hinted and unhinted prompts, then checks whether traces acknowledge the hint in cases where the answer follows it. An answer change and a verbal acknowledgment are separate measurements.",
+            "For Novel, use a trace to locate explicit assumptions and candidate mechanisms, then turn a mechanistic story into a testable prediction. If a prompt hint changes target recovery, that shows an effect of the changed input condition. It does not identify the internal layer carrying that effect. An internal intervention can address that later question, with its own controls."
+          ],
+          "id": "a-trace-can-both-affect-an-answer-and-omit-its-causes"
         }
       ],
       "takeaway": "Assess outcome validity, reasoning quality and faithfulness separately, with evidence appropriate to each.",
@@ -554,6 +1013,16 @@
         "turpin-faithfulness",
         "lanham-faithfulness",
         "reasoning-faithfulness"
+      ],
+      "connections": [
+        {
+          "chapter": "meaning",
+          "reason": "Separate validity, target match and novelty."
+        },
+        {
+          "chapter": "patching",
+          "reason": "Turn a trace-based hypothesis into a causal test."
+        }
       ]
     },
     {
@@ -572,11 +1041,21 @@
       ],
       "sections": [
         {
+          "title": "Follow one invented event from question to result",
+          "paragraphs": [
+            "An assay is a repeatable measurement procedure. For Novel it includes the historical challenge, fixed model and decoder, bounded generation, a proposal-selection rule and independent semantic judgment. An observational study measures behavior under those conditions without changing selected hidden states to test a causal mechanism.",
+            "Imagine a candidate contribution that reduces an algorithm’s memory use. First define exactly which reduction is new, find the earlier equivalents and establish the historical model bundle. Then write a visible challenge that specifies the memory constraint without revealing the construction. On development cases, check whether the model understands the notation, can execute simpler related operations, and can produce an answer that reviewers can judge.",
+            "After choosing the prompt, decoder, budget and rubric on development material, freeze them for confirmation. Sample the planned attempts, preserve all outputs and failures, and have blinded judges assign validity and target-match labels. Report event-level counts and intervals, valid alternatives and unresolved labels, then account for generation and review costs. This chain explains why a successful model call is only one part of the experiment."
+          ],
+          "id": "follow-one-invented-event-from-question-to-result"
+        },
+        {
           "title": "Separate development from confirmation",
           "paragraphs": [
             "Development is where prompts, budgets, rubrics and engineering choices can be revised. Confirmation evaluates a prospectively frozen procedure on cases that did not drive those revisions. Keep entire event and mechanism families together: withholding one phrasing while exposing its solution elsewhere does not create an independent holdout. Public worked cases remain development material permanently.",
             "Novel proposes six development and twelve confirmation events, 64 primary samples per confirmation event, and an output cap up to 2,048 tokens, including reasoning. These are feasibility proposals, not admitted inventory or a promise of adequate statistical power. Domain expertise, model competence, adjudication cost and a concrete rarity threshold still need decisions."
-          ]
+          ],
+          "id": "separate-development-from-confirmation"
         },
         {
           "title": "Use gates as dependencies",
@@ -608,20 +1087,25 @@
               }
             ],
             "caption": "These are scientific dependencies from the repository protocols, not completed milestones."
-          }
+          },
+          "id": "use-gates-as-dependencies"
         },
         {
           "title": "Choose the conclusion that the evidence supports",
           "paragraphs": [
             "If a capable, temporally eligible model recovers a target under P0, the result supports recoverability under that historical problem condition. If it succeeds only under P2, it supports guided recoverability with the stated hint. If it repeatedly supplies valid older alternatives, that is informative behavior even when target recovery is low. If it cannot handle the prerequisites or response format, the finding concerns feasibility.",
             "The purpose of a small first study is to establish a trustworthy measurement and a bounded result. A negative observation with wide uncertainty can still be useful when every attempt, admission decision and failure is preserved. It does not locate a unique missing thought, prove a universal ceiling, or justify choosing confirmation cases because a favored hint made them succeed."
-          ]
+          ],
+          "id": "choose-the-conclusion-that-the-evidence-supports"
         },
         {
-          "title": "Removing a title cannot restore a holdout",
+          "title": "Four evidence levels answer four different questions",
           "paragraphs": [
-            "A public worked example remains development material even if its title is later removed. The contribution and its mechanism have already been exposed. Confirmation needs a separately held event family."
-          ]
+            "A proposed design states what we intend to test. An engineering check asks whether the machinery does the specified thing: for example, whether capture-only hooks preserve output. Numerical qualification asks whether the actual scores and intervention calculations agree within predefined tolerances on the intended execution condition. Scientific evidence concerns an admitted question measured with a valid assay and supported by the required judgments or experiments.",
+            "Passing a unit test on a tiny randomly initialized model can expose indexing errors, but it does not establish the behavior of the pretrained historical baseline. Matching cached and uncached scores can qualify a computation, but it does not show discovery competence. A scientifically useful observational result would still be scoped to the admitted events, assistance level, decoder and budget. Independent replication asks whether another execution or team can recover that bounded result from the evidence.",
+            "This is the context for Novel’s present status: the repository contains engineering tools and protocols, while strict local FP16 comparisons still have unresolved failures and no historical idea is admitted. The lessons teach how those pieces would connect; they do not report a completed observational study."
+          ],
+          "id": "four-evidence-levels-answer-four-different-questions"
         }
       ],
       "takeaway": "The first publishable result may be an auditable corpus and an inconclusive but well-measured reconstruction assay.",
@@ -630,6 +1114,16 @@
         "discoverybench",
         "cusp",
         "reconstruction"
+      ],
+      "connections": [
+        {
+          "chapter": "history",
+          "reason": "Establish the historical condition before confirmation."
+        },
+        {
+          "chapter": "uncertainty",
+          "reason": "Choose an affordable precision target for the sample budget."
+        }
       ]
     },
     {
@@ -645,6 +1139,15 @@
         "observational"
       ],
       "sections": [
+        {
+          "title": "Prediction and intervention answer different questions",
+          "paragraphs": [
+            "An internal state may predict an answer because both are produced by the same earlier computation. That correlation does not show what would happen if we changed the state. For example, a warning light predicts a hot engine, but covering the light does not cool the engine. A causal intervention deliberately changes a variable and compares the resulting outcome under specified conditions.",
+            "In a model we can sometimes replace a hidden vector while keeping weights and the recipient input fixed. The resulting answer difference is an effect of that manipulation. To interpret it, specify what information the replacement imported and what else the intervention changed. A donor taken after a correct answer may act like supplying the answer, rather than supplying the natural reasoning process.",
+            "Controls make competing explanations testable. An identity patch puts the original state back; capture-only observes without modification; zero strength adds nothing. Wrong-answer and irrelevant donors test whether the effect is selective. Random directions of matched scale test whether any perturbation produces a similar effect. These comparisons have distinct purposes, so a long list of controls is useful only when each corresponds to a concrete alternative explanation."
+          ],
+          "id": "prediction-and-intervention-answer-different-questions"
+        },
         {
           "title": "State the intervention precisely",
           "paragraphs": [
@@ -672,7 +1175,8 @@
               }
             ],
             "caption": "The donor supplies information. A changed answer is evidence about this intervention; its interpretation depends on what the donor contains and which comparisons were made."
-          }
+          },
+          "id": "state-the-intervention-precisely"
         },
         {
           "title": "Restoration and disruption ask different questions",
@@ -680,26 +1184,70 @@
             "In restoration, information from a clean run is placed into a changed run and the experiment asks whether the behavior returns. In disruption, changed information is placed into a clean run and the experiment asks whether behavior breaks. The interpretation is conditional on the donor, recipient and surrounding computation. Redundant routes can survive one disruption; a late replacement can bypass earlier steps. Neither direction identifies a unique natural mechanism.",
             "Use an original toy example: a system succeeds if either route A or route B works. Removing A alone leaves success. That null result does not prove A is unused. If both routes are broken and a late state supplies the answer, restoring output does not demonstrate how the system normally computed it. Patching interpretations require the causal structure and controls."
           ],
-          "interactive": "intervention"
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Route A available",
+              "Route B available",
+              "Toy system succeeds?"
+            ],
+            "rows": [
+              [
+                "yes",
+                "yes",
+                "yes"
+              ],
+              [
+                "no",
+                "yes",
+                "yes"
+              ],
+              [
+                "yes",
+                "no",
+                "yes"
+              ],
+              [
+                "no",
+                "no",
+                "no"
+              ]
+            ],
+            "caption": "An invented redundant system succeeds through either route. Disrupting A alone gives a null effect even when A is a usable causal route. A late answer patch could bypass both routes."
+          },
+          "id": "restoration-and-disruption-ask-different-questions"
         },
         {
           "title": "Design selective predictions",
           "paragraphs": [
             "A useful Novel hypothesis predicts improvement on the relevant mechanism while preserving unrelated competence and appropriate abstention. Controls include identity, capture-only and zero strength; wrong and irrelevant donors; answer-only and generic-task donors; matched random directions and reversed signs; different-answer separate-event transfer; alternate sites and rescue where justified.",
             "Patching best-practice studies show that corruption choices and output metrics can change localization. A logit contrast is a sensitive diagnostic, but it is not an independently validated scientific solution. The primary follow-up must include blinded free-generation V and T outcomes, numerical parity on the actual backend, and a prospectively fixed development/confirmation split."
-          ]
+          ],
+          "id": "design-selective-predictions"
         },
         {
-          "title": "A successful replacement may bypass the usual computation",
+          "title": "Effect size depends on what outcome is measured",
           "paragraphs": [
-            "A late donor state can make a recipient answer correctly without showing how the recipient normally computes the answer. The patch may import the answer or bypass earlier steps. Donor controls and selective held-out tests distinguish those explanations."
-          ]
+            "A logit contrast subtracts the score of a comparison token from the score of a target token. If target and comparison scores are 3 and 1, the contrast is 2. A patch raising it to 3 has increased that local contrast by 1. This can be a useful diagnostic, but it does not tell us whether a free continuation contains a scientifically valid proposal. Softmax also depends on all the other vocabulary scores.",
+            "Exact patching runs the altered computation and measures the chosen endpoint directly. Gradient approximations estimate effects more cheaply and need checks against exact interventions. A late state can restore an answer by bypassing earlier computation, and redundant routes can hide the effect of a disruption. Restoration, disruption and generalization to new events therefore provide complementary evidence rather than a single universal importance ranking."
+          ],
+          "id": "effect-size-depends-on-what-outcome-is-measured"
         }
       ],
       "takeaway": "A causal effect is an effect of a specified intervention under specified conditions, not a universal explanation.",
       "sources": [
         "patching-interpretation",
         "patching-best-practices"
+      ],
+      "connections": [
+        {
+          "chapter": "transformer",
+          "reason": "Review vectors, attention and the residual bypass."
+        },
+        {
+          "chapter": "vectors",
+          "reason": "Construct directions and understand local derivatives."
+        }
       ]
     },
     {
@@ -713,6 +1261,15 @@
         "patching"
       ],
       "sections": [
+        {
+          "title": "A direction is a displacement, not a named idea",
+          "paragraphs": [
+            "Return to vector arithmetic. If a residual state is h = [1, 2] and a direction is v = [0.5, −1], adding strength a = 2 gives h + av = [2, 0]. The scalar a controls the size and sign of the displacement. Setting a = 0 returns the original state; using a negative value moves in the opposite direction. The same displacement can have different downstream effects at different states or layers.",
+            "A mean-difference direction starts with two collections of matched examples. Suppose positive-condition vectors are [3, 1] and [1, 3], averaging to [2, 2]. Negative-condition vectors [1, 0] and [1, 2] average to [1, 1]. Their difference is [1, 1]. Averaging can reduce unrelated variation, but whatever systematically differs between the conditions can enter the direction: intended task signal, answer content, style or another confound.",
+            "A confound is an alternative varying factor that could explain the observed relationship. If every positive example is long and every negative example is short, the direction may reflect length rather than the desired mechanism. Matching examples, auditing donor tokens and testing different-answer transfer address that problem experimentally. Subtraction alone cannot establish what information the direction carries."
+          ],
+          "id": "a-direction-is-a-displacement-not-a-named-idea"
+        },
         {
           "title": "Extracting a direction",
           "paragraphs": [
@@ -741,27 +1298,73 @@
               }
             ],
             "caption": "Coordinate-wise addition in a two-dimensional teaching example. Real activations have many dimensions; a direction gets its interpretation from experiments, not its coordinates alone."
-          }
+          },
+          "id": "extracting-a-direction"
         },
         {
-          "title": "Gradients are local slopes",
+          "title": "Build a gradient from an ordinary slope",
           "paragraphs": [
-            "Let f(h) be a chosen scalar score evaluated from activation h. Its gradient g contains one partial derivative per coordinate: how f changes for a tiny change in that coordinate. For a small displacement delta, a first-order approximation is f(h + delta) − f(h) approximately g dot delta, where the dot product multiplies corresponding coordinates and sums.",
-            "A flat slope at one point can miss a large effect farther away. Saturation, interactions and cancellation can therefore make a gradient-based ranking omit important sites. AtP* develops more reliable approximations and diagnostics for this problem; candidate sites still need exact intervention checks. Whole-residual changes may be substantially nonlinear."
-          ]
+            "For one number, a derivative is the local slope of a function. If f(a) = a², moving a tiny amount epsilon changes the score by approximately 2a × epsilon. At a = 3, the slope is 6: a step of 0.01 changes the score by about 0.06. The exact change is 3.01² − 3² = 0.0601. The approximation improves as the step becomes smaller.",
+            "For a vector, hold all but one coordinate fixed and take a slope for each coordinate. Those partial derivatives form the gradient. Let f(h) = h₁² + 3h₂, where h₁ and h₂ are the first and second coordinates. At h = [2, 1], f = 7 and the gradient is g = [4, 3]. For delta = [0.1, −0.2], the dot product g · delta = 4 × 0.1 + 3 × (−0.2) = −0.2 predicts the score change. The exact new score is 2.1² + 3 × 0.8 = 6.81, a change of −0.19.",
+            "In general, for a scalar score f evaluated from a vector h, a small displacement delta has approximate effect f(h + delta) − f(h) ≈ g · delta, where g is the gradient at h. Each partial derivative holds the other coordinates fixed. This formula summarizes the local calculation illustrated above; it does not guarantee the same accuracy for a large patch.",
+            "Backpropagation computes such derivatives through composed operations using the chain rule: local sensitivities multiply along a route, and contributions add where routes meet. It is an efficient calculation of sensitivity to the chosen scalar score. It does not infer the meaning of that score or the scientific value of changing it.",
+            "The local approximation can fail for large moves or curved functions. At a = 0, f(a) = a² has slope zero, but moving to a = 1 changes f by 1. Saturated output probabilities can likewise have small local slopes. AtP* addresses important failure modes in approximate patching; exact intervention checks remain necessary."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "At h = [2, 1]",
+              "Calculation",
+              "Result"
+            ],
+            "rows": [
+              [
+                "Original score",
+                "2² + 3 × 1",
+                "7"
+              ],
+              [
+                "Gradient",
+                "[2 × 2, 3]",
+                "[4, 3]"
+              ],
+              [
+                "Predicted change",
+                "[4, 3] · [0.1, −0.2]",
+                "−0.20"
+              ],
+              [
+                "Exact changed score",
+                "2.1² + 3 × 0.8",
+                "6.81, change −0.19"
+              ]
+            ],
+            "caption": "An original differentiable toy function. A gradient predicts a local score change; it does not label a coordinate as a scientific concept."
+          },
+          "id": "build-a-gradient-from-an-ordinary-slope"
         },
         {
           "title": "Detection is not intervention",
           "paragraphs": [
             "A feature that predicts a label need not be a useful control knob. The targeted feature-learning study compares activation values and gradient signals with different estimators, finding different strengths for detection and intervention. Its targets provide supervision and its intervention scores concern target-token probabilities. Free scientific generation is a further test.",
             "Every fitted encoder, probe, reward model or selected direction adds an artifact and a selection procedure to the system. Record training data, target information, validation choices and compute. Novel currently implements a bounded selected-activation gradient diagnostic, not donor learning or a trained attribution pipeline. A nonzero gradient establishes local numerical sensitivity only."
-          ]
+          ],
+          "id": "detection-is-not-intervention"
         },
         {
           "title": "Identical prefixes imply identical pre-answer states in this setup",
           "paragraphs": [
-            "At the same pre-answer boundary, a deterministic frozen model sees identical prefixes and produces identical activations. A nonzero contrast therefore comes from a changed input, position, stochastic computation or later answer-conditioned state."
-          ]
+            "With the same complete condition—model, token IDs, positions, mask, numerical execution, stochastic operations and intervention state—a deterministic frozen computation produces the same pre-answer activations. A nonzero contrast must come from some changed part of that condition or a later answer-conditioned state. The visible wording alone does not establish identical inputs."
+          ],
+          "id": "identical-prefixes-imply-identical-pre-answer-states-in-this-setup"
+        },
+        {
+          "title": "Reading the four method families together",
+          "paragraphs": [
+            "Function Vectors extracts task-related signals from demonstrations and tests transfer. Contrastive Activation Addition constructs contrasts from paired answer-conditioned examples and adds a direction at inference. AtP* uses derivatives to approximate which exact component patches matter. Targeted Feature Learning compares signals and estimators for detecting a target and changing its probability. These methods differ in what is extracted, what supervision is used and what outcome is measured.",
+            "A detector asks whether a state helps predict a label. A controller asks whether changing that state improves the desired outcome. A thermometer can detect heat without being a heater. For Novel, a transferable mechanism would need to improve relevant free-generation outcomes on separately held events with different answers, while surviving comparisons against text assistance and other donors. Current selected-activation gradients are a bounded diagnostic, not that completed pipeline."
+          ],
+          "id": "reading-the-four-method-families-together"
         }
       ],
       "takeaway": "Audit where a direction got its information, then test transfer and selectivity independently.",
@@ -770,6 +1373,16 @@
         "caa",
         "atp-star",
         "targeted-feature-learning"
+      ],
+      "connections": [
+        {
+          "chapter": "transformer",
+          "reason": "Review coordinate arithmetic and dot products."
+        },
+        {
+          "chapter": "patching",
+          "reason": "Compare local gradient predictions with exact interventions."
+        }
       ]
     },
     {
@@ -786,11 +1399,22 @@
       ],
       "sections": [
         {
+          "title": "Separate generating, choosing and checking",
+          "paragraphs": [
+            "A search procedure generates candidates, decides where to try next or which candidate to keep, and checks its output. Ordinary sampling changes the next chosen token. An activation perturbation changes intermediate numerical states. Weight steering changes the transformation parameters. A verifier scores candidates, while a selector uses available information to choose among them. These components can be combined, but each introduces a distinct source of assistance and cost.",
+            "Consider an invented comparison. System A generates one answer. System B generates ten answers and gives all of them to an expert. If B returns more valid ideas, we have evidence about the larger procedure. To isolate a proposed noise method, compare it with ordinary sampling using the same candidate budget, selection information and accounting rules. Otherwise more search or better review could explain the gain.",
+            "Diversity means variation according to a declared measure: wording, mechanisms or valid solutions can each vary differently. Ten colorful paraphrases may contain one idea. Ten different but invalid proposals may have high diversity and no scientific yield. Useful yield requires validity and usefulness as well as variation."
+          ],
+          "id": "separate-generating-choosing-and-checking"
+        },
+        {
           "title": "More variation is not yet more science",
           "paragraphs": [
             "Ordinary token sampling changes selected tokens. Internal perturbation changes a representation used to produce later tokens. Weight steering changes the transformation itself. Each creates a different system, even if all are called inference-time methods. A wider variety of sentences can be invalid, irrelevant or merely cosmetic.",
+            "Gaussian perturbation means adding a random vector whose coordinates follow a specified bell-shaped distribution, often centered at zero with a chosen standard deviation. Standard deviation describes scale: larger values typically produce larger coordinate changes. Correlation between coordinates, injection site, normalization and duration also matter. “Add noise” therefore names a family of interventions, not one reproducible method.",
             "Soft Reasoning combines embedding exploration with verifier-guided optimization. Noise Steering studies constrained educational story generation. CreativityNeuro rescales selected weights and studies divergent thinking with human ratings. These are concrete methodological leads, but their task outcomes are not measurements of historical scientific reconstruction. CreativityNeuro’s reported utility and factual-competence tradeoffs make separate outcome dimensions particularly important."
-          ]
+          ],
+          "id": "more-variation-is-not-yet-more-science"
         },
         {
           "title": "Separate the components of a claimed gain",
@@ -820,7 +1444,18 @@
               }
             ],
             "caption": "A search system is more than its generator. Changing any stage can change the outcome, so a claimed improvement needs a comparison that identifies what changed."
-          }
+          },
+          "id": "separate-the-components-of-a-claimed-gain"
+        },
+        {
+          "title": "What adaptive search learns between attempts",
+          "paragraphs": [
+            "Bayesian optimization builds a statistical surrogate: a model of how candidate settings relate to previously observed scores, including uncertainty about untried settings. An acquisition rule uses that surrogate to choose another candidate, balancing predicted promise and information gain. Here the candidates might be perturbation directions or scales. The search is using feedback, so later attempts depend on earlier outcomes.",
+            "A verifier may check code tests, mathematical consistency or a learned reward, each with different blind spots. Optimizing a proxy can find candidates that exploit those blind spots. Keep the search objective separate from independent final evaluation and count the cost of learning or tuning the surrogate. A frozen language-model backbone can still sit inside a system with newly trained sampler or reward components.",
+            "Soft Reasoning combines continuous embedding exploration with verifier-guided search. Noise Steering studies constrained Arabic stories, and CreativityNeuro alters weights for divergent-thinking tasks. GTS and LatentTTS introduce learned latent sampling or reward components. They are methodological leads for later decisions; their benchmarks do not already measure Novel’s historical reconstruction endpoint. The library identifies the access depth and limitations of each.",
+            "Independent repetitions of the whole frozen search procedure could support a new endpoint, such as the chance that one complete search returns a valid proposal within its total budget. Its internal candidates remain history-dependent. This separates evaluating a complete adaptive system from pretending that all its internal trials came from the original frozen decoder."
+          ],
+          "id": "what-adaptive-search-learns-between-attempts"
         },
         {
           "title": "Recovery policy is an experimental factor",
@@ -828,13 +1463,8 @@
             "After a temporary perturbation, retaining the altered KV history, cleanly re-prefilling the same emitted text, and asking for a fresh clean refinement preserve different information. Declare each policy and compare it to its own no-noise control. Noise removal cannot undo an earlier sampled claim that now appears in the visible text.",
             "Only proceed after G5: a specific hypothesis, selective predictions, development-chosen settings, new held-out event families, reliable outcomes and full cost accounting. NNsight can help express interventions, but its API and release claims do not validate a particular Qwen3 backend. Tool choice follows the experiment and its checks.",
             "A successful later study would show more independently validated useful proposals per declared compute and review budget, with preserved unrelated competence and a replicated effect. Prospective discovery then adds contemporary prior-art review and domain-specific validation. That is the long-term destination; the current repository supplies the engineering and protocol groundwork."
-          ]
-        },
-        {
-          "title": "Extra search and verification change the comparison",
-          "paragraphs": [
-            "A noise-search system using ten times as many generations and an extra verifier might find more correct answers. That comparison changes candidate count and selection information as well as noise. Matched baselines and component ablations are needed to isolate the effect."
-          ]
+          ],
+          "id": "recovery-policy-is-an-experimental-factor"
         }
       ],
       "takeaway": "Attribute improvement to a complete, controlled procedure, and keep validity and utility alongside diversity.",
@@ -846,6 +1476,16 @@
         "latent-tts",
         "nnsight-ndif",
         "nnsight-release"
+      ],
+      "connections": [
+        {
+          "chapter": "sampling",
+          "reason": "Separate oracle availability from selected success."
+        },
+        {
+          "chapter": "inference",
+          "reason": "Inspect what text and cache history survive a perturbation."
+        }
       ]
     }
   ],
@@ -859,16 +1499,17 @@
       "status": "core",
       "stage": "Meaning and measurement",
       "summary": "Different phrasings can share a meaning, so token-level uncertainty and semantic uncertainty can disagree.",
-      "mechanism": "Groups answer realizations into semantic classes for uncertainty estimation.",
+      "mechanism": "Samples answers, groups them using bidirectional entailment in context, then aggregates model probabilities for semantic uncertainty estimation.",
       "novelUse": "Write a context-sensitive equivalence rubric before comparing strings.",
       "limits": "Clustering is fallible; agreement does not certify correctness or exhaust unseen scientific alternatives.",
       "readFor": "The difference between a string and its scientific content.",
-      "readSections": "Section 3 on semantic equivalence; Section 4 is the next methods read.",
-      "sourceScope": "Primary metadata plus targeted HTML Section 3 inspected on 12 October 2026; no experiment reproduction.",
+      "readSections": "Sections 3.1–3.3 and Section 4: semantic classes, length effects, sampling, bidirectional entailment and probability aggregation.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 3.1–3.3 and Section 4: semantic classes, length effects, sampling, bidirectional entailment and probability aggregation. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "semantic equivalence",
         "uncertainty"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2302.09664v3"
     },
     {
       "id": "semantic-entropy-account",
@@ -899,16 +1540,17 @@
       "status": "core",
       "stage": "Reference likelihood",
       "summary": "A correct meaning can divide its probability among several strings, weakening any one answer option.",
-      "mechanism": "Proposes a task-conditioned likelihood reweighting for answer ranking.",
+      "mechanism": "Ranks listed answer strings by their question-conditioned likelihood relative to a domain-context likelihood. This changes the ranking score; it does not sum all equivalent answers.",
       "novelUse": "Keep canonical-string scores separate from semantic recovery.",
       "limits": "Multiple-choice improvements do not supply an exact probability for an open-ended idea.",
       "readFor": "What a normalization changes, and what remains unmeasured.",
-      "readSections": "Abstract checked; inspect the scoring definition and evaluations next.",
-      "sourceScope": "ACL proceedings metadata and abstract checked on 12 October 2026; PDF methods not reread.",
+      "readSections": "PDF Sections 3.1–3.2 (proceedings pages 7040–7042): sequence scoring and domain-conditional likelihood ratio; setup context in Section 4.1.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. PDF Sections 3.1–3.2 (proceedings pages 7040–7042): sequence scoring and domain-conditional likelihood ratio; setup context in Section 4.1. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "surface-form competition",
         "likelihood"
-      ]
+      ],
+      "methodUrl": "https://aclanthology.org/2021.emnlp-main.564.pdf"
     },
     {
       "id": "probability-mass",
@@ -923,12 +1565,13 @@
       "novelUse": "Do not interpret a better-normalized reference score as stronger idea generation.",
       "limits": "The studied multiple-choice tasks do not resolve free-generation scientific measurement.",
       "readFor": "A useful counterpoint to the original surface-form paper.",
-      "readSections": "Abstract checked; read the formalism and normalization comparisons before implementation.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readSections": "Sections 3.1–3.2 and 5.1–6.3: semantic-class sum, PMI workaround, prompt/choice conditioning and evaluation setup.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 3.1–3.2 and 5.1–6.3: semantic-class sum, PMI workaround, prompt/choice conditioning and evaluation setup. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "normalization",
         "answer ranking"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2305.14596v2"
     },
     {
       "id": "ideation-study",
@@ -983,12 +1626,13 @@
       "novelUse": "Declare candidate count, semantic verifier and the role of an oracle.",
       "limits": "Test-passing code is a task-specific endpoint; oracle success does not describe an actual selector.",
       "readFor": "The estimator and its assumptions, rather than historical headline scores.",
-      "readSections": "Section 2.1 estimator passage inspected; Appendix A is the proof to read next.",
-      "sourceScope": "Exact metadata plus targeted HTML estimator and biased-plug-in discussion checked on 12 October 2026.",
+      "readSections": "Section 2.1 and Appendix A: subset estimator, bias of the plug-in formula and binomial unbiasedness derivation.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Section 2.1 and Appendix A: subset estimator, bias of the plug-in formula and binomial unbiasedness derivation. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "pass@k",
         "oracle selection"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2107.03374v2"
     },
     {
       "id": "confidence-sequences",
@@ -996,19 +1640,20 @@
       "authors": "Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, Jasjeet Sekhon",
       "year": 2018,
       "url": "https://arxiv.org/abs/1810.08240v9",
-      "status": "core",
+      "status": "context",
       "stage": "Statistical design",
       "summary": "Develops uncertainty intervals with guarantees that hold over time under specified assumptions.",
       "mechanism": "Time-uniform inference permits certain sequential monitoring and stopping designs.",
-      "novelUse": "Understand why the first fixed-N study must not stop opportunistically.",
+      "novelUse": "Explains why optional stopping requires a different guarantee. It remains context while the proposed initial assay uses fixed allocations.",
       "limits": "No confidence-sequence method has been selected or implemented for Novel’s initial assay.",
-      "readFor": "The contrast between fixed-total and sequential inference.",
-      "readSections": "Abstract and version history checked; assumptions and constructions require a dedicated later methods read.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readFor": "Understand time-uniform coverage; audit a specific construction only if Novel chooses sequential monitoring.",
+      "readSections": "Section 1, uniform-coverage definition (1) and properties P1–P4. Advanced boundary constructions are not audited for adoption.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Section 1, uniform-coverage definition (1) and properties P1–P4. Advanced boundary constructions are not audited for adoption. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "confidence sequence",
         "optional stopping"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/1810.08240v9"
     },
     {
       "id": "turpin-faithfulness",
@@ -1023,12 +1668,13 @@
       "novelUse": "Treat expressed reasoning as evidence to annotate, not a guaranteed causal account.",
       "limits": "The reported tasks and models do not establish universal unfaithfulness.",
       "readFor": "How an unmentioned influence can be tested.",
-      "readSections": "Abstract checked; read the bias interventions and explanation coding next.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readSections": "Sections 2.1–2.2 and Section 3 setup: biasing prompt features and operational answer/explanation comparison.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 2.1–2.2 and Section 3 setup: biasing prompt features and operational answer/explanation comparison. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "faithfulness",
         "prompt influence"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2305.04388v1"
     },
     {
       "id": "lanham-faithfulness",
@@ -1043,12 +1689,13 @@
       "novelUse": "Separate outcome validity from dependence on an expressed chain of thought.",
       "limits": "Text interventions do not map an internal neural mechanism by themselves.",
       "readFor": "What an intervention on the trace can and cannot establish.",
-      "readSections": "Abstract checked; inspect the intervention conditions and task-level results next.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readSections": "Sections 2.1, 2.3 and 2.4: task/sampling setup, early answering through truncation, and inserted reasoning mistakes.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 2.1, 2.3 and 2.4: task/sampling setup, early answering through truncation, and inserted reasoning mistakes. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "chain of thought",
         "text intervention"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2307.13702v1"
     },
     {
       "id": "reasoning-faithfulness",
@@ -1063,12 +1710,13 @@
       "novelUse": "Do not infer absence of influence from silence in a trace.",
       "limits": "Disclosure rates depend on the tested setup; this is not a universal monitor guarantee.",
       "readFor": "Behavioral influence versus self-reported explanation.",
-      "readSections": "Abstract checked; examine hint construction and operational definition of hint use next.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readSections": "Sections 2–2.1: paired hinted/unhinted prompts, selected answer-switch cases, verbal acknowledgment and random-noise adjustment.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 2–2.1: paired hinted/unhinted prompts, selected answer-switch cases, verbal acknowledgment and random-noise adjustment. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "reasoning models",
         "hint use"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2505.05410v1"
     },
     {
       "id": "researchbench",
@@ -1443,150 +2091,244 @@
       "novelUse": "Understand the components before identifying Qwen3-specific capture sites.",
       "limits": "The original encoder-decoder is not an exact architectural specification of modern Qwen3.",
       "readFor": "The roles of queries, keys, values and residual updates.",
-      "readSections": "Targeted HTML Section 3 architecture passage inspected; reread its attention subsections with the schematic.",
-      "sourceScope": "Primary exact-version metadata and targeted architecture text checked on 12 October 2026.",
+      "readSections": "Sections 3.1–3.5: attention scaling, multi-head output projection, residual ordering, feed-forward maps, vocabulary readout and positional encoding.",
+      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 3.1–3.5: attention scaling, multi-head output projection, residual ordering, feed-forward maps, vocabulary readout and positional encoding. No independent reproduction or exhaustive full-paper review.",
       "concepts": [
         "attention",
         "transformer",
         "residual stream"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/1706.03762v7"
     }
   ],
   "glossary": [
     {
       "term": "Token",
       "definition": "A vocabulary item represented by an integer ID; it need not be a whole word.",
-      "example": "A space and word fragment may have their own tokenization."
+      "example": "A space and word fragment may have their own tokenization.",
+      "chapter": "tokens"
     },
     {
       "term": "Logit",
       "definition": "An unnormalized score for a possible next token.",
-      "example": "Softmax turns all vocabulary logits into a probability distribution."
+      "example": "Softmax turns all vocabulary logits into a probability distribution.",
+      "chapter": "tokens"
     },
     {
       "term": "Conditional probability",
       "definition": "A probability given specified information.",
-      "example": "p(next token | prompt) changes when the prompt changes."
+      "example": "p(next token | prompt) changes when the prompt changes.",
+      "chapter": "tokens"
     },
     {
       "term": "Decoder",
       "definition": "The procedure that turns scores into tokens and decides when to stop.",
-      "example": "Temperature and top-k form part of a sampling decoder."
+      "example": "Temperature and top-k form part of a sampling decoder.",
+      "chapter": "tokens"
     },
     {
       "term": "Activation",
       "definition": "An intermediate numerical value produced during a forward pass.",
-      "example": "The residual vector at the last prompt position in layer 12."
+      "example": "The residual vector at the last prompt position in layer 12.",
+      "chapter": "transformer"
     },
     {
       "term": "Weight",
       "definition": "A learned parameter used by the model’s computation.",
-      "example": "A matrix that projects a residual vector into an attention query."
+      "example": "A matrix that projects a residual vector into an attention query.",
+      "chapter": "transformer"
     },
     {
       "term": "Residual stream",
       "definition": "The sequence of representations updated through additive connections.",
-      "example": "Novel captures the decoder-block output after both residual additions."
+      "example": "Novel captures the decoder-block output after both residual additions.",
+      "chapter": "transformer"
     },
     {
       "term": "Attention",
       "definition": "A learned operation that mixes value vectors using query-key compatibility weights.",
-      "example": "A later position can use information from earlier permitted positions."
+      "example": "A later position can use information from earlier permitted positions.",
+      "chapter": "transformer"
     },
     {
       "term": "KV cache",
       "definition": "Saved key and value states from previous positions, reused during decoding.",
-      "example": "A retained perturbed cache preserves some effects after noise injection stops."
+      "example": "A retained perturbed cache preserves some effects after noise injection stops.",
+      "chapter": "inference"
     },
     {
       "term": "Teacher forcing",
       "definition": "Scoring a reference while supplying its preceding tokens instead of sampling them.",
-      "example": "The final equation is scored after the reference derivation is already in the input."
+      "example": "The final equation is scored after the reference derivation is already in the input.",
+      "chapter": "likelihood"
     },
     {
       "term": "Estimand",
       "definition": "The precisely defined quantity an experiment aims to estimate.",
-      "example": "Probability of valid target recovery for one frozen prompt and decoder."
+      "example": "Probability of valid target recovery for one frozen prompt and decoder.",
+      "chapter": "sampling"
     },
     {
       "term": "Semantic equivalence",
       "definition": "Sameness of the relevant meaning under stated assumptions and a rubric.",
-      "example": "Renaming variables can preserve a mechanism; dropping a boundary condition may not."
+      "example": "Renaming variables can preserve a mechanism; dropping a boundary condition may not.",
+      "chapter": "meaning"
     },
     {
       "term": "Validity V",
       "definition": "Whether the endorsed proposal solves the posed problem at the required evidence tier.",
-      "example": "A correct older algorithm can count as valid."
+      "example": "A correct older algorithm can count as valid.",
+      "chapter": "meaning"
     },
     {
       "term": "Mechanism match M",
       "definition": "Whether the proposal contains the scoped historical target contribution.",
-      "example": "The target’s particular memory schedule is present, not just its familiar algebra."
+      "example": "The target’s particular memory schedule is present, not just its familiar algebra.",
+      "chapter": "meaning"
     },
     {
       "term": "Target recovery T",
       "definition": "The conjunction of validity and target mechanism match.",
-      "example": "T is true only when both V and M are true."
+      "example": "T is true only when both V and M are true.",
+      "chapter": "meaning"
     },
     {
       "term": "Historical eligibility",
       "definition": "Evidence that the complete model condition predates the target’s first supported public contribution.",
-      "example": "A July model snapshot cannot be certified with an April family launch alone."
+      "example": "A July model snapshot cannot be certified with an April family launch alone.",
+      "chapter": "history"
     },
     {
       "term": "Assistance",
       "definition": "Information or selection that helps narrow the route to a solution.",
-      "example": "Choosing two old inspirations based on a future paper is hindsight assistance."
+      "example": "Choosing two old inspirations based on a future paper is hindsight assistance.",
+      "chapter": "history"
     },
     {
       "term": "Pass@k",
       "definition": "The probability that at least one of k candidates meets a success criterion, usually evaluated with an oracle.",
-      "example": "A candidate pool can pass while an actual selector chooses its wrong member."
+      "example": "A candidate pool can pass while an actual selector chooses its wrong member.",
+      "chapter": "sampling"
     },
     {
       "term": "Confidence interval",
       "definition": "A procedure with stated repeated-study coverage under assumptions.",
-      "example": "A fixed-N binomial interval assumes the declared sampling model and reliable labels."
+      "example": "A fixed-N binomial interval assumes the declared sampling model and reliable labels.",
+      "chapter": "uncertainty"
     },
     {
       "term": "Development set",
       "definition": "Cases used to choose or revise the procedure.",
-      "example": "A public worked historical case used for prompt design."
+      "example": "A public worked historical case used for prompt design.",
+      "chapter": "observational"
     },
     {
       "term": "Confirmation set",
       "definition": "Held-out cases evaluated using a prospectively frozen procedure.",
-      "example": "A separately held contribution family that did not influence tuning."
+      "example": "A separately held contribution family that did not influence tuning.",
+      "chapter": "observational"
     },
     {
       "term": "Faithfulness",
       "definition": "Whether an explanation accurately reflects influences on the computation being explained.",
-      "example": "A trace may omit a hint that changed the answer."
+      "example": "A trace may omit a hint that changed the answer.",
+      "chapter": "judgment"
     },
     {
       "term": "Activation patching",
       "definition": "Replacing a specified internal state with another state during execution.",
-      "example": "Copying one donor residual into an aligned recipient position."
+      "example": "Copying one donor residual into an aligned recipient position.",
+      "chapter": "patching"
     },
     {
       "term": "Steering direction",
       "definition": "A vector used to change an activation or parameters according to a defined intervention.",
-      "example": "Adding a scaled mean contrast to a residual state."
+      "example": "Adding a scaled mean contrast to a residual state.",
+      "chapter": "vectors"
     },
     {
       "term": "Gradient",
       "definition": "Local derivatives of a scalar objective with respect to selected numbers.",
-      "example": "A derivative of a target-logit contrast with respect to one residual vector."
+      "example": "A derivative of a target-logit contrast with respect to one residual vector.",
+      "chapter": "vectors"
     },
     {
       "term": "Ablation",
       "definition": "Removing or substituting part of a computation to test its effect.",
-      "example": "Setting a selected component to a declared baseline and measuring output change."
+      "example": "Setting a selected component to a declared baseline and measuring output change.",
+      "chapter": "patching"
     },
     {
       "term": "Scientific qualification",
       "definition": "Evidence that supports a scoped scientific claim beyond operational correctness.",
-      "example": "Human-adjudicated recovery under an admitted historical condition and frozen protocol."
+      "example": "Human-adjudicated recovery under an admitted historical condition and frozen protocol.",
+      "chapter": "observational"
+    },
+    {
+      "term": "Probability distribution",
+      "definition": "A list or rule assigning probabilities to all possible outcomes of a process.",
+      "example": "The toy red/blue/stop distribution is 0.50/0.30/0.20.",
+      "chapter": "tokens"
+    },
+    {
+      "term": "Exponential and logarithm",
+      "definition": "exp turns a real number into a positive number; the natural logarithm reverses it.",
+      "example": "log(0.5) is about −0.693; exp(−0.693) is about 0.5.",
+      "chapter": "tokens"
+    },
+    {
+      "term": "Scalar, vector and tensor",
+      "definition": "One number, an ordered list of numbers, and an array with any number of axes.",
+      "example": "A hidden-state tensor with shape [1, 3, 4] stores 12 scalars.",
+      "chapter": "transformer"
+    },
+    {
+      "term": "Dot product",
+      "definition": "Multiply matching vector coordinates, then add the products to obtain one scalar.",
+      "example": "[2, −1] · [3, 4] = 6 − 4 = 2.",
+      "chapter": "transformer"
+    },
+    {
+      "term": "Linear map",
+      "definition": "A transformation forming weighted sums of input coordinates.",
+      "example": "[a, b] → [2a + b, a − b] maps [2, −1] to [3, 3].",
+      "chapter": "transformer"
+    },
+    {
+      "term": "Forward pass",
+      "definition": "An execution of the model that computes activations and scores from inputs and current parameters.",
+      "example": "The last prompt state produces scores for the next token.",
+      "chapter": "inference"
+    },
+    {
+      "term": "Loss and optimizer",
+      "definition": "A scalar objective to minimize, and a rule that uses information such as derivatives to update parameters.",
+      "example": "Computing an activation gradient without an optimizer step leaves the model weights fixed.",
+      "chapter": "inference"
+    },
+    {
+      "term": "Entropy",
+      "definition": "A measure of how spread out a probability distribution is, relative to the specified outcomes or groups.",
+      "example": "One meaning group has entropy zero, even if its claim is wrong.",
+      "chapter": "meaning"
+    },
+    {
+      "term": "Independent and identically distributed trials",
+      "definition": "Trials sharing the same generating law, where learning previous outcomes does not change the next outcome’s distribution.",
+      "example": "Frozen independent sampling is intended to support binomial inference; different seeds alone do not prove it.",
+      "chapter": "sampling"
+    },
+    {
+      "term": "Confound",
+      "definition": "An alternative varying factor that could explain an observed relationship.",
+      "example": "A positive/negative contrast that also changes answer length may mix task signal with length.",
+      "chapter": "vectors"
+    },
+    {
+      "term": "Surrogate and acquisition rule",
+      "definition": "A model predicting candidate outcomes, and a rule using that prediction and uncertainty to select the next candidate.",
+      "example": "Adaptive perturbation search uses earlier verifier scores to choose another setting.",
+      "chapter": "search"
     }
   ]
 }

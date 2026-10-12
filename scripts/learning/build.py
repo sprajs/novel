@@ -79,16 +79,32 @@ def validate(data):
         require(set(chapter["sources"]) <= ids["papers"], f"Broken sources in {chapter['id']}")
         require(set(chapter["prerequisites"]) <= ids["chapters"], f"Broken prerequisites in {chapter['id']}")
         require(chapter["id"] not in chapter["prerequisites"], "Chapter cannot require itself")
+        connections = chapter.get("connections", [])
+        require(all(c.get("chapter") in ids["chapters"] and c["chapter"] != chapter["id"]
+                    and isinstance(c.get("reason"), str) and c["reason"].strip()
+                    for c in connections), f"Broken connections in {chapter['id']}")
         require("check" not in chapter, "The reading guide does not use quizzes or completion checks")
+        section_ids = [s.get("id", "") for s in chapter["sections"]]
+        require(all(ID.fullmatch(s) for s in section_ids) and len(set(section_ids)) == len(section_ids),
+                f"Invalid section anchors in {chapter['id']}")
         for section in chapter["sections"]:
             require(section.get("title") and section.get("paragraphs"), "Empty lesson section")
             require(all(isinstance(p, str) and p.strip() for p in section["paragraphs"]), "Empty paragraph")
             if "visual" in section:
                 v = section["visual"]
-                require(v["type"] in {"flow", "matrix"} and len(v["nodes"]) >= 2 and v.get("caption"), "Invalid diagram")
+                require(v["type"] in {"flow", "matrix", "table", "residual"} and v.get("caption"), "Invalid diagram")
+                if v["type"] == "table":
+                    require(len(v.get("headers", [])) >= 2 and v.get("rows")
+                            and all(isinstance(h, str) and h.strip() for h in v["headers"])
+                            and all(len(r) == len(v["headers"]) and all(isinstance(x, str) and x.strip() for x in r)
+                                    for r in v["rows"]), "Invalid worked table")
+                else:
+                    require(len(v.get("nodes", [])) >= 2, "Invalid diagram nodes")
                 if v["type"] == "matrix":
                     require(len(v["nodes"]) == 4 and len(v["rowLabels"]) == 2 and len(v["columnLabels"]) == 2, "Invalid concept matrix")
-                require(all(n.get("title") and n.get("text") for n in v["nodes"]), "Empty diagram node")
+                if v["type"] == "residual":
+                    require(len(v["nodes"]) == 3, "Invalid residual diagram")
+                require(all(n.get("title") and n.get("text") for n in v.get("nodes", [])), "Empty diagram node")
             if "interactive" in section:
                 widgets.add(section["interactive"])
     require(widgets == {"sampling", "likelihood", "intervention", "timeline"}, "Missing or unsupported interactive lesson")
@@ -103,12 +119,17 @@ def validate(data):
         require(paper["status"] in {"core", "later", "context", "retired"}, "Invalid paper priority")
         url = urlparse(paper["url"])
         require(url.scheme == "https" and url.hostname and not url.username, "Only primary HTTPS source links are allowed")
+        if "methodUrl" in paper:
+            method_url = urlparse(paper["methodUrl"])
+            require(method_url.scheme == "https" and method_url.hostname and not method_url.username,
+                    "Only primary HTTPS method links are allowed")
         require(isinstance(paper.get("year"), int), "Missing source year")
         require(isinstance(paper.get("concepts"), list) and paper["concepts"], "Missing concepts")
     covered = {source_key(p["url"]) for p in data["papers"]}
     missing = {key: url for key, url in inventory().items() if key not in covered}
     require(not missing, "Reading inventory not covered: " + ", ".join(missing.values()))
     require(data["glossary"] and all(g.get("term") and g.get("definition") and g.get("example") for g in data["glossary"]), "Incomplete glossary")
+    require(all(g.get("chapter") in ids["chapters"] for g in data["glossary"]), "Broken glossary explanation link")
 
 
 def check_baseline(data):
