@@ -1,5 +1,12 @@
 # GPU implementation and remaining hardware gates
 
+Local RTX 2080 Ti execution on 12 October 2026 now establishes CUDA kernels,
+uncached 0.6B/1.7B inference and captures, and a finite 0.6B activation gradient.
+Full FP16 profiles fail cached/full-prefix numerical guards; the 1.7B gradient
+planning envelope exceeds available memory. See the [local installation and
+validation record](../validation/local-2080ti.md). The cloud-only statements
+below describe the earlier implementation stage, not the latest local results.
+
 The requested [separate fast prediction setup](fast-prediction.md) is now
 implemented and CPU-tested. The earlier deferral below is historical; GPU
 measurement and scientific equivalence remain separate open gates.

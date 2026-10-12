@@ -190,7 +190,7 @@ def main():
     os.chdir(ROOT)
     import torch
     from novel.diagnostics import numerical_runtime
-    from novel.profiles import ProfileRequest, configure_determinism, inspect_hardware, resolve_profile, validate_environment
+    from novel.profiles import ProfileRequest, configure_determinism, initialize_device, inspect_hardware, resolve_profile, validate_environment
     config = strict_json(args.config.read_text())
     if set(config) != {"schema_version", "max_abs_logprob", "max_kl_reference_to_fast", "max_abs_sequence_logprob_delta", "max_repeat_abs_logprob", "cases"} or config["schema_version"] != 1:
         raise ValueError("Unknown equivalence configuration")
@@ -212,6 +212,10 @@ def main():
         if resolved.device != args.device:
             raise ValueError(f"Reference profile requires --device {resolved.device}")
         report["locked_reference_packages"] = validate_environment(resolved)
+        # Initialize cuBLAS before execute_phases records its allocation baseline.
+        # Its persistent workspace is not a retained model tensor. The unchanged
+        # release guard still rejects any allocation above that measured baseline.
+        report["reference_device_preflight"] = initialize_device(resolved)
         snapshot = snapshot_path(args.cache, args.model, entry)
         report["snapshot_hashes"] = verify_snapshot(snapshot, entry)
         torch.set_num_threads(5)

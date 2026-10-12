@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 import weakref
+import sys
 
 import pytest
 import torch
@@ -78,6 +79,56 @@ def test_cuda_allocations_block_native_startup_without_gpu_execution(monkeypatch
     with pytest.raises(ValueError, match="native server was not started"):
         eq.release_reference("cuda:0", 0)
     assert calls == ["sync", "empty"]
+
+
+def test_cuda_workspace_at_preflight_baseline_is_allowed(monkeypatch):
+    eq = module()
+    workspace = 32 * 1024**2
+    monkeypatch.setattr(torch.cuda, "synchronize", lambda device: None)
+    monkeypatch.setattr(torch.cuda, "empty_cache", lambda: None)
+    monkeypatch.setattr(torch.cuda, "memory_allocated", lambda device: workspace)
+    monkeypatch.setattr(torch.cuda, "memory_reserved", lambda device: workspace)
+    result = eq.release_reference("cuda:0", workspace)
+    assert result["status"] == "PASS"
+    assert result["gpu_allocated_bytes"] == result["baseline_allocated_bytes"] == workspace
+
+
+def test_main_initializes_library_workspace_before_reference_phases(tmp_path, monkeypatch):
+    import novel.profiles as profiles
+    eq = module()
+    calls = []
+    monkeypatch.setattr(profiles, "configure_determinism", lambda: {})
+    monkeypatch.setattr(profiles, "inspect_hardware", lambda: {})
+    monkeypatch.setattr(profiles, "resolve_profile", lambda *args: SimpleNamespace(device="cuda:0"))
+    monkeypatch.setattr(profiles, "validate_environment", lambda resolved: {})
+
+    def initialize(resolved):
+        calls.append("initialize")
+        return {"status": "PASS"}
+
+    monkeypatch.setattr(profiles, "initialize_device", initialize)
+    monkeypatch.setattr(eq, "model_entry", lambda *args: {})
+    monkeypatch.setattr(eq, "snapshot_path", lambda *args: tmp_path)
+    monkeypatch.setattr(eq, "verify_snapshot", lambda *args: {})
+
+    def execute(*args):
+        calls.append("execute")
+        report = args[-1]
+        assert calls == ["initialize", "execute"]
+        assert report["reference_device_preflight"]["status"] == "PASS"
+        report["status"] = "PASS"
+
+    monkeypatch.setattr(eq, "execute_phases", execute)
+    monkeypatch.setattr(sys, "argv", ["fast_equivalence.py", "--profile", "local-2080ti",
+        "--model", "qwen3_0_6b", "--gguf", str(tmp_path / "model.gguf"),
+        "--output", str(tmp_path / "output"), "--device", "cuda:0", "--dtype", "float16"])
+    before = torch.get_num_threads()
+    try:
+        with pytest.raises(SystemExit) as result:
+            eq.main()
+        assert result.value.code == 0
+    finally:
+        torch.set_num_threads(before)
 
 
 def test_persisted_reference_tampering_blocks_native_inference(tmp_path, monkeypatch):

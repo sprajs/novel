@@ -80,6 +80,12 @@ build toolkit. [NVIDIA's component and driver table](https://docs.nvidia.com/cud
 distinguishes toolkit components from the CUDA minor-compatibility floor.
 No system installer or GPU rental is included.
 
+NVIDIA's [12.8.1 redistributable manifest](https://developer.download.nvidia.com/compute/cuda/redist/redistrib_12.8.1.json)
+ships the NVCC component at **12.8.93**, although the release-notes table lists
+12.8.90. For that provisioned compiler, explicitly add `--nvcc-version 12.8.93`
+to `fast_build.py`. The default remains 12.8.90; another compiler version is
+rejected. The selected version and actual compiler output are saved in the receipt.
+
 [NVIDIA lists](https://developer.nvidia.com/cuda/gpus) RTX2080Ti as **SM75** and
 RTX5090 as **SM120**. Both appear in the pinned
 [CUDA build source](https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/ggml/src/ggml-cuda/CMakeLists.txt),
