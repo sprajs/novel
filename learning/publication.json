@@ -1,0 +1,29 @@
+{
+  "siteUrl": "https://novel-reading-room.sprajs.chatgpt.site",
+  "projectId": "appgprj_6acd40d2a55c81919e433f02a07b603a",
+  "audience": "owner-private",
+  "researchRevision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
+  "siteSourceCommit": "705a55ac1aa3621890447ae88fbaefd40407ad4d",
+  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_fd0beca9e06c8191b316d0c1ea2f91c4",
+  "deploymentId": "appgdep_6acd4553bde081919bee65d1175a710b",
+  "deploymentStatus": "succeeded",
+  "publishedAt": "2026-10-12T20:38:59.153095+00:00",
+  "maintenance": {
+    "automationId": "keep-novel-s-reading-baseline-current",
+    "kind": "local-thread-heartbeat",
+    "statusAtCreation": "ACTIVE",
+    "cadence": "Daily at 09:00 Europe/London",
+    "runVerified": false,
+    "requirements": "The Codex desktop and local host must be available with authenticated GitHub and Sites access."
+  },
+  "verification": {
+    "contentContractTests": 7,
+    "chaptersRendered": 13,
+    "browserErrors": 0,
+    "diagrams": 9,
+    "interactiveExamples": 4,
+    "quizAndProgressControls": 0,
+    "testedLayouts": ["391px mobile", "1440px desktop"],
+    "note": "Browser checks used the exact local static output subsequently packaged and deployed. No scientific model runs were performed."
+  }
+}
