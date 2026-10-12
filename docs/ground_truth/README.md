@@ -1,6 +1,6 @@
 # Ground-truth research collection
 
-This is a research specification and an executable development collection, not a completed historical benchmark or a model-performance report. Read [the decision report](decision_report.md) for the current recommendation and unresolved gates. Every fixture committed here is public calibration/development material. **There is no sealed confirmation set in this repository.**
+This is an evidence audit and executable calibration collection. The [research programme](../../Plan/research-plan.md) sets the scientific priorities; the [collection report](decision_report.md) records scoped findings and unresolved gates. Every fixture committed here is public calibration/development material. **There is no sealed confirmation set in this repository.**
 
 The collection contains 20 ranked leads, five worked research packets, six model snapshot audits and 51 exact fixtures. No historical candidate is fully admitted and no target-model behavior is measured here.
 
@@ -12,7 +12,7 @@ The collection contains 20 ranked leads, five worked research packets, six model
 | [Evidence packets](packets/) | Derivations, prerequisites, bridges, counterexamples, and empirical limits |
 | [Benchmark audit](benchmark_audit.md) | ResearchBench, DiscoveryBench, CUSP, Reconstruction and licensing |
 | [Evidence and annotation guide](evidence_and_annotation.md) | Admission hierarchy, dates, independence and reviewer checklist |
-| [Experiment protocol](protocol.md) | Primary estimand, prompt ladder, donor boundary, splits and interpretation |
+| [Transfer calibration protocol](protocol.md) | Reference design for later causal work: prompt ladder, donor boundary, splits and interpretation |
 | [Calibration specification](calibration.md) | Tiny exact offset and badge worlds, standalone prerequisite probes |
 | [Infrastructure interface](interface.md) | Versioned paths, visible/hidden boundary, run and model requirements |
 | [Adversarial review](adversarial_review.md) | Independent AI review findings, fixes, scope and remaining limits |
@@ -29,4 +29,4 @@ python tests/ground_truth/artifact_tools.py manifest --check
 
 `manifest` without `--check` rebuilds the inventory after an intentional change. It hashes raw bytes, not a reserialized approximation. Do not regenerate it to hide unexpected drift. Source URLs and revision identifiers refer to upstream evidence; local file hashes attest to this collection, not to the truth of the historical claims. No paper PDFs, restricted datasets, checkpoint weights, or model responses are included.
 
-The collection includes a narrow CUSP evidence correction in [Plan/research-plan.md](../../Plan/research-plan.md); unrelated plan sections remain unchanged. Current-main verification and the base revision are recorded in the manifest. Code and data licensing for these new original artifacts remains an explicit repository-owner decision; no upstream paper or model license is inherited automatically.
+The [benchmark audit](benchmark_audit.md) documents CUSP's exemption for correct predictions and methods matching the target paper. Collection-base verification and the base revision are recorded in the manifest. Code and data licensing for these original artifacts remains an explicit repository-owner decision; no upstream paper or model license is inherited automatically.

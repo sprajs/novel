@@ -1,8 +1,8 @@
 # First working session: qualify one claim
 
-Prepared 11 October 2026. The goal is a reviewable corpus packet and an executable
-measurement specification, not a quick historical-discovery result. Setup already
-exists; consult the current README rather than repeating the archived setup plan.
+The goal is a reviewable corpus packet and an executable measurement
+specification. Use the [project README](../README.md) for environment setup and
+implementation limits before starting the scientific work.
 
 | Time cap | Work | Concrete output |
 | --- | --- | --- |
@@ -18,7 +18,7 @@ progress if the evidence and next search are recorded. Do not fill a candidate
 quota by relaxing admission. The public worked cases remain development material.
 
 Use the commands in [data/discovery/README.md](../data/discovery/README.md)
-for the new specification and the existing ground-truth checks:
+for the discovery specification and the calibration collection checks:
 
 ```sh
 python -m unittest discover -s tests/ground_truth -v

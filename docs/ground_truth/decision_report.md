@@ -1,8 +1,8 @@
 # Ground-truth collection decision report
 
-Prepared 11 October 2026. This collection advances the project from a plan to an auditable candidate registry, worked deductive tasks and tested data interfaces. It does **not** report a model's failure, successful rediscovery, activation-transfer effect or new scientific discovery. No target-model inference was performed in this research session.
+Audited 11 October 2026. This collection provides a candidate registry, worked deductive tasks and tested data interfaces for the [machine discovery programme](../../Plan/research-plan.md). It does **not** report a model's failure, successful rediscovery, activation-transfer effect or new scientific discovery. No target-model inference was performed in this collection audit.
 
-## Decision
+## Collection findings
 
 Maintain two model lanes. Keep the infrastructure's July 2025 Qwen3 revisions for mechanics. For a recent historical study, investigate the separately pinned April 29 Qwen3 snapshots against a narrowly scoped MeanFlow application; for DPO, investigate the April 2023 Pythia snapshots. Do not switch infrastructure's model pins silently. None of the twenty surveyed candidates is fully admitted: earliest-equivalent-disclosure, exact public-artifact evidence, prerequisite competence and independent review remain gates.
 
@@ -29,9 +29,9 @@ The [infrastructure adapter](../../tests/ground_truth/infrastructure_adapter.py)
 | FlashAttention's scoped online merge has 2018 softmax and 2021 attention antecedents; retained code also has a May 20, 2022 commit before its arXiv date | Reject “rediscovered FlashAttention” for recovering that identity; audit public code visibility and the particular systems contribution separately |
 | Low-rank additive/fusible adaptation has 2016 and 2018 antecedents | Reject generic low-rank update plus merge as uniquely LoRA's discovery |
 | The scalar speculative residual sampler already appears in 2017 maximal coupling; SOAP points to an essentially equivalent older optimizer | Reject the later-paper attribution of those narrow identities; retain as precise method controls |
-| CUSP's detailed auditor explicitly exempts correct predictions/methodologies matching the paper | Correct the plan's overly broad contamination critique; output similarity alone must not invalidate a rediscovery |
+| CUSP's detailed auditor explicitly exempts correct predictions/methodologies matching the paper | Output similarity alone must not invalidate a rediscovery |
 
-Evidence and exact revisions are in the [model audit](model_audit.md), [lead temporal audit](lead_temporal_audit.md), [survey](candidate_survey.md), and [benchmark audit](benchmark_audit.md). A narrow CUSP evidence correction is also applied to [Plan/research-plan.md](../../Plan/research-plan.md); unrelated plan sections remain unchanged. Dates reflect inspected primary records and bounded searches; commit timestamps alone do not prove historical public visibility.
+Evidence and exact revisions are in the [model audit](model_audit.md), [lead temporal audit](lead_temporal_audit.md), [survey](candidate_survey.md), and [benchmark audit](benchmark_audit.md). Dates reflect inspected primary records and bounded searches; commit timestamps alone do not prove historical public visibility.
 
 ## What changes make the deductions valid
 
@@ -62,13 +62,22 @@ git diff --check
 
 Ten version-specific paper PDFs were lawfully retrieved temporarily and hashed for version inspection; only citations, hashes and original summaries are committed. Public model metadata and tokenizer files were inspected; no checkpoint weights, restricted corpus, copied paper PDF or inference outputs are committed. The [manifest](../../data/ground_truth/manifest.json) records raw-byte hashes of this collection. It is not a guarantee of source truth or historical exclusion.
 
-## Remaining decisions and next collection steps
+## Use within the programme
 
-1. **Choose the historical target claim.** Decide whether selected-prerequisite reconstruction of a later application is worthwhile when the underlying calculus is old. For MeanFlow, audit two-time/shortcut/transport antecedents and the exact training construction; for DPO, audit earlier preference-policy/IRL objectives and public author/code/talk histories. Do not relabel classical identities as new discoveries to obtain an admissible set.
-2. **Select and validate the separate historical model lane.** Review the April Qwen/Pythia release evidence, confirm exact acquired bytes and all post-training/adapters, preserve the original tokenizer/template, and obtain runtime/no-op checks. There is no reason to replace the working modern mechanics lane while doing this audit.
-3. **Obtain independent adjudication.** A domain reviewer should check novelty scope and derivations; a temporal reviewer should check the artifact/public-release chain, source permissions and unresolved channels. Record disagreements rather than converting missing evidence into admission. Original artifact licensing remains the repository owner's decision.
-4. **Run bounded development calibration only after model and protocol choices.** Assess prerequisites in fresh contexts, report the entire cohort, and classify floor/ceiling, arithmetic, retrieval, format and truncation errors. None of the supplied prompts has a measured hint benefit yet. No paid compute or broad inference sweep is part of this collection.
-5. **Freeze a prospective donor policy and held-out structural population.** Define answer equivalence/pools, new families, useful-effect threshold, harms, sampling policy and a variance-based sample size. Generate new final content under a custodian after freeze, outside this public tree, and log access. The plan's illustrative mixture size is not automatically powered for the newly designated held-out primary endpoint.
-6. **Collect transfer and specificity evidence.** Evaluate unguided held-out consequences with independent verifiers, different-answer donors, generic/answer/sham controls and bridge-inapplicable guardrails. Treat shared worlds, paraphrases, seeds and donor libraries as dependence, and report family-specific uncertainty.
+The [corpus protocol](../../Plan/corpus-protocol.md) governs admission of actual
+scientific contributions. For MeanFlow, audit the training design and its
+antecedents rather than admitting the classical calculus identity as a new
+discovery. Historical model lanes require complete artifact and interface
+evidence, competence checks and independent domain/temporal adjudication.
 
-There is no remaining repository-authentication blocker. Scientific admission, human review, licensing choice and actual behavioral evidence remain unresolved. The collection is ready for review and bounded next-stage calibration; it is not ready to support a historical novelty or causal-mechanism claim.
+Use these public fixtures to check scoring, prerequisite competence, prompt
+boundaries and exact verifiers. The [measurement protocol](../../Plan/measurement-protocol.md)
+defines the observational study's semantic endpoints and confirmation process.
+No supplied prompt has a measured hint benefit, and these exposed fixtures
+cannot become a sealed confirmation set.
+
+Transfer and specificity studies require the [causal study gates](../../Plan/causal-review.md)
+and their own held-out population, donor policy and power analysis. The local
+[transfer calibration protocol](protocol.md) supplies controls for that stage.
+Scientific admission, human review, licensing and behavioral evidence remain
+unresolved; passing fixture checks cannot settle them.

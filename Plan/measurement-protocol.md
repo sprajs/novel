@@ -2,7 +2,7 @@
 
 Prepared 11 October 2026. Status: proposed observational protocol, ready to turn into a preregistration after the explicit freeze decisions below. No target model has been run, no historical discovery has been certified, and no confirmation corpus exists. Numerical allocations are feasibility proposals, not measured runtime or a claim of adequate rare-event power.
 
-This programme asks how a particular immutable model distributes probability over valid reconstructions of human ideas whose first contribution-bearing public disclosure came after that model already existed. It first measures behaviour and conditional likelihood, then characterizes observable failures. Changing activations, weights, caches, or decoding to increase recovery is a later experiment with its own protocol. The existing [causal review](causal-review.md) remains relevant to that later work; its intervention endpoint does not replace the observational endpoint here.
+The first study asks how a particular immutable model distributes probability over valid reconstructions of human ideas whose first contribution-bearing public disclosure came after that model already existed. It measures behaviour and conditional likelihood, then characterizes observable failures. Changing activations, weights, caches, or decoding to increase recovery is a later experiment with its own protocol. The [causal study guide](causal-review.md) defines requirements for that work; this protocol defines the observational endpoint.
 
 The [ground-truth collection](../docs/ground_truth/README.md) supplies development fixtures, audits, and verifier precedents. Its DPO, speculative-decoding, DoRA, FlashAttention, and MeanFlow packets are not admitted historical discoveries. In particular, recovering a classical identity appearing inside a later method cannot establish recovery of that method's novel contribution. Read the [antecedent audit](../docs/ground_truth/lead_temporal_audit.md), [model audit](../docs/ground_truth/model_audit.md), and [corrected benchmark audit](../docs/ground_truth/benchmark_audit.md) before selecting events.
 
@@ -56,7 +56,7 @@ Freeze before confirmation: event inventory and cluster IDs; canonical problem a
 
 ## 3. Prompt conditions and the actual sampling law
 
-Use one short, model-appropriate canonical problem prompt per confirmation event. Base models may require a completion format rather than an invented chat interface; few-shot formatting examples must be generic, historically eligible, and declared. An instruction-tuned model's exact template and thinking argument are part of the condition. No target-paper title, distinctive post-freeze system name, citation, gold answer, verifier trace, or hidden evaluator metadata enters the primary prompt.
+Use one short, model-appropriate canonical problem prompt per confirmation event. Base models may require a completion format rather than an invented chat interface; few-shot formatting examples must be generic, historically eligible, and declared. An instruction-tuned model's exact template and thinking argument are part of the condition. No target-paper title, distinctive later system name, citation, gold answer, verifier trace, or hidden evaluator metadata enters the primary prompt.
 
 | Condition | Model-visible information | Interpretation |
 | --- | --- | --- |

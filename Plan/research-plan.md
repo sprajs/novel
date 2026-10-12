@@ -1,9 +1,32 @@
-# Post-freeze human ideas: research programme
+# Novel: a research programme for machine discovery
 
-Prepared 11 October 2026. This is a research specification, not a discovery or
-model-performance result. **No historical idea is admitted yet.**
+This programme aims to understand how AI systems produce useful scientific
+ideas and to develop reliable ways to improve that ability. **No historical
+idea is admitted yet, and no scientific model-performance result is reported.**
 
-## The question and the first useful result
+## Long-term ambition
+
+The central question is how a model turns available knowledge into a new,
+correct and useful contribution. Novel connects evaluation of that contribution
+to the reasoning and internal mechanisms that produce it, then tests methods
+for improving discovery under explicit resource budgets.
+
+Historical reconstruction provides a controlled first assay. The longer
+programme extends to causal explanation, reproducible improvements and
+prospective work on open research problems across domains. A prospective
+contribution requires a contemporary prior-art audit, independent validation
+and evidence of scientific value; reconstructing a known result alone cannot
+establish it. These are research aims, with later stages contingent on evidence
+from the earlier ones.
+
+| Research direction | Intended contribution | Evidence required |
+| --- | --- | --- |
+| Measure discovery | Auditable tasks and semantic measures of valid scientific contributions | Claim-level admission, independent adjudication and reproducible model evaluation |
+| Explain discovery | Testable accounts of reasoning and internal mechanisms | Stable behavioral findings followed by selective causal tests |
+| Improve discovery | Methods that increase useful output per compute and review budget | New held-out cases, strong matched baselines and replication |
+| Discover prospectively | Independently validated contributions to open research problems | Current prior-art review, domain-specific verification and demonstrated value |
+
+## First study: historical reconstruction
 
 For a fixed, auditable model artifact, how often does a specified generation
 procedure recover a human research idea first disclosed after that artifact
@@ -28,28 +51,14 @@ Public-release evidence cannot exclude private precursors, obscure equivalents,
 or errors in the historical record. The corpus describes **first documented
 public contribution**, not the unknowable moment a person first thought of it.
 
-## What changes, and what survives
-
-The previous recommendation was to begin with exactly verified synthetic bridge
-transfer and postpone historical research. The new priority reverses that order.
-Synthetic and algebraic fixtures are useful engineering/competence controls;
-they do not stand in for human scientific novelty.
-
-| Previous emphasis | Current decision | Preserved asset |
-| --- | --- | --- |
-| Bridge-conditioned activation transfer as the first scientific endpoint | Defer until there is an admitted corpus and a reliable behavioral assay | [Original causal design](archive/pre-pr4/research-plan.md), [causal safeguards](archive/pre-pr4/causal-review.md) |
-| Small executable worlds as the principal benchmark | Keep as calibration and scoring checks, outside the historical success count | [Ground-truth collection](../docs/ground_truth/README.md) and its 51 fixtures |
-| Short identities as candidate discoveries | Separate old identity, later method, and empirical benefit; audit the residual contribution | [Earlier-equivalent audit](../docs/ground_truth/lead_temporal_audit.md) |
-| Qwen mechanics configuration as starting model | Keep it for engineering; choose a separately eligible historical snapshot for scientific claims | [Exact model audit](../docs/ground_truth/model_audit.md) |
-| Perturb-and-recover | Retain as a later, separately preregistered intervention experiment | [Current causal-stage gate](causal-review.md) |
-
-The five original Plan documents, including the corrected CUSP discussion, are
-preserved byte for byte at [archive/pre-pr4](archive/pre-pr4/README.md), with
-[hashes and source commit](archive/pre-pr4/provenance.json). Old links inside
-that archive reflect their original location; consult the historical source
-commit when following them. The earlier ground-truth collection remains intact
-and records its own scoped recommendation. This programme supersedes its
-*priority order*, not its evidence, exclusions or unresolved gates.
+Synthetic and algebraic fixtures serve as engineering and competence controls,
+outside the historical success count. The [evidence collection](../docs/ground_truth/README.md)
+provides 51 exact fixtures and candidate audits. Short identities must be
+distinguished from later methods and empirical benefits; use the
+[earlier-equivalent audit](../docs/ground_truth/lead_temporal_audit.md) to scope
+each claim. Mechanics configurations and historically eligible model bundles
+have separate roles, documented in the [model audit](../docs/ground_truth/model_audit.md).
+Activation transfer and perturb-and-recover require the [causal study gates](causal-review.md).
 
 ## Study objects and claim levels
 
@@ -89,7 +98,7 @@ inherently unsearchable class of ideas.
 The [corpus protocol](corpus-protocol.md) defines admission and independent human
 review. The [casebook](candidate-casebook.md) works through actual claims and
 candidate prompts across domains. They remain exploratory, public development
-material. The new [machine specification](../data/discovery/README.md) guards
+material. The [machine specification](../data/discovery/README.md) guards
 against accidental status promotion; validation cannot establish source truth.
 
 Begin with a bounded audit funnel, proposed at 20 leads, six worked development
@@ -124,8 +133,8 @@ The [existing audit](../docs/ground_truth/model_audit.md) identifies April 2023
 Pythia and April 2025 Qwen snapshots, including tokenizer/interface distinctions.
 Use its literal revisions and unresolved release-evidence notes. The current
 July Qwen interfaces are mechanics conditions; an April weight object alone
-does not make their later templates historically eligible. No model pin changes
-in this PR.
+does not make their later templates historically eligible. Model pins are
+explicit experimental conditions and require separate validation when changed.
 
 A model manifest must identify weights, tokenizer, template, adapters,
 post-training, generation policy, numerical precision and every information-bearing
@@ -169,7 +178,7 @@ and a target-bearing explanation/recognition condition. The latter is a ceiling
 or leakage diagnostic. Author-selected precursor combinations and bibliographies
 are hindsight assistance even if all source documents are old. Fresh-context
 prerequisite probes, length/style controls, plausible wrong mechanisms,
-pre-freeze known ideas and insufficient-information cases help interpret failure.
+ideas known before model release and insufficient-information cases help interpret failure.
 They do not uniquely diagnose hidden knowledge versus reasoning.
 
 Optional visible-reasoning and tensor measurements are read-only in this phase.
@@ -212,21 +221,22 @@ seeing outcomes require a new version and new confirmation; retain old results.
 
 | Stage | Concrete deliverable | Exit or stop rule | Ownership/dependency |
 | --- | --- | --- | --- |
-| 0 — specification | This plan, scoped worked cases, admission records and tests | Independent methodological review; zero fabricated admissions | PR #4 |
+| 0 — specification | Programme, scoped worked cases, admission records and tests | Independent methodological review; zero fabricated admissions | Research owner and methodological reviewers |
 | 1 — provenance and adjudication | Versioned claim/input/model packets; prior-art search ledger; two independent human admission reviews | Admit individually, reject/rescope antecedents, or publish an audit-only result | Domain/temporal experts and corpus custodian; not supplied by AI consensus |
 | 2 — measurement mechanics | Exact token scoring, semantic response export, fixed-seed generation and read-only capture logs | Hand-computed probability checks, target-span alignment, no-op/capture parity and backend discrepancy characterization | Separate inference implementation; interface in measurement protocol |
 | 3 — development | Six exposed events, old-result/near-miss controls, fresh-context competence probes, calibrated human judgments | Stop at competence floor, unjudgeable claims, runtime failure or unacceptable rubric ambiguity; log revisions | Research owner + experts; no target-driven confirmation selection |
 | 4 — frozen observation | New admitted cohort, 64-sample scenario or a justified revised budget; target/valid-solution rates and likelihood diagnostics | Report bounds and all outcomes; insufficient precision stays inconclusive | Requires validated model/backend and frozen study manifest |
 | 5 — replication | New events, another appropriate checkpoint or domain, stable adjudication | Test whether associations survive changed surfaces and selection frames | Separate budget and protocol |
-| 6 — interventions | Specific bridge or perturb-and-recover hypothesis on new cases | Independent free generation, compute-matched strong baselines and selective causal controls | Later PR; see causal-review.md |
+| 6 — interventions | Specific bridge or perturb-and-recover hypothesis on new cases | Independent free generation, compute-matched strong baselines and selective causal controls | Requires causal-review.md gates and a separate protocol |
+| 7 — prospective discovery | Independently selected open problems and new candidate contributions | Contemporary prior-art audit, independent scientific validation and demonstrated value | Requires replicated evaluation and a domain-specific protocol |
 
 Human adjudication may dominate cost. At the proposed confirmation scale, two
 independent first-pass judgments on each of 768 outputs require 1,536 reviews
 before disagreements and substantive empirical validation. Measure minutes per
 review on development; reduce or narrow the study if this is infeasible. An LLM
 can triage, but its score is not the primary scientific validity certificate.
-No recruitment, external messages, paid services, GPU rental or large model
-acquisition is performed by this PR.
+Recruitment, paid services, GPU rental and large model acquisition need a
+separate execution budget and operational plan.
 
 The existing [GPU validation gaps](../docs/validation.md) and
 [CPU repeatability investigation](../docs/validation/cpu-repeatability-investigation.md)
@@ -235,7 +245,7 @@ trajectories across batch shapes, kernels, precision, hardware or backends.
 Backend parity must cover probability scoring as well as generation. Faster
 inference changes feasibility, not corpus validity.
 
-## Literature position and retained correction
+## Literature position
 
 ResearchBench, DiscoveryBench, CUSP and Reconstruction supply candidate sources
 and protocol comparisons, not a ready-made eligible corpus. The
@@ -263,7 +273,7 @@ intervention tests, not blanket dismissal of all rationales.
 [Turpin et al.](https://arxiv.org/abs/2305.04388),
 [Lanham et al.](https://arxiv.org/abs/2307.13702).
 
-No unique literature gap is established by this planning pass. The prospective
+No unique literature gap is established by this specification. The prospective
 contribution is the conjunction of artifact-level temporal eligibility,
 claim-level human adjudication, distinction between target and alternative
 solutions, and reproducible semantic/likelihood measurement.
@@ -285,6 +295,6 @@ solutions, and reproducible semantic/likelihood measurement.
 7. Which internal association would justify a *new* causal intervention study,
    rather than merely rediscovering surface, length or answer-token differences?
 
-These are research gates. This PR resolves the programme design and exposes the
-remaining work; it does not solve historical novelty certification, semantic
-probability enumeration or the general problem of scientific discovery.
+These gates determine when each study can proceed and what its results can
+support. Historical novelty certification, semantic probability estimation and
+prospective scientific discovery each require their own evidence.
