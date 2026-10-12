@@ -3,11 +3,11 @@
   "projectId": "appgprj_6acd40d2a55c81919e433f02a07b603a",
   "audience": "owner-private",
   "researchRevision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
-  "siteSourceCommit": "84b066318ef80bed0bbd4e1708c1267b65dd946c",
-  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_827e085ce0008191b9bc7f13710b0405",
-  "deploymentId": "appgdep_6acd50aac5088191b5cdbb7870921bf4",
+  "siteSourceCommit": "ce25f8651d3c8194b92943c21098ea8a675016ed",
+  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_222c6514e2808191b30197f9ff801a82",
+  "deploymentId": "appgdep_6acd55ede5348191973a76fa16e91a59",
   "deploymentStatus": "succeeded",
-  "publishedAt": "2026-10-12T21:27:20.620730+00:00",
+  "publishedAt": "2026-10-12T21:49:49.888077+00:00",
   "maintenance": {
     "automationId": "keep-novel-s-reading-baseline-current",
     "kind": "local-thread-heartbeat",
@@ -27,15 +27,17 @@
       "391px mobile",
       "1440px desktop"
     ],
-    "note": "The parent review read all 13 chapters and rechecked their rendering at 1440px desktop and 391px mobile, with no horizontal overflow or browser errors. The new introductory section address, vocabulary entries and mobile navigation were checked. Prior second-pass QA also covered library search/filter/empty states, glossary navigation and all four unchanged interactive examples. The nine runtime archive files match the tested local output byte for byte; the helper-packaged hosting manifest matches semantically. Production browser inspection reached the ChatGPT login screen, so native Sites results confirm successful version 3 deployment and owner-private access. No scientific model runs or new primary-method readings were performed in this parent review.",
+    "note": "All 13 chapters were checked at 1440px desktop and 391px mobile with no horizontal page overflow, KaTeX errors or browser warnings/errors. All 130 expressions pass the exact pinned renderer, and its vendored asset hashes match provenance. MathML and loaded fonts were inspected; glossary filtering still works. The original 8765 browser tab was observed displaying the superseded prototype, then refreshed and verified to contain no comprehension checkbox, quiz prompt or progress controls. Prior teaching-pass QA covered the library and four interactive examples. All 74 runtime archive files match the checked local output byte for byte; the packaged hosting manifest matches semantically. Native Sites confirms successful private publication. Signed-in production browser inspection remains unavailable. No scientific model runs or new paper-method readings were performed.",
     "sections": 69,
     "glossaryTerms": 41,
     "explainedChapterConnections": 26,
-    "primaryMethodChecksSecondPass": 9
+    "primaryMethodChecksSecondPass": 9,
+    "typesetExpressions": 130,
+    "mathRenderer": "KaTeX 0.19.0 (local assets, htmlAndMathml)"
   },
-  "curriculumCommit": "63578747c57854efc0da57c77da026be4ddee137",
-  "archiveSha256": "a327e8d948cdebaccf332d174816352f3bedee96109521887a859f146cbe3f35",
-  "versionNumber": 3,
+  "curriculumCommit": "25c5d22c95a03a78c362a78d9d48195f1f13c15c",
+  "archiveSha256": "248199b56751aedeacc2c078bd25b9d3ecd32adf76477f95e89bfd021b5447d6",
+  "versionNumber": 4,
   "parentTeachingReview": {
     "record": "learning/TEACHING-REVIEW.md",
     "reviewedSecondPassCommit": "636ecc423d65b527add3ecb10c8b0f55470df707",
