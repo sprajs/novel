@@ -32,11 +32,12 @@ The locked environment targets Linux x86-64, Python 3.12.14, uv 0.12.23,
 PyTorch 2.8.0+cpu and Transformers 4.57.6. Current alternatives were researched
 as of 11 October 2026; newer versions are not silently substituted. All direct
 dependencies are exact pins; `uv.lock` fixes transitive dependencies and hashes.
-CPU FP32 is an engineering condition distinct from the prospective RTX 2080 Ti
-FP16 scientific condition. The CPU wheel cannot run CUDA tests.
+CPU FP32 and RTX 2080 Ti FP16 are distinct engineering conditions; scientific
+qualification remains separate. The CPU wheel cannot run CUDA tests.
 These commands select CPU Torch even on a GPU host. The
 [three execution profiles](docs/tooling/execution-profiles.md) provide isolated
-CUDA locks and actual GPU code; GPU validation is still awaiting hardware.
+CUDA locks and GPU code. [Local RTX 2080 Ti results](docs/validation/local-2080ti.md)
+record successful operational checks and the remaining numerical failures.
 
 From the repository root:
 
