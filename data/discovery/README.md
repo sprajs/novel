@@ -1,4 +1,4 @@
-# Illustrative post-freeze records
+# Discovery corpus specifications
 
 This directory supports the proposed [corpus protocol](../../Plan/corpus-protocol.md),
 [casebook](../../Plan/candidate-casebook.md), and [measurement protocol](../../Plan/measurement-protocol.md).
@@ -7,7 +7,7 @@ It contains one original, public **exploratory development** admission record fo
 No candidate is admitted, no human expert review has occurred, no model has run,
 and no source or model bytes were fetched for this record.
 
-The target is a generative method and its training design. The earlier
+The target is a generative method and its training design. The
 [MeanFlow calculus packet](../../docs/ground_truth/packets/meanflow.md) remains
 composition/calibration material; its exact checker does not certify the method.
 Known submission, recorded Git commit, and publisher release announcement are
@@ -33,8 +33,8 @@ sealed confirmation. A withdrawn shape requires a prior admission reference.
 Run the offline checks from the repository root:
 
 ```sh
-python tests/post_freeze/validate_admission.py
-python -m unittest discover -s tests/post_freeze -p 'test_*.py'
+python tests/discovery/validate_admission.py
+python -m unittest discover -s tests/discovery -p 'test_*.py'
 ```
 
 The standard-library checker supports only the bundled assertion vocabulary:

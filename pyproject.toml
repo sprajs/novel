@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "novel-research"
 version = "0.1.0"
-description = "Frozen-model activation intervention research infrastructure"
+description = "Research infrastructure for evaluating and understanding machine discovery"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "torch==2.8.0+cpu",

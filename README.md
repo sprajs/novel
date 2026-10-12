@@ -1,19 +1,32 @@
-# Novel: post-freeze idea research
+# Novel: toward a science of machine discovery
 
-This repository studies how a frozen model generates human research ideas first
-publicly disclosed after its exact artifact existed. The current priority is
-corpus admission and observational semantic/likelihood measurement; later
-activation interventions require a separate causal study. No historical idea is
-admitted yet. The existing CPU implementation and provenance are engineering
-assets, **not a scientific result**.
-Start with the [research plan](Plan/research-plan.md), then the
+Novel is a research programme for understanding how AI systems generate,
+develop and validate new scientific ideas. Its long-term aim is to turn that
+understanding into methods that reliably expand what these systems can discover:
+from recovering known human insights to producing useful contributions that
+survive independent scrutiny.
+
+The programme connects three questions: what makes a generated idea correct,
+novel and useful; which reasoning processes and internal mechanisms make it
+possible; and how to improve discovery under a measurable compute and review
+budget. It progresses through reproducible evaluation, mechanistic explanation,
+controlled interventions and prospective research across domains.
+
+The first study uses historical reconstruction as a controlled starting point:
+can a fixed model recover human contributions first publicly disclosed after
+its exact artifact existed? Corpus admission and semantic measurement come
+first, followed by causal studies once the assay is reliable. **No historical
+idea is admitted yet, and no scientific model-performance result is reported.**
+The implementation and provenance records establish engineering capabilities.
+
+Start with the [programme and roadmap](Plan/research-plan.md), then the
 [tooling comparison](docs/tooling/current-stack.md),
 [model selection](docs/models/selection.md), and [reading notes](papers/README.md).
-The active Plan supersedes the earlier bridge-first priority while preserving
-the [original documents](Plan/archive/pre-pr4/provenance.json) and unchanged
-[ground-truth audit](docs/ground_truth/README.md). The
-[measurement protocol](Plan/measurement-protocol.md) separates semantic success
-from reference-string likelihood. Tested implementation limits remain below.
+The [research guide](Plan/README.md) connects the protocols and next working
+session. The [evidence collection](docs/ground_truth/README.md) supplies candidate
+audits and exact calibration tasks; the [measurement protocol](Plan/measurement-protocol.md)
+separates semantic success from reference-string likelihood. Tested
+implementation limits remain below.
 
 The locked environment targets Linux x86-64, Python 3.12.14, uv 0.12.23,
 PyTorch 2.8.0+cpu and Transformers 4.57.6. Current alternatives were researched
@@ -21,7 +34,7 @@ as of 11 October 2026; newer versions are not silently substituted. All direct
 dependencies are exact pins; `uv.lock` fixes transitive dependencies and hashes.
 CPU FP32 is an engineering condition distinct from the prospective RTX 2080 Ti
 FP16 scientific condition. The CPU wheel cannot run CUDA tests.
-These commands select CPU Torch even on a GPU host. The new
+These commands select CPU Torch even on a GPU host. The
 [three execution profiles](docs/tooling/execution-profiles.md) provide isolated
 CUDA locks and actual GPU code; GPU validation is still awaiting hardware.
 
@@ -116,9 +129,9 @@ to redistribute. No repository-wide software license has been selected on the
 owner's behalf; model and paper licenses are recorded independently.
 
 For existing runtime integration use the [dataset handoff v1](docs/dataset-interface.md).
-The merged ground-truth collection remains under `data/ground_truth/`,
-`docs/ground_truth/`, and `tests/ground_truth/`. The new
-[post-freeze admission specification](data/post_freeze/README.md) is separate;
+The calibration and candidate-audit collection lives under `data/ground_truth/`,
+`docs/ground_truth/`, and `tests/ground_truth/`. The
+[discovery corpus admission specification](data/discovery/README.md) is separate;
 it does not promote those exploratory fixtures to historical ground truth.
 Hidden answers are excluded from the public generation interface.
 

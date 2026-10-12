@@ -78,18 +78,18 @@
     },
     {
       "path": "docs/ground_truth/README.md",
-      "bytes": 3261,
-      "sha256": "183993ad5a5c34cc52fd875a863f76bf1cb7bdfc163e8839bb5c8307e1205c70"
+      "bytes": 3265,
+      "sha256": "396f5ff8cff22e7b787d665d7b3930fb1ee603a22d552280da08e5bea2d16135"
     },
     {
       "path": "docs/ground_truth/adversarial_review.md",
-      "bytes": 15937,
-      "sha256": "a79b1840a0523dd78289874eccefa8d9eca9b40ee1e3c6dc8bd58fb279586089"
+      "bytes": 15874,
+      "sha256": "5aac55db50a0e86b0ceae51be9e36f2fd6ee39d404dba6214e7e0a69dd4cb274"
     },
     {
       "path": "docs/ground_truth/benchmark_audit.md",
-      "bytes": 11940,
-      "sha256": "5537f59970afc123d6d9ccf88e68210e50575d65a49d7d6d5d199aa158ff9d57"
+      "bytes": 11912,
+      "sha256": "4f1e1072cd941e412edbd3e9d2f9e39433c84c5f37708dbbd710c09b47367a90"
     },
     {
       "path": "docs/ground_truth/calibration.md",
@@ -103,8 +103,8 @@
     },
     {
       "path": "docs/ground_truth/decision_report.md",
-      "bytes": 13057,
-      "sha256": "4d2c4d1f658252104e57d8894c22dda695f98a7c640755091c52cc5ea6314169"
+      "bytes": 11446,
+      "sha256": "311b24d06d81d7f0c28178cbc6c2a56d3145392a89da2ecacf112cb202d716c0"
     },
     {
       "path": "docs/ground_truth/evidence_and_annotation.md",
@@ -163,8 +163,8 @@
     },
     {
       "path": "docs/ground_truth/protocol.md",
-      "bytes": 9840,
-      "sha256": "e71495cdcafa68acfbb9baf027f38e2773cede132b56b05e4bd121917811ad73"
+      "bytes": 10118,
+      "sha256": "f2d2ad9fd6cd2801ef012455e87a4dc797c0c30a070e1a872788388739a0c3fe"
     },
     {
       "path": "tests/ground_truth/.gitignore",

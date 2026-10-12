@@ -1,6 +1,6 @@
 {
-  "schema_version": "post-freeze-admission-v0.1",
-  "record_id": "post-freeze-meanflow-admission-dev-001",
+  "schema_version": "discovery-admission-v0.1",
+  "record_id": "discovery-meanflow-admission-dev-001",
   "case_id": "meanflow-training-design-2025",
   "status": "exploratory",
   "status_reason": "Method-level candidate linked to public development prose; no historical or scientific admission is certified.",

@@ -1,10 +1,16 @@
-# Prompt and transfer protocol v0.1
+# Transfer calibration protocol v0.1
+
+This reference design supports a later causal study under the
+[programme's causal gates](../../Plan/causal-review.md). The first historical
+reconstruction study uses the [observational measurement protocol](../../Plan/measurement-protocol.md).
+These public fixtures calibrate mechanics and verifier contracts; they do not
+define an admitted scientific cohort or authorize a transfer experiment.
 
 ## Estimands and prospective selection
 
 The primary endpoint is independently verified **free-generation success on unguided held-out consequences**, after a frozen intervention learned from other worlds whose concrete answers differ. Here “unguided” means no bridge or solution text in the recipient; both primary arms receive the same complete observations and explicit prerequisites A/B. Compare the bridge-derived intervention with the unmodified recipient baseline. Also compare matched irrelevant, random, answer-only and generic-task interventions. Improvement relative only to a harmful sham is insufficient.
 
-This specification promotes the held-out structural population to primary. The plan's illustrative 160-world mixture and 80-world held-out subset are not a powered design for this endpoint. Sample size, family weighting, practical effect threshold, harm margins, seed count and budget remain unresolved, to be fixed from development variance and actual runtime before generating confirmation data. Do not silently claim power from total completion count.
+For this transfer design, the held-out structural population is primary. Sample size, family weighting, practical effect threshold, harm margins, seed count and budget remain unresolved, to be fixed from development variance and actual runtime before generating confirmation data. Total completion count alone does not establish power.
 
 Choose candidates by temporal evidence and verifiability, and choose development difficulty using a logged recipe. Retain every calibration outcome. Do not admit a confirmation item because that model failed without help and succeeded with hints. All numeric examples in this repository have been seen by authors and are development material. Final families and worlds must be newly instantiated by a designated custodian after protocol freeze, with the authoring/evaluation boundary recorded.
 

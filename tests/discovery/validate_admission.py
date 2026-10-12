@@ -1,4 +1,4 @@
-"""Offline structural checks for the illustrative post-freeze admission record.
+"""Offline structural checks for the illustrative discovery admission record.
 
 The assertion subset below is deliberately finite and fail-closed. It is not a
 general Draft 2020-12 implementation or an operational admission authority.
@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "data" / "post_freeze"
+DATA = ROOT / "data" / "discovery"
 ADMITTED = {"admitted_development", "admitted_confirmation"}
 ASSERTIONS = {
     "$ref", "type", "enum", "const", "required", "properties",

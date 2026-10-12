@@ -26,11 +26,11 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "post-freeze-admission-v0.1"
+      "const": "discovery-admission-v0.1"
     },
     "record_id": {
       "type": "string",
-      "pattern": "^post-freeze-[a-z0-9-]+$"
+      "pattern": "^discovery-[a-z0-9-]+$"
     },
     "case_id": {
       "type": "string",
@@ -726,9 +726,9 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:novel:post-freeze:admission:v0.1",
-  "title": "Exploratory post-freeze method admission record",
-  "$comment": "Validation checks declared structure and consistency, never historical novelty or truth of human evidence. Additional date, cross-reference, and independence constraints are enforced by tests/post_freeze/validate_admission.py.",
+  "$id": "urn:novel:discovery:admission:v0.1",
+  "title": "Exploratory scientific contribution admission record",
+  "$comment": "Validation checks declared structure and consistency, never historical novelty or truth of human evidence. Additional date, cross-reference, and independence constraints are enforced by tests/discovery/validate_admission.py.",
   "$defs": {
     "time_evidence": {
       "type": "object",

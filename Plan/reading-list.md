@@ -23,9 +23,9 @@ entire library before qualifying the first claim.
 
 ## Source access and boundaries
 
-PR #4 checked public primary pages and version histories, building on the
-unchanged 11 October ground-truth audits. The new documents link claims to their
-sources; the corpus casebook records candidate-specific uncertainties. No full
+The source audit checked public primary pages and version histories on
+11 October 2026. The documents link claims to their sources; the corpus
+casebook records candidate-specific uncertainties. No full
 paper or restricted benchmark is redistributed. No upstream license is adopted
 as the repository's license.
 
@@ -39,6 +39,6 @@ ambiguities; those remain explicit in the casebook rather than becoming clean
 historical evidence. Author claims about performance are not independent
 replications.
 
-The original intervention syllabus remains [archived](archive/pre-pr4/reading-list.md).
-Its existence does not establish that every historical citation has been
-re-audited for a future intervention experiment.
+The [causal study guide](causal-review.md) identifies methodological reading for
+interventions. A future experiment must audit the versions relevant to its own
+claims.

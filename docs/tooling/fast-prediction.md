@@ -250,7 +250,7 @@ CPU repeatability anomaly and all untested GPU caveats remain open.
 
 ## Alignment with the observational protocol
 
-The [merged measurement protocol](../../Plan/measurement-protocol.md) distinguishes
+The [measurement protocol](../../Plan/measurement-protocol.md) distinguishes
 raw model probability `p`, decoder-induced sampling probability `q`, exact token
 paths and semantic event recovery. This adapter is measurement infrastructure;
 it admits no historical candidates, labels no discoveries and estimates no

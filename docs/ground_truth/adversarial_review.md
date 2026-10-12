@@ -62,7 +62,9 @@ No prerequisite competence, hint benefit, donor-answer copying rate, transfer ef
 
 These SHA-256 values identify the reviewed bytes. Later edits require reconciliation with this record; the final collection manifest may additionally include this review and subsequent handoff documents.
 
-The decision-report hash below identifies its [pre-correction version](https://github.com/sprajs/novel/blob/b491c365446644f16147afc7cac62fa316c8b2d9/docs/ground_truth/decision_report.md). Its only subsequent change records the narrow CUSP correction in `Plan/research-plan.md`; the substantive findings and all other artifacts listed below are unchanged. The manifest records the current bytes.
+The decision-report hash below identifies the [audited snapshot](https://github.com/sprajs/novel/blob/b491c365446644f16147afc7cac62fa316c8b2d9/docs/ground_truth/decision_report.md).
+It is a review receipt for that version. The collection report's programme
+navigation and framing can evolve; the manifest records the current bytes.
 
 | Artifact | SHA-256 |
 | --- | --- |

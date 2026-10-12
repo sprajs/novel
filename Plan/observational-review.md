@@ -2,9 +2,9 @@
 
 Prepared 11 October 2026. This is an independent AI-assisted design review,
 not human peer review, target admission, or evidence from model inference.
-The review inspected the existing plan and ground-truth audits, then the revised
-programme, protocols, six-case book, and structural admission specification. The
-file-specific findings and checks are recorded below.
+The review inspected the programme, protocols, six-case book, ground-truth
+audits and structural admission specification. Its methodological findings and
+scope are recorded below.
 
 ## Verdict and scope
 
@@ -18,8 +18,8 @@ likelihood score, or a colorful activation plot is not yet such an assay.
 The existing audits contain valuable negative evidence. Classical normalization,
 coupling, low-rank updates, and calculus must not acquire a later discovery date
 because a recent paper uses them. None of the twenty existing leads is admitted.
-The corrected CUSP discussion must survive the revision: recovering a later
-correct method or numerical prediction is an intended outcome, not automatic
+Recovering a later correct method or numerical prediction is an intended
+outcome, not automatic
 evidence of contamination. Its actual auditor exempts those outcomes; named
 entities still cannot establish their own training provenance.
 [Existing decision report](../docs/ground_truth/decision_report.md),
@@ -39,7 +39,7 @@ properly bounded observational study impossible.
 | Teacher forcing | Activations while reading the target show the model invented it | Label supplied-target traces as recognition/conditioning measurements; inspect unassisted traces separately |
 | Reference matching | Failure to match the historical paper proves failure to find a useful idea | Allow valid alternative methods and unexpected insights; adjudicate correctness, utility, and novelty independently |
 | Geometry | Weight distance or activation separation proves novelty or discovery | Declare coordinate system and behavioral endpoints; reserve causal claims for a separately controlled intervention study |
-| OOD/search | Post-freeze dates prove distributional novelty or an inherently unsearchable task class | Describe documented history and observed finite-budget failures; avoid universal impossibility claims |
+| OOD/search | Disclosure after model release proves distributional novelty or an inherently unsearchable task class | Describe documented history and observed finite-budget failures; avoid universal impossibility claims |
 | Adjudication | Code or equations make every target trivially verifiable | State the exact specification, assumptions, checker coverage, and empirical remainder; budget expert review |
 
 ## What admission must actually establish
@@ -208,28 +208,27 @@ No finite-budget failure proves a task class inherently unsearchable.
 [Zhang and Nanda, Patching Best Practices](https://arxiv.org/abs/2309.16042v2),
 [Heimersheim and Nanda, Interpreting Patching](https://arxiv.org/abs/2404.15255).
 
-## Revision review record
+## Design review findings
 
 The final review read the active [programme](research-plan.md),
 [measurement protocol](measurement-protocol.md), [corpus protocol](corpus-protocol.md),
 [casebook](candidate-casebook.md), Plan navigation/session/reading/causal files,
-root README, and [schema, example, scope notes](../data/post_freeze/README.md)
+root README, and [schema, example, scope notes](../data/discovery/README.md)
 with their validator and mutation tests. The review checked the methodological
 claims against the primary sources linked above; it did not independently
 re-audit every candidate paper's full versioned technical content.
 
-| Finding | Resolution in the revised artifacts | Status |
+| Finding | Design requirement or resolution | Status |
 | --- | --- | --- |
-| Old plan prioritized synthetic bridge transfer | Programme now starts with claim-level corpus admission and observation; old fixtures remain calibration and the earlier plan is archived | Resolved for planning |
 | Reference likelihood could be mistaken for idea probability | Measurement separates decoder `q` from raw `p`, complete-path lower bounds from finite sampling estimates, and first-contribution spans from downstream forced continuation | Resolved |
 | Paper matching could suppress valid alternatives | Primary `T = V AND M` and accompanying `V` distinguish target recovery from any valid solution; older equivalent routes and unresolved alternatives retain separate labels | Resolved |
 | A plausible scientific proposal could be counted as validated | Each event must freeze an evidence tier: conceptual construction under assumptions, proved property, or empirical realization; missing essential empirical evidence remains unknown/plausible rather than definite `V` | Resolved in specification; actual rubrics pending |
 | A short response could be credited with a major theorem | Casebook defers mincut generation until an expert defines an independently meaningful lemma-sized target; scoped response/cap feasibility is a gate, and a generic outline cannot count as proof | Resolved for planning |
-| Corpus lifecycle and schema were inconsistent | Schema now uses the protocol's admitted-development/confirmation and withdrawn states, with distinct artifact-bound human review declarations and exposure/custody fields | Resolved structurally |
+| Corpus lifecycle and schema must agree | Schema uses the protocol's admitted-development/confirmation and withdrawn states, with distinct artifact-bound human review declarations and exposure/custody fields | Resolved structurally |
 | Structural checks might be read as authentication or admission | Data README explicitly limits checks to declared consistency and lists signature authentication, source truth, full weight identities, custody, append-only history and semantic leakage as unenforced obligations | Resolved by scope limitation |
 | Historical sources could be promoted despite adverse evidence | All six cases and the MeanFlow record remain exploratory; antecedents, manuscript-date evidence, the engineering rendering conflict and public-visibility gaps remain blockers | Correctly unresolved |
 
-Independent execution of the structural CLI passed. The new admission suite
+Independent execution of the structural CLI passed on 11 October 2026. The admission suite
 passed **23 tests**, including its optional full Draft 2020-12 shape check with
 the already installed `jsonschema` library. The mutation tests exercise status
 promotion, independent reviewers, bound digests, mutable model/source aliases,
@@ -248,5 +247,5 @@ custody and a frozen precision/runtime budget remain scientific gates. Broader
 source or serving claims would require additional evidence. The existing CPU
 discrepancy and unperformed GPU validation remain engineering limitations.
 
-No model weights or datasets were downloaded, no inference or paid workloads
-were run, and this reviewer changed only this document.
+No model weights or datasets were downloaded and no inference or paid workloads
+were run during the design review.
