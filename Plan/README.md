@@ -10,7 +10,7 @@ no scientific model-performance result is reported.**
 | [Measurement protocol](measurement-protocol.md) | Semantic events, teacher forcing, sampling, controls, statistics and internal diagnostics |
 | [Corpus protocol](corpus-protocol.md) | Immutable model/idea provenance, licensing and independent human admission |
 | [Worked candidate casebook](candidate-casebook.md) | Scoped exploratory contributions, prompts, prior-art challenges and verdict rubrics |
-| [Machine admission specification](../data/post_freeze/README.md) | Record/schema examples and executable structural checks |
+| [Machine admission specification](../data/discovery/README.md) | Record/schema examples and executable structural checks |
 | [First working session](first-day-plan.md) | Bounded concrete next actions and stopping points |
 | [Reading syllabus](reading-list.md) | Primary sources tied to research decisions |
 | [Independent AI review](observational-review.md) | Critical objections and their resolution; not human peer review |

@@ -89,7 +89,7 @@ inherently unsearchable class of ideas.
 The [corpus protocol](corpus-protocol.md) defines admission and independent human
 review. The [casebook](candidate-casebook.md) works through actual claims and
 candidate prompts across domains. They remain exploratory, public development
-material. The new [machine specification](../data/post_freeze/README.md) guards
+material. The new [machine specification](../data/discovery/README.md) guards
 against accidental status promotion; validation cannot establish source truth.
 
 Begin with a bounded audit funnel, proposed at 20 leads, six worked development

@@ -213,7 +213,7 @@ No finite-budget failure proves a task class inherently unsearchable.
 The final review read the active [programme](research-plan.md),
 [measurement protocol](measurement-protocol.md), [corpus protocol](corpus-protocol.md),
 [casebook](candidate-casebook.md), Plan navigation/session/reading/causal files,
-root README, and [schema, example, scope notes](../data/post_freeze/README.md)
+root README, and [schema, example, scope notes](../data/discovery/README.md)
 with their validator and mutation tests. The review checked the methodological
 claims against the primary sources linked above; it did not independently
 re-audit every candidate paper's full versioned technical content.

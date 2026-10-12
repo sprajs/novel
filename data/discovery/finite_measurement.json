@@ -1,5 +1,5 @@
 {
-  "schema_version": "post-freeze-measurement-example-v0.1",
+  "schema_version": "discovery-measurement-example-v0.1",
   "purpose": "Hand-enumerated finite probability law illustrating the measurement protocol; no model observations or scientific labels are asserted.",
   "protocol_ref": "Plan/measurement-protocol.md",
   "development_only": true,

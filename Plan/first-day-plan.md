@@ -17,7 +17,7 @@ A three-hour session may end with rejection or unresolved provenance. That is
 progress if the evidence and next search are recorded. Do not fill a candidate
 quota by relaxing admission. The public worked cases remain development material.
 
-Use the commands in [data/post_freeze/README.md](../data/post_freeze/README.md)
+Use the commands in [data/discovery/README.md](../data/discovery/README.md)
 for the new specification and the existing ground-truth checks:
 
 ```sh

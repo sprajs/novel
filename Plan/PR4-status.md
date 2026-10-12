@@ -9,7 +9,7 @@ review and explicit release; this record is not a merge authorization.
 ## Ownership and changes
 
 This revision owns `Plan/`, introductory research framing/navigation in
-`README.md`, and new `data/post_freeze/` and `tests/post_freeze/` specifications.
+`README.md`, and new `data/discovery/` and `tests/discovery/` specifications.
 It changes no runtime, backend, model pin, dependency or environment lock,
 existing ground-truth collection, or GPU/CPU validation evidence. Repository
 and workspace inspection found no applicable AGENTS.md or local .agents skill
@@ -51,8 +51,8 @@ establish historical novelty or validate the truth of a review signature.
 Commands, run from the repository root:
 
 ```sh
-python tests/post_freeze/validate_admission.py
-python -m unittest discover -s tests/post_freeze -p 'test_*.py'
+python tests/discovery/validate_admission.py
+python -m unittest discover -s tests/discovery -p 'test_*.py'
 python -m unittest discover -s tests/ground_truth -v
 python tests/ground_truth/artifact_tools.py validate
 python tests/ground_truth/artifact_tools.py manifest --check

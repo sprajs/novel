@@ -118,7 +118,7 @@ owner's behalf; model and paper licenses are recorded independently.
 For existing runtime integration use the [dataset handoff v1](docs/dataset-interface.md).
 The merged ground-truth collection remains under `data/ground_truth/`,
 `docs/ground_truth/`, and `tests/ground_truth/`. The new
-[post-freeze admission specification](data/post_freeze/README.md) is separate;
+[post-freeze admission specification](data/discovery/README.md) is separate;
 it does not promote those exploratory fixtures to historical ground truth.
 Hidden answers are excluded from the public generation interface.
 
