@@ -19,6 +19,8 @@ def main():
     parser.add_argument("--profile", choices=("cloud-cpu", "local-2080ti", "rental"), required=True)
     parser.add_argument("--source", type=Path, default=ROOT / ".cache/llama.cpp")
     parser.add_argument("--jobs", type=int, default=5)
+    parser.add_argument("--nvcc-version", choices=("12.8.90", "12.8.93"), default="12.8.90",
+                        help="Exact CUDA 12.8 Update 1 compiler component; 12.8.93 is in NVIDIA's redistributable manifest")
     args = parser.parse_args()
     os.chdir(ROOT)
     bounded_int(args.jobs, "jobs", 1, 32)
@@ -35,7 +37,9 @@ def main():
     verify_source(source)
     build = ROOT / ".cache/fast" / args.profile
     if (build / "receipt.json").exists():
-        verify_build(build, args.profile)
+        receipt = verify_build(build, args.profile)
+        if profile["cuda_arch"] and not re.search(r"\bV" + re.escape(args.nvcc_version) + r"\b", receipt.get("nvcc") or ""):
+            raise ValueError("Existing GPU build used a different NVCC version; select its exact --nvcc-version")
         print(f"Verified existing build: {build}")
         return
     tools = Path(sys.executable).parent
@@ -45,8 +49,8 @@ def main():
     nvcc = None
     if profile["cuda_arch"]:
         nvcc = subprocess.check_output(["nvcc", "--version"], text=True)
-        if not re.search(r"release 12\.8,", nvcc) or "V12.8.90" not in nvcc:
-            raise ValueError("GPU recipe requires explicitly provisioned CUDA 12.8 Update 1 (nvcc V12.8.90); no installer/fallback")
+        if not re.search(r"release 12\.8,", nvcc) or not re.search(r"\bV" + re.escape(args.nvcc_version) + r"\b", nvcc):
+            raise ValueError(f"GPU recipe requires explicitly provisioned CUDA 12.8 Update 1 (nvcc V{args.nvcc_version}); no installer/fallback")
         flags += ["-DGGML_CUDA=ON", "-DCMAKE_CUDA_ARCHITECTURES=" + profile["cuda_arch"]]
     else:
         flags += ["-DGGML_CUDA=OFF"]
@@ -61,7 +65,8 @@ def main():
     receipt = {"schema_version": 1, "commit": verify_source(source), "tag": config["tag"],
                "profile": args.profile, "commands": [configure, compile_cmd], "host": host_record(),
                "packages": packages,
-               "compiler": subprocess.check_output(["c++", "--version"], text=True), "nvcc": nvcc,
+               "compiler": subprocess.check_output([os.environ.get("CXX", "c++"), "--version"], text=True), "nvcc": nvcc,
+               "expected_nvcc_version": args.nvcc_version if nvcc else None,
                "system_runtime_linkage": subprocess.check_output(["ldd", str(build / "bin/llama-server")], text=True),
                "build_tool_lock_sha256": sha256_file(ROOT / "environments/fast-build/uv.lock"),
                "cmake_cache_sha256": sha256_file(build / "CMakeCache.txt"),
