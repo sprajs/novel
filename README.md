@@ -71,10 +71,12 @@ checks a local logit contrast; it is mechanics, not learned donor attribution. C
 explicitly rejects interventions. New architectures require new validation.
 
 The offline suite constructs tiny random Qwen3 models: it downloads nothing and
-tests the mechanics, including a nonzero effect and hook cleanup. GPU-marked
-tests are skipped on this CPU cloud. The [GPU profiles and validation commands](docs/tooling/execution-profiles.md)
-implement the next bounded hardware checks; there is no measured GPU or
-fastest-backend claim.
+tests the mechanics, including a nonzero effect and hook cleanup. The GPU unit
+gate has also passed on a local RTX 2080 Ti. [Local installation and results](docs/validation/local-2080ti.md)
+record working uncached inference/capture on 0.6B and 1.7B, plus outstanding
+FP16 cache-parity failures. The [GPU profiles and validation commands](docs/tooling/execution-profiles.md)
+retain their strict numerical gates; an operational pass is separate from full
+profile or scientific qualification.
 
 Three modes are available through `scripts/profile_smoke.py`: `cloud-cpu`
 (Qwen3-0.6B FP32), `local-2080ti` (11 GB, Qwen3-1.7B FP16), and `rental`

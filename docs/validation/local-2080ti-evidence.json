@@ -1,0 +1,3653 @@
+{
+  "artifacts": [
+    {
+      "artifact_bytes": 1509347648,
+      "artifact_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "conversion_lock_sha256": "ccc84bf6072b4d060bc22cacc256609291fc85bc922052f3942251b51a8c4d27",
+      "custody": {
+        "bytes": 7440,
+        "path": ".cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/F16.gguf.json",
+        "sha256": "fbc84970bdbaf237d37b880a7ee17c106a1369732d09550a17dc998f719c652b"
+      },
+      "llama_commit": "d81235049384534c167caea52b85a694f6103d14",
+      "model_key": "qwen3_0_6b",
+      "parent_f16_sha256": null,
+      "quantization": "F16",
+      "quantizer_sha256": null,
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "source_file_sha256": {
+        "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "README.md": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+        "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    {
+      "artifact_bytes": 804753728,
+      "artifact_sha256": "0392d70678044c268e122876a3b3742059969bd9b00dce7994579baa83d3e110",
+      "conversion_lock_sha256": "ccc84bf6072b4d060bc22cacc256609291fc85bc922052f3942251b51a8c4d27",
+      "custody": {
+        "bytes": 7475,
+        "path": ".cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/Q8_0.gguf.json",
+        "sha256": "220565630f749c113e68e086a4df85e4f1844d1fe104ab987840e90133b8009f"
+      },
+      "llama_commit": "d81235049384534c167caea52b85a694f6103d14",
+      "model_key": "qwen3_0_6b",
+      "parent_f16_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "quantization": "Q8_0",
+      "quantizer_sha256": "29b5adc6507ccab9eca24b35299a41a353dc67728a2a51e29e9376465543f87f",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "source_file_sha256": {
+        "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "README.md": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+        "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    {
+      "artifact_bytes": 4069679520,
+      "artifact_sha256": "d904d6dd6587242d8452ee7774d2fdc6cadfaccffa72c1639d871d1d675cb5a4",
+      "conversion_lock_sha256": "ccc84bf6072b4d060bc22cacc256609291fc85bc922052f3942251b51a8c4d27",
+      "custody": {
+        "bytes": 7667,
+        "path": ".cache/gguf/qwen3_1_7b-70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/F16.gguf.json",
+        "sha256": "903c9a1cce7d56e7c2be8d02fb26966a36b3c1b1ede0c016f4b60c58e43c48d3"
+      },
+      "llama_commit": "d81235049384534c167caea52b85a694f6103d14",
+      "model_key": "qwen3_1_7b",
+      "parent_f16_sha256": null,
+      "quantization": "F16",
+      "quantizer_sha256": null,
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "source_file_sha256": {
+        "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "README.md": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+        "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+        "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+        "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  ],
+  "base_merge_commit": "c207e17c9dad9696ea947f82a83a9c7c7240b9bd",
+  "benchmarks": [
+    {
+      "custody": {
+        "bytes": 20734,
+        "path": "runs/local-gpu-20261012/bench-0.6b-f16/report.json",
+        "sha256": "d3c074e3552994c1e55698e3ce218eaf5a2a7f89d51bef8b1f5203d83f5f67e9"
+      },
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "interpretation": "Native synthetic-token prefill/decode microbenchmark, native warmup retained. Not task throughput, GPU fit, or reference equivalence.",
+      "native_results": [
+        {
+          "avg_ns": 13486456,
+          "avg_ts": 2866.515356,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/F16.gguf",
+          "model_n_params": 751632384,
+          "model_size": 1503395840,
+          "model_type": "qwen3 0.6B F16",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 0,
+          "n_gpu_layers": 99,
+          "n_prompt": 32,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            22407776,
+            8068442,
+            9983150
+          ],
+          "samples_ts": [
+            1428.08,
+            3966.07,
+            3205.4
+          ],
+          "split_mode": "none",
+          "stddev_ns": 7785177,
+          "stddev_ts": 1302.492051,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:51:42Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        },
+        {
+          "avg_ns": 44708360,
+          "avg_ts": 179.540188,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/F16.gguf",
+          "model_n_params": 751632384,
+          "model_size": 1503395840,
+          "model_type": "qwen3 0.6B F16",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 8,
+          "n_gpu_layers": 99,
+          "n_prompt": 0,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            48444250,
+            42965528,
+            42715304
+          ],
+          "samples_ts": [
+            165.138,
+            186.196,
+            187.287
+          ],
+          "split_mode": "none",
+          "stddev_ns": 3237807,
+          "stddev_ts": 12.484337,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:51:42Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "custody": {
+        "bytes": 20768,
+        "path": "runs/local-gpu-20261012/bench-0.6b-q8/report.json",
+        "sha256": "2484283ca37ec14e7ab85ce07441b6e61522396aec8e51a9e1f347b689aa7cea"
+      },
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "interpretation": "Native synthetic-token prefill/decode microbenchmark, native warmup retained. Not task throughput, GPU fit, or reference equivalence.",
+      "native_results": [
+        {
+          "avg_ns": 10785970,
+          "avg_ts": 3138.499359,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/Q8_0.gguf",
+          "model_n_params": 751632384,
+          "model_size": 798801920,
+          "model_type": "qwen3 0.6B Q8_0",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 0,
+          "n_gpu_layers": 99,
+          "n_prompt": 32,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            14655217,
+            8976116,
+            8726577
+          ],
+          "samples_ts": [
+            2183.52,
+            3565.02,
+            3666.96
+          ],
+          "split_mode": "none",
+          "stddev_ns": 3353188,
+          "stddev_ts": 828.603218,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:52:06Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        },
+        {
+          "avg_ns": 31914482,
+          "avg_ts": 251.553695,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_0_6b-c1899de289a04d12100db370d81485cdf75e47ca/Q8_0.gguf",
+          "model_n_params": 751632384,
+          "model_size": 798801920,
+          "model_type": "qwen3 0.6B Q8_0",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 8,
+          "n_gpu_layers": 99,
+          "n_prompt": 0,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            34374203,
+            29740048,
+            31629196
+          ],
+          "samples_ts": [
+            232.733,
+            268.998,
+            252.931
+          ],
+          "split_mode": "none",
+          "stddev_ns": 2330219,
+          "stddev_ts": 18.171621,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:52:06Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "custody": {
+        "bytes": 20967,
+        "path": "runs/local-gpu-20261012/bench-1.7b-f16/report.json",
+        "sha256": "d69ecba32fc4ce6dc0767e36a9e42beef9a9139f97a785cc0fafcb93c4b2551e"
+      },
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "interpretation": "Native synthetic-token prefill/decode microbenchmark, native warmup retained. Not task throughput, GPU fit, or reference equivalence.",
+      "native_results": [
+        {
+          "avg_ns": 12791935,
+          "avg_ts": 2656.329024,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_1_7b-70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/F16.gguf",
+          "model_n_params": 2031739904,
+          "model_size": 4063727616,
+          "model_type": "qwen3 1.7B F16",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 0,
+          "n_gpu_layers": 99,
+          "n_prompt": 32,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            17519705,
+            10125239,
+            10730862
+          ],
+          "samples_ts": [
+            1826.51,
+            3160.42,
+            2982.05
+          ],
+          "split_mode": "none",
+          "stddev_ns": 4105552,
+          "stddev_ts": 724.152877,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:51:51Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        },
+        {
+          "avg_ns": 62418597,
+          "avg_ts": 128.186249,
+          "backends": "CUDA",
+          "build_commit": "d812350",
+          "build_number": 1,
+          "cpu_info": "Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz",
+          "cpu_mask": "0x0",
+          "cpu_strict": false,
+          "devices": "CUDA0",
+          "embeddings": false,
+          "fit_min_ctx": 0,
+          "fit_target": 0,
+          "flash_attn": 0,
+          "gpu_info": "NVIDIA GeForce RTX 2080 Ti",
+          "lazy_mode": "auto",
+          "load_mode": "auto",
+          "main_gpu": 0,
+          "model_filename": "/home/szymon/Projects/novel/.cache/gguf/qwen3_1_7b-70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/F16.gguf",
+          "model_n_params": 2031739904,
+          "model_size": 4063727616,
+          "model_type": "qwen3 1.7B F16",
+          "n_batch": 2048,
+          "n_cpu_moe": 0,
+          "n_depth": 0,
+          "n_gen": 8,
+          "n_gpu_layers": 99,
+          "n_prompt": 0,
+          "n_threads": 4,
+          "n_ubatch": 512,
+          "no_host": false,
+          "no_kv_offload": false,
+          "no_op_offload": 0,
+          "poll": 50,
+          "repack": true,
+          "samples_ns": [
+            63470091,
+            62131636,
+            61654065
+          ],
+          "samples_ts": [
+            126.044,
+            128.759,
+            129.756
+          ],
+          "split_mode": "none",
+          "stddev_ns": 941440,
+          "stddev_ts": 1.921413,
+          "tensor_buft_overrides": "none",
+          "tensor_split": "0.00",
+          "test_time": "2026-10-12T19:51:51Z",
+          "type_k": "f16",
+          "type_v": "f16"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "build": {
+    "build_tool_lock_sha256": "3c759387a7511aa13ce658260f4bc121cd5f28500a27a7eb1a25f5a9f1c49b7c",
+    "cmake_cache_sha256": "90b6455020edf04d9f0c3a34681d02ae18a038d33a8e33e000b89fc46d49ded2",
+    "commands": [
+      [
+        "/home/szymon/Projects/novel/environments/fast-build/.venv/bin/cmake",
+        "-S",
+        "/home/szymon/Projects/novel/.cache/llama.cpp",
+        "-B",
+        "/home/szymon/Projects/novel/.cache/fast/local-2080ti",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DGGML_NATIVE=ON",
+        "-DLLAMA_BUILD_IS_DEV=OFF",
+        "-DLLAMA_BUILD_TESTS=OFF",
+        "-DLLAMA_BUILD_EXAMPLES=OFF",
+        "-DLLAMA_OPENSSL=OFF",
+        "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath-link,/home/szymon/Projects/novel/.cache/toolchains/cuda128/lib",
+        "-DGGML_CUDA=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=75"
+      ],
+      [
+        "/home/szymon/Projects/novel/environments/fast-build/.venv/bin/cmake",
+        "--build",
+        "/home/szymon/Projects/novel/.cache/fast/local-2080ti",
+        "--target",
+        "llama-server",
+        "llama-bench",
+        "llama-quantize",
+        "-j",
+        "4"
+      ]
+    ],
+    "commit": "d81235049384534c167caea52b85a694f6103d14",
+    "compiler": "x86_64-conda-linux-gnu-c++ (conda-forge gcc 13.4.0-20) 13.4.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "expected_nvcc_version": "12.8.93",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0\n",
+    "profile": "local-2080ti",
+    "runtime_hashes": {
+      "libggml-base.so": "b1fff3a3c172d320d61da8ae6abb487b33858698419b9ac6ea167fef2ab2e73c",
+      "libggml-base.so.0": "b1fff3a3c172d320d61da8ae6abb487b33858698419b9ac6ea167fef2ab2e73c",
+      "libggml-base.so.0.26.0": "b1fff3a3c172d320d61da8ae6abb487b33858698419b9ac6ea167fef2ab2e73c",
+      "libggml-cpu.so": "cebfa97a47aeea7df0dc7f774aa958d6513814ab82e69a9ef818a7f673e561b5",
+      "libggml-cpu.so.0": "cebfa97a47aeea7df0dc7f774aa958d6513814ab82e69a9ef818a7f673e561b5",
+      "libggml-cpu.so.0.26.0": "cebfa97a47aeea7df0dc7f774aa958d6513814ab82e69a9ef818a7f673e561b5",
+      "libggml-cuda.so": "b6ba2414d5cf5fa36824e6b2ec38d3ece7bb3d88d4640023487feb96a1216cea",
+      "libggml-cuda.so.0": "b6ba2414d5cf5fa36824e6b2ec38d3ece7bb3d88d4640023487feb96a1216cea",
+      "libggml-cuda.so.0.26.0": "b6ba2414d5cf5fa36824e6b2ec38d3ece7bb3d88d4640023487feb96a1216cea",
+      "libggml.so": "a5d0fb63b7f34c6175336b889fcfab4fca3ab8aefbea4f52c9cbeafee28de740",
+      "libggml.so.0": "a5d0fb63b7f34c6175336b889fcfab4fca3ab8aefbea4f52c9cbeafee28de740",
+      "libggml.so.0.26.0": "a5d0fb63b7f34c6175336b889fcfab4fca3ab8aefbea4f52c9cbeafee28de740",
+      "libllama-bench-impl.so": "ab3a6cc0ed234481400f66210f032a395c5cfbf0eea0338164bceee990bc11b8",
+      "libllama-common.so": "c13e2214669492b78ed8fd1afa5ebd8aa3197d1536c5de0ab4263f584ee366b5",
+      "libllama-common.so.0": "c13e2214669492b78ed8fd1afa5ebd8aa3197d1536c5de0ab4263f584ee366b5",
+      "libllama-common.so.0.6.0": "c13e2214669492b78ed8fd1afa5ebd8aa3197d1536c5de0ab4263f584ee366b5",
+      "libllama-quantize-impl.so": "5a2e88181151c8bf649b1c8cdd529b6bf7d86f703af8177e5ed4ceb64fc3510b",
+      "libllama-server-impl.so": "99cb38f846965339bafe5325352945084ce510b46cd50ab1ae1d3f798b9a960b",
+      "libllama.so": "2e4a4d84716e18c30afb952a0a983a64cf4a3211163dc428fce0cc47062a3191",
+      "libllama.so.0": "2e4a4d84716e18c30afb952a0a983a64cf4a3211163dc428fce0cc47062a3191",
+      "libllama.so.0.6.0": "2e4a4d84716e18c30afb952a0a983a64cf4a3211163dc428fce0cc47062a3191",
+      "libmtmd.so": "e536e1c8bf1b7873ee5207ed91663e90df7928eabefdb68c53b74ed1af70c558",
+      "libmtmd.so.0": "e536e1c8bf1b7873ee5207ed91663e90df7928eabefdb68c53b74ed1af70c558",
+      "libmtmd.so.0.6.0": "e536e1c8bf1b7873ee5207ed91663e90df7928eabefdb68c53b74ed1af70c558",
+      "llama-bench": "0d9009b15f36c7b73b6ad4a10cce11e6d860e4f17427a816b8f10ed21ac66179",
+      "llama-quantize": "29b5adc6507ccab9eca24b35299a41a353dc67728a2a51e29e9376465543f87f",
+      "llama-server": "1a3d59323ab22f9bf5d430df1ab8a766cfa368c303de7beccbf16dc1219d17e9"
+    },
+    "system_runtime_linkage": "\tlinux-vdso.so.1 (0x00007fef70005000)\n\tlibllama-server-impl.so => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libllama-server-impl.so (0x00007fef6f800000)\n\tlibllama-common.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libllama-common.so.0 (0x00007fef6f200000)\n\tlibmtmd.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libmtmd.so.0 (0x00007fef6fe24000)\n\tlibllama.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libllama.so.0 (0x00007fef6ee00000)\n\tlibggml.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libggml.so.0 (0x00007fef6fe15000)\n\tlibggml-cpu.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libggml-cpu.so.0 (0x00007fef6ec3e000)\n\tlibggml-cuda.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libggml-cuda.so.0 (0x00007fef6b200000)\n\tlibggml-base.so.0 => /home/szymon/Projects/novel/.cache/fast/local-2080ti/bin/libggml-base.so.0 (0x00007fef6f730000)\n\tlibcuda.so.1 => /home/szymon/Projects/novel/.cache/host/nvidia-615.71.09/usr/lib/libcuda.so.1 (0x00007fef64600000)\n\tlibpthread.so.0 => /usr/lib/libpthread.so.0 (0x00007fef6fe0e000)\n\tlibstdc++.so.6 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libstdc++.so.6 (0x00007fef64200000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007fef644c9000)\n\tlibgcc_s.so.1 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libgcc_s.so.1 (0x00007fef6f702000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007fef63e00000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007fef70007000)\n\tlibdl.so.2 => /usr/lib/libdl.so.2 (0x00007fef6fe07000)\n\tlibgomp.so.1 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libgomp.so.1 (0x00007fef6f6a7000)\n\tlibcudart.so.12 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libcudart.so.12 (0x00007fef63a00000)\n\tlibcublas.so.12 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libcublas.so.12 (0x00007fef5c800000)\n\tlibcublasLt.so.12 => /home/szymon/Projects/novel/.cache/toolchains/cuda128/lib/libcublasLt.so.12 (0x00007fef2a400000)\n\tlibrt.so.1 => /usr/lib/librt.so.1 (0x00007fef6fe00000)\n",
+    "tag": "v0.6.0"
+  },
+  "build_custody": [
+    {
+      "bytes": 7722,
+      "path": ".cache/fast/local-2080ti/receipt.json",
+      "sha256": "77b3241d0152de5f1bd53d89ddde445d9f3cde57d68c1d03b89e38dfd0cbeec8"
+    },
+    {
+      "bytes": 2084,
+      "path": ".cache/fast/local-2080ti/recipe-build.log",
+      "sha256": "83564d90e3cd7e2cdb7041da917818a5863456c2314440f9b706e16f9bea593b"
+    },
+    {
+      "bytes": 52209,
+      "path": ".cache/fast/local-2080ti/recipe-build.initial-link-failure.log",
+      "sha256": "402a7225e09ce8220af2439840c7d604e94c1607e0a8fb133f15d2045ebdcdf1"
+    }
+  ],
+  "cache_probe_custody": [
+    {
+      "bytes": 4175,
+      "path": "runs/local-gpu-20261012/cache-study/report.json",
+      "sha256": "63952c4681cccc994811c632b066d3e4a40f7dd1974541eda3a5fb49db143d08"
+    },
+    {
+      "bytes": 2955,
+      "path": "runs/local-gpu-20261012/cache-study/probe.py",
+      "sha256": "03f5ff9478456753ef996994f0f043e758054552570f2111b75b965e39686e48"
+    }
+  ],
+  "cache_reduction_probe": [
+    {
+      "allow_fp16_reduced_precision_reduction": true,
+      "exact_forward_repeat": true,
+      "gradient_finite": true,
+      "gradient_l2": 1.7608875036239624,
+      "steps": [
+        {
+          "max_abs_error": 0.0390625,
+          "mismatches": 374,
+          "top1_match": true
+        },
+        {
+          "max_abs_error": 0.033203125,
+          "mismatches": 139,
+          "top1_match": true
+        },
+        {
+          "max_abs_error": 0.1875,
+          "mismatches": 127886,
+          "top1_match": true
+        }
+      ]
+    },
+    {
+      "allow_fp16_reduced_precision_reduction": false,
+      "exact_forward_repeat": true,
+      "gradient_finite": true,
+      "gradient_l2": 1.7598363161087036,
+      "steps": [
+        {
+          "max_abs_error": 0.0390625,
+          "mismatches": 374,
+          "top1_match": true
+        },
+        {
+          "max_abs_error": 0.033203125,
+          "mismatches": 139,
+          "top1_match": true
+        },
+        {
+          "max_abs_error": 0.1875,
+          "mismatches": 127886,
+          "top1_match": true
+        }
+      ]
+    }
+  ],
+  "date": "2026-10-12",
+  "driver": {
+    "installed": "615.78.08",
+    "loaded": "615.71.09",
+    "reboot_performed": false,
+    "workaround": "Process-local matching compute libraries extracted from cached Arch package; launcher first prefers working system access"
+  },
+  "equivalence": [
+    {
+      "cases": [
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.4413783179988968
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3581413280007837
+            }
+          },
+          "id": "bridge",
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            85984,
+            398,
+            7512,
+            1128,
+            264,
+            14164,
+            33061,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "steps": [
+            {
+              "position": 0,
+              "reference_logits_sha256": "0c030459bdd462adbf76e64dd5baef4b6ad9b322f6ef08a8a9c6b02346e9e1d2",
+              "reference_logprobs_path": "reference-1-0.safetensors",
+              "reference_logprobs_sha256": "fcdfff9fda617dc2bdb676642e989870bb181cf69c17677a7e309c41956475ef",
+              "reference_target_logprob": -0.00017272452728745466,
+              "target_id": 32
+            },
+            {
+              "position": 1,
+              "reference_logits_sha256": "572320c394dc1e6714555e97f6fe809c5345d57694845c6e24e5c038912cd6c8",
+              "reference_logprobs_path": "reference-1-1.safetensors",
+              "reference_logprobs_sha256": "0add1da835631678a083af682a3e7abd0bc35c24bd9239bc4865a3c3a1bb3290",
+              "reference_target_logprob": -0.00014967905296462203,
+              "target_id": 14164
+            }
+          ],
+          "target_ids": [
+            32,
+            14164
+          ]
+        },
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.31801547500072047
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3674542629996722
+            }
+          },
+          "id": "unicode",
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            825,
+            2805,
+            11652,
+            911,
+            51950,
+            12632,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "steps": [
+            {
+              "position": 0,
+              "reference_logits_sha256": "24cfe03af2efcd84274f1066cc9f70249400de19fdfe3b4d88efb00db7f2a744",
+              "reference_logprobs_path": "reference-2-0.safetensors",
+              "reference_logprobs_sha256": "d02e3b8b70cb65658d255cb3ccf6b5efbf169c34dba74dbc23386198f2a3a47a",
+              "reference_target_logprob": -3.014987289784608,
+              "target_id": 34
+            },
+            {
+              "position": 1,
+              "reference_logits_sha256": "161aab997f22f4ed102e0d50c546e4024c760049708bc1b5af83c7be1582c823",
+              "reference_logprobs_path": "reference-2-1.safetensors",
+              "reference_logprobs_sha256": "1d5e21d08fb1d05a0849290329081218182d90a7de0d6bdde1e572bdbe87362c",
+              "reference_target_logprob": -0.0049879777561891575,
+              "target_id": 2577
+            },
+            {
+              "position": 2,
+              "reference_logits_sha256": "b370742a4166e316641aa9d92b45f5b5ff4a55bed47ecbaf20fa9ad00d831fca",
+              "reference_logprobs_path": "reference-2-2.safetensors",
+              "reference_logprobs_sha256": "b1ba518acdac72e81b8acab6c515ed1911428a075250f20e7baea0aea719d141",
+              "reference_target_logprob": -0.017864597112429277,
+              "target_id": 963
+            },
+            {
+              "position": 3,
+              "reference_logits_sha256": "416814f6955ce90936d3b8375f8e7b00d9d03bb3bcdd2a3313d0dbc897c4c255",
+              "reference_logprobs_path": "reference-2-3.safetensors",
+              "reference_logprobs_sha256": "6b6ca6a613b4904547f41b05db091b27a998890f9dae760295601adfa6cf7ffd",
+              "reference_target_logprob": -0.0003578739211955831,
+              "target_id": 12632
+            }
+          ],
+          "target_ids": [
+            34,
+            2577,
+            963,
+            12632
+          ]
+        }
+      ],
+      "config": {
+        "cases": [
+          {
+            "continuation": "A bridge",
+            "id": "bridge",
+            "messages": [
+              {
+                "content": "Briefly describe what a bridge connects.",
+                "role": "user"
+              }
+            ]
+          },
+          {
+            "continuation": "Caf\u00e9 tables",
+            "id": "unicode",
+            "messages": [
+              {
+                "content": "Write one short sentence about caf\u00e9 tables.",
+                "role": "user"
+              }
+            ]
+          }
+        ],
+        "max_abs_logprob": 0.1,
+        "max_abs_sequence_logprob_delta": 0.05,
+        "max_kl_reference_to_fast": 0.0001,
+        "max_repeat_abs_logprob": 0.0,
+        "schema_version": 1
+      },
+      "custody": {
+        "bytes": 16254,
+        "path": "runs/local-gpu-20261012/equivalence-0.6b-f16/report.json",
+        "sha256": "ddf67501a532aa4c0213c50db990b07ff463bf925400b49f7aff762faea8fb4a"
+      },
+      "error": {
+        "message": "Reference CUDA tensors remain allocated; native server was not started",
+        "type": "ValueError"
+      },
+      "reference_release": null,
+      "scientific_interchangeability": false,
+      "status": "FAIL",
+      "stop_contract": null
+    },
+    {
+      "cases": [
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.34727150200342294
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.33301903900064644
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "bridge",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            85984,
+            398,
+            7512,
+            1128,
+            264,
+            14164,
+            33061,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": 1.6012117451983694e-05,
+          "steps": [
+            {
+              "fast_log_normalizer": 5.891983067789495e-06,
+              "fast_logprob_sha256": "c8dd05007135dd3fb4082adf419483b525e4173cfae0fbea544a6a321c4354a8",
+              "fast_target_logprob": -0.00016416466678492725,
+              "kl_reference_to_fast": 3.416741171699708e-07,
+              "max_abs_logprob": 0.24519241829497673,
+              "normalized_fast_target_logprob": -0.00017005664985271675,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 5.892000425555821e-06,
+              "reference_logits_sha256": "0c030459bdd462adbf76e64dd5baef4b6ad9b322f6ef08a8a9c6b02346e9e1d2",
+              "reference_logprobs_path": "reference-1-0.safetensors",
+              "reference_logprobs_sha256": "fcdfff9fda617dc2bdb676642e989870bb181cf69c17677a7e309c41956475ef",
+              "reference_target_logprob": -0.00017272452728745466,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 32,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                -0.24519241829497673,
+                -0.23348892708403923,
+                -0.23107040901763298,
+                -0.22965134163482048,
+                -0.22957504768950798,
+                -0.2245892383633361,
+                -0.21856583138091423,
+                -0.21643341560942986
+              ],
+              "worst_token_ids": [
+                86154,
+                38039,
+                136953,
+                120416,
+                94334,
+                96301,
+                67271,
+                77651
+              ]
+            },
+            {
+              "fast_log_normalizer": 1.0793034749445314e-05,
+              "fast_logprob_sha256": "7e6f4eb503a25582ac20cdbbf6670ffe93e79b6d2d4ca819e8cc3860ad5aa202",
+              "fast_target_logprob": -0.00014222679601516575,
+              "kl_reference_to_fast": 8.855864934540993e-08,
+              "max_abs_logprob": 0.09924225820289578,
+              "normalized_fast_target_logprob": -0.00015301983076461105,
+              "pass": true,
+              "position": 1,
+              "raw_probability_mass_error": 1.0793092994454412e-05,
+              "reference_logits_sha256": "572320c394dc1e6714555e97f6fe809c5345d57694845c6e24e5c038912cd6c8",
+              "reference_logprobs_path": "reference-1-1.safetensors",
+              "reference_logprobs_sha256": "0add1da835631678a083af682a3e7abd0bc35c24bd9239bc4865a3c3a1bb3290",
+              "reference_target_logprob": -0.00014967905296462203,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 14164,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                -0.09924225820289578,
+                -0.09719376577125516,
+                -0.09702782644020047,
+                -0.09354310048804848,
+                -0.09143738759742703,
+                -0.09138970388160672,
+                -0.09114937795387235,
+                -0.09038453115211453
+              ],
+              "worst_token_ids": [
+                79795,
+                83485,
+                2440,
+                65861,
+                71472,
+                10133,
+                5993,
+                13744
+              ]
+            }
+          ],
+          "target_ids": [
+            32,
+            14164
+          ]
+        },
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.31669367799986503
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3307450059983239
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "unicode",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            825,
+            2805,
+            11652,
+            911,
+            51950,
+            12632,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": 0.056367311616963706,
+          "steps": [
+            {
+              "fast_log_normalizer": 3.1470848244484156e-05,
+              "fast_logprob_sha256": "f02557f5104369bc7f1a6009a2acf3a78f0299f0088e6e1cb39e5487fc441a01",
+              "fast_target_logprob": -2.9591331481933594,
+              "kl_reference_to_fast": 0.00036629964669804044,
+              "max_abs_logprob": 0.20908671605413787,
+              "normalized_fast_target_logprob": -2.9591646190416037,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 3.1471343456823675e-05,
+              "reference_logits_sha256": "24cfe03af2efcd84274f1066cc9f70249400de19fdfe3b4d88efb00db7f2a744",
+              "reference_logprobs_path": "reference-2-0.safetensors",
+              "reference_logprobs_sha256": "d02e3b8b70cb65658d255cb3ccf6b5efbf169c34dba74dbc23386198f2a3a47a",
+              "reference_target_logprob": -3.014987289784608,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 34,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.20908671605413787,
+                0.19977122533148162,
+                0.19521647679632537,
+                0.19302493321722558,
+                0.1908276675922238,
+                0.18872767674749724,
+                0.18849021184271386,
+                0.18494921910589568
+              ],
+              "worst_token_ids": [
+                38713,
+                330,
+                91204,
+                32603,
+                53305,
+                6523,
+                2073,
+                67961
+              ]
+            },
+            {
+              "fast_log_normalizer": 4.228205720855038e-06,
+              "fast_logprob_sha256": "7b310492e5886741e5472028bf5cf4b95a503cb048317f51d2f62c08765283b0",
+              "fast_target_logprob": -0.00504129147157073,
+              "kl_reference_to_fast": 4.23403421031361e-07,
+              "max_abs_logprob": 0.18516566635482334,
+              "normalized_fast_target_logprob": -0.005045519677291585,
+              "pass": false,
+              "position": 1,
+              "raw_probability_mass_error": 4.228214659729446e-06,
+              "reference_logits_sha256": "161aab997f22f4ed102e0d50c546e4024c760049708bc1b5af83c7be1582c823",
+              "reference_logprobs_path": "reference-2-1.safetensors",
+              "reference_logprobs_sha256": "1d5e21d08fb1d05a0849290329081218182d90a7de0d6bdde1e572bdbe87362c",
+              "reference_target_logprob": -0.0049879777561891575,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 2577,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.18516566635482334,
+                0.17709948898665573,
+                0.17566516281478073,
+                0.17455890060774948,
+                0.17449405075423385,
+                0.17436053634993698,
+                0.17278125168197178,
+                0.17162921310774948
+              ],
+              "worst_token_ids": [
+                6450,
+                63612,
+                2847,
+                14084,
+                71897,
+                89721,
+                138417,
+                48366
+              ]
+            },
+            {
+              "fast_log_normalizer": 7.787947416782293e-06,
+              "fast_logprob_sha256": "86241a6ba614748b1de7729f04726ed4c3b4a7825e6ebdbfff98b47020bf7385",
+              "fast_target_logprob": -0.017300084233283997,
+              "kl_reference_to_fast": 9.96278805441276e-06,
+              "max_abs_logprob": 0.19428597661804048,
+              "normalized_fast_target_logprob": -0.01730787218070078,
+              "pass": false,
+              "position": 2,
+              "raw_probability_mass_error": 7.787977742923502e-06,
+              "reference_logits_sha256": "b370742a4166e316641aa9d92b45f5b5ff4a55bed47ecbaf20fa9ad00d831fca",
+              "reference_logprobs_path": "reference-2-2.safetensors",
+              "reference_logprobs_sha256": "b1ba518acdac72e81b8acab6c515ed1911428a075250f20e7baea0aea719d141",
+              "reference_target_logprob": -0.017864597112429277,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 963,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                -0.19428597661804048,
+                -0.1847988245184311,
+                -0.18164788457702485,
+                -0.18136750432800142,
+                -0.18000375005554048,
+                -0.17992364141296235,
+                -0.17982827398132173,
+                -0.17905198308776704
+              ],
+              "worst_token_ids": [
+                88678,
+                58322,
+                27313,
+                94328,
+                99492,
+                44084,
+                46268,
+                59730
+              ]
+            },
+            {
+              "fast_log_normalizer": 6.073278072861514e-06,
+              "fast_logprob_sha256": "77f990f2ad3723565e31b20e91a4722ca3cc601e6e1de3c2d0735246843cc6e2",
+              "fast_target_logprob": -0.0003559030592441559,
+              "kl_reference_to_fast": 1.2521602475868403e-07,
+              "max_abs_logprob": 0.2507965641067429,
+              "normalized_fast_target_logprob": -0.0003619763373170174,
+              "pass": false,
+              "position": 3,
+              "raw_probability_mass_error": 6.0732965152521245e-06,
+              "reference_logits_sha256": "416814f6955ce90936d3b8375f8e7b00d9d03bb3bcdd2a3313d0dbc897c4c255",
+              "reference_logprobs_path": "reference-2-3.safetensors",
+              "reference_logprobs_sha256": "6b6ca6a613b4904547f41b05db091b27a998890f9dae760295601adfa6cf7ffd",
+              "reference_target_logprob": -0.0003578739211955831,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 12632,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.2507965641067429,
+                0.24597860146025852,
+                0.24016881752471164,
+                0.23809362221221164,
+                0.2351868228958054,
+                0.2330811100051804,
+                0.23290563393096164,
+                0.23275686073760227
+              ],
+              "worst_token_ids": [
+                82048,
+                89702,
+                86050,
+                20128,
+                79363,
+                47005,
+                39501,
+                7444
+              ]
+            }
+          ],
+          "target_ids": [
+            34,
+            2577,
+            963,
+            12632
+          ]
+        }
+      ],
+      "config": {
+        "cases": [
+          {
+            "continuation": "A bridge",
+            "id": "bridge",
+            "messages": [
+              {
+                "content": "Briefly describe what a bridge connects.",
+                "role": "user"
+              }
+            ]
+          },
+          {
+            "continuation": "Caf\u00e9 tables",
+            "id": "unicode",
+            "messages": [
+              {
+                "content": "Write one short sentence about caf\u00e9 tables.",
+                "role": "user"
+              }
+            ]
+          }
+        ],
+        "max_abs_logprob": 0.1,
+        "max_abs_sequence_logprob_delta": 0.05,
+        "max_kl_reference_to_fast": 0.0001,
+        "max_repeat_abs_logprob": 0.0,
+        "schema_version": 1
+      },
+      "custody": {
+        "bytes": 68901,
+        "path": "runs/local-gpu-20261012/equivalence-0.6b-f16-workspace/report.json",
+        "sha256": "f399dc24bef8a338cdfd407ae38948216e89feed285478db96b271d3a8350c98"
+      },
+      "error": null,
+      "reference_release": {
+        "baseline_allocated_bytes": 33554432,
+        "device": "cuda:0",
+        "gpu_allocated_bytes": 33554432,
+        "gpu_execution_tested_here": true,
+        "reserved_bytes": 33554432,
+        "status": "PASS"
+      },
+      "scientific_interchangeability": false,
+      "status": "FAIL",
+      "stop_contract": {
+        "effective_eos_ids": [
+          151645,
+          151643
+        ],
+        "native_eog_ids": [
+          128247,
+          151643,
+          151645,
+          151662,
+          151663,
+          151664
+        ],
+        "native_stop_set_match": false,
+        "pass": true,
+        "policy": "hf-eos",
+        "reference_eos_ids": [
+          151645,
+          151643
+        ],
+        "scope": "Greedy token-ID termination only; native tokenizer attributes unchanged"
+      }
+    },
+    {
+      "cases": [
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3645101500005694
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3461032300001534
+            }
+          },
+          "id": "bridge",
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            85984,
+            398,
+            7512,
+            1128,
+            264,
+            14164,
+            33061,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "steps": [
+            {
+              "position": 0,
+              "reference_logits_sha256": "0c030459bdd462adbf76e64dd5baef4b6ad9b322f6ef08a8a9c6b02346e9e1d2",
+              "reference_logprobs_path": "reference-1-0.safetensors",
+              "reference_logprobs_sha256": "fcdfff9fda617dc2bdb676642e989870bb181cf69c17677a7e309c41956475ef",
+              "reference_target_logprob": -0.00017272452728745466,
+              "target_id": 32
+            },
+            {
+              "position": 1,
+              "reference_logits_sha256": "572320c394dc1e6714555e97f6fe809c5345d57694845c6e24e5c038912cd6c8",
+              "reference_logprobs_path": "reference-1-1.safetensors",
+              "reference_logprobs_sha256": "0add1da835631678a083af682a3e7abd0bc35c24bd9239bc4865a3c3a1bb3290",
+              "reference_target_logprob": -0.00014967905296462203,
+              "target_id": 14164
+            }
+          ],
+          "target_ids": [
+            32,
+            14164
+          ]
+        },
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3291324130004796
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.339315061999514
+            }
+          },
+          "id": "unicode",
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            825,
+            2805,
+            11652,
+            911,
+            51950,
+            12632,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "steps": [
+            {
+              "position": 0,
+              "reference_logits_sha256": "24cfe03af2efcd84274f1066cc9f70249400de19fdfe3b4d88efb00db7f2a744",
+              "reference_logprobs_path": "reference-2-0.safetensors",
+              "reference_logprobs_sha256": "d02e3b8b70cb65658d255cb3ccf6b5efbf169c34dba74dbc23386198f2a3a47a",
+              "reference_target_logprob": -3.014987289784608,
+              "target_id": 34
+            },
+            {
+              "position": 1,
+              "reference_logits_sha256": "161aab997f22f4ed102e0d50c546e4024c760049708bc1b5af83c7be1582c823",
+              "reference_logprobs_path": "reference-2-1.safetensors",
+              "reference_logprobs_sha256": "1d5e21d08fb1d05a0849290329081218182d90a7de0d6bdde1e572bdbe87362c",
+              "reference_target_logprob": -0.0049879777561891575,
+              "target_id": 2577
+            },
+            {
+              "position": 2,
+              "reference_logits_sha256": "b370742a4166e316641aa9d92b45f5b5ff4a55bed47ecbaf20fa9ad00d831fca",
+              "reference_logprobs_path": "reference-2-2.safetensors",
+              "reference_logprobs_sha256": "b1ba518acdac72e81b8acab6c515ed1911428a075250f20e7baea0aea719d141",
+              "reference_target_logprob": -0.017864597112429277,
+              "target_id": 963
+            },
+            {
+              "position": 3,
+              "reference_logits_sha256": "416814f6955ce90936d3b8375f8e7b00d9d03bb3bcdd2a3313d0dbc897c4c255",
+              "reference_logprobs_path": "reference-2-3.safetensors",
+              "reference_logprobs_sha256": "6b6ca6a613b4904547f41b05db091b27a998890f9dae760295601adfa6cf7ffd",
+              "reference_target_logprob": -0.0003578739211955831,
+              "target_id": 12632
+            }
+          ],
+          "target_ids": [
+            34,
+            2577,
+            963,
+            12632
+          ]
+        }
+      ],
+      "config": {
+        "cases": [
+          {
+            "continuation": "A bridge",
+            "id": "bridge",
+            "messages": [
+              {
+                "content": "Briefly describe what a bridge connects.",
+                "role": "user"
+              }
+            ]
+          },
+          {
+            "continuation": "Caf\u00e9 tables",
+            "id": "unicode",
+            "messages": [
+              {
+                "content": "Write one short sentence about caf\u00e9 tables.",
+                "role": "user"
+              }
+            ]
+          }
+        ],
+        "max_abs_logprob": 0.1,
+        "max_abs_sequence_logprob_delta": 0.05,
+        "max_kl_reference_to_fast": 0.0001,
+        "max_repeat_abs_logprob": 0.0,
+        "schema_version": 1
+      },
+      "custody": {
+        "bytes": 16252,
+        "path": "runs/local-gpu-20261012/equivalence-0.6b-q8/report.json",
+        "sha256": "4297fb2302577e669071d517bd7dfc73f3bde9fccff24ff7a68dcae247ea1f2e"
+      },
+      "error": {
+        "message": "Reference CUDA tensors remain allocated; native server was not started",
+        "type": "ValueError"
+      },
+      "reference_release": null,
+      "scientific_interchangeability": false,
+      "status": "FAIL",
+      "stop_contract": null
+    },
+    {
+      "cases": [
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3530933459987864
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                2155,
+                10468,
+                476,
+                14389
+              ],
+              "raw_text": "A bridge connects two different locations or structures",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.34210259599785786
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "bridge",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            85984,
+            398,
+            7512,
+            1128,
+            264,
+            14164,
+            33061,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": 1.976725372857899e-05,
+          "steps": [
+            {
+              "fast_log_normalizer": 5.623335624853622e-06,
+              "fast_logprob_sha256": "73f2ab7f7ad1853d668d8484b629f00996d079d2535ed344732f335f752cb353",
+              "fast_target_logprob": -0.00017674338596407324,
+              "kl_reference_to_fast": 6.709158096690149e-07,
+              "max_abs_logprob": 0.6274787090243592,
+              "normalized_fast_target_logprob": -0.00018236672158892687,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 5.623351435835033e-06,
+              "reference_logits_sha256": "0c030459bdd462adbf76e64dd5baef4b6ad9b322f6ef08a8a9c6b02346e9e1d2",
+              "reference_logprobs_path": "reference-1-0.safetensors",
+              "reference_logprobs_sha256": "fcdfff9fda617dc2bdb676642e989870bb181cf69c17677a7e309c41956475ef",
+              "reference_target_logprob": -0.00017272452728745466,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 32,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.6274787090243592,
+                0.568459620279242,
+                0.5651522777499451,
+                0.5542193553866639,
+                0.5337954662265076,
+                -0.5267456867275939,
+                0.5167552135409608,
+                0.5167513988436951
+              ],
+              "worst_token_ids": [
+                45756,
+                38828,
+                18745,
+                105214,
+                51083,
+                38282,
+                11688,
+                23030
+              ]
+            },
+            {
+              "fast_log_normalizer": 1.0965407054865649e-05,
+              "fast_logprob_sha256": "4b91899dcf26bbaf1e2472134adc84fc3fb7db04b459ea87bd7be0c245668c49",
+              "fast_target_logprob": -0.00012589294055942446,
+              "kl_reference_to_fast": 1.0619959230192165e-06,
+              "max_abs_logprob": 0.43705840097679527,
+              "normalized_fast_target_logprob": -0.00013685834761429012,
+              "pass": false,
+              "position": 1,
+              "raw_probability_mass_error": 1.0965467175161336e-05,
+              "reference_logits_sha256": "572320c394dc1e6714555e97f6fe809c5345d57694845c6e24e5c038912cd6c8",
+              "reference_logprobs_path": "reference-1-1.safetensors",
+              "reference_logprobs_sha256": "0add1da835631678a083af682a3e7abd0bc35c24bd9239bc4865a3c3a1bb3290",
+              "reference_target_logprob": -0.00014967905296462203,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 14164,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.43705840097679527,
+                0.3901490687014011,
+                0.35768599497093234,
+                0.3532990931154636,
+                0.35243315683617027,
+                0.3507127283693734,
+                0.34121794687523277,
+                0.33697600351585777
+              ],
+              "worst_token_ids": [
+                41841,
+                82187,
+                20051,
+                25912,
+                4596,
+                76791,
+                124382,
+                99695
+              ]
+            }
+          ],
+          "target_ids": [
+            32,
+            14164
+          ]
+        },
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.31713823699828936
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                42435,
+                51950,
+                1965,
+                5707,
+                264,
+                35287,
+                3550
+              ],
+              "raw_text": "A cozy caf\u00e9 table provides a welcoming space",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.32784272199933184
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "unicode",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            825,
+            2805,
+            11652,
+            911,
+            51950,
+            12632,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": 0.2535442316923989,
+          "steps": [
+            {
+              "fast_log_normalizer": 3.755918382211012e-05,
+              "fast_logprob_sha256": "50fcd32af692f6396cb1d7fd0ab820f9f3bf9fed51394d4408a47cbb95470345",
+              "fast_target_logprob": -2.7643332481384277,
+              "kl_reference_to_fast": 0.0023941886345307624,
+              "max_abs_logprob": 0.9731267093402707,
+              "normalized_fast_target_logprob": -2.76437080732225,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 3.755988917708564e-05,
+              "reference_logits_sha256": "24cfe03af2efcd84274f1066cc9f70249400de19fdfe3b4d88efb00db7f2a744",
+              "reference_logprobs_path": "reference-2-0.safetensors",
+              "reference_logprobs_sha256": "d02e3b8b70cb65658d255cb3ccf6b5efbf169c34dba74dbc23386198f2a3a47a",
+              "reference_target_logprob": -3.014987289784608,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 34,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.9731267093402707,
+                0.9491551517230832,
+                0.9232724307758176,
+                0.9097512363178097,
+                0.9074280856830441,
+                0.900573074696716,
+                0.8883507846576535,
+                0.8856957553607785
+              ],
+              "worst_token_ids": [
+                10632,
+                48272,
+                42792,
+                22158,
+                139243,
+                44372,
+                105600,
+                2586
+              ]
+            },
+            {
+              "fast_log_normalizer": 4.396080299724356e-06,
+              "fast_logprob_sha256": "e1e1e0bcd8aa7e04bbb1e977e90d39d6be280726d92c372f0998aa0461cacc1a",
+              "fast_target_logprob": -0.005506569053977728,
+              "kl_reference_to_fast": 2.6109915530414332e-05,
+              "max_abs_logprob": 0.7052309739720108,
+              "normalized_fast_target_logprob": -0.0055109651342774525,
+              "pass": false,
+              "position": 1,
+              "raw_probability_mass_error": 4.3960899624995164e-06,
+              "reference_logits_sha256": "161aab997f22f4ed102e0d50c546e4024c760049708bc1b5af83c7be1582c823",
+              "reference_logprobs_path": "reference-2-1.safetensors",
+              "reference_logprobs_sha256": "1d5e21d08fb1d05a0849290329081218182d90a7de0d6bdde1e572bdbe87362c",
+              "reference_target_logprob": -0.0049879777561891575,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 2577,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.7052309739720108,
+                0.6977637040745499,
+                0.6879332292210307,
+                0.6666262376438858,
+                0.6635458696018901,
+                0.6466047990452495,
+                0.6338331925999405,
+                0.6292155015599015
+              ],
+              "worst_token_ids": [
+                96101,
+                134455,
+                51903,
+                57821,
+                124670,
+                133255,
+                27678,
+                117110
+              ]
+            },
+            {
+              "fast_log_normalizer": 7.509599813211802e-06,
+              "fast_logprob_sha256": "23dc4b0fcc21991f837bc464d9bd70819850bc76fb519feeb8dd4dedb7fdcef8",
+              "fast_target_logprob": -0.01446792297065258,
+              "kl_reference_to_fast": 0.0004773640144723006,
+              "max_abs_logprob": 0.7420726892645249,
+              "normalized_fast_target_logprob": -0.014475432570465793,
+              "pass": false,
+              "position": 2,
+              "raw_probability_mass_error": 7.509628010327063e-06,
+              "reference_logits_sha256": "b370742a4166e316641aa9d92b45f5b5ff4a55bed47ecbaf20fa9ad00d831fca",
+              "reference_logprobs_path": "reference-2-2.safetensors",
+              "reference_logprobs_sha256": "b1ba518acdac72e81b8acab6c515ed1911428a075250f20e7baea0aea719d141",
+              "reference_target_logprob": -0.017864597112429277,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 963,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                -0.7420726892645249,
+                -0.719325649469603,
+                -0.7087169763738999,
+                -0.6972194788153061,
+                -0.6889492151434311,
+                -0.6831813928778061,
+                -0.6820293543035874,
+                -0.6793361780340561
+              ],
+              "worst_token_ids": [
+                52868,
+                89702,
+                15594,
+                69200,
+                8412,
+                130305,
+                30725,
+                95568
+              ]
+            },
+            {
+              "fast_log_normalizer": 5.933711332368924e-06,
+              "fast_logprob_sha256": "14f5181354df1cda54cb573f69382706938f6aa04669b866e36021b1c52b6e72",
+              "fast_target_logprob": -0.00034576671896502376,
+              "kl_reference_to_fast": 1.5940957972722792e-05,
+              "max_abs_logprob": 0.7993938999221726,
+              "normalized_fast_target_logprob": -0.0003517004302973927,
+              "pass": false,
+              "position": 3,
+              "raw_probability_mass_error": 5.933728936868832e-06,
+              "reference_logits_sha256": "416814f6955ce90936d3b8375f8e7b00d9d03bb3bcdd2a3313d0dbc897c4c255",
+              "reference_logprobs_path": "reference-2-3.safetensors",
+              "reference_logprobs_sha256": "6b6ca6a613b4904547f41b05db091b27a998890f9dae760295601adfa6cf7ffd",
+              "reference_target_logprob": -0.0003578739211955831,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 12632,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.7993938999221726,
+                0.798178918843071,
+                0.7978260593460007,
+                0.7893326358840866,
+                0.7866623477981491,
+                0.7842133121536179,
+                0.7695877628372116,
+                0.7530701236770554
+              ],
+              "worst_token_ids": [
+                98753,
+                125672,
+                126580,
+                136869,
+                42945,
+                66014,
+                24102,
+                91265
+              ]
+            }
+          ],
+          "target_ids": [
+            34,
+            2577,
+            963,
+            12632
+          ]
+        }
+      ],
+      "config": {
+        "cases": [
+          {
+            "continuation": "A bridge",
+            "id": "bridge",
+            "messages": [
+              {
+                "content": "Briefly describe what a bridge connects.",
+                "role": "user"
+              }
+            ]
+          },
+          {
+            "continuation": "Caf\u00e9 tables",
+            "id": "unicode",
+            "messages": [
+              {
+                "content": "Write one short sentence about caf\u00e9 tables.",
+                "role": "user"
+              }
+            ]
+          }
+        ],
+        "max_abs_logprob": 0.1,
+        "max_abs_sequence_logprob_delta": 0.05,
+        "max_kl_reference_to_fast": 0.0001,
+        "max_repeat_abs_logprob": 0.0,
+        "schema_version": 1
+      },
+      "custody": {
+        "bytes": 68912,
+        "path": "runs/local-gpu-20261012/equivalence-0.6b-q8-workspace/report.json",
+        "sha256": "ea7d77f7fc84512f27785ee881c37e046f59f10de85369c3eee90a8fd3f0d15c"
+      },
+      "error": null,
+      "reference_release": {
+        "baseline_allocated_bytes": 33554432,
+        "device": "cuda:0",
+        "gpu_allocated_bytes": 33554432,
+        "gpu_execution_tested_here": true,
+        "reserved_bytes": 33554432,
+        "status": "PASS"
+      },
+      "scientific_interchangeability": false,
+      "status": "FAIL",
+      "stop_contract": {
+        "effective_eos_ids": [
+          151645,
+          151643
+        ],
+        "native_eog_ids": [
+          128247,
+          151643,
+          151645,
+          151662,
+          151663,
+          151664
+        ],
+        "native_stop_set_match": false,
+        "pass": true,
+        "policy": "hf-eos",
+        "reference_eos_ids": [
+          151645,
+          151643
+        ],
+        "scope": "Greedy token-ID termination only; native tokenizer attributes unchanged"
+      }
+    },
+    {
+      "cases": [
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                476,
+                803,
+                3501,
+                476
+              ],
+              "raw_text": "A bridge connects two or more points or",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.36001353900064714
+            },
+            "hf_full_prefix": {
+              "ids": [
+                32,
+                14164,
+                33061,
+                1378,
+                476,
+                803,
+                3501,
+                476
+              ],
+              "raw_text": "A bridge connects two or more points or",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.35491181399993366
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "bridge",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            85984,
+            398,
+            7512,
+            1128,
+            264,
+            14164,
+            33061,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": 5.364317877625984e-10,
+          "steps": [
+            {
+              "fast_log_normalizer": 5.537725833295471e-11,
+              "fast_logprob_sha256": "08c3d785045dcb43d4628049eef8a6d43f121afed399eb57eda561eede10cac5",
+              "fast_target_logprob": 0.0,
+              "kl_reference_to_fast": 1.28169253914796e-13,
+              "max_abs_logprob": 0.23922348016643724,
+              "normalized_fast_target_logprob": -5.537725833295471e-11,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 5.537725833448803e-11,
+              "reference_logits_sha256": "a3cbe6218b91be73a2e670ac6c702d3beaa2a7fcb4a27047c83d03b5dd5143cb",
+              "reference_logprobs_path": "reference-1-0.safetensors",
+              "reference_logprobs_sha256": "9e4a7f46b51b699f9fdb834a147baf13f89f4e160f238fa9363c864febe81f51",
+              "reference_target_logprob": -5.8175686488666e-11,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 32,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                -0.23922348016643724,
+                -0.23280334466838326,
+                -0.22905731195354662,
+                -0.22518920892619576,
+                -0.22331237787151537,
+                -0.22240447992229662,
+                -0.2220993041410395,
+                -0.21456146234417162
+              ],
+              "worst_token_ids": [
+                111445,
+                110204,
+                90998,
+                110595,
+                11532,
+                91050,
+                107607,
+                63206
+              ]
+            },
+            {
+              "fast_log_normalizer": 4.879341374195194e-10,
+              "fast_logprob_sha256": "2731e7363072c4f4e3d2122c991005e4a55575657fa48247c2ce3da122051c81",
+              "fast_target_logprob": 0.0,
+              "kl_reference_to_fast": 2.8259893102764843e-13,
+              "max_abs_logprob": 0.21620559740208734,
+              "normalized_fast_target_logprob": -4.879341374195194e-10,
+              "pass": false,
+              "position": 1,
+              "raw_probability_mass_error": 4.879341375385593e-10,
+              "reference_logits_sha256": "33f26e2beb52dabf4d398c6252d6dc86be1fa839baa9be11dee70b9f009c8941",
+              "reference_logprobs_path": "reference-1-1.safetensors",
+              "reference_logprobs_sha256": "71ce4bd56e97759b3b99670074c3ee69e82181eb8f0778af9ea0187b3dd213ca",
+              "reference_target_logprob": -4.782561012739324e-10,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 14164,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.21620559740208734,
+                0.2097778325095021,
+                0.2075195317282592,
+                0.20671463060521234,
+                0.20432281541966546,
+                0.20380783128880609,
+                0.20285415697239984,
+                0.19905853319310296
+              ],
+              "worst_token_ids": [
+                19781,
+                98772,
+                12834,
+                53615,
+                4427,
+                20270,
+                5297,
+                45302
+              ]
+            }
+          ],
+          "target_ids": [
+            32,
+            14164
+          ]
+        },
+        {
+          "generation": {
+            "hf_cached": {
+              "ids": [
+                34,
+                2577,
+                963,
+                12632,
+                525,
+                3545,
+                1483,
+                311
+              ],
+              "raw_text": "Caf\u00e9 tables are often used to",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3357050929989782
+            },
+            "hf_full_prefix": {
+              "ids": [
+                34,
+                2577,
+                963,
+                12632,
+                525,
+                3545,
+                1483,
+                311
+              ],
+              "raw_text": "Caf\u00e9 tables are often used to",
+              "stop": "max_new_tokens",
+              "wall_seconds": 0.3489602230001765
+            },
+            "raw_ids_match": true,
+            "raw_text_match": true,
+            "stop_match": true
+          },
+          "id": "unicode",
+          "pass": false,
+          "prompt_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            825,
+            2805,
+            11652,
+            911,
+            51950,
+            12632,
+            13,
+            151645,
+            198,
+            151644,
+            77091,
+            198,
+            151667,
+            271,
+            151668,
+            271
+          ],
+          "sequence_logprob_delta": -0.00039042378745605846,
+          "steps": [
+            {
+              "fast_log_normalizer": 1.8003907187536075e-07,
+              "fast_logprob_sha256": "fa9ba7e5c9cbeec428b0029d5157de39fd39342a67833a189eaeb56339011de4",
+              "fast_target_logprob": -0.00019796661217696965,
+              "kl_reference_to_fast": 9.266868776810419e-07,
+              "max_abs_logprob": 0.2793425363857125,
+              "normalized_fast_target_logprob": -0.000198146651248845,
+              "pass": false,
+              "position": 0,
+              "raw_probability_mass_error": 1.8003908808239544e-07,
+              "reference_logits_sha256": "8c96aa6a66b804e53eb54ef8dd2ee5053977dc277b35374a775f596087e8d8a0",
+              "reference_logprobs_path": "reference-2-0.safetensors",
+              "reference_logprobs_sha256": "2c25ff90c9e4e7e3e0a550483befd44cea250e7d88f67a473a59430031d8ac13",
+              "reference_target_logprob": -0.00019443457907305085,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 34,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.2793425363857125,
+                0.2503546518642281,
+                0.244201545174775,
+                0.24197757666891562,
+                0.23770511573141562,
+                0.23280704444235312,
+                0.23170078223532187,
+                0.23075473731344687
+              ],
+              "worst_token_ids": [
+                15738,
+                24307,
+                90749,
+                22185,
+                9275,
+                7221,
+                54460,
+                27995
+              ]
+            },
+            {
+              "fast_log_normalizer": 8.406845016881857e-07,
+              "fast_logprob_sha256": "5509aaad21ae5fa1f42651bad7f4c1a5f11703472c444fa4869e244c4ff21f49",
+              "fast_target_logprob": -0.005067470483481884,
+              "kl_reference_to_fast": 1.549583113025013e-05,
+              "max_abs_logprob": 0.17981333920879905,
+              "normalized_fast_target_logprob": -0.005068311167983572,
+              "pass": false,
+              "position": 1,
+              "raw_probability_mass_error": 8.406848550635004e-07,
+              "reference_logits_sha256": "2bff0ab3f782b9c1b9edf7a69375903245550956211e118be5bed24729b29f34",
+              "reference_logprobs_path": "reference-2-1.safetensors",
+              "reference_logprobs_sha256": "8c8844b3e0ed90dbf34d6b128c44c97774d3a84f752db954831910ae78b6ab9b",
+              "reference_target_logprob": -0.004680587743957976,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 2577,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.17981333920879905,
+                0.17761988828106468,
+                0.17561907956524792,
+                0.1749152679197401,
+                0.1748771209470803,
+                0.1723289031736428,
+                0.16318125913067405,
+                0.1619987029783303
+              ],
+              "worst_token_ids": [
+                965,
+                93269,
+                35626,
+                15011,
+                22090,
+                14957,
+                67878,
+                56193
+              ]
+            },
+            {
+              "fast_log_normalizer": 2.4961999103221285e-09,
+              "fast_logprob_sha256": "462b25d5c1fb49d615dab8fc25e711541200104f56ebeb5a75e2256e392bb775",
+              "fast_target_logprob": -7.152559646783629e-07,
+              "kl_reference_to_fast": 8.819774918410051e-10,
+              "max_abs_logprob": 0.2786414335548173,
+              "normalized_fast_target_logprob": -7.177521645886851e-07,
+              "pass": false,
+              "position": 2,
+              "raw_probability_mass_error": 2.4961999134376356e-09,
+              "reference_logits_sha256": "c4e1b13c9fba37ac58f7373a70ed381d420c6e29ae0603b39079b2dee43b716d",
+              "reference_logprobs_path": "reference-2-2.safetensors",
+              "reference_logprobs_sha256": "7512f73f8c80ba4e84dd71e231375f180383456c3127a7b69c3a23c8fe93e17c",
+              "reference_target_logprob": -6.86484505200009e-07,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 963,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.2786414335548173,
+                0.2702490995704423,
+                0.2621619413673173,
+                0.26087638838880167,
+                0.25493690474622355,
+                0.25324317916028605,
+                0.2505194853126298,
+                0.24789878829114542
+              ],
+              "worst_token_ids": [
+                76589,
+                62273,
+                61671,
+                96443,
+                41914,
+                64937,
+                31897,
+                5565
+              ]
+            },
+            {
+              "fast_log_normalizer": 1.9795555443202923e-08,
+              "fast_logprob_sha256": "2e651f0b6fab26b2e31e1301bf3477a3ea8e441cb4500b863db2b81c91da5fbe",
+              "fast_target_logprob": 0.0,
+              "kl_reference_to_fast": 3.211494488311387e-12,
+              "max_abs_logprob": 0.24159242698318906,
+              "normalized_fast_target_logprob": -1.9795555443202923e-08,
+              "pass": false,
+              "position": 3,
+              "raw_probability_mass_error": 1.9795555639134932e-08,
+              "reference_logits_sha256": "8014a234ce7dd8ae1c24d7fae10ac9dc3c1aa4aae09e6786b39fcbbd5423bcff",
+              "reference_logprobs_path": "reference-2-3.safetensors",
+              "reference_logprobs_sha256": "f7ed1556574b5625787616449e281b226936c12fe83c0e1a7de2b0add161d931",
+              "reference_target_logprob": -1.9756631246773938e-08,
+              "repeat_max_abs_logprob": 0.0,
+              "target_id": 12632,
+              "top1_match": true,
+              "worst_logprob_deltas": [
+                0.24159242698318906,
+                0.24067308494218054,
+                0.23846437522538366,
+                0.23250963279374304,
+                0.2302780348933524,
+                0.2298507887996024,
+                0.22937013694413366,
+                0.2288742262996024
+              ],
+              "worst_token_ids": [
+                87789,
+                49717,
+                99825,
+                2190,
+                58511,
+                91647,
+                15884,
+                76825
+              ]
+            }
+          ],
+          "target_ids": [
+            34,
+            2577,
+            963,
+            12632
+          ]
+        }
+      ],
+      "config": {
+        "cases": [
+          {
+            "continuation": "A bridge",
+            "id": "bridge",
+            "messages": [
+              {
+                "content": "Briefly describe what a bridge connects.",
+                "role": "user"
+              }
+            ]
+          },
+          {
+            "continuation": "Caf\u00e9 tables",
+            "id": "unicode",
+            "messages": [
+              {
+                "content": "Write one short sentence about caf\u00e9 tables.",
+                "role": "user"
+              }
+            ]
+          }
+        ],
+        "max_abs_logprob": 0.1,
+        "max_abs_sequence_logprob_delta": 0.05,
+        "max_kl_reference_to_fast": 0.0001,
+        "max_repeat_abs_logprob": 0.0,
+        "schema_version": 1
+      },
+      "custody": {
+        "bytes": 69098,
+        "path": "runs/local-gpu-20261012/equivalence-1.7b-f16-workspace/report.json",
+        "sha256": "9fef8411748650e64049ed07be73aeaab1159efcee972dd5dfb8be15acc47f00"
+      },
+      "error": null,
+      "reference_release": {
+        "baseline_allocated_bytes": 33554432,
+        "device": "cuda:0",
+        "gpu_allocated_bytes": 33554432,
+        "gpu_execution_tested_here": true,
+        "reserved_bytes": 33554432,
+        "status": "PASS"
+      },
+      "scientific_interchangeability": false,
+      "status": "FAIL",
+      "stop_contract": {
+        "effective_eos_ids": [
+          151645,
+          151643
+        ],
+        "native_eog_ids": [
+          128247,
+          151643,
+          151645,
+          151662,
+          151663,
+          151664
+        ],
+        "native_stop_set_match": false,
+        "pass": true,
+        "policy": "hf-eos",
+        "reference_eos_ids": [
+          151645,
+          151643
+        ],
+        "scope": "Greedy token-ID termination only; native tokenizer attributes unchanged"
+      }
+    }
+  ],
+  "native_predictions": [
+    {
+      "artifact_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "attempted_jobs": 4,
+      "custody": {
+        "bytes": 27118,
+        "path": "runs/local-gpu-20261012/native-0.6b-batch/report.json",
+        "sha256": "22c3c7461a26f000be46944828ce7260b0c58abc86fda9c9e3700d2e2e7d48fd"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "adapter": {
+          "chunk_count": 1,
+          "eos_ids": [
+            151645,
+            151643
+          ],
+          "kernel_contract": "native KV within chunks; clean full-prefix prefill after extra EOG",
+          "native_eog_ids": [
+            128247,
+            151643,
+            151645,
+            151662,
+            151663,
+            151664
+          ],
+          "raw_text_contract": "all token spellings, including special/EOS tokens",
+          "termination": "hf-eos"
+        },
+        "content": "A bridge connects two different locations or structures, allowing people, vehicles, or goods",
+        "stop_type": "limit",
+        "tokens": [
+          32,
+          14164,
+          33061,
+          1378,
+          2155,
+          10468,
+          476,
+          14389,
+          11,
+          10693,
+          1251,
+          11,
+          11474,
+          11,
+          476,
+          11561
+        ],
+        "tokens_evaluated": 20,
+        "tokens_predicted": 16
+      },
+      "first_parsed_json": null,
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_0_6b",
+      "slots": 2,
+      "status": "PASS"
+    },
+    {
+      "artifact_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "attempted_jobs": 4,
+      "custody": {
+        "bytes": 27122,
+        "path": "runs/local-gpu-20261012/native-0.6b-f16/report.json",
+        "sha256": "964c33db792a2d2e050597a6b2725247795b2647a34211a745ca896334181935"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "adapter": {
+          "chunk_count": 1,
+          "eos_ids": [
+            151645,
+            151643
+          ],
+          "kernel_contract": "native KV within chunks; clean full-prefix prefill after extra EOG",
+          "native_eog_ids": [
+            128247,
+            151643,
+            151645,
+            151662,
+            151663,
+            151664
+          ],
+          "raw_text_contract": "all token spellings, including special/EOS tokens",
+          "termination": "hf-eos"
+        },
+        "content": "A bridge connects two different locations or structures, allowing people, vehicles, or goods to move between them safely and efficiently.<|im_end|>",
+        "stop_type": "eos",
+        "tokens": [
+          32,
+          14164,
+          33061,
+          1378,
+          2155,
+          10468,
+          476,
+          14389,
+          11,
+          10693,
+          1251,
+          11,
+          11474,
+          11,
+          476,
+          11561,
+          311,
+          3271,
+          1948,
+          1105,
+          21000,
+          323,
+          29720,
+          13,
+          151645
+        ],
+        "tokens_evaluated": 20,
+        "tokens_predicted": 25
+      },
+      "first_parsed_json": null,
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_0_6b",
+      "slots": 1,
+      "status": "PASS"
+    },
+    {
+      "artifact_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "attempted_jobs": 2,
+      "custody": {
+        "bytes": 27082,
+        "path": "runs/local-gpu-20261012/native-0.6b-json/report.json",
+        "sha256": "22078e30a271dc7b32b6bc01e591cb918649edfe68e9716d6a0ce62a713106d1"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "content": "{\n  \"answer\": \"yes\"\n}",
+        "stop_type": "eos",
+        "tokens": [
+          515,
+          220,
+          330,
+          9217,
+          788,
+          330,
+          9693,
+          698,
+          92,
+          151645
+        ],
+        "tokens_evaluated": 27,
+        "tokens_predicted": 10
+      },
+      "first_parsed_json": {
+        "answer": "yes"
+      },
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_0_6b",
+      "slots": 1,
+      "status": "PASS"
+    },
+    {
+      "artifact_sha256": "0392d70678044c268e122876a3b3742059969bd9b00dce7994579baa83d3e110",
+      "attempted_jobs": 4,
+      "custody": {
+        "bytes": 27153,
+        "path": "runs/local-gpu-20261012/native-0.6b-q8/report.json",
+        "sha256": "41b7aa17e3c16fce3d0d3fa19928d5074697dc36b43620f475a41f765810c182"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "adapter": {
+          "chunk_count": 1,
+          "eos_ids": [
+            151645,
+            151643
+          ],
+          "kernel_contract": "native KV within chunks; clean full-prefix prefill after extra EOG",
+          "native_eog_ids": [
+            128247,
+            151643,
+            151645,
+            151662,
+            151663,
+            151664
+          ],
+          "raw_text_contract": "all token spellings, including special/EOS tokens",
+          "termination": "hf-eos"
+        },
+        "content": "A bridge connects two different locations or structures, allowing people, vehicles, or goods to move between them safely and efficiently.<|im_end|>",
+        "stop_type": "eos",
+        "tokens": [
+          32,
+          14164,
+          33061,
+          1378,
+          2155,
+          10468,
+          476,
+          14389,
+          11,
+          10693,
+          1251,
+          11,
+          11474,
+          11,
+          476,
+          11561,
+          311,
+          3271,
+          1948,
+          1105,
+          21000,
+          323,
+          29720,
+          13,
+          151645
+        ],
+        "tokens_evaluated": 20,
+        "tokens_predicted": 25
+      },
+      "first_parsed_json": null,
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_0_6b",
+      "slots": 1,
+      "status": "PASS"
+    },
+    {
+      "artifact_sha256": "fc090d6b5617b1b8578cd4816bbabd48d8987aa49baecbb024942956b1af1a01",
+      "attempted_jobs": 4,
+      "custody": {
+        "bytes": 27122,
+        "path": "runs/local-gpu-20261012/native-0.6b-sampling/report.json",
+        "sha256": "202901f9b14d22da2c6b93f758ab9645c052f66709c4fdd519430d1f7842bfda"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "content": "A bridge connects two different locations or structures, allowing for the transportation of people,",
+        "stop_type": "limit",
+        "tokens": [
+          32,
+          14164,
+          33061,
+          1378,
+          2155,
+          10468,
+          476,
+          14389,
+          11,
+          10693,
+          369,
+          279,
+          17903,
+          315,
+          1251,
+          11
+        ],
+        "tokens_evaluated": 20,
+        "tokens_predicted": 16
+      },
+      "first_parsed_json": null,
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_0_6b",
+      "slots": 1,
+      "status": "PASS"
+    },
+    {
+      "artifact_sha256": "d904d6dd6587242d8452ee7774d2fdc6cadfaccffa72c1639d871d1d675cb5a4",
+      "attempted_jobs": 4,
+      "custody": {
+        "bytes": 27356,
+        "path": "runs/local-gpu-20261012/native-1.7b-f16/report.json",
+        "sha256": "0b16f64363593498c8a6c7b8682a169e509d146194c45cc11305d319ec7118b9"
+      },
+      "failed_jobs": 0,
+      "first_output": {
+        "adapter": {
+          "chunk_count": 1,
+          "eos_ids": [
+            151645,
+            151643
+          ],
+          "kernel_contract": "native KV within chunks; clean full-prefix prefill after extra EOG",
+          "native_eog_ids": [
+            128247,
+            151643,
+            151645,
+            151662,
+            151663,
+            151664
+          ],
+          "raw_text_contract": "all token spellings, including special/EOS tokens",
+          "termination": "hf-eos"
+        },
+        "content": "A bridge connects two or more points or structures, typically across a body of water, gap, or terrain, allowing for the passage of people, vehicles, or",
+        "stop_type": "limit",
+        "tokens": [
+          32,
+          14164,
+          33061,
+          1378,
+          476,
+          803,
+          3501,
+          476,
+          14389,
+          11,
+          11136,
+          3941,
+          264,
+          2487,
+          315,
+          3015,
+          11,
+          12929,
+          11,
+          476,
+          24869,
+          11,
+          10693,
+          369,
+          279,
+          21085,
+          315,
+          1251,
+          11,
+          11474,
+          11,
+          476
+        ],
+        "tokens_evaluated": 20,
+        "tokens_predicted": 32
+      },
+      "first_parsed_json": null,
+      "full_gpu_offload": {
+        "offloaded_layers": 29,
+        "total_layers": 29
+      },
+      "model": "qwen3_1_7b",
+      "slots": 1,
+      "status": "PASS"
+    }
+  ],
+  "operational_custody": [
+    {
+      "bytes": 12307,
+      "path": "runs/local-gpu-20261012/operational/report.json",
+      "sha256": "d97e1c9a3019e7c2452d159af68d102ae2b23d89d6b6055e6a5656e7c8e29a7a"
+    },
+    {
+      "bytes": 5085,
+      "path": "runs/local-gpu-20261012/pytorch-operational.py",
+      "sha256": "1d85184bb2096c1c13be848ba1d88960b8dd212b9e6763391e2589bf607c9510"
+    }
+  ],
+  "profiles": [
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "operation": "native device allocation and dtype-specific matrix multiply",
+          "status": "PASS"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "message": "Engineering invariant failed: clean_cache_logits_0, max_abs_error=0.0390625",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "AssertionError"
+        }
+      },
+      "custody": {
+        "bytes": 19331,
+        "path": "runs/local-gpu-20261012/profile-checks/20261012T193720Z-4a76a097387e/diagnostics.json",
+        "sha256": "eed25b957d33c3cca25e3cdc552ea98ac3e6e96e86862abc3d9b915c5b19fc96"
+      },
+      "error": {
+        "message": "Engineering invariant failed: clean_cache_logits_0, max_abs_error=0.0390625",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "AssertionError"
+      },
+      "hardware": {
+        "arch_list": [
+          "sm_50",
+          "sm_60",
+          "sm_70",
+          "sm_75",
+          "sm_80",
+          "sm_86",
+          "sm_90"
+        ],
+        "capability": [
+          7,
+          5
+        ],
+        "cuda_available": true,
+        "cuda_build": "12.6",
+        "device_count": 1,
+        "device_index": 0,
+        "discovery_error": null,
+        "free_bytes": 9785245696,
+        "name": "NVIDIA GeForce RTX 2080 Ti",
+        "native_bf16": false,
+        "nvidia_smi": {
+          "returncode": 0,
+          "rows": [
+            "0, NVIDIA GeForce RTX 2080 Ti, 615.71.09, 11264, 9488"
+          ]
+        },
+        "torch_version": "2.8.0+cu126",
+        "total_bytes": 11361320960
+      },
+      "invariants": {
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_0": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_1": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_0": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_1": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "clean_cache_logits_0": {
+          "atol": 0.02,
+          "failure_evidence": {
+            "full_tensors_retained": false,
+            "largest_failing_values": [
+              {
+                "abs_error": 0.0390625,
+                "index": [
+                  0,
+                  0,
+                  16969
+                ],
+                "left": -9.2421875,
+                "right": -9.28125
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  68187
+                ],
+                "left": -6.3125,
+                "right": -6.34765625
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  16215
+                ],
+                "left": -5.5078125,
+                "right": -5.54296875
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  50817
+                ],
+                "left": -4.390625,
+                "right": -4.42578125
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  60395
+                ],
+                "left": -5.703125,
+                "right": -5.73828125
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  87628
+                ],
+                "left": -4.31640625,
+                "right": -4.3515625
+              },
+              {
+                "abs_error": 0.03515625,
+                "index": [
+                  0,
+                  0,
+                  47213
+                ],
+                "left": -5.00390625,
+                "right": -5.0390625
+              },
+              {
+                "abs_error": 0.0341796875,
+                "index": [
+                  0,
+                  0,
+                  56227
+                ],
+                "left": -1.1904296875,
+                "right": -1.224609375
+              }
+            ],
+            "left_device": "cuda:0",
+            "left_dtype": "torch.float16",
+            "left_sha256": "23942d242b6e472788e3c824c880bfcc25c25a3e05a96aa591068a0e2f4a2617",
+            "mismatch_count": 374,
+            "right_device": "cuda:0",
+            "right_dtype": "torch.float16",
+            "right_sha256": "c40f988ba90e3326fcd24bc51b6b94cc9dcca8aec768d4bd99d3b9d5ea4d1c14",
+            "sample_limit": 8,
+            "shape": [
+              1,
+              1,
+              151936
+            ]
+          },
+          "max_abs_error": 0.0390625,
+          "passed": false,
+          "rtol": 0.002,
+          "status": "FAIL"
+        },
+        "clean_repeat_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "identity_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "zero_strength_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        }
+      },
+      "model": {
+        "key": "qwen3_0_6b",
+        "license": "Apache-2.0",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "tokenizer_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": "qwen3_0_6b",
+        "profile": "local-2080ti",
+        "quantization": null,
+        "rental_capacity_gib": 32
+      },
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "message": "Estimated 8.53 GiB exceeds the 80%-of-free/capacity budget 7.31 GiB. Use --model qwen3_0_6b, shorter --max-input-tokens, omit --gradient, or release other GPU allocations; fit is not guaranteed",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "ProfileError"
+        },
+        "pretrained_smoke": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        }
+      },
+      "custody": {
+        "bytes": 3292,
+        "path": "runs/local-gpu-20261012/profile-checks/20261012T193915Z-554da8349398/diagnostics.json",
+        "sha256": "74a558ba41f0993926c7d9582c07ebac36aaf8ff8ac19e3206c928f9dc86cb94"
+      },
+      "error": {
+        "message": "Estimated 8.53 GiB exceeds the 80%-of-free/capacity budget 7.31 GiB. Use --model qwen3_0_6b, shorter --max-input-tokens, omit --gradient, or release other GPU allocations; fit is not guaranteed",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "ProfileError"
+      },
+      "hardware": {
+        "arch_list": [
+          "sm_50",
+          "sm_60",
+          "sm_70",
+          "sm_75",
+          "sm_80",
+          "sm_86",
+          "sm_90"
+        ],
+        "capability": [
+          7,
+          5
+        ],
+        "cuda_available": true,
+        "cuda_build": "12.6",
+        "device_count": 1,
+        "device_index": 0,
+        "discovery_error": null,
+        "free_bytes": 9816834048,
+        "name": "NVIDIA GeForce RTX 2080 Ti",
+        "native_bf16": false,
+        "nvidia_smi": {
+          "returncode": 0,
+          "rows": [
+            "0, NVIDIA GeForce RTX 2080 Ti, 615.71.09, 11264, 9519"
+          ]
+        },
+        "torch_version": "2.8.0+cu126",
+        "total_bytes": 11361320960
+      },
+      "invariants": {},
+      "model": {
+        "key": "qwen3_1_7b",
+        "license": "Apache-2.0",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "tokenizer_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": "qwen3_1_7b",
+        "profile": "local-2080ti",
+        "quantization": null,
+        "rental_capacity_gib": 32
+      },
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "operation": "native device allocation and dtype-specific matrix multiply",
+          "status": "PASS"
+        },
+        "preflight": {
+          "status": "PASS"
+        },
+        "pretrained_smoke": {
+          "message": "Engineering invariant failed: clean_cache_logits_0, max_abs_error=0.0625",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "AssertionError"
+        }
+      },
+      "custody": {
+        "bytes": 19260,
+        "path": "runs/local-gpu-20261012/profile-checks/20261012T194014Z-48e9c6185a83/diagnostics.json",
+        "sha256": "8d45341108bfa2ed5ebba3762c898d934d5eff1a9899c60cd96edaf74e79f31f"
+      },
+      "error": {
+        "message": "Engineering invariant failed: clean_cache_logits_0, max_abs_error=0.0625",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "AssertionError"
+      },
+      "hardware": {
+        "arch_list": [
+          "sm_50",
+          "sm_60",
+          "sm_70",
+          "sm_75",
+          "sm_80",
+          "sm_86",
+          "sm_90"
+        ],
+        "capability": [
+          7,
+          5
+        ],
+        "cuda_available": true,
+        "cuda_build": "12.6",
+        "device_count": 1,
+        "device_index": 0,
+        "discovery_error": null,
+        "free_bytes": 9840361472,
+        "name": "NVIDIA GeForce RTX 2080 Ti",
+        "native_bf16": false,
+        "nvidia_smi": {
+          "returncode": 0,
+          "rows": [
+            "0, NVIDIA GeForce RTX 2080 Ti, 615.71.09, 11264, 9541"
+          ]
+        },
+        "torch_version": "2.8.0+cu126",
+        "total_bytes": 11361320960
+      },
+      "invariants": {
+        "capture_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_0": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_logits_1": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_0": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "causal_prefix_residual_1": {
+          "atol": 0.02,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.002,
+          "status": "PASS"
+        },
+        "clean_cache_logits_0": {
+          "atol": 0.02,
+          "failure_evidence": {
+            "full_tensors_retained": false,
+            "largest_failing_values": [
+              {
+                "abs_error": 0.0625,
+                "index": [
+                  0,
+                  0,
+                  101440
+                ],
+                "left": -19.078125,
+                "right": -19.140625
+              },
+              {
+                "abs_error": 0.0625,
+                "index": [
+                  0,
+                  0,
+                  107972
+                ],
+                "left": -17.78125,
+                "right": -17.84375
+              },
+              {
+                "abs_error": 0.0625,
+                "index": [
+                  0,
+                  0,
+                  81998
+                ],
+                "left": -8.65625,
+                "right": -8.71875
+              },
+              {
+                "abs_error": 0.0625,
+                "index": [
+                  0,
+                  0,
+                  72309
+                ],
+                "left": -9.140625,
+                "right": -9.203125
+              },
+              {
+                "abs_error": 0.0546875,
+                "index": [
+                  0,
+                  0,
+                  39908
+                ],
+                "left": -11.96875,
+                "right": -12.0234375
+              },
+              {
+                "abs_error": 0.0546875,
+                "index": [
+                  0,
+                  0,
+                  16261
+                ],
+                "left": -8.3125,
+                "right": -8.3671875
+              },
+              {
+                "abs_error": 0.0546875,
+                "index": [
+                  0,
+                  0,
+                  45264
+                ],
+                "left": -13.3203125,
+                "right": -13.375
+              },
+              {
+                "abs_error": 0.0546875,
+                "index": [
+                  0,
+                  0,
+                  44529
+                ],
+                "left": -13.0,
+                "right": -13.0546875
+              }
+            ],
+            "left_device": "cuda:0",
+            "left_dtype": "torch.float16",
+            "left_sha256": "f24d6a7a0b5e9cde4af618ab26c978fc32477e6bde7777f8d1412dd9c70d0a80",
+            "mismatch_count": 3656,
+            "right_device": "cuda:0",
+            "right_dtype": "torch.float16",
+            "right_sha256": "6c3ab8b3d24ea2c9832930b830bd38d8e1b8f37cf254f040e8c4c1302df021e0",
+            "sample_limit": 8,
+            "shape": [
+              1,
+              1,
+              151936
+            ]
+          },
+          "max_abs_error": 0.0625,
+          "passed": false,
+          "rtol": 0.002,
+          "status": "FAIL"
+        },
+        "clean_repeat_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "identity_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        },
+        "zero_strength_logits": {
+          "atol": 0.0,
+          "max_abs_error": 0.0,
+          "passed": true,
+          "rtol": 0.0,
+          "status": "PASS"
+        }
+      },
+      "model": {
+        "key": "qwen3_1_7b",
+        "license": "Apache-2.0",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "tokenizer_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": false,
+        "max_input_tokens": 128,
+        "max_new_tokens": 8,
+        "model": "qwen3_1_7b",
+        "profile": "local-2080ti",
+        "quantization": null,
+        "rental_capacity_gib": 32
+      },
+      "status": "FAIL"
+    },
+    {
+      "checks": {
+        "activation_gradient": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "cuda_kernel": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        },
+        "preflight": {
+          "message": "Estimated 7.46 GiB exceeds the 80%-of-free/capacity budget 7.40 GiB. Use --model qwen3_0_6b, shorter --max-input-tokens, omit --gradient, or release other GPU allocations; fit is not guaranteed",
+          "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+          "out_of_memory": false,
+          "status": "FAIL",
+          "type": "ProfileError"
+        },
+        "pretrained_smoke": {
+          "reason": "Not reached",
+          "status": "SKIP"
+        }
+      },
+      "custody": {
+        "bytes": 3317,
+        "path": "runs/local-gpu-20261012/short-gradient/profile-checks/20261012T194431Z-308f4cd962ba/diagnostics.json",
+        "sha256": "28ff2662a7a768ab9ecccfa8aa29e74dd644d0dbbbc3453a9a0d58f4ccc88c7f"
+      },
+      "error": {
+        "message": "Estimated 7.46 GiB exceeds the 80%-of-free/capacity budget 7.40 GiB. Use --model qwen3_0_6b, shorter --max-input-tokens, omit --gradient, or release other GPU allocations; fit is not guaranteed",
+        "next_action": "Correct the reported condition and rerun; skipped checks do not establish GPU support.",
+        "out_of_memory": false,
+        "status": "FAIL",
+        "type": "ProfileError"
+      },
+      "hardware": {
+        "arch_list": [
+          "sm_50",
+          "sm_60",
+          "sm_70",
+          "sm_75",
+          "sm_80",
+          "sm_86",
+          "sm_90"
+        ],
+        "capability": [
+          7,
+          5
+        ],
+        "cuda_available": true,
+        "cuda_build": "12.6",
+        "device_count": 1,
+        "device_index": 0,
+        "discovery_error": null,
+        "free_bytes": 9935126528,
+        "name": "NVIDIA GeForce RTX 2080 Ti",
+        "native_bf16": false,
+        "nvidia_smi": {
+          "returncode": 0,
+          "rows": [
+            "0, NVIDIA GeForce RTX 2080 Ti, 615.71.09, 11264, 9632"
+          ]
+        },
+        "torch_version": "2.8.0+cu126",
+        "total_bytes": 11361320960
+      },
+      "invariants": {},
+      "model": {
+        "key": "qwen3_1_7b",
+        "license": "Apache-2.0",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "tokenizer_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+      },
+      "request": {
+        "attention_backend": "eager",
+        "batch_size": 1,
+        "device_index": 0,
+        "dtype": null,
+        "gradient": true,
+        "max_input_tokens": 20,
+        "max_new_tokens": 1,
+        "model": "qwen3_1_7b",
+        "profile": "local-2080ti",
+        "quantization": null,
+        "rental_capacity_gib": 32
+      },
+      "status": "FAIL"
+    }
+  ],
+  "provisioning": [
+    {
+      "bytes": 341,
+      "path": ".cache/host/package-sha256.txt",
+      "sha256": "1c7bc7beb0c0296d997d52438c538c57f03cdea453d04264d64e110a5eea328b"
+    },
+    {
+      "bytes": 3729,
+      "path": ".cache/toolchains/cuda128-explicit.txt",
+      "sha256": "8cbe86efc4a8ed6e1aae3fe0c592914430c96ddafaa635fba0d7e663183c33d6"
+    },
+    {
+      "bytes": 50197,
+      "path": ".cache/toolchains/redistrib_12.8.1.json",
+      "sha256": "249e28a83008d711d5f72880541c8be6253f6d61608461de4fcb715554a6cf17"
+    }
+  ],
+  "pytorch_operational": {
+    "cases": [
+      {
+        "checks": {
+          "capture_finite": true,
+          "capture_logits_exact": true,
+          "gradient_finite_nonzero": true,
+          "hooks_removed": true,
+          "identity_exact": true,
+          "nonzero_patch_changes_logits": true,
+          "parameters_frozen_without_gradients": true,
+          "repeat_exact": true,
+          "uncached_greedy_repeat": true,
+          "zero_strength_exact": true
+        },
+        "generations": [
+          {
+            "ids": [
+              32,
+              14164,
+              33061,
+              1378,
+              2155,
+              10468,
+              476,
+              14389
+            ],
+            "stop": "max_new_tokens",
+            "text": "A bridge connects two different locations or structures"
+          },
+          {
+            "ids": [
+              32,
+              14164,
+              33061,
+              1378,
+              2155,
+              10468,
+              476,
+              14389
+            ],
+            "stop": "max_new_tokens",
+            "text": "A bridge connects two different locations or structures"
+          }
+        ],
+        "gradient": {
+          "finite": true,
+          "l2": 1.7608875036239624,
+          "status": "PASS"
+        },
+        "input_ids": [
+          151644,
+          872,
+          198,
+          85984,
+          398,
+          7512,
+          1128,
+          264,
+          14164,
+          33061,
+          13,
+          151645,
+          198,
+          151644,
+          77091,
+          198,
+          151667,
+          271,
+          151668,
+          271
+        ],
+        "logits_sha256": "602b16a1cadf9402bfba5340aff8f8cc680d8260735ba5c8c76a4921c8c1b1d3",
+        "memory": {
+          "free_bytes_after": 8435859456,
+          "peak_allocated_bytes": 1292124160,
+          "peak_reserved_bytes": 1319108608,
+          "status": "PASS",
+          "total_bytes": 11361320960
+        },
+        "model": "qwen3_0_6b",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "snapshot_sha256": {
+          "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "README.md": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9",
+          "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+          "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "wall_seconds": 6.09861624700352
+      },
+      {
+        "checks": {
+          "capture_finite": true,
+          "capture_logits_exact": true,
+          "hooks_removed": true,
+          "identity_exact": true,
+          "nonzero_patch_changes_logits": true,
+          "parameters_frozen_without_gradients": true,
+          "repeat_exact": true,
+          "uncached_greedy_repeat": true,
+          "zero_strength_exact": true
+        },
+        "generations": [
+          {
+            "ids": [
+              32,
+              14164,
+              33061,
+              1378,
+              476,
+              803,
+              3501,
+              476
+            ],
+            "stop": "max_new_tokens",
+            "text": "A bridge connects two or more points or"
+          },
+          {
+            "ids": [
+              32,
+              14164,
+              33061,
+              1378,
+              476,
+              803,
+              3501,
+              476
+            ],
+            "stop": "max_new_tokens",
+            "text": "A bridge connects two or more points or"
+          }
+        ],
+        "gradient": {
+          "reason": "1.7B gradient excluded: full profile planning budget rejected it",
+          "status": "SKIP"
+        },
+        "input_ids": [
+          151644,
+          872,
+          198,
+          85984,
+          398,
+          7512,
+          1128,
+          264,
+          14164,
+          33061,
+          13,
+          151645,
+          198,
+          151644,
+          77091,
+          198,
+          151667,
+          271,
+          151668,
+          271
+        ],
+        "logits_sha256": "519c44c9e80ff0b22771ae436037c601af30968b6a6ff00e4df68ddd2ac86b03",
+        "memory": {
+          "free_bytes_after": 6191906816,
+          "peak_allocated_bytes": 3542241280,
+          "peak_reserved_bytes": 3563061248,
+          "status": "PASS",
+          "total_bytes": 11361320960
+        },
+        "model": "qwen3_1_7b",
+        "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "snapshot_sha256": {
+          "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "README.md": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+          "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+          "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+          "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+          "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "wall_seconds": 11.792189806998067
+      }
+    ],
+    "scope": "Uncached GPU operational mechanics only; full profile/cache equivalence gates are separate",
+    "status": "PASS"
+  },
+  "regression": {
+    "cpu_skipped": 2,
+    "cpu_subtests_passed": 118,
+    "cpu_tests_passed": 308,
+    "separately_enabled_gpu_tests_passed": 1
+  },
+  "runtime_source_commit": "47a5edee6bc0c27834f9c9396656cdf9b9c11d5a",
+  "schema_version": 1,
+  "scope": "Local engineering execution; numerical qualification failures retained; no scientific interchangeability",
+  "source_sha256": {
+    "scripts/fast_build.py": "0eca67405dd96d4207cc6fbed290a7cf4d3c8463b96b22fedd86f46c7d7a01ca",
+    "scripts/fast_equivalence.py": "a3ee3cc3efa1b4068b214ed84140ef391e00e106f515e30d53bf2b0b2f45d911",
+    "scripts/local_gpu.py": "9970e68ec071f8af9505825fd60667c31c3d7f1d8a310ad4e8ac1e887fe42bec",
+    "src/novel/__init__.py": "9a3249059e5354911e3eb784166d83661f7448693b04af52c3fdd14ae800fc60",
+    "src/novel/activation.py": "507608ee59e4a2554482c2f582e5b9bfc2e3b3c1d0886a3e644d7bbdb63a2140",
+    "src/novel/artifacts.py": "3faa4aad352b73529f101ef4e00a80fc0f1b24a6778c00bc70ffbdd50024e1d6",
+    "src/novel/diagnostics.py": "ef65b09ce427a0d87f5728a11ec84eaa2f1f9eb8f5a0bee1b3fb4dee9f231fe3",
+    "src/novel/fast_jobs.py": "f4b6b62e2e9d1a902d282e8a36e69e1174698b803295aaf125336b2dba2ec139",
+    "src/novel/fast_runtime.py": "e8858aa85efd866120b8466c80d64e612f37a59689f10f3c8dfd803255c571c8",
+    "src/novel/generation.py": "6dbe64e285934f3490f5a0e67ea3c7937a24bac06cdfb6d51ddf533c84dc0569",
+    "src/novel/gradients.py": "de800fbb3395f0070106d7875b811750bcc06e99605413b9a6594d6f5d77cc92",
+    "src/novel/models.py": "e0fb800c23357c89b9efbcb8bcdef66703ca3e84ea3e493d74617fa5f86ec92f",
+    "src/novel/profile_runner.py": "3f3b737d56e718eda13b34a73f9f0c6300ce3ecad62e8874c02ac12d2218c43c",
+    "src/novel/profiles.py": "1d0b8beac6f6989c105c369adb230aecf150cc4be374ed59833cc332438f061a",
+    "src/novel/runner.py": "2f0be7ceff88bf8839e4bc3efc8af2066a55acc65310902bca54aca25e486e9d",
+    "src/novel/tasks.py": "797af2f9a17aa47e53e62c04325052ad6bf25c79c60e2c3b0d2c88f1b74a8c69"
+  },
+  "voice_service": {
+    "action": "systemctl --user disable --now voxtype.service",
+    "active": false,
+    "enabled": false,
+    "name": "voxtype.service"
+  }
+}
