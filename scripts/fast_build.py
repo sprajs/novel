@@ -21,6 +21,8 @@ def main():
     parser.add_argument("--jobs", type=int, default=5)
     parser.add_argument("--nvcc-version", choices=("12.8.90", "12.8.93"), default="12.8.90",
                         help="Exact CUDA 12.8 Update 1 compiler component; 12.8.93 is in NVIDIA's redistributable manifest")
+    parser.add_argument("--link-library-dir", type=Path,
+                        help="Explicit indirect-library search directory for an isolated compiler sysroot")
     args = parser.parse_args()
     os.chdir(ROOT)
     bounded_int(args.jobs, "jobs", 1, 32)
@@ -46,6 +48,11 @@ def main():
     env = {**os.environ, "PATH": str(tools) + os.pathsep + os.environ["PATH"]}
     flags = ["-DCMAKE_BUILD_TYPE=Release", "-DGGML_NATIVE=ON", "-DLLAMA_BUILD_IS_DEV=OFF",
              "-DLLAMA_BUILD_TESTS=OFF", "-DLLAMA_BUILD_EXAMPLES=OFF", "-DLLAMA_OPENSSL=OFF"]
+    if args.link_library_dir is not None:
+        directory = args.link_library_dir.resolve(strict=True)
+        if not directory.is_dir() or any(c in str(directory) for c in (",", ";", "\n")):
+            raise ValueError("Link library directory must be a directory without CMake/linker separators")
+        flags.append(f"-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath-link,{directory}")
     nvcc = None
     if profile["cuda_arch"]:
         nvcc = subprocess.check_output(["nvcc", "--version"], text=True)
