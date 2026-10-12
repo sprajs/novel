@@ -44,9 +44,15 @@ understanding:
 python scripts/learning/build.py --refresh-baseline \
   --revision FULL_RESEARCH_COMMIT_SHA --reviewed-at YYYY-MM-DD
 python -m unittest discover -s tests/learning -v
+node scripts/learning/check_math.mjs
 python scripts/learning/build.py --check
 python scripts/learning/build.py
 ```
+
+Use LaTeX delimiters for mathematics, with displayed equations for the main
+relationships. Keep definitions and worked steps alongside the notation. The
+pinned KaTeX assets are local; preserve their provenance and license when
+updating them. Check all expressions with the same renderer used by the browser.
 
 The baseline revision identifies the research commit reviewed. The per-file
 hashes also record reviewed modifications in the curriculum PR, including the

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and package Novel's dependency-free reading room (no network)."""
+"""Validate and package Novel's self-contained reading room (no network)."""
 import argparse
 import hashlib
 import json
@@ -170,11 +170,13 @@ def build(data, baseline):
             child.unlink()
     for name in ("index.html", "app.js", "style.css", "favicon.svg"):
         shutil.copyfile(SOURCE / name, destination / name)
+    shutil.copytree(SOURCE / "vendor", destination / "vendor")
     for name in ("content.json", "baseline.json", "source-audit.md"):
         shutil.copyfile(LEARNING / name, destination / name)
     shutil.copyfile(LEARNING / "MAINTENANCE.md", destination / "maintenance.md")
     info = {"researchRevision": baseline["revision"], "reviewedAt": baseline["reviewedAt"],
-            "contentSha256": digest(LEARNING / "content.json"), "files": {p.name: digest(p) for p in sorted(destination.iterdir())}}
+            "contentSha256": digest(LEARNING / "content.json"),
+            "files": {str(p.relative_to(destination)): digest(p) for p in sorted(destination.rglob("*")) if p.is_file()}}
     (destination / "build-info.json").write_text(json.dumps(info, indent=2) + "\n")
     print(f"Built {len(data['chapters'])} chapters, {len(data['papers'])} sources and {len(data['glossary'])} terms into {destination.relative_to(ROOT)}")
 

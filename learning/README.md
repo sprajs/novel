@@ -10,16 +10,18 @@ general computer-science syllabus.
 - `source-audit.md`: primary-source verification and reading-inventory coverage.
 - `TEACHING-REVIEW.md`: parent review of beginner readability and addressed prerequisites.
 - `baseline.json`: reviewed research revision, input hashes and content hash.
-- `site/`: dependency-free HTML, CSS and JavaScript, plus the stable hosting identity.
+- `site/`: HTML, CSS and JavaScript, a pinned local KaTeX renderer, and the stable hosting identity.
 - `MAINTENANCE.md`: when to add, defer, retire and publish reading.
 - `CHANGES.md`: substantive curriculum changes and reasons.
 - `publication.json`: deployment receipt and the saved maintenance automation.
 
-Build and validate offline using standard-library Python (3.12 or later):
+Build offline using standard-library Python (3.12 or later). Validate equations
+with Node.js (20 or later); no package installation or CDN is needed:
 
 ```sh
 python scripts/learning/build.py --check
 python -m unittest discover -s tests/learning -v
+node scripts/learning/check_math.mjs
 python scripts/learning/build.py
 python -m http.server 8765 --directory learning/site/dist --bind 127.0.0.1
 ```
@@ -35,3 +37,11 @@ editing a heading. Chapter `connections` pair a chapter ID with a reason to
 follow the link; glossary entries link back to a fuller explanation. The builder
 validates those references, primary method URLs and worked figure structures.
 Diagrams can be flows, V/M matrices, worked tables or a residual bypass schematic.
+
+Write inline mathematics with `\(...\)` and displayed equations with `\[...\]`
+in content strings (escape the backslash when editing JSON). KaTeX renders both
+visual notation and accessible MathML. Keep the surrounding explanation and
+define new notation. `site/vendor/katex/PROVENANCE.json` pins the upstream npm
+archive integrity and individual file hashes; `LICENSE` retains its MIT notice.
+All scripts, styles and fonts are served by the Site itself. The checker rejects
+invalid expressions and the return of self-assessment or progress controls.

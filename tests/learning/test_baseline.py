@@ -2,6 +2,7 @@
 import copy
 import importlib.util
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -95,6 +96,7 @@ class BaselineContract(unittest.TestCase):
             source = Path(directory)
             for name in ("index.html", "app.js", "style.css", "favicon.svg"):
                 (source / name).write_bytes((build.SOURCE / name).read_bytes())
+            shutil.copytree(build.SOURCE / "vendor", source / "vendor")
             (source / "dist").mkdir()
             (source / "dist/obsolete.txt").write_text("retired")
             with patch.object(build, "SOURCE", source):

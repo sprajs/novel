@@ -17,6 +17,8 @@ jobs:
         run: python scripts/learning/build.py --check
       - name: Exercise drift detection and output integrity
         run: python -m unittest discover -s tests/learning -v
+      - name: Validate typeset equations and the open reading interface
+        run: node scripts/learning/check_math.mjs
       - name: Build the static reading room
         run: python scripts/learning/build.py
       - uses: actions/upload-artifact@v4

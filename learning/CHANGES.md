@@ -1,5 +1,18 @@
 # Curriculum changes
 
+## 12 October 2026 — typeset mathematics and refresh the original preview
+
+Render inline notation and displayed equations using a pinned local KaTeX copy,
+including accessible MathML and local fonts. Typeset softmax, path likelihood,
+pass@k, uncertainty bounds and gradient calculations while retaining the
+beginner explanations. Validate expressions with the browser's renderer and
+include nested vendor assets in output hashes and publication packaging.
+
+The original local browser tab still displayed the superseded first prototype,
+including a comprehension checkbox, quiz and progress indicator. The current
+source already omits those controls. Refresh that preview with the current
+build and add a regression guard against restoring self-assessment controls.
+
 ## 12 October 2026 — parent beginner-readability review
 
 Read all 13 expanded chapters without relying on paper text for the teaching

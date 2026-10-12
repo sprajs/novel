@@ -38,6 +38,12 @@ def main():
     if target.exists():
         shutil.rmtree(target)
     shutil.copytree(source / "dist", target)
+    vendor = destination / "vendor"
+    if vendor.is_symlink():
+        parser.error("Refusing symlinked vendor directory")
+    if vendor.exists():
+        shutil.rmtree(vendor)
+    shutil.copytree(source / "vendor", vendor)
     print(f"Prepared static Site checkout: {destination}")
 
 

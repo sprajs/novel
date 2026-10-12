@@ -33,7 +33,7 @@
           "paragraphs": [
             "A probability describes how much chance a specified outcome has under a specified process. For the finite token choices used here, probability 0 excludes that choice under the declared process, and 1 assigns it all the probability. The decimal 0.25, the fraction 1/4 and 25% express the same number. A distribution lists the possible outcomes and assigns their probabilities. For alternatives that cannot happen together and cover every possibility, the probabilities add to 1.",
             "Imagine an invented next-token vocabulary containing only “red”, “blue” and a stop marker. Suppose their probabilities are 0.50, 0.30 and 0.20. Sampling once chooses exactly one of them. Over many repetitions with the same input, about half the choices would be red; ten repetitions need not contain exactly five reds. A probability is a property of the sampling process, while a frequency is what a finite set of repetitions happened to produce.",
-            "The information already supplied matters. Write p(blue | x) for “the probability of blue given input x”; the vertical bar means given. Change x from “The sky looks” to “The paint is labelled”, and the probabilities can change. A language model repeatedly makes this kind of conditional prediction. A high probability of a word means that the model favors that continuation in this context; it does not by itself measure whether a scientific assertion is true."
+            "The information already supplied matters. Write \\(p(\\text{blue}\\mid x)\\) for “the probability of blue given input x”; the vertical bar means given. Change x from “The sky looks” to “The paint is labelled”, and the probabilities can change. A language model repeatedly makes this kind of conditional prediction. A high probability of a word means that the model favors that continuation in this context; it does not by itself measure whether a scientific assertion is true."
           ],
           "visual": {
             "type": "table",
@@ -76,8 +76,8 @@
         {
           "title": "Exponentials and logarithms, before softmax",
           "paragraphs": [
-            "Exponentiation means repeated multiplication when the exponent is a whole number: 2³ = 2 × 2 × 2 = 8. The exponential function exp(z), also written e^z, extends this operation smoothly to any real number, using the base e, approximately 2.718. It is always positive: exp(0) = 1, exp(1) ≈ 2.718 and exp(−1) ≈ 0.368. A negative score can therefore become a positive weight.",
-            "A logarithm asks the reverse question: which exponent produced this number? The natural logarithm, written ln or log here, reverses exp. Thus log(1) = 0 and log(2) ≈ 0.693 because exp(0.693) ≈ 2. A number between 0 and 1 has a negative logarithm. For example, log(0.5) ≈ −0.693. More negative log probability means a smaller probability, not a negative chance.",
+            "Exponentiation means repeated multiplication when the exponent is a whole number: \\(2^3=2\\times2\\times2=8\\). The exponential function \\(\\exp(z)\\), also written \\(e^z\\), extends this operation smoothly to any real number, using the base e, approximately 2.718. It is always positive: \\(\\exp(0)=1\\), \\(\\exp(1)\\approx2.718\\) and \\(\\exp(-1)\\approx0.368\\). A negative score can therefore become a positive weight.",
+            "A logarithm asks the reverse question: which exponent produced this number? The natural logarithm, written ln or log here, reverses exp. Thus \\(\\log(1)=0\\) and \\(\\log(2)\\approx0.693\\) because \\(\\exp(0.693)\\approx2\\). A number between 0 and 1 has a negative logarithm. For example, \\(\\log(0.5)\\approx-0.693\\). More negative log probability means a smaller probability, not a negative chance.",
             "Softmax first converts arbitrary scores into positive weights using exp, then divides each weight by their total. You can picture dividing a fixed pie in proportion to weights. Scores need not themselves add to one or lie between zero and one. The normalization step gives them the required probability scale."
           ],
           "id": "exponentials-and-logarithms-before-softmax"
@@ -85,10 +85,12 @@
         {
           "title": "Scores become probabilities",
           "paragraphs": [
-            "At each step the model produces a logit: one real-valued score for each token in its vocabulary. Let z_j be the score for vocabulary token j. Softmax converts those scores to probabilities: p_j = exp(z_j) / sum_r exp(z_r), where exp is the exponential function and the sum covers every vocabulary token r. The probabilities sum to one. Adding a shared constant offset to every logit leaves the softmax probabilities unchanged; rescaling logits generally changes them.",
-            "For a toy vocabulary with scores log(2), 0 and 0, exponentiation gives weights 2, 1 and 1. Dividing by their total, 4, gives probabilities 0.50, 0.25 and 0.25. That is a distribution over the next token, not a 50% scientific confidence in the entire answer. Here log means the natural logarithm.",
+            "At each step the model produces a logit: one real-valued score for each token in its vocabulary. Let \\(z_j\\) be the score for vocabulary token \\(j\\). Softmax converts those scores to probabilities:",
+            "\\[p_j=\\frac{\\exp(z_j)}{\\sum_r\\exp(z_r)}\\]",
+            "Here exp is the exponential function and the sum covers every vocabulary token \\(r\\). The probabilities sum to one. Adding a shared constant offset to every logit leaves the softmax probabilities unchanged; rescaling logits generally changes them.",
+            "For a toy vocabulary with scores \\(\\log(2)\\), 0 and 0, exponentiation gives weights 2, 1 and 1. Dividing by their total, 4, gives probabilities 0.50, 0.25 and 0.25. That is a distribution over the next token, not a 50% scientific confidence in the entire answer. Here log means the natural logarithm.",
             "Autoregressive generation repeats this operation: predict one token, choose it, append it, and predict again. Later probabilities depend on the actual earlier choices. A wrong first assumption can therefore change the entire continuation.",
-            "The subscript j simply selects one vocabulary entry, such as the token for blue. The sum_r notation means add the weight for every entry r. Softmax compares all scores together; a token’s probability can fall even when its own score stays fixed, if competing scores rise. This connection becomes important when comparing exact wording with the total probability of an idea."
+            "The subscript j simply selects one vocabulary entry, such as the token for blue. The \\(\\sum_r\\) notation means add the weight for every entry r. Softmax compares all scores together; a token’s probability can fall even when its own score stays fixed, if competing scores rise. This connection becomes important when comparing exact wording with the total probability of an idea."
           ],
           "visual": {
             "type": "flow",
@@ -117,9 +119,9 @@
         {
           "title": "The decoder is part of the system",
           "paragraphs": [
-            "The model supplies scores; the decoder decides how to turn them into a token. Greedy decoding takes a highest-scoring token. Sampling draws randomly. Temperature rescales logits before sampling: at temperature τ (tau) greater than zero, use z_j/τ. Higher temperature flattens differences; lower temperature sharpens them. Top-k keeps only k candidates, while top-p keeps a prefix of ranked candidates reaching a probability threshold, then renormalizes.",
+            "The model supplies scores; the decoder decides how to turn them into a token. Greedy decoding takes a highest-scoring token. Sampling draws randomly. Temperature rescales logits before sampling: at temperature τ (tau) greater than zero, use \\(z_j/\\tau\\). Higher temperature flattens differences; lower temperature sharpens them. Top-k keeps only k candidates, while top-p keeps a prefix of ranked candidates reaching a probability threshold, then renormalizes.",
             "Novel distinguishes the raw model distribution p from the executed sampling distribution q. A reference token can have positive probability under p but be removed by a top-k filter under q. An end-of-sequence token is a special marker the model can emit to finish its response. An output cap is a limit imposed by the program even if the model has not chosen to stop. A seed initializes the program’s random-number generator and helps reproduce draws when the rest of the setup is fixed; it does not define the distribution by itself.",
-            "In the red/blue/stop distribution 0.50/0.30/0.20, top-k with k = 2 removes stop and rescales the survivors: red becomes 0.50/0.80 = 0.625 and blue becomes 0.30/0.80 = 0.375. Greedy decoding always chooses red for that same step. Repeating greedy decoding does not explore the original 50/30/20 distribution. Temperature and filtering are therefore substantive choices in Novel’s definition of one attempt."
+            "In the red/blue/stop distribution 0.50/0.30/0.20, top-k with k = 2 removes stop and rescales the survivors: red becomes \\(\\frac{0.50}{0.80}=0.625\\) and blue becomes \\(\\frac{0.30}{0.80}=0.375\\). Greedy decoding always chooses red for that same step. Repeating greedy decoding does not explore the original 50/30/20 distribution. Temperature and filtering are therefore substantive choices in Novel’s definition of one attempt."
           ],
           "id": "the-decoder-is-part-of-the-system"
         }
@@ -162,9 +164,9 @@
         {
           "title": "Read a vector as coordinates, and a tensor as indexed storage",
           "paragraphs": [
-            "A scalar is one number. A vector is an ordered collection of numbers, such as h = [2, −1]. The first coordinate is 2 and the second is −1; changing their order changes the vector. Addition and scaling work coordinate by coordinate: [2, −1] + [1, 3] = [3, 2], and 0.5 × [2, −1] = [1, −0.5]. The symbol h is just a name for this particular list.",
+            "A scalar is one number. A vector is an ordered collection of numbers, such as \\(h=[2,-1]\\). The first coordinate is 2 and the second is −1; changing their order changes the vector. Addition and scaling work coordinate by coordinate: \\([2,-1]+[1,3]=[3,2]\\), and \\(0.5\\times[2,-1]=[1,-0.5]\\). The symbol h is just a name for this particular list.",
             "A matrix is a rectangular table of numbers. It can represent a transformation from one vector to another. For a concrete two-coordinate example, let the transformation turn [a, b] into [2a + b, a − b]. It sends [2, −1] to [3, 3]. The coefficients 2, 1, 1 and −1 are the matrix’s entries. This is a linear map: it forms weighted sums of the input coordinates. A neural network learns many such coefficients rather than assigning every coordinate a meaning by hand.",
-            "A dot product produces one scalar by multiplying matching coordinates and adding: [2, −1] · [3, 4] = 2 × 3 + (−1) × 4 = 2. It is one way to measure compatibility between vectors in a shared coordinate system. A positive dot product is not a truth score; its significance depends on how the vectors were constructed.",
+            "A dot product produces one scalar by multiplying matching coordinates and adding: \\([2,-1]\\cdot[3,4]=2\\times3+(-1)\\times4=2\\). It is one way to measure compatibility between vectors in a shared coordinate system. A positive dot product is not a truth score; its significance depends on how the vectors were constructed.",
             "A tensor generalizes a vector or matrix to any number of axes. A hidden-state tensor can have shape [batch, positions, width]. Shape [1, 3, 4] means one sequence, three token positions, and four coordinates at each position: 12 stored numbers. Layer is often a separate selection rather than an axis in that individual tensor. An attention cache has additional head and key/value structure. Shape tells you how to locate a number, not what concept it encodes."
           ],
           "visual": {
@@ -195,8 +197,8 @@
           "title": "Attention routes information between positions",
           "paragraphs": [
             "An attention head constructs three kinds of vectors from the current states using learned maps: queries, keys and values. A query at the reading position is compared with a key at each permitted source position. Those comparisons determine mixing weights; the values supply what gets mixed. This is a learned numerical operation. The names are a useful reading analogy, not literal database queries or human requests.",
-            "For one head, take the dot product of the query with each key, divide by the square root of the query/key width, mask disallowed positions, and apply softmax across the allowed positions. The square root of 4 is 2, since 2 × 2 = 4. Dividing by this scale helps control the size of scores as width grows. A causal mask allows a token position to read itself and earlier positions, but prevents it from reading later tokens. Otherwise training could reveal the very answer it is supposed to predict.",
-            "Suppose an invented head assigns weights 0.75 and 0.25 to values [2, 0] and [0, 4]. Its mixture is 0.75 × [2, 0] + 0.25 × [0, 4] = [1.5, 1]. Several heads construct different mixtures. Their results are combined and transformed by an output projection into an update with the residual stream’s width. Attention weights describe one mixing operation; later projections and other pathways can amplify, cancel or bypass it.",
+            "For one head, take the dot product of the query with each key, divide by the square root of the query/key width, mask disallowed positions, and apply softmax across the allowed positions. The square root of 4 is 2, since \\(2\\times2=4\\). Dividing by this scale helps control the size of scores as width grows. A causal mask allows a token position to read itself and earlier positions, but prevents it from reading later tokens. Otherwise training could reveal the very answer it is supposed to predict.",
+            "Suppose an invented head assigns weights 0.75 and 0.25 to values [2, 0] and [0, 4]. Its mixture is \\(0.75\\times[2,0]+0.25\\times[0,4]=[1.5,1]\\). Several heads construct different mixtures. Their results are combined and transformed by an output projection into an update with the residual stream’s width. Attention weights describe one mixing operation; later projections and other pathways can amplify, cancel or bypass it.",
             "Imagine the prefix: “The instrument was calibrated yesterday. It now reports …”. Attention can allow the representation near “It” to use information at “instrument”. This is a teaching analogy, not proof that a particular head implements pronoun resolution. High attention weight alone does not establish the importance of that input to the final answer.",
             "The original Transformer paper explains these components in an encoder-decoder translation system. Novel uses a decoder-only Qwen3 implementation, so do not copy the original architecture diagram as an exact map of its layers."
           ],
@@ -236,7 +238,7 @@
           "title": "The residual stream carries a changing state",
           "paragraphs": [
             "A residual connection adds a computed update to the existing representation. In a simplified block, attention contributes one update and a feed-forward network contributes another. The feed-forward network applies learned transformations separately at each position using the same parameters, after the attention route has mixed information across positions. Normalization and the exact order of operations depend on the architecture.",
-            "Write a simplified residual substep as h_new = h + u(h). Here h is the incoming state and u(h) is the computed update. If h = [2, −1] and u(h) = [1, 3], the outgoing state is [3, 2]. The incoming state travels along a direct route as well as through the update calculation. Removing the update leaves h, rather than erasing the entire state. This bypass is central to interpreting ablations.",
+            "Write a simplified residual substep as \\(h_{\\mathrm{new}}=h+u(h)\\). Here h is the incoming state and u(h) is the computed update. If \\(h=[2,-1]\\) and \\(u(h)=[1,3]\\), the outgoing state is [3, 2]. The incoming state travels along a direct route as well as through the update calculation. Removing the update leaves h, rather than erasing the entire state. This bypass is central to interpreting ablations.",
             "A feed-forward network mixes coordinates within each position. It includes nonlinear operations: transformations whose effect is not just a fixed weighted sum. These let later computations depend on combinations of features. Normalization controls numerical scale. Qwen3 normalizes before its attention and feed-forward substeps; the original paper’s ordering differs. The drawing below intentionally shows only one additive substep, not every implementation detail.",
             "Novel captures the decoder block output after both residual additions. Capturing the block input, an individual attention-head output, or the feed-forward output would answer a different question. Store the site name, layer index, absolute token position, shape and dtype with every tensor. The last prompt position is especially useful because it precedes the first generated answer token."
           ],
@@ -557,7 +559,7 @@
         {
           "title": "Two questions about one proposal",
           "paragraphs": [
-            "Let H denote a complete generated trajectory, including any expressed reasoning and final proposal. Define V(H) as “the endorsed proposal validly solves the posed problem at the required evidence tier”. Define M(H) as “it contains the target event’s particular contribution”. Target recovery is T(H) = V(H) AND M(H). These are rubric decisions, not quantities the model can certify about itself.",
+            "Let H denote a complete generated trajectory, including any expressed reasoning and final proposal. Define V(H) as “the endorsed proposal validly solves the posed problem at the required evidence tier”. Define M(H) as “it contains the target event’s particular contribution”. Target recovery is \\(T(H)=V(H)\\land M(H)\\). These are rubric decisions, not quantities the model can certify about itself.",
             "A valid older method can satisfy V but fail M. A proposal that names the target mechanism yet violates a crucial assumption can satisfy M but fail V. A valid target satisfies both. Reporting only T would hide useful alternatives; reporting only V would overstate recovery of the specified historical contribution. Consequently, target recoveries can never outnumber valid solutions.",
             "Here is a fully invented rubric example: estimate a shared mean without bias from independent, zero-mean measurement errors with known strictly positive variances. The scoped target ingredient is the choice of inverse-variance weights. Validity additionally requires dividing the weighted sum by the total weight to obtain an unbiased estimator. Arithmetic averaging is also unbiased under these assumptions, though it misses this chosen target. This is a teaching target, not a claimed historical invention."
           ],
@@ -614,7 +616,7 @@
           "title": "How semantic uncertainty differs from correctness",
           "paragraphs": [
             "Imagine ten invented samples: six recommend the same arithmetic mean, three recommend the same weighted mean, and one recommends discarding all observations. There are ten texts but only three meaning groups under this simple rubric, with observed shares 0.6, 0.3 and 0.1. Entropy summarizes how spread out such a distribution is: for group shares w, add −w log(w) over groups, taking the zero-share contribution as zero. A single group has entropy zero; more balanced groups have higher entropy.",
-            "For these shares, −0.6 log(0.6) − 0.3 log(0.3) − 0.1 log(0.1) ≈ 0.898 in natural-log units called nats. The exact number is less important than the distinction: ten differently worded copies of one claim have little semantic diversity, while incompatible recommendations can have much more. Group definitions and finite sampling affect the estimate.",
+            "For these shares, \\(-0.6\\log(0.6)-0.3\\log(0.3)-0.1\\log(0.1)\\approx0.898\\) in natural-log units called nats. The exact number is less important than the distinction: ten differently worded copies of one claim have little semantic diversity, while incompatible recommendations can have much more. Group definitions and finite sampling affect the estimate.",
             "This is a simple empirical group-frequency illustration, not a reimplementation of the Semantic Uncertainty paper’s likelihood-based estimator. That method uses sampled strings, semantic grouping and model probabilities. Both require an operational rule for deciding equivalence. Neither makes agreement into truth: all ten answers could share the same scientifically invalid assumption. Novel still needs an independent validity judgment."
           ],
           "visual": {
@@ -672,7 +674,7 @@
         {
           "title": "Read the probability tree one branch at a time",
           "paragraphs": [
-            "Start with a tiny invented generator. It chooses A with probability 0.5 or B with probability 0.5. After A, it chooses C with probability 0.2 or D with probability 0.8. The probability of the two-token prefix AC is 0.5 × 0.2 = 0.1; AD has probability 0.5 × 0.8 = 0.4. The children of A add back to A’s probability: 0.1 + 0.4 = 0.5.",
+            "Start with a tiny invented generator. It chooses A with probability 0.5 or B with probability 0.5. After A, it chooses C with probability 0.2 or D with probability 0.8. The probability of the two-token prefix AC is \\(0.5\\times0.2=0.1\\); AD has probability \\(0.5\\times0.8=0.4\\). The children of A add back to A’s probability: \\(0.1+0.4=0.5\\).",
             "Multiplication along a path is the chain rule for conditional probability. It does not assume the token choices are independent. The second choice explicitly depends on the first. Addition has a different job: it combines mutually exclusive paths into an event. If AC and AD both satisfy a rubric, their joint contribution to that event is 0.1 + 0.4. A path and a set of acceptable paths are different objects."
           ],
           "visual": {
@@ -711,7 +713,10 @@
         {
           "title": "Multiply along a specified path",
           "paragraphs": [
-            "Let x be the fixed prompt and y_1 through y_L a particular L-token continuation. The raw model probability of that exact continuation prefix is the product of p(y_t | x, y_1,…,y_(t−1)) across positions t. Here the vertical bar means “given”, and each factor conditions on the preceding tokens. Log probability turns this product into a sum, which is easier to compute without numerical underflow.",
+            "Let x be the fixed prompt and \\(y_1\\) through \\(y_L\\) a particular L-token continuation. The raw model probability of that exact continuation prefix is the product of \\(p(y_t\\mid x,y_{<t})\\) across positions t. Here the vertical bar means “given”, and each factor conditions on the preceding tokens. Log probability turns this product into a sum, which is easier to compute without numerical underflow.",
+            "\\[P(y_{1:L}\\mid x)=\\prod_{t=1}^{L}p(y_t\\mid x,y_{<t})\\]",
+            "\\[\\log P(y_{1:L}\\mid x)=\\sum_{t=1}^{L}\\log p(y_t\\mid x,y_{<t})\\]",
+            "The notation \\(y_{<t}\\) means all continuation tokens before position \\(t\\); \\(\\prod\\) multiplies the factors, while \\(\\sum\\) adds them. These are two ways to write the same path probability, not an assumption that tokens are independent.",
             "In a toy three-token path with conditional probabilities 0.5, 0.2 and 0.1, the product is 0.01 and its natural log is about −4.605. A low product can arise simply because many exact choices are being specified. If the claim is about a terminated complete sequence, the stopping token or declared terminal rule must also be included; scoring just its visible words is a prefix event."
           ],
           "id": "multiply-along-a-specified-path"
@@ -719,16 +724,16 @@
         {
           "title": "Why log probabilities are added",
           "paragraphs": [
-            "The logarithm identity log(a × b) = log(a) + log(b) turns a long product into a sum. For two conditional probabilities of 0.5, the product is 0.25. Their logs add to −0.693 − 0.693 ≈ −1.386, which is log(0.25). The sum retains the same information: exponentiating it returns the probability.",
-            "Computers have a smallest representable positive number in a chosen numerical format. A product of many small factors can round to zero, called underflow, even when its mathematical value is positive. Adding logarithms avoids forming that tiny product. A log score of −100 is perfectly usable even though exp(−100) is extremely small. A probability truly equal to zero has log probability −infinity.",
-            "Dividing a sequence log score by its token count gives an average log probability. Exponentiating that average gives the geometric mean token probability. If every factor is 0.5, the geometric mean remains 0.5 for two tokens or two hundred tokens; the average log probability remains approximately −0.693, while the exact prefix probabilities are 0.5² and 0.5²⁰⁰. Length normalization is useful description, but it has deliberately removed the probability cost of specifying that many choices."
+            "The logarithm identity \\(\\log(ab)=\\log(a)+\\log(b)\\) turns a long product into a sum. For two conditional probabilities of 0.5, the product is 0.25. Their logs add to \\(-0.693-0.693\\approx-1.386\\), which is \\(\\log(0.25)\\). The sum retains the same information: exponentiating it returns the probability.",
+            "Computers have a smallest representable positive number in a chosen numerical format. A product of many small factors can round to zero, called underflow, even when its mathematical value is positive. Adding logarithms avoids forming that tiny product. A log score of −100 is perfectly usable even though \\(\\exp(-100)\\) is extremely small. A probability truly equal to zero has log probability −infinity.",
+            "Dividing a sequence log score by its token count gives an average log probability. Exponentiating that average gives the geometric mean token probability. If every factor is 0.5, the geometric mean remains 0.5 for two tokens or two hundred tokens; the average log probability remains approximately −0.693, while the exact prefix probabilities are \\(0.5^2\\) and \\(0.5^{200}\\). Length normalization is useful description, but it has deliberately removed the probability cost of specifying that many choices."
           ],
           "id": "why-log-probabilities-are-added"
         },
         {
           "title": "Teacher forcing supplies the previous token",
           "paragraphs": [
-            "Teacher forcing means evaluating a reference continuation while feeding its specified reference earlier tokens to the model instead of sampling them. To score token y_t, use the model prediction after its prefix, before feeding y_t. An off-by-one shift can produce plausible-looking but incorrect likelihoods. Token boundaries and the chat suffix also need an explicit policy.",
+            "Teacher forcing means evaluating a reference continuation while feeding its specified reference earlier tokens to the model instead of sampling them. To score token \\(y_t\\), use the model prediction after its prefix, before feeding \\(y_t\\). An off-by-one shift can produce plausible-looking but incorrect likelihoods. Token boundaries and the chat suffix also need an explicit policy.",
             "Suppose the difficult scientific insight is the first sentence. If we force that sentence into the input and find the remaining calculation likely, we have measured execution after being supplied the insight. We have not measured how often the model invents the insight. A score for a later span is conditional on every earlier forced word.",
             "The reference need not be true: teacher forcing can score a false scientific sentence just as it can score a true one. Full-path scoring remains a valid calculation for that specified path. The mistake would be interpreting a later span, whose earlier insight was supplied, as the unassisted probability of producing the insight."
           ],
@@ -815,7 +820,7 @@
           "paragraphs": [
             "An estimand is the quantity we want to learn. Here it can be the chance that one complete attempt recovers a valid target, for one admitted event under one frozen model, prompt and decoder. Call that chance s to distinguish it from the next-token law p and executed decoder law q. The rubric maps a generated trajectory to success or failure. Many token decisions can lead to the same success label.",
             "A binary trial is often called a Bernoulli trial: it has two labels, success and failure. A binomial model describes the number of successes in n independent trials that share the same chance s. Independent means that one trial’s outcome does not change the chance of another’s; identical means the setup and probability remain the same. Fresh random streams under a frozen sampler are intended to approximate this design. Distinct seeds alone do not prove it, and repeated deterministic greedy runs do not supply independent evidence about a sampling distribution.",
-            "Imagine s = 0.1 and n = 20. The expected count is n × s = 2, an average over repeated batches, not a guarantee of two successes. A particular batch may contain none or several. If its count is 3, the observed fraction is 3/20 = 0.15. This estimate can differ from the assumed generating probability simply through sampling variation.",
+            "Imagine \\(s=0.1\\) and \\(n=20\\). The expected count is \\(n\\times s=2\\), an average over repeated batches, not a guarantee of two successes. A particular batch may contain none or several. If its count is 3, the observed fraction is \\(\\frac{3}{20}=0.15\\). This estimate can differ from the assumed generating probability simply through sampling variation.",
             "The expected success count adds the individual success probabilities. This uses linearity of expectation and does not itself require independence. The formula for the chance of at least one success uses a product of failure probabilities and does require the independence assumption. Similar-looking outputs can still be independent draws; adaptation or reused random streams, rather than repeated wording alone, are the concern."
           ],
           "id": "define-the-quantity-before-estimating-it"
@@ -831,8 +836,9 @@
         {
           "title": "What pass@k assumes",
           "paragraphs": [
-            "Imagine an oracle that perfectly recognizes success among k independent candidates. If the true one-draw success probability is s, the chance that the pool contains at least one success is 1 − (1 − s)^k: all k must fail for the pool to fail. With s = 0.1 and k = 5, this is about 0.410. This is a mathematical illustration, not a measured Novel probability.",
-            "In a dataset of n independent candidates with c successes, the standard unbiased pass@k estimator is 1 − C(n−c,k)/C(n,k), for k ≤ n. C(a,b) means the number of ways to choose b items from a without order; when there are fewer than k failures the numerator is zero. The formula averages over subsets of the observed sample. Plugging c/n into the previous known-s formula is generally a different, biased estimator.",
+            "Imagine an oracle that perfectly recognizes success among k independent candidates. If the true one-draw success probability is s, the chance that the pool contains at least one success is \\(1-(1-s)^k\\): all k must fail for the pool to fail. With \\(s=0.1\\) and \\(k=5\\), this is about 0.410. This is a mathematical illustration, not a measured Novel probability.",
+            "In a dataset of \\(n\\) independent candidates with \\(c\\) successes, use the following standard unbiased pass@k estimator for \\(k\\le n\\). The notation \\(\\binom{a}{b}\\) means the number of ways to choose \\(b\\) items from \\(a\\) without order; when there are fewer than \\(k\\) failures the numerator is zero. The formula averages over subsets of the observed sample. Plugging \\(c/n\\) into the previous known-\\(s\\) formula is generally a different, biased estimator.",
+            "\\[\\widehat{\\mathrm{pass@}k}=1-\\frac{\\binom{n-c}{k}}{\\binom{n}{k}},\\qquad k\\le n\\]",
             "An actual selector can choose a wrong candidate even when the pool contains a correct one. Oracle availability, human selection, model self-selection and majority voting are separate systems. Chen and colleagues introduced this evaluation distinction in code generation; Novel must define an equally explicit success rubric for scientific proposals."
           ],
           "interactive": "sampling",
@@ -841,8 +847,8 @@
         {
           "title": "Derive the pool probability and its sample estimator",
           "paragraphs": [
-            "If each candidate fails with probability 1 − s, then two independent candidates both fail with probability (1 − s) × (1 − s). For k candidates this becomes (1 − s)^k. The pool either contains a success or contains only failures, so subtracting all-failure probability from 1 gives the oracle availability formula. For s = 0.1, a five-candidate pool has availability 1 − 0.9⁵ ≈ 0.40951.",
-            "Usually s is unknown. Suppose we observed five candidates, of which two succeeded. There are ten unordered pairs that can be selected from five items: C(5,2) = 10. Only three pairs contain two failures, because there are three failures and C(3,2) = 3. Seven pairs contain at least one success, so the pass@2 estimate is 7/10 = 0.7. Plugging 2/5 into 1 − (1 − s)² would instead give 0.64. The subset calculation avoids that particular plug-in bias under the independent sampling assumptions.",
+            "If each candidate fails with probability 1 − s, then two independent candidates both fail with probability \\((1-s)\\times(1-s)\\). For k candidates this becomes \\((1-s)^k\\). The pool either contains a success or contains only failures, so subtracting all-failure probability from 1 gives the oracle availability formula. For \\(s=0.1\\), a five-candidate pool has availability \\(1-0.9^5\\approx0.40951\\).",
+            "Usually s is unknown. Suppose we observed five candidates, of which two succeeded. There are ten unordered pairs that can be selected from five items: \\(\\binom{5}{2}=10\\). Only three pairs contain two failures, because there are three failures and \\(\\binom{3}{2}=3\\). Seven pairs contain at least one success, so the pass@2 estimate is \\(\\frac{7}{10}=0.7\\). Plugging 2/5 into \\(1-(1-s)^2\\) would instead give 0.64. The subset calculation avoids that particular plug-in bias under the independent sampling assumptions.",
             "An oracle is an ideal evaluator that can identify success perfectly. A real selector has limited information. It may prefer a polished wrong answer over a rough correct one. Oracle availability describes what was somewhere in the pool; selected success describes what the complete procedure actually returned. Novel needs both quantities if it studies candidate search."
           ],
           "id": "derive-the-pool-probability-and-its-sample-estimator"
@@ -895,10 +901,11 @@
         {
           "title": "Build the zero-success bound from a surprise calculation",
           "paragraphs": [
-            "Suppose the true success chance were 10%. The chance of seeing no successes in 64 independent trials would be 0.9⁶⁴ ≈ 0.00118, or about 0.118%. Zero successes would be quite surprising at that assumed rate. If the true chance were 1%, the same zero count would have probability 0.99⁶⁴ ≈ 0.526, or 52.6%. Zero is entirely unsurprising at that rate. This is why an empty batch distinguishes some probabilities much more strongly than others.",
-            "For a one-sided 95% bound, set the all-failure probability to 0.05 and solve for the largest rate at this boundary: (1 − U)^n = 0.05. Taking an nth root gives 1 − U = 0.05^(1/n), hence U = 1 − 0.05^(1/n). Alpha names the tolerated error level, here 0.05. One-sided means we are bounding only the upper end, rather than allocating error to both ends. At n = 64 the bound is about 0.04573, or 4.57%. This is a one-sided 95% upper bound, not zero probability. A two-sided 95% interval allocates error differently and has a different upper endpoint.",
-            "To plan a desired upper bound r after zero successes, solve n ≥ log(alpha)/log(1 − r), then round up to a whole number of trials. At r = 0.01 and alpha = 0.05, this gives 299. It is a planning calculation conditional on observing zero; it does not promise that a real study will observe zero or yield a decisive result.",
-            "To reach a one-sided 95% upper bound below 0.1% after zero successes requires at least 2,995 independent trials. More ambitious rarity claims therefore have substantial generation and adjudication costs, even before correcting for multiple endpoints."
+            "Suppose the true success chance were 10%. The chance of seeing no successes in 64 independent trials would be \\(0.9^{64}\\approx0.00118\\), or about 0.118%. Zero successes would be quite surprising at that assumed rate. If the true chance were 1%, the same zero count would have probability \\(0.99^{64}\\approx0.526\\), or 52.6%. Zero is entirely unsurprising at that rate. This is why an empty batch distinguishes some probabilities much more strongly than others.",
+            "For a one-sided 95% bound, set the all-failure probability to 0.05 and solve for the largest rate at this boundary: \\((1-U)^n=0.05\\). Taking an nth root gives \\(1-U=0.05^{1/n}\\), hence \\(U=1-0.05^{1/n}\\). Alpha names the tolerated error level, here 0.05. One-sided means we are bounding only the upper end, rather than allocating error to both ends. At \\(n=64\\) the bound is about 0.04573, or 4.57%. This is a one-sided 95% upper bound, not zero probability. A two-sided 95% interval allocates error differently and has a different upper endpoint.",
+            "To plan a desired upper bound r after zero successes, solve \\(n\\ge\\frac{\\log\\alpha}{\\log(1-r)}\\), then round up to a whole number of trials. At \\(r=0.01\\) and \\(\\alpha=0.05\\), this gives 299. It is a planning calculation conditional on observing zero; it does not promise that a real study will observe zero or yield a decisive result.",
+            "To reach a one-sided 95% upper bound below 0.1% after zero successes requires at least 2,995 independent trials. More ambitious rarity claims therefore have substantial generation and adjudication costs, even before correcting for multiple endpoints.",
+            "\\[U=1-\\alpha^{1/n}\\qquad(\\text{zero successes, one-sided upper bound})\\]"
           ],
           "visual": {
             "type": "table",
@@ -931,8 +938,8 @@
         {
           "title": "Many endpoints and uncertain labels",
           "paragraphs": [
-            "If twelve event-level rarity claims must hold simultaneously, spending the full 5% error budget on each does not give 95% simultaneous coverage. One conservative solution assigns alpha/12 to each endpoint. For zero successes in 64 trials this raises each upper bound to about 8.21%. More prompts, models or chosen endpoints require further planned accounting. The chance that any endpoint fails is at most the sum of its error allowances, here 12 × (0.05/12) = 0.05. This union-bound argument does not require endpoint independence, though it can be conservative.",
-            "Suppose n = 64, two outputs definitely recover the target, and three are unresolved. Preserve a sensitivity range from 2/64 to 5/64, with appropriate statistical bounds on the definite and possible counts. Removing unresolved answers would conceal uncertainty in the measuring instrument. An unresolved historical admission gate is different: that event stays outside the admitted historical summary."
+            "If twelve event-level rarity claims must hold simultaneously, spending the full 5% error budget on each does not give 95% simultaneous coverage. One conservative solution assigns \\(\\alpha/12\\) to each endpoint. For zero successes in 64 trials this raises each upper bound to about 8.21%. More prompts, models or chosen endpoints require further planned accounting. The chance that any endpoint fails is at most the sum of its error allowances, here \\(12\\times\\frac{0.05}{12}=0.05\\). This union-bound argument does not require endpoint independence, though it can be conservative.",
+            "Suppose \\(n=64\\), two outputs definitely recover the target, and three are unresolved. Preserve a sensitivity range from 2/64 to 5/64, with appropriate statistical bounds on the definite and possible counts. Removing unresolved answers would conceal uncertainty in the measuring instrument. An unresolved historical admission gate is different: that event stays outside the admitted historical summary."
           ],
           "id": "many-endpoints-and-uncertain-labels"
         },
@@ -1002,7 +1009,7 @@
         {
           "title": "A worked adjudication example",
           "paragraphs": [
-            "Imagine the task asks for every solution of b·u = b for real numbers b and u. An answer divides by b and endorses “u = 1 is the only solution.” That is valid only when b is nonzero. If b = 0, every real u is a solution. The endorsed all-cases answer therefore fails validity. If the target rubric specifically requires handling the degenerate b = 0 case, it also misses that target. A trace that briefly mentions b = 0 before discarding it can be annotated separately; it does not repair the endorsed claim.",
+            "Imagine the task asks for every solution of \\(b\\cdot u=b\\) for real numbers b and u. An answer divides by b and endorses “\\(u=1\\) is the only solution.” That is valid only when b is nonzero. If \\(b=0\\), every real u is a solution. The endorsed all-cases answer therefore fails validity. If the target rubric specifically requires handling the degenerate \\(b=0\\) case, it also misses that target. A trace that briefly mentions \\(b=0\\) before discarding it can be annotated separately; it does not repair the endorsed claim.",
             "If the model names the intended mechanism only after the prompt supplies a bridge, that is guided behavior. A later internal hypothesis might ask whether the bridge changes a particular computation. The observational annotation cannot answer that causal question by itself. Likewise, asking the model afterward why it answered something produces a new explanation, not a recovered recording of the original forward pass."
           ],
           "id": "a-worked-adjudication-example"
@@ -1162,7 +1169,7 @@
         {
           "title": "State the intervention precisely",
           "paragraphs": [
-            "An observation records an activation while preserving the computation. An intervention changes a chosen state and measures what follows. Replacement substitutes a donor activation for the recipient state. Additive steering changes h to h + a·v, where h is the recipient vector, v the chosen direction and a a scalar strength. Ablation removes or substitutes a component according to a declared rule. These operations are not interchangeable.",
+            "An observation records an activation while preserving the computation. An intervention changes a chosen state and measures what follows. Replacement substitutes a donor activation for the recipient state. Additive steering changes h to \\(h+av\\), where h is the recipient vector, v the chosen direction and a a scalar strength. Ablation removes or substitutes a component according to a declared rule. These operations are not interchangeable.",
             "Specify layer, position, boundary, donor origin, scale, duration and cache treatment. Novel’s current patch acts persistently at selected absolute prompt positions in full-prefix replay. A temporary decode-time noise experiment would require different implementation and validation."
           ],
           "visual": {
@@ -1275,7 +1282,7 @@
         {
           "title": "A direction is a displacement, not a named idea",
           "paragraphs": [
-            "Return to vector arithmetic. If a residual state is h = [1, 2] and a direction is v = [0.5, −1], adding strength a = 2 gives h + av = [2, 0]. The scalar a controls the size and sign of the displacement. Setting a = 0 returns the original state; using a negative value moves in the opposite direction. The same displacement can have different downstream effects at different states or layers.",
+            "Return to vector arithmetic. If a residual state is \\(h=[1,2]\\) and a direction is \\(v=[0.5,-1]\\), adding strength \\(a=2\\) gives \\(h+av=[2,0]\\). The scalar a controls the size and sign of the displacement. Setting \\(a=0\\) returns the original state; using a negative value moves in the opposite direction. The same displacement can have different downstream effects at different states or layers.",
             "A mean-difference direction starts with two collections of matched examples. Suppose positive-condition vectors are [3, 1] and [1, 3], averaging to [2, 2]. Negative-condition vectors [1, 0] and [1, 2] average to [1, 1]. Their difference is [1, 1]. Averaging can reduce unrelated variation, but whatever systematically differs between the conditions can enter the direction: intended task signal, answer content, style or another confound.",
             "A confound is an alternative varying factor that could explain the observed relationship. If every positive example is long and every negative example is short, the direction may reflect length rather than the desired mechanism. Matching examples, auditing donor tokens and testing different-answer transfer address that problem experimentally. Subtraction alone cannot establish what information the direction carries."
           ],
@@ -1293,19 +1300,19 @@
             "nodes": [
               {
                 "title": "Recipient state",
-                "text": "Toy vector h = [1, 2]"
+                "text": "Toy vector \\(h=[1,2]\\)"
               },
               {
                 "title": "Direction",
-                "text": "Toy vector v = [0.5, −1]"
+                "text": "Toy vector \\(v=[0.5,-1]\\)"
               },
               {
                 "title": "Strength",
-                "text": "Choose a = 2, so a·v = [1, −2]"
+                "text": "Choose \\(a=2\\), so a·v = [1, −2]"
               },
               {
                 "title": "New state",
-                "text": "h + a·v = [2, 0]"
+                "text": "\\(h+av\\) = [2, 0]"
               }
             ],
             "caption": "Coordinate-wise addition in a two-dimensional teaching example. Real activations have many dimensions; a direction gets its interpretation from experiments, not its coordinates alone."
@@ -1315,16 +1322,17 @@
         {
           "title": "Build a gradient from an ordinary slope",
           "paragraphs": [
-            "For one number, a derivative is the local slope of a function. If f(a) = a², moving a tiny amount epsilon changes the score by approximately 2a × epsilon. At a = 3, the slope is 6: a step of 0.01 changes the score by about 0.06. The exact change is 3.01² − 3² = 0.0601. The approximation improves as the step becomes smaller.",
-            "For a vector, hold all but one coordinate fixed and take a slope for each coordinate. Those partial derivatives form the gradient. Let f(h) = h₁² + 3h₂, where h₁ and h₂ are the first and second coordinates. At h = [2, 1], f = 7 and the gradient is g = [4, 3]. For delta = [0.1, −0.2], the dot product g · delta = 4 × 0.1 + 3 × (−0.2) = −0.2 predicts the score change. The exact new score is 2.1² + 3 × 0.8 = 6.81, a change of −0.19.",
-            "In general, for a scalar score f evaluated from a vector h, a small displacement delta has approximate effect f(h + delta) − f(h) ≈ g · delta, where g is the gradient at h. Each partial derivative holds the other coordinates fixed. This formula summarizes the local calculation illustrated above; it does not guarantee the same accuracy for a large patch.",
+            "For one number, a derivative is the local slope of a function. If \\(f(a)=a^2\\), moving a tiny amount epsilon changes the score by approximately \\(2a\\varepsilon\\). At \\(a=3\\), the slope is 6: a step of 0.01 changes the score by about 0.06. The exact change is \\(3.01^2-3^2=0.0601\\). The approximation improves as the step becomes smaller.",
+            "For a vector, hold all but one coordinate fixed and take a slope for each coordinate. Those partial derivatives form the gradient. Let \\(f(h)=h_1^2+3h_2\\), where \\(h_1\\) and \\(h_2\\) are the first and second coordinates. At \\(h=[2,1]\\), \\(f=7\\) and the gradient is \\(g=[4,3]\\). For \\(\\delta=[0.1,-0.2]\\), the dot product \\(g\\cdot\\delta=4\\times0.1+3\\times(-0.2)=-0.2\\) predicts the score change. The exact new score is \\(2.1^2+3\\times0.8=6.81\\), a change of −0.19.",
+            "In general, for a scalar score f evaluated from a vector h, a small displacement \\(\\delta\\) has approximate effect \\(f(h+\\delta)-f(h)\\approx g\\cdot\\delta\\), where \\(g=\\nabla_h f(h)\\) is the gradient at \\(h\\). Each partial derivative holds the other coordinates fixed. This formula summarizes the local calculation illustrated above; it does not guarantee the same accuracy for a large patch.",
+            "\\[f(h+\\delta)-f(h)\\approx\\nabla_h f(h)\\cdot\\delta\\]",
             "Backpropagation computes such derivatives through composed operations using the chain rule: local sensitivities multiply along a route, and contributions add where routes meet. It is an efficient calculation of sensitivity to the chosen scalar score. It does not infer the meaning of that score or the scientific value of changing it.",
-            "The local approximation can fail for large moves or curved functions. At a = 0, f(a) = a² has slope zero, but moving to a = 1 changes f by 1. Saturated output probabilities can likewise have small local slopes. AtP* addresses important failure modes in approximate patching; exact intervention checks remain necessary."
+            "The local approximation can fail for large moves or curved functions. At \\(a=0\\), \\(f(a)=a^2\\) has slope zero, but moving to \\(a=1\\) changes f by 1. Saturated output probabilities can likewise have small local slopes. AtP* addresses important failure modes in approximate patching; exact intervention checks remain necessary."
           ],
           "visual": {
             "type": "table",
             "headers": [
-              "At h = [2, 1]",
+              "At \\(h=[2,1]\\)",
               "Calculation",
               "Result"
             ],
