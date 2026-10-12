@@ -157,11 +157,14 @@ Each invocation loads one model into one loopback server and submits the entire
 JSONL batch. `--slots 2` enables concurrent requests/continuous batching and
 scales context/KV allocation; measure that separate condition. `--context 4096`
 is an explicit per-slot override (128..8192), and `--tokens` allows 1..2048.
-Prompt plus output cap must fit; larger traces require an explicit smaller
+Prompt plus output cap must leave one token of context slack; larger traces require an explicit smaller
 `--n-probs` or splitting the workload within the saved trace budget. The default is
 one slot, F16 K/V, Flash Attention off, no shifting, no startup warmup, no prompt
-reuse and greedy decoding. Output directories must be new. Completed observations
-and failed reports survive; input and token/probability budgets bound output.
+reuse and greedy decoding. Output directories must be new. Every planned job is recorded before launch. Raw HTTP bodies and native
+responses are saved before token-contract validation or JSON interpretation;
+per-job failures and later successful responses are retained independently.
+Input and token/probability budgets bound output. A bounded oversized HTTP
+response preserves the received prefix and records failure.
 
 For stochastic non-thinking predictions add `--temperature 0.7 --top-k 20
 --top-p 0.8 --min-p 0 --seed 17`. Seed increases by repeat index and each request
@@ -205,8 +208,13 @@ and cold latency. Resident request timings exclude startup/model load.
 
 Run equivalence in the selected **reference** lock/interpreter: root CPU, cu126
 for 2080Ti, cu128 for 5090. On GPU pass `--device cuda:0 --dtype float16`, after
-passing the reference profile smoke. The checker verifies source hashes,
-template source/rendered bytes, IDs and complete stop/EOG sets. Each fixed target
+passing the reference profile smoke. The checker first runs HF, persists CPU FP64 probability vectors and exact
+input/generation records, then releases the reference model before native
+startup. CUDA allocations must return to their pre-reference baseline after
+synchronization and cache release; actual free VRAM is checked again by native
+preflight. This prevents co-resident 8B weight copies. CPU lifecycle and checksum
+tests establish ordering/integrity; GPU execution remains untested. The checker
+verifies source hashes, template source/rendered bytes, IDs and stop/EOG policy. Each fixed target
 continuation token uses a teacher-forced full prefix. HF cache is disabled and
 two exact clean forwards are required. A repeat discrepancy preserves raw
 failure evidence and stops; it is never retried into a passing observation.
@@ -266,8 +274,8 @@ The executed 0.6B startup log lists native EOG IDs
 configuration stops on `[151645,151643]`. The extra native stops are the ordinary
 BPE token `</s>` and FIM/repository markers. The pinned native vocabulary loader
 uses token-text heuristics and marks these as EOG, including a logged attribute
-override for `</s>`. The checker preserves that difference and fails the aggregate
-gate even when a short greedy output matches. No tokenizer patch, logit bias,
+override for `</s>`. The default native-policy checker preserves that difference and fails the
+aggregate gate even when a short greedy output matches. No tokenizer patch, logit bias,
 ignore-EOS workaround, or scientific stopping-rule substitution is applied.
 
 Fast prediction is usable under its own explicitly recorded native stop law.
@@ -275,3 +283,47 @@ It is not yet a substitute for the protocol's HF stopped-trajectory law.
 Fixed-prefix raw-probability diagnostics remain possible because they request
 the full pre-sampling distribution before stopping is interpreted. Actual
 limits and measurements, including Q8 drift, are in the CPU validation report.
+
+## Explicit greedy HF EOS adapter, added 12 October
+
+`--termination hf-eos` is an optional token-ID termination policy. The default
+remains `native`. The adapter permits only greedy, unconstrained generation with
+cross-request prompt reuse disabled. Sampling/grammar modes are rejected because
+resuming a chunk would reset RNG/grammar state. It retains each complete native
+chunk and its original stop reason. After an extra native EOG token it appends
+all emitted raw IDs to the next prompt and resumes the remaining token budget.
+It stops only at `[151645,151643]` or the declared cap. The final terminal ID is
+retained. There is no logit mask, `ignore_eos`, metadata override, weight change,
+source patch or decoded-text retokenization. A resumed chunk does a clean native
+full-prefix prefill; normal decoding inside each chunk uses native KV. That
+numerical condition and its overhead remain explicit.
+
+The adapter's `adapted_response` is separate from `response_receipts` holding
+the unchanged native responses. Its text is detokenized from all raw IDs with
+special spellings included, matching HF `skip_special_tokens=False` on the
+validated fixtures. Native mode's text convention remains unchanged.
+
+```bash
+environments/fast-build/.venv/bin/python scripts/fast_predict.py \
+  --profile cloud-cpu --gguf "$MODEL_DIR/F16.gguf" --termination hf-eos \
+  --tokens 8 --repeats 1 --output runs/hf-eos-predictions
+.venv/bin/python scripts/fast_equivalence.py --profile cloud-cpu --model qwen3_0_6b \
+  --gguf "$MODEL_DIR/F16.gguf" --termination hf-eos --output runs/hf-eos-check
+.venv/bin/python scripts/fast_termination_probe.py --gguf "$MODEL_DIR/F16.gguf" \
+  --output runs/eog-boundary-check
+```
+
+The boundary probe explicitly injects and records logit biases to force all six
+EOG cases. Those are termination/custody fixtures, **not** unmodified probability
+or behavior measurements. Production generation and likelihood probes do not
+use those biases. The exact F16 artifact passed the unchanged supplied-prefix
+likelihood gates and greedy IDs/text/stops with the adapter; Q8 still fails
+numerical gates. `scientific_interchangeability` remains false. See
+[follow-up validation](../validation/fast-followup.md).
+
+The native tokenizer's existing attribute override also changes literal text
+encoding: `</s>` becomes native ID 128247 but HF IDs `[522,82,29]`. The adapter
+does not fix or hide this. Resumed raw-ID trajectories preserve the emitted
+ID 128247 and its spelling, while new prompts/scoring paths require exact input
+ID parity. Global tokenizer, kernel, stochastic-decoder or intervention
+equivalence is not established. Old native-policy FAIL evidence remains valid.

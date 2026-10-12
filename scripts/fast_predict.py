@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Keep one server/model resident for bounded repeated JSONL predictions."""
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 from pathlib import Path
@@ -11,7 +10,9 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from novel.artifacts import sha256_file, strict_json
-from novel.fast_runtime import bounded_int, checked_completion, completion_request, server, write_new
+from novel.fast_runtime import bounded_int, completion_request, server, write_new
+from novel.fast_jobs import prediction_jobs
+from novel.models import model_entry
 
 
 def main():
@@ -34,6 +35,7 @@ def main():
     parser.add_argument("--flash-attention", action="store_true")
     parser.add_argument("--thinking", action="store_true")
     parser.add_argument("--schema", type=Path)
+    parser.add_argument("--termination", choices=("native", "hf-eos"), default="native")
     args = parser.parse_args()
     os.chdir(ROOT)
     bounded_int(args.repeats, "repeats", 1, 32)
@@ -52,6 +54,8 @@ def main():
     if len(items) * args.repeats * args.tokens * max(1, args.n_probs) > 65536:
         raise ValueError("Trace budget exceeds 65,536 token/probability entries; split the workload explicitly")
     schema = strict_json(args.schema.read_text()) if args.schema else None
+    if args.termination == "hf-eos" and (args.temperature >= 0 or args.cache_prompt or schema is not None):
+        raise ValueError("hf-eos supports greedy unconstrained generation with prompt reuse disabled")
     # An exclusive directory retains all evidence, including partial/failing runs.
     args.output.mkdir(parents=True, exist_ok=False)
     report = {"status": "FAIL", "input_sha256": sha256_file(args.inputs), "records": [],
@@ -62,40 +66,28 @@ def main():
                     args.output / "server.log", slots=args.slots, flash_attention=args.flash_attention,
                     thinking=args.thinking, context=args.context) as (client, info):
             report["runtime"] = info
-            jobs = []
-            for item in items:
-                rendered, ids = client.prompt(item["messages"])
-                for repeat in range(args.repeats):
-                    jobs.append((item["id"], repeat, rendered, ids))
-
-            def predict(job):
-                identity, repeat, rendered, ids = job
-                request = completion_request(ids, tokens=args.tokens, seed=args.seed + repeat, cache_prompt=args.cache_prompt,
-                    n_probs=args.n_probs, schema=schema, temperature=args.temperature,
-                    top_k=args.top_k, top_p=args.top_p, min_p=args.min_p)
-                start = time.perf_counter()
-                response = checked_completion(client, request, info["profile"]["context"])
-                parsed = strict_json(response["content"]) if schema else None
-                return {"id": identity, "repeat": repeat, "rendered_prompt": rendered, "prompt_ids": ids,
-                        "request": request, "raw_response": response, "parsed_json": parsed,
-                        "wall_seconds": time.perf_counter() - start}
-
+            entry = model_entry(ROOT / "configs/models.json", info["artifact"]["model_key"])
+            if entry["revision"] != info["artifact"]["revision"]:
+                raise ValueError("Artifact revision differs from termination-policy registry")
             started = time.perf_counter()
-            with ThreadPoolExecutor(max_workers=args.slots) as pool:
-                for record in pool.map(predict, jobs):
-                    # Persist every completed ordered observation before proceeding.
-                    write_new(args.output / f"record-{len(report['records']):04d}.json", record)
-                    report["records"].append({"id": record["id"], "repeat": record["repeat"],
-                                              "wall_seconds": record["wall_seconds"],
-                                              "tokens": len(record["raw_response"]["tokens"])})
+            records = prediction_jobs(client, info, items, args.output, repeats=args.repeats, slots=args.slots,
+                options={"tokens": args.tokens, "seed": args.seed, "cache_prompt": args.cache_prompt,
+                         "n_probs": args.n_probs, "temperature": args.temperature, "top_k": args.top_k,
+                         "top_p": args.top_p, "min_p": args.min_p}, schema=schema, termination=args.termination,
+                eos_ids=entry["token_ids"]["generation_eos_token_ids"])
+            report["records"] = [{k: record[k] for k in ("job_index", "status", "id", "repeat", "wall_seconds") if k in record}
+                                 for record in records]
+            report["attempted_jobs"] = len(records)
+            report["failed_jobs"] = sum(record["status"] != "PASS" for record in records)
             report["request_wall_seconds"] = time.perf_counter() - started
-            report["status"] = "PASS"
+            report["status"] = "PASS" if report["failed_jobs"] == 0 else "FAIL"
     except Exception as exc:
         report["error"] = {"type": type(exc).__name__, "message": str(exc)}
         raise
     finally:
         write_new(args.output / "report.json", report)
     print(json.dumps({"status": report["status"], "report": str(args.output / "report.json")}))
+    raise SystemExit(0 if report["status"] == "PASS" else 1)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,10 @@
 # Fast backend CPU validation, 11 October 2026
 
+These initial observations are retained unchanged. The [12 October follow-up](fast-followup.md)
+adds an explicit greedy EOS adapter and fixes response custody, sequential
+reference/native lifecycle and the context equality boundary. Native mode still
+has the original stop law; Q8 numerical drift remains.
+
 **Fast generation works. Scientific interchangeability remains blocked.**
 The native stop policy differs from HF even for F16, and Q8_0 also fails the
 predeclared probability thresholds. No GPU execution or scientific discovery

@@ -91,6 +91,13 @@ def test_context_overflow_fails_before_inference():
     assert client.calls == 0
 
 
+def test_equality_context_boundary_requires_one_token_slack():
+    client = StubClient({})
+    with pytest.raises(ValueError, match="one token"):
+        checked_completion(client, completion_request([1] * 10, tokens=2), 12)
+    assert client.calls == 0
+
+
 @pytest.mark.parametrize("changed", [{"truncated": True}, {"tokens_evaluated": 3}, {"tokens": None}, {"stop_type": "none"}])
 def test_truncation_implicit_bos_and_missing_token_trace_fail(changed):
     client = StubClient({"truncated": False, "tokens_evaluated": 2, "tokens": [3], "stop_type": "limit", **changed})

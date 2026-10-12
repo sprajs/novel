@@ -142,13 +142,24 @@ class Client:
     def __init__(self, url: str, timeout=180):
         self.url, self.timeout = url, timeout
 
-    def call(self, endpoint, payload=None):
+    def call(self, endpoint, payload=None, *, response_path=None):
         request = Request(self.url + endpoint, data=None if payload is None else json_bytes(payload),
                           headers={"Content-Type": "application/json"})
-        with urlopen(request, timeout=self.timeout) as response:
+        http_error = None
+        try:
+            response = urlopen(request, timeout=self.timeout)
+        except HTTPError as exc:
+            response, http_error = exc, exc
+        with response:
             body = response.read(MAX_RESPONSE_BYTES + 1)
+        if response_path is not None:
+            # Retain even invalid JSON/HTTP failures before interpretation.
+            with response_path.open("xb") as handle:
+                handle.write(body)
         if len(body) > MAX_RESPONSE_BYTES:
             raise ValueError("Server response exceeds 32 MiB bound")
+        if http_error is not None:
+            raise http_error
         return strict_json(body.decode())
 
     def prompt(self, messages):
@@ -191,14 +202,77 @@ def completion_request(ids, *, tokens=8, seed=17, cache_prompt=False, n_probs=20
 
 
 def checked_completion(client, request, context):
-    if len(request["prompt"]) + request["n_predict"] > context:
-        raise ValueError("Prompt plus generation cap exceeds per-slot context")
-    result = client.call("/completion", request)
+    validate_completion_request(request, context)
+    return validate_completion(client.call("/completion", request), request)
+
+
+def validate_completion_request(request, context):
+    if len(request["prompt"]) + request["n_predict"] >= context:
+        raise ValueError("Prompt plus generation cap must leave one token of per-slot context slack")
+
+
+def validate_completion(result, request):
     if result.get("truncated") is not False or result.get("tokens_evaluated") != len(request["prompt"]):
         raise ValueError("Server truncated or changed prompt token count")
     if not isinstance(result.get("tokens"), list) or result.get("stop_type") not in ("limit", "eos", "word"):
         raise ValueError("Missing raw token/stop information")
     return result
+
+
+def complete_with_termination(client, request, context, *, policy="native", eos_ids=(), native_eog_ids=(),
+                              on_response=None, response_path=None):
+    """Explicit greedy chunk continuation; never mask logits or edit tokenizer metadata.
+
+    Native chunks retain their own stop reasons. The adapter resumes only extra
+    native EOG IDs, preserving them in the prefix/output. Text is decoded from
+    all IDs with special spellings included, matching HF skip_special_tokens=False.
+    """
+    validate_completion_request(request, context)
+    if policy not in ("native", "hf-eos"):
+        raise ValueError("Unknown termination policy")
+    if policy == "hf-eos":
+        if (request["temperature"] >= 0 or request["cache_prompt"] or request.get("json_schema") is not None
+                or request.get("grammar") or request.get("logit_bias") or request["ignore_eos"] or request["stop"]):
+            raise ValueError("hf-eos requires greedy unconstrained generation, no biases or prompt reuse")
+        if not eos_ids or not set(eos_ids) <= set(native_eog_ids):
+            raise ValueError("Native stops must contain all configured HF EOS IDs")
+    chunks, generated, probabilities = [], [], []
+    while len(generated) < request["n_predict"]:
+        chunk_request = {**request, "prompt": request["prompt"] + generated,
+                         "n_predict": request["n_predict"] - len(generated)}
+        kwargs = {} if response_path is None else {"response_path": response_path(len(chunks))}
+        response = client.call("/completion", chunk_request, **kwargs)
+        # Receipt callback runs before token-contract validation or output parsing.
+        if on_response is not None:
+            on_response(chunk_request, response)
+        chunks.append({"request": chunk_request, "response": response})
+        validate_completion(response, chunk_request)
+        if policy == "native":
+            return response, chunks
+        tokens = response["tokens"]
+        if (not tokens or len(tokens) > chunk_request["n_predict"] or
+                any(type(t) is not int or t < 0 for t in tokens)):
+            raise ValueError("Missing/invalid raw chunk tokens; cannot align termination")
+        if any(t in native_eog_ids for t in tokens[:-1]):
+            raise ValueError("Native chunk contains an interior EOG token")
+        last = tokens[-1]
+        if (response["stop_type"] == "eos") != (last in native_eog_ids):
+            raise ValueError("Native terminal token and stop reason disagree")
+        if response["stop_type"] not in ("eos", "limit"):
+            raise ValueError("Unexpected native stopping rule")
+        generated.extend(tokens)
+        probabilities.extend(response.get("completion_probabilities", []))
+        if last in eos_ids or len(generated) == request["n_predict"]:
+            break
+        if response["stop_type"] != "eos":
+            raise ValueError("Native stopped below the cap without an extra EOG")
+    content = client.call("/detokenize", {"tokens": generated})["content"]
+    return {"content": content, "tokens": generated, "completion_probabilities": probabilities,
+            "stop_type": "eos" if generated[-1] in eos_ids else "limit", "truncated": False,
+            "tokens_evaluated": len(request["prompt"]), "tokens_predicted": len(generated),
+            "adapter": {"termination": "hf-eos", "eos_ids": list(eos_ids), "native_eog_ids": list(native_eog_ids),
+                        "chunk_count": len(chunks), "raw_text_contract": "all token spellings, including special/EOS tokens",
+                        "kernel_contract": "native KV within chunks; clean full-prefix prefill after extra EOG"}}, chunks
 
 
 def server_command(binary, model, profile, *, port, slots=1, flash_attention=False, thinking=False):
