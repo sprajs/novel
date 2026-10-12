@@ -3,11 +3,11 @@
   "projectId": "appgprj_6acd40d2a55c81919e433f02a07b603a",
   "audience": "owner-private",
   "researchRevision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
-  "siteSourceCommit": "705a55ac1aa3621890447ae88fbaefd40407ad4d",
-  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_fd0beca9e06c8191b316d0c1ea2f91c4",
-  "deploymentId": "appgdep_6acd4553bde081919bee65d1175a710b",
+  "siteSourceCommit": "d4d6e9d7837659158d23d4e2b830ad10ebecb39b",
+  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_6f50376f46c481919f52cd8e73017c48",
+  "deploymentId": "appgdep_6acd4bbf6bd08191a38bff7cf0fd54d1",
   "deploymentStatus": "succeeded",
-  "publishedAt": "2026-10-12T20:38:59.153095+00:00",
+  "publishedAt": "2026-10-12T21:06:22.786388+00:00",
   "maintenance": {
     "automationId": "keep-novel-s-reading-baseline-current",
     "kind": "local-thread-heartbeat",
@@ -17,13 +17,22 @@
     "requirements": "The Codex desktop and local host must be available with authenticated GitHub and Sites access."
   },
   "verification": {
-    "contentContractTests": 7,
+    "contentContractTests": 10,
     "chaptersRendered": 13,
     "browserErrors": 0,
-    "diagrams": 9,
+    "diagrams": 20,
     "interactiveExamples": 4,
     "quizAndProgressControls": 0,
-    "testedLayouts": ["391px mobile", "1440px desktop"],
-    "note": "Browser checks used the exact local static output subsequently packaged and deployed. No scientific model runs were performed."
-  }
+    "testedLayouts": [
+      "391px mobile",
+      "1440px desktop"
+    ],
+    "note": "Browser checks used the exact local static output subsequently packaged and deployed; archive bytes were compared with that output. Library search/filter/empty states, glossary links, section anchors, mobile navigation and all four interactive examples were checked. The authenticated production browser reached an owner passkey challenge, so production deployment and owner-private access are confirmed by the native Sites result rather than a signed-in browser inspection. No scientific model runs were performed.",
+    "sections": 68,
+    "glossaryTerms": 38,
+    "explainedChapterConnections": 26,
+    "primaryMethodChecksThisPass": 9
+  },
+  "curriculumCommit": "e9de4459d2c655bd7a014b974d3c6219845d6e83",
+  "archiveSha256": "12494b0b1ca6f2474a1c09b3c001f5a50b4968ef92c67d3f2d44f6a1175b7304"
 }
