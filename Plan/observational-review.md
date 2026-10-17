@@ -1,5 +1,8 @@
 # Independent review of the observational study
 
+Scope: review of the later historical-reconstruction assay. The active next
+experiment and its distinct behavioural claim are in [HC-1](hidden-context-protocol.md).
+
 Prepared 11 October 2026. This is an independent AI-assisted design review,
 not human peer review, target admission, or evidence from model inference.
 The review inspected the programme, protocols, six-case book, ground-truth
@@ -210,7 +213,7 @@ No finite-budget failure proves a task class inherently unsearchable.
 
 ## Design review findings
 
-The final review read the active [programme](research-plan.md),
+The final review read the then-active [historical programme](historical-reconstruction.md),
 [measurement protocol](measurement-protocol.md), [corpus protocol](corpus-protocol.md),
 [casebook](candidate-casebook.md), Plan navigation/session/reading/causal files,
 root README, and [schema, example, scope notes](../data/discovery/README.md)

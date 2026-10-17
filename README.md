@@ -12,17 +12,21 @@ possible; and how to improve discovery under a measurable compute and review
 budget. It progresses through reproducible evaluation, mechanistic explanation,
 controlled interventions and prospective research across domains.
 
-The first study uses historical reconstruction as a controlled starting point:
-can a fixed model recover human contributions first publicly disclosed after
-its exact artifact existed? Corpus admission and semantic measurement come
-first, followed by causal studies once the assay is reliable. **No historical
-idea is admitted yet, and no scientific model-performance result is reported.**
-The implementation and provenance records establish engineering capabilities.
+The next study adapts neuroscience tasks to neural networks, starting with
+[hidden-context transfer](Plan/hidden-context-protocol.md): can evidence about
+one item change the network's answer for another item before new feedback?
+We establish behaviour and transfer first, then investigate representations and
+selective interventions. [Historical reconstruction](Plan/historical-reconstruction.md)
+remains a later scientific-transfer track with its own admission requirements.
+**HC-1 is specified but not implemented or run. No historical idea is admitted,
+and no scientific model-performance result is reported.** The existing runtime
+and provenance records establish bounded engineering capabilities.
 
 Start with the [Novel reading room](https://novel-reading-room.sprajs.chatgpt.site),
-the private, living baseline for this project. It explains the concepts from
-first principles, summarizes the selected papers, and connects diagrams and
-interactive examples to the current research decisions. Its
+the private, living literature review for this project. It connects recent
+research on machine discovery, reasoning, interpretability and neuroscience,
+explains results with diagrams and mathematics, and links to concept notes
+where more background is useful. Its
 [versioned source and maintenance contract](learning/README.md) keep reading
 aligned with the programme, including retiring reading that stops being useful.
 

@@ -1,0 +1,68 @@
+{
+  "searchedAt": "2026-10-17",
+  "scope": {
+    "searchedAt": "2026-10-17",
+    "coverage": "Selected 2025–2026 primary work, with earlier methods and counterarguments where relevant. Searches explicitly included October 2026. A focused follow-up selected 2023–2024 context/abstraction studies and a 2019 replay experiment for HC-1; this is a task-driven addition, not a new exhaustive frontier search.",
+    "focus": [
+      "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
+      "Scientific discovery and evaluation",
+      "Reasoning, reinforcement learning and search",
+      "Mechanistic interpretability",
+      "AI and neuroscience"
+    ],
+    "boundary": "Targeted methods/results review; no exhaustive survey or independent replication."
+  },
+  "reviews": [
+    {
+      "id": "transfer",
+      "title": "When does one experience change a whole rule?",
+      "sources": [
+        "human-context-inference",
+        "multitask-abstraction",
+        "rule-guided-replay"
+      ]
+    },
+    {
+      "id": "discovery",
+      "title": "When does an AI idea become a scientific contribution?",
+      "sources": [
+        "execution-study",
+        "reconstruction",
+        "cusp",
+        "eurekabench"
+      ]
+    },
+    {
+      "id": "reasoning",
+      "title": "Do more attempts reveal more ability—or create a better search?",
+      "sources": [
+        "rlvr-boundary",
+        "curriculum-rl",
+        "learned-search",
+        "reasoning-faithfulness"
+      ]
+    },
+    {
+      "id": "circuits",
+      "title": "Can we explain the computation behind an answer?",
+      "sources": [
+        "circuit-biology",
+        "circuit-tracing",
+        "circuit-faithfulness",
+        "neuron-basis-circuits",
+        "patching-interpretation",
+        "patching-best-practices"
+      ]
+    },
+    {
+      "id": "brains",
+      "title": "What can a language model tell us about a brain?",
+      "sources": [
+        "visual-brain-alignment",
+        "temporal-brain-hierarchy",
+        "neuronal-language",
+        "brain-guided-reasoning"
+      ]
+    }
+  ]
+}

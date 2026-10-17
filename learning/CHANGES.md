@@ -61,3 +61,64 @@ Introduce a reviewed source fingerprint and repository check, a stable private
 Site identity and a daily chat review. Future removals must record the reason
 here; a retired source may remain as an audit record while disappearing from the
 default active library and learning path.
+
+## 17 October 2026 — Research-led literature review
+
+The reader requested a newer entry point and a literature review rather than a
+linear introductory course. Four connected reviews now lead the Site: scientific
+discovery, reasoning/search, mechanistic interpretability, and AI/neuroscience.
+They compare primary methods and reported results, including 2026 papers, and
+retain competing explanations and limitations beside the findings.
+
+Twelve primary sources were added. Four existing records (execution study, CUSP,
+Reconstruction and reasoning faithfulness) received fresh targeted methods/results
+checks. Search coverage, screened leads, versions, correction checks and access
+depth are recorded in `source-audit.md`. The frontier search date is distinct from
+a claim of exhaustive coverage. Neuroscience and the RLVR boundary debate are
+context; circuit methods and trained search interventions are later-study reading.
+No scientific status changed and no paper was independently replicated.
+
+The previous thirteen chapters are optional concept notes. Three focused notes
+explain representation alignment, sparse features and reward-based training.
+Reviews link to concepts at the relevant passage, concept notes link back to
+reviews, and papers link to the arguments that use them. Existing `#/learn/...`
+links still work. Numbered chapters and next/previous progression are removed
+from the interface. The reader can select a passage and ask for an additional
+linked subpage; text selection itself stores nothing and sends no request.
+
+The Site contains 42 sources, 49 glossary entries, 26 original figures and 150
+checked mathematical expressions. Source and concept search, section links,
+local KaTeX/MathML and the four optional illustrative controls are retained.
+Reference-graph checks now validate review citations, concept anchors and links
+between reviews without depending on display order.
+
+AGENTS.md, README and maintenance instructions now preserve this research-first
+approach. The existing daily maintenance automation also performs a bounded
+primary-literature search when seven days have passed since the last recorded
+search. The existing private Site identity is retained. PR #9 merged during this
+review; the revision follows that unchanged merge tree in a new focused PR.
+No merge of this revision is authorized by this update.
+
+## 17 October 2026 — Hidden-context transfer becomes the next experiment
+
+Adopt the owner's behaviour-first direction: adapt a neuroscience inference task
+before studying internal representations and selective interventions. Add the
+HC-1 protocol and a bounded first implementation session. Preserve the previous
+research and corpus-session documents as later historical-transfer protocols.
+This changes the research plan; it does not implement or run the experiment.
+
+Add the leading review “When does one experience change a whole rule?”, a linked
+hidden-context concept note, three primary source records and four glossary terms.
+Use original diagrams and typeset balanced accuracy, XOR, Bayes and Brier
+expressions. Explain matched change/stay histories, the one-bit alternative,
+indistinguishable causes, held-out task groups and the limits of decoding.
+The home page and review-status page now point to HC-1 and its implementation
+packet. Existing review, concept and legacy lesson links remain available.
+
+Defer historical evaluation/model-selection sources and related notes, and move
+faithfulness evidence readings to context; exact selections and source access
+are recorded in `source-audit.md`. No source is removed. Correct earlier prose
+that still called historical admission the immediate next task. Keep reported
+paper findings, design choices, engineering evidence and scientific results
+separate. Maintenance now follows the active HC-1 protocol as well as the wider
+research literature. There are no quizzes, declarations or progress controls.
