@@ -79,3 +79,34 @@ paired-intervention diagram. Review → concept → review navigation, mobile me
 source filtering, empty search and concept search were exercised. No browser
 warnings or errors were captured. This verifies the local build, not a signed-in
 production browser session.
+
+## Hidden-context teaching and design review — 17 October 2026
+
+The parent read the complete new transfer review and hidden-context concept note
+without relying on the papers to supply a missing explanatory step. The review
+begins with a concrete shared-rule problem, then shows what the human experiment
+motivates, what HC-1 supplies to a network and what competing explanations survive.
+The linked note defines context, XOR, prior/posterior, Brier score, carried state
+and a fitted decoder. Worked examples distinguish a prediction justified by the
+evidence from a lucky answer. Hippocampus, recurrent state and causal attention
+are defined where used. Diagrams and equations describe the proposed experiment;
+they are not plotted results.
+
+An independent Astra methodological reviewer inspected the source/task mapping
+and identified design errors before implementation. The revised protocol uses
+600 confirmation split groups from 819 available, distinguishes groups from
+sampled instances, probes each trained network in its own coordinate system,
+trains both ambiguity predictions and reports balanced change/stay accuracy.
+The parent additionally specified a separate ordinary-recall query and the
+odd-pass robustness exposure. A final review moved the competence gate to the
+trained stay-query position and required both change and stay accuracy for the
+reliable-transfer label; immediate recall remains a position-shift control. Known change timing, reward decoding shortcuts,
+limited abstract rule diversity and a perfect one-bit baseline remain visible
+limitations. The ambiguity example uses identical observations and opposite
+labels; its one-half prediction follows from that explicit paired generator.
+
+The older historical-assay pages remain useful optional reference. Their status
+and current programme connections now say later scientific-transfer work. This
+review is an editorial and design assessment, not testing with a novice reader,
+implementation verification or independent replication. Actual content, renderer,
+browser and deployment checks are recorded in the publication receipt.

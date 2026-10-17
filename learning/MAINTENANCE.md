@@ -3,7 +3,10 @@
 The Site is a research-led literature review for Novel. Select recent work on
 AI discovery, reasoning, interpretability and neuroscience for a concrete
 connection to measuring, explaining or improving discovery. The canonical
-source lives in this repository. Its stable,
+source lives in this repository. The active next experiment is hidden-context
+transfer (HC-1, `Plan/hidden-context-protocol.md`); review its task information,
+reference policies and behavioural evidence before promoting representation or
+causal claims. Historical reconstruction is a later scientific-transfer track. Its stable,
 private Site identity is in `site/.openai/hosting.json`. Preserve that identity
 and audience on every publication.
 

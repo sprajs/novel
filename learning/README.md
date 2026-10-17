@@ -3,6 +3,10 @@
 The [private reading Site](https://novel-reading-room.sprajs.chatgpt.site) is a
 living literature review for Novel. It opens with current research questions
 about discovery, reasoning, internal mechanisms and comparisons with brains.
+The leading review is now hidden-context transfer, the selected next experiment
+in [HC-1](../Plan/hidden-context-protocol.md). It connects human inference,
+network abstraction and a later sequence-reorganisation question; no HC-1 run
+has been performed. Historical reconstruction remains a later research track.
 Reviews connect primary papers, explain methods and results in plain language,
 and distinguish reported findings from what Novel has actually established.
 Technical terms are defined in the argument; longer explanations are available

@@ -98,3 +98,27 @@ primary-literature search when seven days have passed since the last recorded
 search. The existing private Site identity is retained. PR #9 merged during this
 review; the revision follows that unchanged merge tree in a new focused PR.
 No merge of this revision is authorized by this update.
+
+## 17 October 2026 — Hidden-context transfer becomes the next experiment
+
+Adopt the owner's behaviour-first direction: adapt a neuroscience inference task
+before studying internal representations and selective interventions. Add the
+HC-1 protocol and a bounded first implementation session. Preserve the previous
+research and corpus-session documents as later historical-transfer protocols.
+This changes the research plan; it does not implement or run the experiment.
+
+Add the leading review “When does one experience change a whole rule?”, a linked
+hidden-context concept note, three primary source records and four glossary terms.
+Use original diagrams and typeset balanced accuracy, XOR, Bayes and Brier
+expressions. Explain matched change/stay histories, the one-bit alternative,
+indistinguishable causes, held-out task groups and the limits of decoding.
+The home page and review-status page now point to HC-1 and its implementation
+packet. Existing review, concept and legacy lesson links remain available.
+
+Defer historical evaluation/model-selection sources and related notes, and move
+faithfulness evidence readings to context; exact selections and source access
+are recorded in `source-audit.md`. No source is removed. Correct earlier prose
+that still called historical admission the immediate next task. Keep reported
+paper findings, design choices, engineering evidence and scientific results
+separate. Maintenance now follows the active HC-1 protocol as well as the wider
+research literature. There are no quizzes, declarations or progress controls.

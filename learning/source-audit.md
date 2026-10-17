@@ -1,8 +1,75 @@
 # Literature and teaching-source audit
 
+## Hidden-context direction — 17 October 2026
+
+This is the current review record. Current inventory: **5 research reviews,
+17 optional concept notes, 45 source records and 53 glossary terms**. The earlier
+records below retain the counts and decisions of their respective passes.
+
+The owner selected a behaviour-first neuroscience adaptation as Novel's next
+research direction, following the linked conversation “Neuroscience Of Novel
+Thoughts” and the proposed programme. HC-1 asks whether feedback on one item
+changes the first response to a different item under a shared hidden rule.
+`Plan/hidden-context-protocol.md` specifies the synthetic information, controls,
+models, splits and analysis. It is a proposed experiment, not an implemented
+runner, a completed replication or a result. Historical reconstruction and its
+admission rules are retained as a later scientific-transfer track.
+
+The remote was fetched; default branch `8aa2393f13f2f787f8d1839704eb2fa1a1e7405a`
+was unchanged. These research changes and the reading baseline are reviewed
+in the existing PR #10. `baseline.json` identifies the research-plan commit
+and the reviewed input hashes. Publication does not merge or approve the PR.
+
+### Focused primary-source follow-up
+
+This task-driven follow-up builds on the bounded frontier search recorded below.
+It does not imply a fresh exhaustive search or favour a publication merely for
+being recent. The primary texts were checked for the following design decisions:
+
+| Source | Material actually inspected | Why selected and limits |
+| --- | --- | --- |
+| [Courellis et al., Nature 2024](https://www.nature.com/articles/s41586-024-07799-x), [PMC full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC11338822/) | Parent targeted publisher/indexed passages; independent Astra reviewer inspected PMC task, inference trial definition, performance grouping and neural abstraction passages. Parent direct HTML/PDF retrieval redirected or failed and is not counted as a full-text read. | Human anchor for first-other-item transfer after feedback. HC-1 omits reward magnitude and clinical recording conditions. Performance-defined grouping cannot independently establish the same performance contrast. Supplements, participant data and code have not been reconciled; a close-replication claim would require that work. |
+| [Johnston and Fusi, Nature Communications 2023](https://www.nature.com/articles/s41467-023-36583-0), [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9950464/) | Targeted primary full-text abstraction/results passages and data/code availability. Figshare 21761348 v1 and Zenodo 7465963 were identified, not downloaded or executed. | Computational counterpoint: learned representations can generalise across task conditions. Guides held-out decoding; does not predict an HC-1 score or prove a shared human mechanism. |
+| [Liu et al., Cell 2019, author-hosted PDF](https://discovery.ucl.ac.uk/10078375/1/1-s2.0-S0092867419306403-main.pdf) | Targeted task and decoding passages on PDF pages 2–4 during the direction review. No supplement reconciliation or human-data analysis. | Later sequence-reorganisation question. A produced sequence and spontaneously decoded replay are different outcomes; merely pausing a model supplies no computation. |
+
+No source result has been independently reproduced. The new figures are original
+schematics, and the numerical examples are analytic consequences of the proposed
+generator. Access scopes are visible on each paper card. The three sources are
+added to both the repository reading list and the Site inventory.
+
+### Review decisions
+
+The new leading review starts with transfer, connects the human task to a
+controlled network assay, shows paired change/stay and ambiguous-cause examples,
+and links to a focused concept note on hidden variables, Bayes' rule, calibration,
+state and decoding. The examples expose the simple one-bit reversal strategy
+that can solve task A. They also explain why two indistinguishable worlds cannot
+be classified before new evidence arrives. Neither explanation needs the reader
+to open the paper first.
+
+Historical measurement, evaluation and model-selection sources move to `later`:
+semantic uncertainty, the semantic entropy account, surface-form competition,
+probability mass, ideation/execution studies, code evaluation, ResearchBench,
+DiscoveryBench, CUSP, Reconstruction, Qwen3 release and EurekaBench. The existing
+faithfulness evidence readings move to `context`. History, meaning, likelihood
+and historical observational notes are marked later. No source is deleted or
+retired; older URLs remain valid for reference. Current broad reviews remain
+available, with their project implications scoped to the relevant later stage.
+
+An independent methodological review corrected the confirmation allocation to
+fit the available held-out groups, separated split groups from repeated episode
+instances, specified within-checkpoint probes, trained both ambiguity query
+positions, and made balanced change/stay accuracy the primary endpoint. It also
+identified the known change position and reward shortcut as limits. A final review replaced the shifted-position recall competence gate with
+in-distribution stay accuracy and required a minimum change accuracy as well as
+stay accuracy before using the label reliable transfer. Immediate recall remains
+a separately labelled robustness control. The parent incorporated these
+corrections and reviewed the new teaching prose. These are design/editorial checks, not numerical
+qualification, human-reader testing or scientific evidence.
+
 ## Research-led review — 17 October 2026
 
-This is the current review record. The 12 October teaching audits below are historical records; their counts and access labels describe those earlier passes. Current inventory: **4 research reviews, 16 optional concept notes, 42 source records and 49 glossary terms**. Twelve sources were added and four existing sources received deeper methods/results reading. The original 30-source reading inventory remains available; foundational chapters moved out of the main navigation rather than being retired as irrelevant.
+This earlier research-led pass preceded the hidden-context direction above. The 12 October teaching audits below are also historical records. Inventory at this pass: **4 research reviews, 16 optional concept notes, 42 source records and 49 glossary terms**. Twelve sources were added and four existing sources received deeper methods/results reading. The original 30-source reading inventory remains available; foundational chapters moved out of the main navigation rather than being retired as irrelevant.
 
 The reviewed default-branch baseline is `8aa2393f13f2f787f8d1839704eb2fa1a1e7405a`. The remote was fetched and the current research plan, source inventory and validation boundaries reviewed. PR #9 merged during this review; its merge tree exactly matches the previous curriculum head, with no further research changes since `3c962e0e26e53f2b33dc6eae4c6f9835223ef89f`. This revision follows the merged default branch in a new focused PR. It changes the reading experience and literature synthesis, not the research protocol or scientific qualification.
 
