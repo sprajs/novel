@@ -2,12 +2,12 @@
   "siteUrl": "https://novel-reading-room.sprajs.chatgpt.site",
   "projectId": "appgprj_6acd40d2a55c81919e433f02a07b603a",
   "audience": "owner-private",
-  "researchRevision": "8aa2393f13f2f787f8d1839704eb2fa1a1e7405a",
-  "siteSourceCommit": "ad8008c7f93a2cf336afc0ac5e6fce5423052ce0",
-  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_f78c7d1373d08191881b13957fd77587",
-  "deploymentId": "appgdep_6ad39fbf801c8191a866f0b30c265946",
+  "researchRevision": "bc6bc56afaa4ad41f78a1f384d810e63b61d5715",
+  "siteSourceCommit": "2c0f12eb0cc0e3fabe2a171dd234f874dbb52311",
+  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_cd74e30ef98081919b2848dd2a7fb641",
+  "deploymentId": "appgdep_6ad3dbd595f48191b5c6edac228febd2",
   "deploymentStatus": "succeeded",
-  "publishedAt": "2026-10-17T16:18:24.353163+00:00",
+  "publishedAt": "2026-10-17T20:34:43.052534+00:00",
   "maintenance": {
     "automationId": "keep-novel-s-reading-baseline-current",
     "kind": "local-thread-heartbeat",
@@ -16,17 +16,18 @@
     "runVerified": false,
     "requirements": "The Codex desktop and local host must be available with authenticated GitHub and Sites access.",
     "promptUpdatedAt": "2026-10-17",
-    "literatureSearchCadence": "Bounded primary-literature search when at least seven days have elapsed since the last documented search, or on request."
+    "literatureSearchCadence": "Bounded primary-literature search when at least seven days have elapsed since the last documented search, or on request.",
+    "direction": "Follow active HC-1 behavioural protocol; representation and causal studies remain gated, historical reconstruction later. Future repository changes can revise this priority."
   },
   "verification": {
     "contentContractTests": 12,
-    "researchReviews": 4,
-    "conceptNotes": 16,
-    "sources": 42,
-    "glossaryTerms": 49,
-    "diagrams": 26,
+    "researchReviews": 5,
+    "conceptNotes": 17,
+    "sources": 45,
+    "glossaryTerms": 53,
+    "diagrams": 30,
     "interactiveExamples": 4,
-    "typesetExpressions": 150,
+    "typesetExpressions": 154,
     "mathRenderer": "KaTeX 0.19.0 (local assets, htmlAndMathml)",
     "browserErrors": 0,
     "quizAndProgressControls": 0,
@@ -35,20 +36,22 @@
       "1440px desktop"
     ],
     "runtimeArchiveFiles": 74,
-    "reviewedProjectInputs": 125,
-    "note": "The four research reviews, three new concept notes and legacy token route were checked locally at mobile width for page overflow, math errors and forbidden assessment controls. Desktop review and mobile screenshots were inspected. Review/concept return links, mobile menu, paper filtering and concept search were exercised. All 150 mathematical expressions pass the pinned renderer. Twelve content-contract tests and the 125-input baseline check pass. The 74 runtime files in the submitted archive match the tested output byte for byte, and the hosting manifest matches semantically. Sites reports successful version 5 publication from the pushed source commit; its stored-archive metadata is recorded separately. Owner-only access was read back. Production browser QA remains separate from these local checks. Source reading is bounded by learning/source-audit.md; no paper replication or scientific model runs were performed."
+    "reviewedProjectInputs": 128,
+    "note": "Twelve content-contract tests, all 154 expressions with the pinned KaTeX renderer, JavaScript syntax, 103 local Markdown links, and the 128-input baseline check pass. The new transfer review and hidden-context concept note were checked locally at mobile width for page overflow, math errors and forbidden assessment controls; the concept link was exercised. Mobile home, affected discovery/brain reviews and the legacy token route were checked. Desktop worked-example and mobile equation screenshots were inspected; wide equations have their own scroll area. The status page links to the committed HC-1 programme and protocol. No browser console errors were observed on the fresh local preview. The 74 runtime archive files match the checked output byte for byte; the hosting manifest matches semantically. Sites reports successful version 6 publication from the pushed source commit, with owner-only access read back. Production browser access stops at the expected ChatGPT login page; authenticated production rendering was not verified. No neural-network experiment, training run or paper replication was performed."
   },
-  "curriculumCommit": "4a0211038137ee2beb950217d259d04b87cb4a40",
-  "archiveSha256": "528f064f33d13b12dee6172329fa8d5e7f9b05ba8697dacf6796016dbcf822d2",
-  "versionNumber": 5,
+  "curriculumCommit": "b08fd2274ff0a0ca2069505bd48d7c7ff0749259",
+  "archiveSha256": "a42aa37362f54fabe2c853a59a01c683cf95aef7e132353fca0cc2696b61c495",
+  "versionNumber": 6,
   "parentTeachingReview": {
     "record": "learning/TEACHING-REVIEW.md",
-    "reviewedCurriculumCommit": "4a0211038137ee2beb950217d259d04b87cb4a40",
-    "researchReviewsRead": 4,
-    "newConceptNotesRead": 3,
-    "humanNoviceStudy": false
+    "reviewedCurriculumCommit": "b08fd2274ff0a0ca2069505bd48d7c7ff0749259",
+    "researchReviewsRead": 1,
+    "newConceptNotesRead": 1,
+    "humanNoviceStudy": false,
+    "scope": "Complete new transfer review and hidden-context concept note, with affected programme implications in existing material; prior four-review assessment retained in TEACHING-REVIEW.md.",
+    "independentDesignReview": "Astra reviewed the task/source mapping and final protocol; concrete corrections incorporated before publication."
   },
   "archiveFormat": "tar.gz (local helper output supplied to Sites)",
-  "storedArchiveContentHash": "sha256:047dc5eecc0a0722214339abe0bc4a07711ba489ded0761bbec1db0eb1ea492e",
+  "storedArchiveContentHash": "sha256:6995d7d755f8e14381b6035e39506c4da70f8fdff05ac201d5686198af6c1947",
   "storedArchiveFormat": "tar (Sites-reported storage metadata; distinct from local archive bytes)"
 }
