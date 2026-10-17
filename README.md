@@ -20,9 +20,10 @@ idea is admitted yet, and no scientific model-performance result is reported.**
 The implementation and provenance records establish engineering capabilities.
 
 Start with the [Novel reading room](https://novel-reading-room.sprajs.chatgpt.site),
-the private, living baseline for this project. It explains the concepts from
-first principles, summarizes the selected papers, and connects diagrams and
-interactive examples to the current research decisions. Its
+the private, living literature review for this project. It connects recent
+research on machine discovery, reasoning, interpretability and neuroscience,
+explains results with diagrams and mathematics, and links to concept notes
+where more background is useful. Its
 [versioned source and maintenance contract](learning/README.md) keep reading
 aligned with the programme, including retiring reading that stops being useful.
 

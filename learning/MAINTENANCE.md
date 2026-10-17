@@ -1,13 +1,18 @@
 # Keep the reading baseline aligned with Novel
 
-The Site is a baseline for the research being built, not a growing collection of
-interesting papers. The canonical source lives in this repository. Its stable,
+The Site is a research-led literature review for Novel. Select recent work on
+AI discovery, reasoning, interpretability and neuroscience for a concrete
+connection to measuring, explaining or improving discovery. The canonical
+source lives in this repository. Its stable,
 private Site identity is in `site/.openai/hosting.json`. Preserve that identity
 and audience on every publication.
 
-Teach an interested beginner rather than assuming research experience. Explain
-the prerequisites and connect concepts through prose, examples, diagrams and
-links. Do not add quizzes, comprehension declarations, completion checkboxes,
+Start with a current research question, finding or disagreement. Use simple
+language and define terms where they first matter, without requiring prior
+paper reading. Explain methods, results, assumptions and limitations; compare
+papers rather than listing summaries. Keep extended prerequisites in linked
+concept notes and retain stable links when adding a requested explanation of
+a highlighted passage. Do not add quizzes, comprehension declarations, completion checkboxes,
 progress tracking or enforced reading order. The reader chooses what to read.
 
 ## Review triggers and decisions
@@ -18,6 +23,16 @@ the README, Plan, docs, model environments, source implementation, discovery
 specification, calibration tools and selected paper manifests. New/deleted input
 files are detected as well as edits. CI flags drift on pull requests; branch
 protection is configured separately and is not claimed here.
+
+Also perform a bounded primary-literature search when seven days have passed
+since the last documented frontier search, or when the reader requests a
+research update. Search all four review areas, record queries and coverage
+dates, and follow useful new papers to methods/results rather than treating
+search snippets as full-text access. Include counterevidence and competing
+methods. A newer publication is not automatically better or relevant. Do not
+call the selection exhaustive, a live ranking, or the latest available result
+without a suitably scoped check. Preserve the previous publication when nothing
+material changes; record quiet search receipts in automation-local state.
 
 For every material change, inspect the actual current repo state and answer:
 

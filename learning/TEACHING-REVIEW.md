@@ -46,3 +46,36 @@ The review does not claim exhaustive paper reading, reproduced research
 results or demonstrated usability with a novice participant. Source-access
 limits remain in `source-audit.md`; actual build, browser and publication checks
 are recorded separately in `publication.json`.
+
+## Research-led editorial review — 17 October 2026
+
+The reader changed the desired entry point: current research and a connected
+literature review, with simple language and optional prerequisites. The parent
+read all four Astra-drafted review essays and the three additional concept notes.
+It removed introductory progression from navigation, added citations at the
+argument level and linked explanations back to the reviews that use them.
+
+Parent edits define NLP, statistical significance, mean ablation, down-projection,
+syntactic features and putative single-neuron recordings locally. Optional pages
+explain alignment/correlation, sparse features/transcoders and reward learning.
+Equations define their symbols and illustrative quantities remain explicitly
+invented. The comparison between an unchanged answer model and a newly trained
+complete system is preserved. Brain prediction is distinguished from a shared
+causal mechanism; publication matching from scientific validity; and candidate
+availability from successful selection.
+
+The source audit records targeted primary reads, numerical-result conditions,
+the temporal-brain article correction, and the preprint-specific best-of-five
+brain-guided result. Parent spot checks covered the learned-search experiment,
+EurekaBench endpoints/results, curriculum-RL comparison, circuit replacement-model
+evaluation and the visual-alignment word-order control. This is an editorial and
+source review, not a human-reader study or independent scientific replication.
+
+Local browser checks covered all four research routes, three new concept routes
+and a legacy `#/learn/tokens` link at 391px, with typeset math, no raw delimiters,
+no math errors and no horizontal page overflow. Desktop checks at 1440px covered
+the homepage and circuit review; screenshots confirmed readable text and the
+paired-intervention diagram. Review → concept → review navigation, mobile menu,
+source filtering, empty search and concept search were exercised. No browser
+warnings or errors were captured. This verifies the local build, not a signed-in
+production browser session.

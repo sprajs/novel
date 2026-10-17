@@ -1,22 +1,23 @@
 # Novel reading room
 
-The [private reading Site](https://novel-reading-room.sprajs.chatgpt.site) is the
-project's living baseline: the concepts and primary sources needed to understand
-the experiment being built. Its audience is the repo owner, starting from basic
-model and probability concepts. It follows Novel's decisions rather than a
-general computer-science syllabus.
+The [private reading Site](https://novel-reading-room.sprajs.chatgpt.site) is a
+living literature review for Novel. It opens with current research questions
+about discovery, reasoning, internal mechanisms and comparisons with brains.
+Reviews connect primary papers, explain methods and results in plain language,
+and distinguish reported findings from what Novel has actually established.
+Technical terms are defined in the argument; longer explanations are available
+through linked concept notes. There is no required reading order.
 
-- `content.json`: original lessons, paper summaries, source access labels and glossary.
-- `source-audit.md`: primary-source verification and reading-inventory coverage.
-- `TEACHING-REVIEW.md`: parent review of beginner readability and addressed prerequisites.
+- `content.json`: research reviews, concept notes, source records and glossary.
+- `source-audit.md`: search coverage, exact source versions, access depth and claim checks.
+- `TEACHING-REVIEW.md`: editorial review of explanations and evidence boundaries.
 - `baseline.json`: reviewed research revision, input hashes and content hash.
-- `site/`: HTML, CSS and JavaScript, a pinned local KaTeX renderer, and the stable hosting identity.
-- `MAINTENANCE.md`: when to add, defer, retire and publish reading.
-- `CHANGES.md`: substantive curriculum changes and reasons.
-- `publication.json`: deployment receipt and the saved maintenance automation.
+- `site/`: HTML, CSS, JavaScript, local KaTeX assets and the stable hosting identity.
+- `MAINTENANCE.md`: selection, review, concept expansion and publication contract.
+- `CHANGES.md`: substantive editorial changes and reasons.
+- `publication.json`: verified deployment receipt and maintenance automation identity.
 
-Build offline using standard-library Python (3.12 or later). Validate equations
-with Node.js (20 or later); no package installation or CDN is needed:
+Build offline using standard-library Python 3.12+ and Node.js 20+:
 
 ```sh
 python scripts/learning/build.py --check
@@ -26,22 +27,40 @@ python scripts/learning/build.py
 python -m http.server 8765 --directory learning/site/dist --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8765`. The generated `dist/` is ignored and reproducible;
-the source, bibliography and review receipts are committed. Examples are
-illustrations, not experimental observations. Readers choose their own order;
-there are no quizzes or progress tracking. No papers, weights or private experiment data are served.
+The generated `dist/` is ignored and reproducible. Source PDFs, credentials,
+model weights, research packets and raw runs are excluded. Paper results are
+attributed reports, not independent replications; invented examples are labeled.
 
-Each section has an explicit stable `id`, used in routes such as
-`#/learn/likelihood/why-log-probabilities-are-added`. Preserve these IDs when
-editing a heading. Chapter `connections` pair a chapter ID with a reason to
-follow the link; glossary entries link back to a fuller explanation. The builder
-validates those references, primary method URLs and worked figure structures.
-Diagrams can be flows, V/M matrices, worked tables or a residual bypass schematic.
+## Linked reviews and explanations
 
-Write inline mathematics with `\(...\)` and displayed equations with `\[...\]`
-in content strings (escape the backslash when editing JSON). KaTeX renders both
-visual notation and accessible MathML. Keep the surrounding explanation and
-define new notation. `site/vendor/katex/PROVENANCE.json` pins the upstream npm
-archive integrity and individual file hashes; `LICENSE` retains its MIT notice.
-All scripts, styles and fonts are served by the Site itself. The checker rejects
-invalid expressions and the return of self-assessment or progress controls.
+`reviews` holds research-led essays at `#/review/<id>/<section-id>`. Each section
+can cite source IDs through `citations` and offer `conceptLinks` with `chapter`,
+optional `section`, and a descriptive `label`. Every review source must be cited
+in its argument. `relatedReviews` connects questions without imposing a sequence.
+
+The existing `chapters` collection now holds optional concept notes at
+`#/concept/<id>/<section-id>`. Old `#/learn/...` links still resolve. Notes can be
+reordered without changing navigation. Keep IDs stable when changing titles.
+The `prerequisites` metadata describes background links, never a reading gate.
+
+When the reader highlights a term or passage and asks for an explanation, add a
+focused concept note (or a focused section if one already fits), link it from
+that passage's section, and include a return connection to the research review.
+Explain the particular concept in its research context; do not append a generic
+introductory course. Text selection itself does not submit a request or store
+personal reading state. Future changes go through the same reviewed publication
+workflow.
+
+Sources have a stated access scope. Keep targeted full-text reading, publisher
+abstracts, author accounts and earlier repository checks distinct. `source-audit.md`
+records bounded searches and why sources were selected or deferred. New papers
+need a concrete connection to Novel; a date alone is not an inclusion criterion.
+
+Diagrams use flows, matrices, worked tables or a residual schematic. Equations
+use `\(...\)` inline and `\[...\]` displayed, with escaped backslashes in JSON.
+Define symbols alongside each equation. The pinned local KaTeX renderer emits
+selectable visual notation and accessible MathML. Its provenance and MIT license
+are retained in `site/vendor/katex/`; no runtime CDN is required. Checks reject
+broken review citations, concept anchors, unsafe URLs, invalid math, stale assets
+and unreviewed input drift. Quizzes, declarations, checkboxes and progress tracking
+remain excluded.
