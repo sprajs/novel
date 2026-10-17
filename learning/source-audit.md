@@ -1,4 +1,188 @@
-# Teaching-source audit
+# Literature and teaching-source audit
+
+## Research-led review — 17 October 2026
+
+This is the current review record. The 12 October teaching audits below are historical records; their counts and access labels describe those earlier passes. Current inventory: **4 research reviews, 16 optional concept notes, 42 source records and 49 glossary terms**. Twelve sources were added and four existing sources received deeper methods/results reading. The original 30-source reading inventory remains available; foundational chapters moved out of the main navigation rather than being retired as irrelevant.
+
+The research baseline remains `3c962e0e26e53f2b33dc6eae4c6f9835223ef89f`. The remote default branch was fetched and the current research plan, source inventory and validation boundaries reviewed. This changes the reading experience and literature synthesis, not the research protocol or scientific qualification.
+
+### Scope and selection
+
+The review connects machine discovery, reasoning and search, mechanistic interpretability, and AI/neuroscience. Searches explicitly included 2026 and October leads. Selection is bounded by relevance to Novel; this is neither an exhaustive survey nor a live leaderboard. Older work remains when it supplies a competing interpretation or an essential method. No paper results were independently reproduced. The original diagrams and illustrative calculations are explanatory synthesis.
+
+### Search record
+
+Queries:
+
+- `site.arxiv.org "Reconstruction: A Blind Benchmark" "2608.16645"`
+- `site.arxiv.org "Scientific reasoning does not reliably" "2605.22681"`
+- `site.arxiv.org "Can LLMs Generate Novel Research Ideas" "execution"`
+- `site.arxiv.org reinforcement learning reasoning capability pass k base models 2025 2026`
+- `site.arxiv.org/abs/ "scientific discovery" "October" "2026" benchmark`
+- `site.arxiv.org/abs/ "reasoning" "October" "2026" "search" "pass"`
+
+Web search used for current discovery and initial primary pages. Several arXiv HTML fetches returned DisabledError through web; direct HTTPS retrieval with urllib succeeded. HTML text parsed with the Python standard library. No downloaded papers or benchmark data retained, no model experiments run.
+
+Screened leads not selected:
+
+- [Autonomous Science Bench](https://arxiv.org/abs/2610.18449): Recent search lead; no primary methods reading; not needed for this bounded comparison.
+- [MechHypoBench](https://arxiv.org/abs/2610.05197): Search lead only; deeper method review deferred.
+- [Station open-ended discovery study](https://arxiv.org/abs/2610.08927): Search lead only; no result imported.
+- [Does RL Expand the Capability Boundary of LLM Agents?](https://arxiv.org/abs/2604.14877): Abstract/search lead; tool-use setting useful later but outside this eight-source selection.
+
+Queries:
+
+- `site.transformer-circuits.pub 2025 circuit tracing attribution graphs limitations biology language model`
+- `site.arxiv.org mechanistic interpretability 2026 circuit tracing evaluation`
+- `site.nature.com language models brain alignment 2025 2026 representations`
+- `Transformer Circuit Faithfulness Metrics Miller ablation`
+- `Beyond representational alignment brain-guided 2026 arxiv`
+- `Language Model Circuits Are Sparse in the Neuron Basis ICML 2026`
+
+Searched primary-source domains for 2025 circuit tracing, 2026 mechanistic interpretability/circuit evaluation, and 2025–2026 language-model brain alignment.
+Included 2026 searches explicitly; selected July 2026 ICML neuron-basis circuits, June 2026 cellular study and June 2026 brain-guided reasoning preprint (later journal publication verified). No claim that these are the latest papers in every subfield.
+Retained 2024 faithfulness critique because it directly changes interpretation of current circuit metrics.
+Attention QK extension (July 2025) surfaced but was not promoted after web access failures; no claims from it used.
+Nature pages intermittently failed in web.open; direct HTTP retrieval recovered targeted full text for visual alignment, neuronal mapping and arXiv brain-guided reasoning.
+2026 sources remain author-reported findings, not independent replications.
+July 2026 CircuitKIT was inspected at methods/results depth but excluded from the final eight-paper selection in favor of the directly competing neuron-basis experiment; this is a focus decision, not a negative validity judgment.
+
+### Source checks and result provenance
+
+Exact versions are linked below. A targeted full-text check covers the stated passages, not every appendix, experiment or implementation. Journal publication status is kept separate from the actual version read.
+
+#### The Ideation-Execution Gap: Execution Outcomes of LLM-Generated versus Human Research Ideas
+
+- Source inspected: [execution-study](https://arxiv.org/html/2506.20803v1)
+- Passages: Sections 2–4, Tables 4–5, Section 5.1 and stated attrition in Section 3.1
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: 43 completed projects: Sections 2–3.
+- Checked claim: Effectiveness gaps −1.879 AI and −0.052 human: Table 5.
+- Checked claim: Project-level post-execution comparisons nonsignificant: Table 4 and Section 4.1; 19 human / 24 AI.
+
+#### Scientific reasoning does not reliably translate into scientific forecasting in frontier AI
+
+- Source inspected: [cusp](https://arxiv.org/html/2605.22681v2)
+- Passages: Methods, Model Evaluation, Supplementary Table S8, Appendix H.1 leakage rubric and main-text limitations
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: Near-chance merged binary accuracy across six models: Supplementary Table S8; per-model domain means 0.476–0.506.
+- Checked claim: Appendix H.1 explicitly passes matching correct methods and coincidentally matching numerical predictions.
+
+#### Reconstruction: A Blind Benchmark for Recovering Research Ideas from Pre-Publication Bibliographies
+
+- Source inspected: [reconstruction](https://arxiv.org/html/2608.16645v3)
+- Passages: Sections 3.1–3.4, 4.3, Table 2 and Section 5 Limitations
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: 643 papers/six domains and 36.0% unweighted domain mean: Table 2.
+- Checked claim: 5-of-20 versus 5-of-5 candidates and no reported human agreement: Section 5.
+
+#### Reasoning Models Don't Always Say What They Think
+
+- Source inspected: [reasoning-faithfulness](https://arxiv.org/html/2505.05410v1)
+- Passages: Sections 2–3, Figure 1 discussion and Sections 4 and 7.2
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: 25% Claude3.7 Sonnet and39% DeepSeekR1 acknowledgment averages:Section3/Figure1 discussion.
+- Checked claim: Answer-switch conditioning and random-noise correction:2.1.
+
+#### EurekaBench: Measuring Agentic Ability to Discover New Scientific Insights
+
+- Source inspected: [eurekabench](https://arxiv.org/html/2610.00492v1)
+- Passages: Sections 2.1–2.2, 3.1–3.2, 4–6; Table 2; Appendix C.2
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: 26 tasks/306 insight questions: Section 3.2.
+- Checked claim: GPT 6 Astra PA 47.4/SI29.4 vs human48.8/69.7: Table 2.
+- Checked claim: PA/SI are unconditional normalized rubric scores; human reference is current scientific progress, not matched-budget trial: Sections 2.2 and 4.
+- Checked claim: Judge can derive additional insights through experiments: Section 2.2; Section 6 distinguishes experimentation-only insights.
+
+#### Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?
+
+- Source inspected: [rlvr-boundary](https://arxiv.org/html/2504.13837v5)
+- Passages: Sections 2.2–3.3, 5 and 7; selected validity checks in Section 3.1
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: v5 selected after checking live version history; first publication 18 April 2025, selected revision24 November2025.
+- Checked claim: Main temperature0.6/top-p0.95/cap16384: Section3; coding exception32k:3.2.
+
+#### Curriculum Reinforcement Learning Can Incentivize Reasoning Capacity in LLMs Beyond the Base Model
+
+- Source inspected: [curriculum-rl](https://arxiv.org/html/2606.22317v1)
+- Passages: Sections 3.1–3.3, 4.1–4.2, Table 1 and discussion of scope
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: Mean pass@256 gain9.8 percentage points over base: Figure3 discussion/Table1.
+- Checked claim: Five model settings/three benchmarks:4.1.
+- Checked claim: Teacher-guidance SFT precedes RL:3.2–3.3.
+
+#### Beyond Repeated Sampling: Learning Search Policies for LLM Reasoning
+
+- Source inspected: [learned-search](https://arxiv.org/html/2609.26704v1)
+- Passages: Sections 6.1–6.2 and 7.3; Table 3; Appendices D.3 and D.6
+- Access: Targeted primary full-text method/results passages; not exhaustive paper or appendix review; no independent replication.
+- Checked claim: 1k held-out DeepMath hard problems, filtered using128 failures:6.1.
+- Checked claim: Pass@12839.20 vs19.00:Table3, max-of-mean variant.
+- Checked claim: Same32B answer/judge model, different scoring prompt:6.1.
+- Checked claim: Training1024 answer generations plus1024 judge calls per problem before update:7.3.
+- Checked claim: Fresh baseline19.46% estimated with1280 samples per problem:D.6; retained as audit context, not displayed as independent replication.
+
+#### Circuit Tracing: Revealing Computational Graphs in Language Models
+
+- Source inspected: [circuit-tracing](https://www.transformer-circuits.pub/2025/attribution-graphs/methods.html)
+- Passages: Sections 2, 3, 5 and 7.
+- Access: Primary HTML: targeted architecture, evaluation and limitation passages directly inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### On the Biology of a Large Language Model
+
+- Source inspected: [circuit-biology](https://www.transformer-circuits.pub/2025/attribution-graphs/biology.html)
+- Passages: Introductory multistep case, methodology, limitations.
+- Access: Primary HTML: targeted case-study and limitation passages inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### Transformer Circuit Faithfulness Metrics Are Not Robust
+
+- Source inspected: [circuit-faithfulness](https://arxiv.org/html/2407.08734v1)
+- Passages: Sections 3 and 4.
+- Access: Primary arXiv HTML: targeted ablation definitions and results inspected; COLM 2024 publication verified. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### Language Model Circuits Are Sparse in the Neuron Basis
+
+- Source inspected: [neuron-basis-circuits](https://raw.githubusercontent.com/mlresearch/v306/main/assets/arora26c/arora26c.pdf)
+- Passages: Sections 3–6 and limitations.
+- Access: ICML 2026 proceedings verified; primary PDF retrieved in memory and text-extracted after web content-type failure. Targeted methods, results and limitations inspected 17 October 2026. No independent replication.
+
+#### High-level visual representations in the human brain are aligned with large language models
+
+- Source inspected: [visual-brain-alignment](https://www.nature.com/articles/s42256-025-01072-0)
+- Passages: Results: mapping and contextual-information controls; Fig. 3.
+- Access: Publisher full text: targeted results and control passages directly inspected via web and HTTP retrieval. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### Temporal structure of natural language processing in the human brain corresponds to layered hierarchy of large language models
+
+- Source inspected: [temporal-brain-hierarchy](https://www.nature.com/articles/s41467-025-65518-0)
+- Passages: Temporal-receptive-window results and interpolation significance methods.
+- Access: Targeted publisher-indexed full-text results and interpolation methods inspected. Direct HTTP inspection of the 17 April 2026 correction (https://www.nature.com/articles/s41467-026-72170-9) confirms incorrectly rendered colored plots in Figure 3; the correction states results and conclusions are unaffected and the HTML/PDF figure is amended. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### Mapping the neuronal building blocks of human language with language models
+
+- Source inspected: [neuronal-language](https://www.nature.com/articles/s41586-026-10691-5)
+- Passages: Results and Fig. 3; language-model and predictivity methods.
+- Access: Publisher full text fetched directly after intermittent browser errors; targeted counts, comparison and method passages inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.
+
+#### Beyond representational alignment with brain-guided language models for robust reasoning
+
+- Source inspected: [brain-guided-reasoning](https://arxiv.org/html/2606.11893v1)
+- Passages: NARI controls, NARF transfer results and neural-predictivity methods.
+- Access: Primary source for the exact numerical result is arXiv v1, dated 10 June 2026: targeted NARI controls, NARF transfer and predictivity methods inspected via direct HTTP. Later journal publication, Nature Machine Intelligence, 3 August 2026, https://www.nature.com/articles/s42256-026-01278-w, was checked bibliographically and at abstract level only. Its full methods were not reconciled. Inspected 17 October 2026; no independent replication.
+
+### Parent consolidation and boundaries
+
+The parent read all four essays and the three added concept notes. It independently checked the primary learned-search design/results, EurekaBench scores and endpoint definitions, the visual-alignment word-order control, and the circuit-tracing evaluation account. The source review also resolved the temporal-brain paper’s 17 April 2026 correction: it concerned colored plots in Figure 3 and states that results/conclusions are unaffected. The 13.2-point brain-guided reasoning claim is pinned to the June preprint, qualified as best-of-five, and is not silently attributed to reconciled journal methods.
+
+The parent made technical definitions more local (NLP, statistical significance, neuron recordings, syntactic features, mean ablation and down-projection), added optional notes on alignment, sparse features and reward learning, and retained the distinction between a frozen answer model and a newly trained complete system. It added original diagrams for the alignment comparison and paired intervention. The review includes negative and conditional findings, with no claim of a universally best method.
+
+Neuroscience readings are comparative context for future mechanisms, not proof of biological identity or prerequisites for the first Novel assay. New frontier sources are in the review because they change a measurement or experimental comparison. Earlier background stays behind concept links. No source was retired, and no historical contribution was admitted.
+
+No paid services, participant data, model runs or experiments were acquired. Full papers are linked, not redistributed. Source access failures were addressed only by ordinary public HTTPS retrieval or explicitly narrower labels; no access controls were bypassed.
+
+---
+
+## Historical audit — 12 October 2026
 
 Audit date: 12 October 2026. Repository baseline: `3c962e0e26e53f2b33dc6eae4c6f9835223ef89f`. This record accompanies `learning/content.json`. It is a bounded teaching-source audit, not a paper replication, scientific qualification, exhaustive literature survey, or historical corpus admission.
 

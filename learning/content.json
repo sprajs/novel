@@ -1,13 +1,13 @@
 {
-  "title": "Learning to study machine discovery",
-  "subtitle": "A connected reference from next-token probabilities to defensible experiments in Novel.",
-  "asOf": "2026-10-12",
+  "title": "How does intelligence find something new?",
+  "subtitle": "A connected literature review of machine discovery, reasoning, interpretability and neuroscience.",
+  "asOf": "2026-10-17",
   "baselineRevision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
   "overview": [
-    "Novel asks how a fixed AI system can produce a correct, useful scientific contribution, how to measure that behavior, and eventually how to improve it. Historical reconstruction is its first controlled assay: recovering a contribution first publicly disclosed after an exact model artifact existed.",
-    "Current evidence is engineering evidence. No historical idea has been admitted and no scientific model-performance result is reported. Local Qwen3 inference and activation probes work under recorded conditions; strict FP16 cache parity and cross-backend likelihood comparisons still fail. A working instrument is necessary, but it does not qualify a discovery claim.",
-    "Use this as an open reference. The contents offer a useful route from foundations to experiments, but every chapter is freely accessible. Worked examples introduce the notation, and connections let you follow a question across chapters. The paper links are optional further reading; the explanations here do not require reading the papers first.",
-    "The paper library covers every external primary reading in Plan/reading-list.md and all ten selected papers and two context sources in papers/manifest.json. Reading scope is explicit: targeted full-text passages, abstract/metadata checks, and a dated author account are different kinds of evidence. Examples here are teaching examples, never model results."
+    "The reading room starts with research questions and compares recent primary papers: their methods, findings, disagreements and implications for Novel. Technical terms are explained where they matter; concept notes supply more background when useful.",
+    "The 17 October 2026 search includes 2026 work, with earlier sources retained to explain live debates. This is a selective, dated literature review, not an exhaustive survey or a live leaderboard.",
+    "Novel studies how AI systems generate, develop and validate scientific ideas. Its first study is historical reconstruction. No historical contribution has been admitted and no scientific model-performance result is reported. External results remain attributed to their authors.",
+    "Reviews, papers and concept notes can be read in any order. Selecting text does not store reading state; a requested explanation can become a focused linked note through the same reviewed publication workflow."
   ],
   "chapters": [
     {
@@ -69,7 +69,7 @@
             "A prompt is the text and conversation structure supplied to a model before it generates a continuation. A tokenizer maps text into a sequence of integers called token IDs. A token can represent a word, a fragment of a word, punctuation, whitespace, or a special control marker. The same sentence can have different token sequences under different tokenizers. Never count words and silently call them tokens.",
             "A chat template adds structure around a conversation: who is speaking, where the user message ends, and where the assistant should begin. Those markers are part of the model input. Changing a template can change behavior even when every model weight stays the same. Novel therefore stores the rendered prompt and its token IDs.",
             "A token ID is a label, not a numerical magnitude: token 900 is not “more blue” than token 20. An embedding lookup uses the ID to select a learned vector. As an invented illustration only, a tokenizer might split “measure” into “meas” and “ure”, assigning labels 17 and 204. Novel records actual tokenizer outputs; these fictional fragments and IDs are not a claim about Qwen3 tokenization.",
-            "The prefix is everything available before the next prediction: the prompt plus any continuation tokens already produced. A forward pass is one execution of the model on an input to compute its intermediate values and output scores. Later chapters unpack those intermediate values; at this point, the useful distinction is input tokens → computation → next-token scores."
+            "The prefix is everything available before the next prediction: the prompt plus any continuation tokens already produced. A forward pass is one execution of the model on an input to compute its intermediate values and output scores. The transformer concept note unpacks those intermediate values. Here the useful distinction is input tokens → computation → next-token scores."
           ],
           "id": "words-become-tokens"
         },
@@ -265,7 +265,7 @@
         {
           "title": "From the last state back to next-token scores",
           "paragraphs": [
-            "The stack of blocks produces a final hidden vector for each position. A final normalization and vocabulary readout map that vector to one logit per possible next token. Softmax then makes the distribution introduced in the text-and-chance chapter. This closes the loop: token IDs become vectors, vectors are transformed, and a readout produces scores for the next token.",
+            "The stack of blocks produces a final hidden vector for each position. A final normalization and vocabulary readout map that vector to one logit per possible next token. Softmax then makes a probability distribution, as explained in the text-and-probability note. This closes the loop: token IDs become vectors, vectors are transformed, and a readout produces scores for the next token.",
             "At the last prompt position, the readout predicts the first continuation token. After that token is chosen and appended, its new final state predicts the following token. A decoder-only model uses the same stack throughout this process; it does not need the separate translation encoder from the original Transformer paper. Novel’s dense Qwen3 adapter is a specific implementation, so component names from another model are a starting point for comparison, not interchangeable hook addresses."
           ],
           "id": "from-the-last-state-back-to-next-token-scores"
@@ -1047,7 +1047,7 @@
       "id": "observational",
       "title": "Build the first defensible observational study",
       "kicker": "10 · Put the pieces together",
-      "summary": "Turn the preceding distinctions into an ordered series of research decisions.",
+      "summary": "Connect claim admission, measurement and independent review in a defensible study.",
       "whyNow": "The next scientific progress is admission and a reliable assay; it is not a broad intervention sweep.",
       "status": "core",
       "prerequisites": [
@@ -1507,6 +1507,164 @@
           "reason": "Inspect what text and cache history survive a perturbation."
         }
       ]
+    },
+    {
+      "id": "alignment",
+      "title": "What does it mean for two representations to align?",
+      "kicker": "Concept note",
+      "summary": "Similarity, prediction and intervention answer different questions about brains and models.",
+      "whyNow": "The neuroscience review compares several kinds of alignment; the measurement has to be named before its score means anything.",
+      "status": "later",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "shared-structure",
+          "title": "Compare relationships, not just coordinates",
+          "paragraphs": [
+            "Suppose a model represents three scenes using lists of numbers: a dog running, a cat running and a parked car. A brain recording gives another list for each scene. The lists need not have the same length, units or coordinate system. We can still ask whether the dog and cat are relatively close in both systems, compared with the car.",
+            "Representational similarity analysis compares these relationships. For each system, make a table of distances between every pair of stimuli, then compare the tables. Agreement means the chosen distance measure organizes the stimuli similarly. It does not identify how either system arrived at that organization.",
+            "An encoding model asks a different question: can a fitted mapping from the model values predict the measured brain responses? Fitting means adjusting the mapping using training examples. Its final evaluation uses new examples that were excluded from fitting and choosing the settings."
+          ]
+        },
+        {
+          "id": "correlation",
+          "title": "What correlation measures",
+          "paragraphs": [
+            "For two lists of measurements, a common comparison is Pearson correlation:",
+            "\\[r=\\frac{\\sum_i(a_i-\\bar a)(b_i-\\bar b)}{\\sqrt{\\sum_i(a_i-\\bar a)^2}\\sqrt{\\sum_i(b_i-\\bar b)^2}}.\\]",
+            "Here \\(a_i\\) and \\(b_i\\) are the two values for example \\(i\\), and the bars mark each list’s mean. Subtracting the mean measures variation around the average; dividing by the two variation scales removes their units. For nonconstant lists, \\(r\\) lies between −1 and 1. A value near 1 means the values rise and fall together in an approximately linear relationship. It is not the fraction of identical thoughts.",
+            "A positive correlation can come from a shared cause. For example, sentence length might affect both measurements. Compare against length-based predictors, test different stimulus families and quantify measurement noise before attributing the agreement to a reasoning process."
+          ]
+        },
+        {
+          "id": "changing-the-model",
+          "title": "Why an intervention adds a different test",
+          "paragraphs": [
+            "An intervention deliberately changes part of the model and observes what happens. If a direction derived from brain measurements improves reasoning, that establishes a useful effect under the tested intervention and comparison. It does not by itself establish that human brains use the same causal sequence.",
+            "The distinction matters to Novel: a brain comparison can suggest which representations to investigate. A claim about machine discovery still needs evidence on the model’s own scientific outputs, with appropriate controls."
+          ]
+        }
+      ],
+      "sources": [
+        "visual-brain-alignment",
+        "brain-guided-reasoning"
+      ],
+      "connections": [
+        {
+          "chapter": "vectors",
+          "reason": "See how vectors describe directions and changes."
+        },
+        {
+          "chapter": "observational",
+          "reason": "Separate measured association from a causal explanation."
+        }
+      ],
+      "takeaway": "Always name the alignment test, held-out data and comparison before interpreting a score."
+    },
+    {
+      "id": "sparse-features",
+      "title": "Neurons, features and replacement models",
+      "kicker": "Concept note",
+      "summary": "Why a named concept need not live in one neuron, and why tracing learned features is a choice to test.",
+      "whyNow": "The circuit review contrasts learned feature models with tracing the model’s original neurons.",
+      "status": "later",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "coordinates",
+          "title": "A neuron is a coordinate; a feature is a proposed pattern",
+          "paragraphs": [
+            "An artificial neuron here is one numerical component of a computation. A feature is a pattern researchers propose has a useful interpretation. The feature might align with one neuron, or depend on several neurons together. Conversely, a neuron can participate in more than one useful pattern.",
+            "Imagine two recorded values that both increase when a scene contains a vehicle, but change in opposite directions for red versus blue. Adding the values can isolate one property and subtracting them can isolate another. This invented example shows why the coordinates used to store information need not be its most interpretable description.",
+            "Superposition names the idea that a model can represent more potentially useful features than it has independent dimensions, especially when only a small subset is needed at once. A readable feature label still needs testing across examples; it is not automatically a stable scientific variable."
+          ]
+        },
+        {
+          "id": "reconstruction",
+          "title": "What a sparse autoencoder learns",
+          "paragraphs": [
+            "An autoencoder learns to turn a vector into a new representation and reconstruct the original from it. A sparse autoencoder additionally encourages relatively few features to be active on each input. A simplified objective is:",
+            "\\[L=\\lVert h-Dz\\rVert_2^2+\\lambda\\lVert z\\rVert_1.\\]",
+            "Here \\(h\\) is an original activation vector; \\(z\\) is a learned feature representation; \\(D\\) maps features back into the original coordinates. The first term adds squared reconstruction errors. The second adds absolute feature magnitudes, weighted by \\(\\lambda\\), to encourage sparse activity. This is a teaching objective; particular implementations use different sparsity rules and biases.",
+            "A transcoder instead learns to predict the output of a model computation from its input. Cross-layer transcoders connect features across several layers. They are useful because their proposed connections can be inspected, but errors in the learned replacement must stay visible. Matching one output after inserting recorded errors does not guarantee the correct response to a new intervention."
+          ]
+        },
+        {
+          "id": "which-basis",
+          "title": "The choice should be tested",
+          "paragraphs": [
+            "A basis is a choice of independent coordinate directions. In this literature, feature dictionaries may contain more directions than the original space has dimensions, so “feature basis” is sometimes used loosely. The 2026 neuron-circuit study makes the original neuron coordinates a serious comparison to learned dictionaries.",
+            "For Novel, compare which representation gives selective, reproducible intervention predictions on the same behavior. A small circuit, a readable label and a faithful causal explanation are three properties to measure separately."
+          ]
+        }
+      ],
+      "sources": [
+        "circuit-tracing",
+        "neuron-basis-circuits"
+      ],
+      "connections": [
+        {
+          "chapter": "transformer",
+          "reason": "Locate feed-forward computations and residual updates."
+        },
+        {
+          "chapter": "patching",
+          "reason": "Test what a candidate feature actually changes."
+        }
+      ],
+      "takeaway": "Choose internal components by how well their explanations survive tests, not by the appeal of their labels."
+    },
+    {
+      "id": "reward-learning",
+      "title": "What reward-based training changes",
+      "kicker": "Concept note",
+      "summary": "How rewards adjust a model, and why teacher guidance and an improved search policy are different sources of gain.",
+      "whyNow": "The reasoning review compares reward learning, teacher-guided curricula and trained concept generators.",
+      "status": "later",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "reward-loop",
+          "title": "The training loop",
+          "paragraphs": [
+            "A policy is a rule for choosing an action. For a language model, it assigns probabilities to possible continuations. Reinforcement learning samples outputs, scores them and changes model parameters so outputs with better rewards become more likely under the training procedure.",
+            "A simplified objective is \\(J(\\theta)=\\mathbb{E}_{y\\sim\\pi_\\theta(\\cdot\\mid x)}[R(x,y)]\\). Here \\(x\\) is a problem, \\(y\\) a sampled answer, \\(\\pi_\\theta\\) the model’s policy with parameters \\(\\theta\\), and \\(R\\) the reward assigned to an answer. The expectation means an average over the sampling process. Real training also specifies its problem distribution, update rule and constraints.",
+            "In reinforcement learning with verifiable rewards, a checker supplies the score, often from an expected answer or program tests. The reward is only as informative as that checker. Tests may miss errors; a scientific proposal may require evidence that no cheap automatic score supplies."
+          ]
+        },
+        {
+          "id": "sources-of-information",
+          "title": "Three places a gain can come from",
+          "paragraphs": [
+            "Supervised training uses example outputs supplied by a teacher or dataset. If a curriculum inserts teacher reasoning before reward-based training, those examples contribute information. The combined method can work well without showing what reward-only training would accomplish.",
+            "A trained concept generator changes a different part of the system. It proposes approaches that a separate answer model uses. The answer model’s weights can remain frozen while the complete system gains a newly trained component. Historical eligibility therefore concerns the whole information-bearing system, including its prompts and helpers.",
+            "During evaluation, changing a prompt or trying more answers can also improve success without training any parameters. Count those attempts, concept generation and verification costs. Equal numbers of final answers do not imply equal total compute."
+          ]
+        },
+        {
+          "id": "discovery-reward",
+          "title": "What this leaves open for discovery",
+          "paragraphs": [
+            "The mathematical reward describes the score being optimized, not scientific value by definition. A method that improves checked mathematics motivates a discovery experiment. It does not establish an advantage on research ideas whose validity, novelty and usefulness require separate review."
+          ]
+        }
+      ],
+      "sources": [
+        "rlvr-boundary",
+        "curriculum-rl",
+        "learned-search"
+      ],
+      "connections": [
+        {
+          "chapter": "inference",
+          "reason": "Distinguish parameters from a run’s changing state."
+        },
+        {
+          "chapter": "search",
+          "reason": "Account for generation, selection and verification."
+        }
+      ],
+      "takeaway": "Report which part of the system learned, what information it received and what its reward actually measures."
     }
   ],
   "papers": [
@@ -1623,15 +1781,16 @@
       "stage": "Human adjudication",
       "summary": "Follows research ideas into execution and finds that proposal-stage ratings can overstate later quality.",
       "mechanism": "Researchers execute assigned ideas and the resulting projects receive blinded review.",
-      "novelUse": "Distinguish plausible proposals from claims requiring realized experiments.",
+      "novelUse": "Distinguish proposal ratings from execution evidence.",
       "limits": "The study’s setting and execution process do not establish a universal ranking of human and AI science.",
       "readFor": "Why execution changes what can be claimed.",
-      "readSections": "Abstract checked; inspect assignment, execution constraints and review design next.",
-      "sourceScope": "Exact-version primary abstract and metadata checked on 12 October 2026. Full methods not independently reread for this teaching page.",
+      "readSections": "Sections 2–4, Tables 4–5, Section 5.1 and stated attrition in Section 3.1",
+      "sourceScope": "Targeted primary HTML methods/results reading on 17 October 2026. Random assignment, blinded execution review and project-level versus review-level comparisons inspected. No independent replication or exhaustive appendix review.",
       "concepts": [
         "scientific utility",
         "execution"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2506.20803v1"
     },
     {
       "id": "code-evaluation",
@@ -1727,11 +1886,11 @@
       "stage": "Reasoning traces",
       "summary": "Tests whether reasoning-model traces disclose their use of supplied hints.",
       "mechanism": "Compares hint use with verbal acknowledgement across experimental conditions.",
-      "novelUse": "Do not infer absence of influence from silence in a trace.",
+      "novelUse": "Treat rationales as evidence requiring causal checks.",
       "limits": "Disclosure rates depend on the tested setup; this is not a universal monitor guarantee.",
       "readFor": "Behavioral influence versus self-reported explanation.",
-      "readSections": "Sections 2–2.1: paired hinted/unhinted prompts, selected answer-switch cases, verbal acknowledgment and random-noise adjustment.",
-      "sourceScope": "Primary targeted method passages directly inspected on 12 October 2026 during the second teaching pass. Sections 2–2.1: paired hinted/unhinted prompts, selected answer-switch cases, verbal acknowledgment and random-noise adjustment. No independent reproduction or exhaustive full-paper review.",
+      "readSections": "Sections 2–3, Figure 1 discussion and Sections 4 and 7.2",
+      "sourceScope": "Targeted primary HTML methods/results reading on 17 October 2026. Paired hints, answer-switch conditioning, noise adjustment and acknowledgment scores inspected. No independent replication or exhaustive appendix review.",
       "concepts": [
         "reasoning models",
         "hint use"
@@ -1788,15 +1947,16 @@
       "stage": "Corpus candidates",
       "summary": "CUSP evaluates forecasting of scientific events across several task types.",
       "mechanism": "Constructs temporally framed forecasting questions and applies an output leakage audit.",
-      "novelUse": "Use chronology as a search lead while independently auditing each contribution.",
+      "novelUse": "Separate mechanism recovery from feasibility and date forecasting.",
       "limits": "Matching methods or numerical predictions are explicitly exempt from the named-entity leakage rule; the audit cannot certify training membership.",
       "readFor": "The difference between intended recovery and evidence of leakage.",
-      "readSections": "Abstract and the matching-outcome exemptions in the Evaluation System Prompts inspected.",
-      "sourceScope": "Direct primary metadata and targeted v2 HTML auditor block checked on 12 October 2026 after browser access failed; not a full benchmark re-audit.",
+      "readSections": "Methods, Model Evaluation, Supplementary Table S8, Appendix H.1 leakage rubric and main-text limitations",
+      "sourceScope": "Targeted primary HTML methods/results reading on 17 October 2026. Paired binary measure, free-response evaluation and exact matching-outcome exemptions inspected. No independent replication or exhaustive appendix review.",
       "concepts": [
         "forecasting",
         "contamination"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2605.22681v2"
     },
     {
       "id": "reconstruction",
@@ -1808,15 +1968,16 @@
       "stage": "Corpus candidates",
       "summary": "Asks models to recover a withheld paper idea from a frozen pre-publication bibliography.",
       "mechanism": "Uses anonymous references and LLM judging of proposed matches.",
-      "novelUse": "Compare its assistance and selection conditions with Novel’s P0/P1/P2 distinctions.",
+      "novelUse": "Treat bibliography-conditioned recovery as assisted and judge-dependent.",
       "limits": "Selected bibliographies provide hindsight. The paper flags parametric contamination, unvalidated human agreement and unmatched candidate/compute conditions.",
       "readFor": "Prompt leakage, weight exposure and selection are separate concerns.",
-      "readSections": "Related Work’s design comparison and Section 5 Limitations inspected.",
-      "sourceScope": "Exact metadata plus targeted v3 HTML design and limitations passages checked on 12 October 2026.",
+      "readSections": "Sections 3.1–3.4, 4.3, Table 2 and Section 5 Limitations",
+      "sourceScope": "Targeted primary HTML methods/results reading on 17 October 2026. Match estimand, candidate counts, judge panels, domain average and unresolved controls inspected. No independent replication or exhaustive appendix review.",
       "concepts": [
         "bibliography assistance",
         "held-out evaluation"
-      ]
+      ],
+      "methodUrl": "https://arxiv.org/html/2608.16645v3"
     },
     {
       "id": "qwen3-release",
@@ -2119,6 +2280,286 @@
         "residual stream"
       ],
       "methodUrl": "https://arxiv.org/html/1706.03762v7"
+    },
+    {
+      "id": "eurekabench",
+      "title": "EurekaBench: Measuring Agentic Ability to Discover New Scientific Insights",
+      "authors": "Jiayi Geng, Zhengxuan Wu, Kevin S. Chen and colleagues",
+      "year": 2026,
+      "publishedAt": "2026-09-30",
+      "url": "https://arxiv.org/abs/2610.00492v1",
+      "methodUrl": "https://arxiv.org/html/2610.00492v1",
+      "status": "core",
+      "stage": "Research frontier",
+      "summary": "Tests whether executable mechanisms support predictions and scientific insights.",
+      "mechanism": "Interactive experiments followed by constraint, prediction and insight assessments.",
+      "novelUse": "Separate fitting observations from explaining further consequences.",
+      "limits": "Expert-built rubrics use agentic judges; human references have different resource histories; training exposure remains possible.",
+      "readFor": "Separate fitting observations from explaining further consequences.",
+      "readSections": "Sections 2.1–2.2, 3.1–3.2, 4–6; Table 2; Appendix C.2",
+      "sourceScope": "Targeted primary HTML methods and results inspected on 17 October 2026; Sections 2.1–2.2, 3.1–3.2, 4–6; Table 2; Appendix C.2. No independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "mechanism",
+        "scientific insight",
+        "agentic evaluation"
+      ],
+      "publicationType": "Preprint · selected version"
+    },
+    {
+      "id": "rlvr-boundary",
+      "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?",
+      "authors": "Yang Yue, Zhiqi Chen, Rui Lu and colleagues",
+      "year": 2025,
+      "publishedAt": "2025-04-18",
+      "url": "https://arxiv.org/abs/2504.13837v5",
+      "methodUrl": "https://arxiv.org/html/2504.13837v5",
+      "status": "context",
+      "stage": "Research frontier",
+      "summary": "Contrasts reliable single answers with coverage under many samples.",
+      "mechanism": "Compares starting and reward-trained models through pass@k curves and selected reasoning checks.",
+      "novelUse": "Measure reliability and coverage at declared budgets.",
+      "limits": "Finite sampling cannot establish zero probability; conclusions concern evaluated recipes and model access.",
+      "readFor": "Measure reliability and coverage at declared budgets.",
+      "readSections": "Sections 2.2–3.3, 5 and 7; selected validity checks in Section 3.1",
+      "sourceScope": "Targeted primary HTML methods and results inspected on 17 October 2026; Sections 2.2–3.3, 5 and 7; selected validity checks in Section 3.1. No independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "RLVR",
+        "pass@k",
+        "sampling efficiency"
+      ],
+      "publicationType": "Preprint · selected version"
+    },
+    {
+      "id": "curriculum-rl",
+      "title": "Curriculum Reinforcement Learning Can Incentivize Reasoning Capacity in LLMs Beyond the Base Model",
+      "authors": "Pengxiang Cai, Tianchen Fang, Xiaohan Li, Qingyuan Zeng, Guocong Li, Jintai Chen",
+      "year": 2026,
+      "publishedAt": "2026-06-21",
+      "url": "https://arxiv.org/abs/2606.22317v1",
+      "methodUrl": "https://arxiv.org/html/2606.22317v1",
+      "status": "later",
+      "stage": "Research frontier",
+      "summary": "Tests guided training near a model’s observed failure boundary.",
+      "mechanism": "Combines sampling, teacher-guided supervised training and a difficulty curriculum for RL.",
+      "novelUse": "Record added guidance separately from reward optimization.",
+      "limits": "Combined intervention; finite-budget boundary; varied model and benchmark effects.",
+      "readFor": "Record added guidance separately from reward optimization.",
+      "readSections": "Sections 3.1–3.3, 4.1–4.2, Table 1 and discussion of scope",
+      "sourceScope": "Targeted primary HTML methods and results inspected on 17 October 2026; Sections 3.1–3.3, 4.1–4.2, Table 1 and discussion of scope. No independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "curriculum",
+        "teacher guidance",
+        "RLVR"
+      ],
+      "publicationType": "Preprint · selected version"
+    },
+    {
+      "id": "learned-search",
+      "title": "Beyond Repeated Sampling: Learning Search Policies for LLM Reasoning",
+      "authors": "Ismail Labiad, Matthieu Kowalski, Marc Schoenauer, Rémi Munos, Julia Kempe",
+      "year": 2026,
+      "publishedAt": "2026-09-22",
+      "url": "https://arxiv.org/abs/2609.26704v1",
+      "methodUrl": "https://arxiv.org/html/2609.26704v1",
+      "status": "later",
+      "stage": "Research frontier",
+      "summary": "Trains a small model to propose approaches that improve a larger frozen model’s search.",
+      "mechanism": "Rewards concept generation by downstream answer success.",
+      "novelUse": "Compare varied approaches with repeated sampling under complete budgets.",
+      "limits": "Hard filtered math set, model-based verification, expensive training and a separately trained guide.",
+      "readFor": "Compare varied approaches with repeated sampling under complete budgets.",
+      "readSections": "Sections 6.1–6.2 and 7.3; Table 3; Appendices D.3 and D.6",
+      "sourceScope": "Targeted primary HTML methods and results inspected on 17 October 2026; Sections 6.1–6.2 and 7.3; Table 3; Appendices D.3 and D.6. No independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "search policy",
+        "concept generator",
+        "test-time compute"
+      ],
+      "publicationType": "Preprint · selected version"
+    },
+    {
+      "id": "circuit-tracing",
+      "title": "Circuit Tracing: Revealing Computational Graphs in Language Models",
+      "authors": "Emmanuel Ameisen, Jack Lindsey, Adam Pearce, Wes Gurnee and colleagues",
+      "year": 2025,
+      "publishedAt": "2025-03-27",
+      "url": "https://www.transformer-circuits.pub/2025/attribution-graphs/methods.html",
+      "methodUrl": "https://www.transformer-circuits.pub/2025/attribution-graphs/methods.html",
+      "status": "later",
+      "stage": "Mechanisms and human comparison",
+      "summary": "A method for proposing internal computational explanations.",
+      "mechanism": "Sparse replacement features and local attribution graphs.",
+      "novelUse": "Keep replacement fidelity distinct from mechanism evidence.",
+      "limits": "Frozen attention and reconstruction gaps limit the graph.",
+      "readFor": "Keep replacement fidelity distinct from mechanism evidence.",
+      "readSections": "Sections 2, 3, 5 and 7.",
+      "sourceScope": "Primary HTML: targeted architecture, evaluation and limitation passages directly inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "cross-layer transcoder",
+        "attribution graph"
+      ],
+      "publicationType": "Primary research report"
+    },
+    {
+      "id": "circuit-biology",
+      "title": "On the Biology of a Large Language Model",
+      "authors": "Jack Lindsey, Wes Gurnee, Emmanuel Ameisen and colleagues",
+      "year": 2025,
+      "publishedAt": "2025-03-27",
+      "url": "https://www.transformer-circuits.pub/2025/attribution-graphs/biology.html",
+      "methodUrl": "https://www.transformer-circuits.pub/2025/attribution-graphs/biology.html",
+      "status": "later",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Selected internal-mechanism case studies.",
+      "mechanism": "Graph-guided hypotheses followed by perturbations.",
+      "novelUse": "Treat discoveries as scoped existence evidence.",
+      "limits": "Selected successes do not establish prevalence.",
+      "readFor": "Treat discoveries as scoped existence evidence.",
+      "readSections": "Introductory multistep case, methodology, limitations.",
+      "sourceScope": "Primary HTML: targeted case-study and limitation passages inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "circuit",
+        "feature"
+      ],
+      "publicationType": "Primary research report"
+    },
+    {
+      "id": "circuit-faithfulness",
+      "title": "Transformer Circuit Faithfulness Metrics Are Not Robust",
+      "authors": "Joseph Miller, Bilal Chughtai, William Saunders",
+      "year": 2024,
+      "publishedAt": "2024-07-11",
+      "url": "https://arxiv.org/abs/2407.08734v1",
+      "methodUrl": "https://arxiv.org/html/2407.08734v1",
+      "status": "later",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Circuit scores depend on the intervention design.",
+      "mechanism": "Compares ablation choices on established circuits.",
+      "novelUse": "Specify the exact necessity or sufficiency test.",
+      "limits": "Task-specific circuit evaluations.",
+      "readFor": "Specify the exact necessity or sufficiency test.",
+      "readSections": "Sections 3 and 4.",
+      "sourceScope": "Primary arXiv HTML: targeted ablation definitions and results inspected; COLM 2024 publication verified. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "ablation",
+        "faithfulness"
+      ],
+      "publicationType": "COLM 2024 · cited preprint version"
+    },
+    {
+      "id": "neuron-basis-circuits",
+      "title": "Language Model Circuits Are Sparse in the Neuron Basis",
+      "authors": "Aryaman Arora, Zhengxuan Wu, Jacob Steinhardt, Sarah Schwettmann",
+      "year": 2026,
+      "publishedAt": "2026-07",
+      "url": "https://proceedings.mlr.press/v306/arora26c.html",
+      "methodUrl": "https://raw.githubusercontent.com/mlresearch/v306/main/assets/arora26c/arora26c.pdf",
+      "status": "later",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Direct neuron tracing provides a competing analysis basis.",
+      "mechanism": "RelP attribution on internal feed-forward activations.",
+      "novelUse": "Compare analysis bases under matched tests.",
+      "limits": "Selected models, tasks and mean-ablation evaluations.",
+      "readFor": "Compare analysis bases under matched tests.",
+      "readSections": "Sections 3–6 and limitations.",
+      "sourceScope": "ICML 2026 proceedings verified; primary PDF retrieved in memory and text-extracted after web content-type failure. Targeted methods, results and limitations inspected 17 October 2026. No independent replication.",
+      "concepts": [
+        "neuron basis",
+        "attribution"
+      ],
+      "publicationType": "ICML 2026 proceedings"
+    },
+    {
+      "id": "visual-brain-alignment",
+      "title": "High-level visual representations in the human brain are aligned with large language models",
+      "authors": "Adrien Doerig, Tim C. Kietzmann, Emily Allen, Yihan Wu, Thomas Naselaris, Kendrick Kay, Ian Charest",
+      "year": 2025,
+      "publishedAt": "2025-08-07",
+      "url": "https://www.nature.com/articles/s42256-025-01072-0",
+      "methodUrl": "https://www.nature.com/articles/s42256-025-01072-0",
+      "status": "context",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Caption vectors predict aspects of visual responses.",
+      "mechanism": "Encoding and representational comparisons with controls.",
+      "novelUse": "Ask which shared information explains alignment.",
+      "limits": "Alignment does not identify a shared algorithm.",
+      "readFor": "Ask which shared information explains alignment.",
+      "readSections": "Results: mapping and contextual-information controls; Fig. 3.",
+      "sourceScope": "Publisher full text: targeted results and control passages directly inspected via web and HTTP retrieval. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "encoding model",
+        "representational similarity"
+      ],
+      "publicationType": "Journal article"
+    },
+    {
+      "id": "temporal-brain-hierarchy",
+      "title": "Temporal structure of natural language processing in the human brain corresponds to layered hierarchy of large language models",
+      "authors": "Ariel Goldstein, Eric Ham, Mariano Schain and colleagues",
+      "year": 2025,
+      "publishedAt": "2025-11-26",
+      "url": "https://www.nature.com/articles/s41467-025-65518-0",
+      "methodUrl": "https://www.nature.com/articles/s41467-025-65518-0",
+      "status": "context",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Layer order corresponds to response timing in selected regions.",
+      "mechanism": "Lagged encoding and interpolation controls.",
+      "novelUse": "Use temporal predictions to constrain explanations.",
+      "limits": "Comprehension evidence; not a layer-to-area identity.",
+      "readFor": "Use temporal predictions to constrain explanations.",
+      "readSections": "Temporal-receptive-window results and interpolation significance methods.",
+      "sourceScope": "Targeted publisher-indexed full-text results and interpolation methods inspected. Direct HTTP inspection of the 17 April 2026 correction (https://www.nature.com/articles/s41467-026-72170-9) confirms incorrectly rendered colored plots in Figure 3; the correction states results and conclusions are unaffected and the HTML/PDF figure is amended. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "temporal encoding",
+        "electrocorticography"
+      ],
+      "publicationType": "Journal article"
+    },
+    {
+      "id": "neuronal-language",
+      "title": "Mapping the neuronal building blocks of human language with language models",
+      "authors": "Jing Cai, Yoav Kfir, Mohsen Jamali, Hesen Huang, Young Joon Kim, Sydney S. Cash, Ziv M. Williams",
+      "year": 2026,
+      "publishedAt": "2026-06-17",
+      "url": "https://www.nature.com/articles/s41586-026-10691-5",
+      "methodUrl": "https://www.nature.com/articles/s41586-026-10691-5",
+      "status": "context",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Individual-cell recordings resolve linguistic distinctions.",
+      "mechanism": "Neuronal decoding and contextual-embedding predictivity.",
+      "novelUse": "Keep recording scale and task explicit.",
+      "limits": "Observed speech-production signals do not establish model mechanisms.",
+      "readFor": "Keep recording scale and task explicit.",
+      "readSections": "Results and Fig. 3; language-model and predictivity methods.",
+      "sourceScope": "Publisher full text fetched directly after intermittent browser errors; targeted counts, comparison and method passages inspected. Inspected 17 October 2026; no independent replication or exhaustive full-paper review.",
+      "concepts": [
+        "single-neuron recording",
+        "contextual representation"
+      ],
+      "publicationType": "Journal article"
+    },
+    {
+      "id": "brain-guided-reasoning",
+      "title": "Beyond representational alignment with brain-guided language models for robust reasoning",
+      "authors": "Mingqing Xiao, Kai Du, Zhouchen Lin",
+      "year": 2026,
+      "publishedAt": "2026-06-10",
+      "url": "https://arxiv.org/abs/2606.11893v1",
+      "methodUrl": "https://arxiv.org/html/2606.11893v1",
+      "status": "context",
+      "stage": "Mechanisms and human comparison",
+      "summary": "Brain-derived signals guide tested reasoning interventions.",
+      "mechanism": "Representation steering and neural-guided fine-tuning.",
+      "novelUse": "Compare matched intervention baselines on fresh tasks.",
+      "limits": "Quoted exact gain is a best-of-five preprint result.",
+      "readFor": "Compare matched intervention baselines on fresh tasks.",
+      "readSections": "NARI controls, NARF transfer results and neural-predictivity methods.",
+      "sourceScope": "Primary source for the exact numerical result is arXiv v1, dated 10 June 2026: targeted NARI controls, NARF transfer and predictivity methods inspected via direct HTTP. Later journal publication, Nature Machine Intelligence, 3 August 2026, https://www.nature.com/articles/s42256-026-01278-w, was checked bibliographically and at abstract level only. Its full methods were not reconciled. Inspected 17 October 2026; no independent replication.",
+      "concepts": [
+        "brain-guided intervention",
+        "neural predictivity"
+      ],
+      "publicationType": "Preprint · selected version"
     }
   ],
   "glossary": [
@@ -2367,6 +2808,923 @@
       "definition": "Supervision supplies known labels or targets; a probe is an extra predictor trained to recover labels from model states.",
       "example": "A probe might predict which task an activation came from without showing that the original model uses that predictor.",
       "chapter": "vectors"
+    },
+    {
+      "term": "RLVR",
+      "definition": "Reinforcement learning with verifiable rewards: training that rewards outputs using a checker, such as an answer comparison or program test.",
+      "example": "A correct mathematical final answer earns a reward; this does not automatically verify every reasoning step.",
+      "chapter": "search"
+    },
+    {
+      "term": "Search policy",
+      "definition": "A rule or learned system deciding which candidate approaches or answers to try.",
+      "example": "A concept generator proposes different mathematical strategies before another model writes full solutions.",
+      "chapter": "search"
+    },
+    {
+      "term": "Empirical capability boundary",
+      "definition": "The problems solved under a particular tested procedure and finite resource budget.",
+      "example": "Unsolved in 256 attempts means no success was observed in those attempts, not that success is impossible.",
+      "chapter": "sampling"
+    },
+    {
+      "term": "Scientific mechanism",
+      "definition": "An account of how interacting parts or processes produce an observed phenomenon.",
+      "example": "A cooling mechanism explains how a channel’s flow removes heat and predicts what changes when the flow changes.",
+      "chapter": "meaning"
+    },
+    {
+      "term": "Circuit",
+      "definition": "A proposed set of model components and connections explaining a specified behavior under a stated test.",
+      "example": "A route that combines a place with information about its capital.",
+      "chapter": "patching"
+    },
+    {
+      "term": "Encoding model",
+      "definition": "A fitted mapping that predicts measured brain responses from stimulus features or model representations.",
+      "example": "Predicting a held-out response from a sentence vector.",
+      "chapter": "alignment"
+    },
+    {
+      "term": "Representational alignment",
+      "definition": "Agreement between representations according to a specified prediction or similarity test.",
+      "example": "Two systems place the same scenes near one another.",
+      "chapter": "alignment"
+    },
+    {
+      "term": "Noise ceiling",
+      "definition": "An estimate of how well a predictor could agree with measurements given their unreliability.",
+      "example": "Repeated responses differ even for the same stimulus.",
+      "chapter": "alignment"
     }
-  ]
+  ],
+  "reviews": [
+    {
+      "id": "discovery",
+      "topic": "Machine scientific discovery",
+      "reviewedAt": "2026-10-17",
+      "relatedReviews": [
+        "reasoning",
+        "circuits"
+      ],
+      "title": "When does an AI idea become a scientific contribution?",
+      "kicker": "Research review · Discovery",
+      "summary": "Recent studies follow ideas from proposals to historical reconstruction, forecasts and executable mechanisms. Their different success measures explain why promising results can coexist with substantial scientific gaps.",
+      "whyNow": "Novel needs to decide which contribution and evidence level its first reconstruction study can actually measure.",
+      "status": "core",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "different-questions",
+          "title": "The field is learning to separate its questions",
+          "paragraphs": [
+            "An AI system suggests a new experiment. The proposal sounds plausible, reviewers find it interesting, and its predicted result resembles a later paper. Has the system made a discovery? The answer depends on what has actually been established. A proposal can be original but unworkable. A correct explanation can reconstruct known science without adding anything new. An accurate forecast can anticipate an outcome without explaining its mechanism: the process that makes the outcome happen.",
+            "The useful movement in recent research is toward evaluations that separate these achievements. The studies below ask what survives implementation, what a model can recover from old literature, whether it can forecast an advance, and whether an executable explanation supports further insights. Read together, they suggest a more precise research question than whether AI is creative: which scientific tasks can a specified system perform, with which information and which kind of verification?",
+            "Novel uses historical reconstruction as its first controlled study. The published result supplies something assessable, while the longer ambition concerns useful contributions to open problems. Those two ambitions need different evidence."
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "history",
+              "label": "How a historical reconstruction task is defined"
+            }
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Propose",
+                "text": "State a candidate explanation or method"
+              },
+              {
+                "title": "Check",
+                "text": "Test assumptions, mechanism and consequences"
+              },
+              {
+                "title": "Compare",
+                "text": "Audit earlier equivalents and competing solutions"
+              },
+              {
+                "title": "Establish value",
+                "text": "Show what the result explains or enables"
+              }
+            ],
+            "caption": "Original research map. These are different evidence questions, not an enforced workflow or a claim that every contribution takes the same form."
+          }
+        },
+        {
+          "id": "execution-gap",
+          "title": "A proposal rating is a prediction about future research",
+          "paragraphs": [
+            "Si, Hashimoto and Yang’s 2025 execution study followed human and AI research proposals into completed natural-language-processing (NLP) projects—research on how computers work with language. Forty-three researchers executed randomly assigned ideas; expert reviewers then assessed the resulting work without knowing its source. AI ideas lost more of their initial novelty, excitement, effectiveness and overall ratings than human ideas did. On the ten-point effectiveness scale, the reported average drop was 1.879 points for AI ideas and 0.052 for human ideas.",
+            "The statistical qualification matters. When each project was treated as the independent observation, direct post-execution differences between human and AI ideas were not statistically significant: the reported tests did not provide sufficient evidence to distinguish those differences from sampling variation at their chosen threshold. The stronger finding is the larger decline from initial promise to execution, not a demonstrated universal human advantage. This study concerns a particular proposal system and scoped NLP projects, with substantial human implementation work.",
+            "For a reader evaluating a new research agent, the practical question is whether its score measures anticipated value or completed evidence. Both can be informative, but they answer different questions."
+          ],
+          "citations": [
+            "execution-study"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "judgment",
+              "label": "How to define a scientific validity rubric"
+            }
+          ]
+        },
+        {
+          "id": "reconstruction",
+          "title": "Recovering a paper is an informative but assisted task",
+          "paragraphs": [
+            "Reconstruction, in its August 2026 v3, gives models a paper’s earlier bibliography while withholding the target paper. Across 643 papers in six domains, its cross-model review and selection pipeline reports a 36.0% unweighted mean domain Match rate. An LLM judge decides whether a proposal matches the held-out idea. This measures hypothesis matching; it is not the percentage of papers scientifically reproduced.",
+            "The authors explicitly leave human agreement with the Match rubric and equal-compute controls unresolved. Their pipeline selects five hypotheses from twenty, while the ordinary condition keeps five from five. A higher score therefore cannot isolate the benefit of collaboration from the benefit of more candidates and selection. Hiding a paper at prompt time also cannot establish that its content never entered model training.",
+            "A bibliography is useful scientific context, but a later author selected it while developing the eventual contribution. Novel therefore treats such a reading list as hindsight assistance. An old document can still become a strong clue when somebody who knows the answer chooses it."
+          ],
+          "citations": [
+            "reconstruction"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "history",
+              "label": "Why prompts also carry history",
+              "section": "prompts-also-carry-history"
+            },
+            {
+              "chapter": "sampling",
+              "label": "How selection differs from finding an answer"
+            }
+          ]
+        },
+        {
+          "id": "forecasting",
+          "title": "Knowing a plausible mechanism does not settle whether it will work",
+          "paragraphs": [
+            "CUSP’s July 2026 revision evaluates scientific forecasting through feasibility decisions, mechanism choices, free proposals and publication-date predictions. Its paired original and perturbed binary questions address a tendency simply to predict success. The six evaluated models remain near chance on that merged binary measure despite stronger mechanism-selection performance.",
+            "This is a useful disagreement between endpoints: recognizing a plausible technical approach need not mean knowing whether an advance is achievable. CUSP’s detailed leakage rubric also explicitly permits correct methods and numerical predictions that happen to match the future paper. Success alone is not contamination evidence. Conversely, an automated audit of names and dates cannot certify a model’s training history.",
+            "For Novel, a proposal to use a mechanism and a demonstrated empirical improvement should consequently receive different labels. The evidence required depends on the contribution being claimed."
+          ],
+          "citations": [
+            "cusp"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "meaning",
+              "label": "How an idea is defined by scientific commitments"
+            }
+          ]
+        },
+        {
+          "id": "mechanisms-and-insights",
+          "title": "The newest benchmarks ask what an explanation lets us infer",
+          "paragraphs": [
+            "EurekaBench, submitted on 30 September 2026, extends evaluation into interactive experiments. Its 26 tasks span six domains, with 306 expert-developed insight questions. Agents submit executable mechanisms. The evaluation distinguishes scientific constraints, predictive accuracy and insights derivable from the mechanism.",
+            "Its GPT 6 Astra configuration scores 47.4% on the normalized predictive measure versus 48.8% for human reference mechanisms, but 29.4% versus 69.7% on insights. These are benchmark-specific scores, not the probability that a scientific assertion is true. Agentic judges may run additional experiments to derive insights, so this endpoint also differs from insights the proposing agent itself expressed.",
+            "The human references are existing scientific work, not people randomized to the agents’ four-hour budget. Source access restrictions do not exclude training exposure. The result nevertheless motivates a concrete evaluation choice: test whether a mechanism supports informative consequences beyond fitting the observations used to build it."
+          ],
+          "citations": [
+            "eurekabench"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "judgment",
+              "label": "Distinguish proposal validity from demonstrated evidence"
+            }
+          ]
+        },
+        {
+          "id": "two-success-events",
+          "title": "Why matching and validity need separate counts",
+          "paragraphs": [
+            "Consider an invented cooling problem. A model proposes a flow channel unlike the published design, but an appropriate physical test confirms that it meets the stated requirements. Calling this a failure because it misses the reference would discard a useful solution. Conversely, a response might name the published mechanism while omitting a crucial operating assumption. Matching words would then exaggerate success.",
+            "Novel can express this distinction with two events:",
+            "\\[T=V\\cap M,\\qquad P(T)\\leq P(V).\\]",
+            "Here V is the event that an answer satisfies the declared scientific requirements, M is the event that it contains the target contribution, and T is valid target recovery. The intersection symbol means both conditions hold. P denotes probability under the specified generation procedure. The inequality follows because every valid target recovery is a valid solution, while a valid alternative need not match the target.",
+            "This is a measurement definition, not an estimated Novel result. It makes the choice of success criterion visible. If empirical validation is missing, an otherwise plausible answer remains unresolved at that evidence level rather than silently becoming valid."
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "meaning",
+              "label": "Worked distinctions between target recovery and alternatives",
+              "section": "two-questions-about-one-proposal"
+            }
+          ]
+        },
+        {
+          "id": "research-frontier",
+          "title": "The research opportunity is a stronger connection between stages",
+          "paragraphs": [
+            "These studies do not provide one interchangeable leaderboard. They provide different instruments for studying how scientific work progresses. A promising next comparison would preserve the same problem and record proposal judgments, executed tests, target recovery and useful alternatives separately. That would show where gains survive and where they disappear without forcing all outcomes into a single quality score.",
+            "For Novel, the immediate work is narrower: admit contribution-level historical cases, audit the complete model and input history, and calibrate independent scientific judgments. No historical idea is admitted and no scientific model-performance result is currently reported. Passing a generation or numerical test would make an experiment more executable; it would not settle these scientific questions.",
+            "The connected reasoning review asks how training and search change the chance of producing a useful candidate. This review explains why the candidate still needs a scientific test."
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "observational",
+              "label": "What each evidence level can support",
+              "section": "four-evidence-levels-answer-four-different-questions"
+            }
+          ]
+        }
+      ],
+      "takeaway": "Measure proposal quality, valid target recovery and useful alternative solutions separately. Benchmarks that score these different achievements should not be read as one leaderboard.",
+      "sources": [
+        "execution-study",
+        "reconstruction",
+        "cusp",
+        "eurekabench"
+      ],
+      "connections": [
+        {
+          "chapter": "history",
+          "reason": "Inspect the historical eligibility assumptions behind reconstruction."
+        },
+        {
+          "chapter": "judgment",
+          "reason": "Define the scientific evidence required for success."
+        }
+      ]
+    },
+    {
+      "id": "reasoning",
+      "topic": "Reasoning, search and reinforcement learning",
+      "reviewedAt": "2026-10-17",
+      "relatedReviews": [
+        "discovery",
+        "circuits"
+      ],
+      "title": "Do more attempts reveal more ability—or create a better search?",
+      "kicker": "Research review · Reasoning and search",
+      "summary": "The debate over reinforcement learning and test-time compute turns on what can be found, how often it is found, and who can recognize success. New work trains systems to search for different approaches.",
+      "whyNow": "Novel must distinguish changes in sampling, added guidance and model training before interpreting a gain in scientific output.",
+      "status": "core",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "three-ways-to-spend-compute",
+          "title": "More computation can change three different things",
+          "paragraphs": [
+            "A model can spend more time on one answer, produce several independent answers, or use feedback to choose its next approach. These procedures all consume test-time compute: computation spent while solving a problem rather than while training the model. They need not produce the same kinds of improvement. Ten versions of one unsuccessful plan may be less useful than two genuinely different plans.",
+            "Reinforcement learning adds another distinction. During training, the system receives rewards for outputs and updates its parameters to make rewarded behavior more likely. In reinforcement learning with verifiable rewards, or RLVR, a checker supplies the reward—for example, by comparing a mathematical answer or running program tests. The checker can be cheap in these settings. Judging an open scientific mechanism may require much more work.",
+            "The current research debate asks whether training mainly makes reachable answers easier to sample or increases the problems a model solves within a large budget. The distinction becomes clearer once we look at a whole curve of performance against attempts."
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "reward-learning",
+              "label": "What changes during reward-based training?"
+            },
+            {
+              "chapter": "inference",
+              "label": "How inference differs from training",
+              "section": "three-kinds-of-things-that-can-change"
+            }
+          ]
+        },
+        {
+          "id": "finite-budget",
+          "title": "A sampling curve is evidence about a specified budget",
+          "paragraphs": [
+            "For one problem, suppose each independent attempt succeeds with the same probability p. The chance of finding at least one success in k attempts is:",
+            "\\[P(\\text{at least one success in }k)=1-(1-p)^k.\\]",
+            "Each failure has probability 1−p. Independence lets us multiply those probabilities k times; subtracting the all-failure event from one gives the equation. In an invented example with p=0.01, one attempt succeeds 1% of the time and 64 attempts succeed about 47.4% of the time. This change requires no new model weights.",
+            "Benchmark pass@k averages a related success measure across problems. It usually asks whether a correct answer exists in the candidate pool, using a checker that knows the target. A deployed selector must still identify that answer. The curve therefore measures availability under the declared procedure, not automatically the quality of the answer a user receives.",
+            "Failure in a finite sample does not show impossibility. Nor can this fixed-p formula simply be reused for an adaptive search that changes prompts after reading earlier results."
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "sampling",
+              "label": "Derive pass@k and its estimator",
+              "section": "derive-the-pool-probability-and-its-sample-estimator"
+            },
+            {
+              "chapter": "uncertainty",
+              "label": "What zero successes can establish"
+            }
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Candidate policy",
+                "text": "Repeated samples or deliberately varied approaches"
+              },
+              {
+                "title": "Candidate pool",
+                "text": "May contain one or several valid answers"
+              },
+              {
+                "title": "Selector",
+                "text": "Chooses an output using available evidence"
+              },
+              {
+                "title": "Scientific check",
+                "text": "Determines what the selected output establishes"
+              }
+            ],
+            "caption": "Original schematic. A larger pool, a better selection rule and stronger verification are different possible sources of improvement."
+          }
+        },
+        {
+          "id": "rlvr-boundary",
+          "title": "The influential result: reliability can rise while coverage falls",
+          "paragraphs": [
+            "Yue and colleagues’ RLVR study, read here in its November 2025 v5, compared starting models and their trained counterparts across mathematics, code and visual reasoning. Trained models often won with few attempts, while starting models caught up and surpassed them as the sample budget increased. The main sampling protocol used temperature 0.6, top-p 0.95 and a 16,384-token cap; some coding comparisons used longer caps.",
+            "The study motivates a distinction between sampling efficiency and broad problem coverage. It does not prove that every possible future RL method is bounded by its starting model. The authors limit their claims to accessible models and current recipes. Selected manual reasoning checks also cannot establish the validity of every correct final answer.",
+            "For discovery, the question is whether a training procedure makes familiar strategies more dependable while narrowing the variety of useful alternatives. A single average accuracy can hide that tradeoff."
+          ],
+          "citations": [
+            "rlvr-boundary"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "tokens",
+              "label": "How temperature and filtering change sampling",
+              "section": "the-decoder-is-part-of-the-system"
+            }
+          ]
+        },
+        {
+          "id": "curriculum",
+          "title": "A newer answer changes how the model encounters hard problems",
+          "paragraphs": [
+            "Cai and colleagues’ June 2026 Curriculum RL paper first measures which problems a model rarely solves. It then supplies structured teacher reasoning for selected difficult examples, performs supervised training on that guidance, and follows with reward-based training. Across five model settings and three math benchmarks, the authors report a mean pass@256 gain of 9.8 percentage points over the starting models.",
+            "This is a combined training intervention. Teacher guidance supplies information, so the comparison does not establish that pure outcome-reward training created the gain unaided. Its boundary is empirical: problems unsolved within 256 attempts can still have small nonzero success probabilities. Results also vary by model and benchmark.",
+            "The connection to Novel is experimental rather than operational. If a method receives useful prerequisites from a teacher, the study should label that assistance. A gain can be valuable while answering a different question from what a historically fixed model can derive independently."
+          ],
+          "citations": [
+            "curriculum-rl"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "reward-learning",
+              "label": "What changes during reward-based training?"
+            },
+            {
+              "chapter": "history",
+              "label": "How to record assistance supplied through inputs"
+            }
+          ]
+        },
+        {
+          "id": "learned-search",
+          "title": "Instead of repeating answers, learn which approaches to try",
+          "paragraphs": [
+            "Labiad and colleagues’ September 2026 Beyond Repeated Sampling trains a 7B concept generator to propose approaches for a frozen 32B answer generator. On 1,000 held-out hard DeepMath problems, the strongest variant reaches 39.2% pass@128 versus 19.0% for repeated sampling, with the same number of answer attempts.",
+            "The scope is specific. Problems were selected because an earlier 128-sample batch found no answer; fresh sampling can still succeed. The answer generator also serves as correctness judge in a separate prompt. Training requires extensive answer generation and judging, even if generating concepts is cheap at inference.",
+            "This is evidence that changing the search policy can improve measured coverage without updating the answer generator. It is not evidence that the complete system was historically frozen: the trained concept generator is another information-bearing component. For Novel, this is a candidate later intervention, requiring new cases and a scientific validity checker."
+          ],
+          "citations": [
+            "learned-search"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "reward-learning",
+              "label": "What changes during reward-based training?"
+            },
+            {
+              "chapter": "search",
+              "label": "Separate generating, choosing and checking",
+              "section": "separate-generating-choosing-and-checking"
+            }
+          ]
+        },
+        {
+          "id": "faithfulness",
+          "title": "A convincing reasoning trace is not a complete causal record",
+          "paragraphs": [
+            "Chen and colleagues’ 2025 reasoning-faithfulness study inserted hints into paired multiple-choice prompts. It examined cases where the answer changed toward the hint, then measured whether the model acknowledged using it, with an adjustment for random answer changes. Average acknowledgment was 25% for Claude 3.7 Sonnet and 39% for DeepSeek R1 across their tested hints.",
+            "The experiment gives evidence of omitted influences in those settings. It does not show that every reasoning step is false or that all visible reasoning is useless. A trace can help produce an answer while failing to disclose an important cause.",
+            "This matters when interpreting a research agent that says it reconsidered an assumption or discovered a new connection. Such statements are observations to investigate. Controlled changes to information, search procedures or internal computation are needed to test explanations of why the system succeeded."
+          ],
+          "citations": [
+            "reasoning-faithfulness"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "judgment",
+              "label": "Why a trace can matter and still omit its causes",
+              "section": "a-trace-can-both-affect-an-answer-and-omit-its-causes"
+            }
+          ]
+        },
+        {
+          "id": "discovery-implications",
+          "title": "The useful target is validated output per complete budget",
+          "paragraphs": [
+            "Taken together, these results make a practical research agenda possible. Compare repeated sampling with deliberately varied approaches; keep the starting information explicit; report both pool coverage and selected-answer performance; count training, prompting, verification and human review. If a selector cannot recognize a valid idea, increasing the candidate pool may mostly increase review work.",
+            "For scientific discovery, a better score on checkable math questions is motivation to test a method, not a transferred result. Novel still needs admitted historical contributions, suitable models and independent judgments before it can measure useful output. Its current engineering evidence does not establish a scientific search advantage. The discovery review explains the next question: when a candidate is found, what evidence would turn it into a contribution?"
+          ],
+          "citations": [],
+          "conceptLinks": [
+            {
+              "chapter": "search",
+              "label": "What must be included in a claimed search gain",
+              "section": "separate-the-components-of-a-claimed-gain"
+            }
+          ]
+        }
+      ],
+      "takeaway": "Compare complete systems and budgets: a frozen answer model can still receive new information from a trained helper. Report both whether a pool contains a valid answer and whether the system can select it.",
+      "sources": [
+        "rlvr-boundary",
+        "curriculum-rl",
+        "learned-search",
+        "reasoning-faithfulness"
+      ],
+      "connections": [
+        {
+          "chapter": "sampling",
+          "reason": "Understand what a repeated-sampling result measures."
+        },
+        {
+          "chapter": "search",
+          "reason": "Count the whole search and verification budget."
+        },
+        {
+          "chapter": "judgment",
+          "reason": "Interpret visible reasoning without treating it as a complete causal record."
+        }
+      ]
+    },
+    {
+      "id": "circuits",
+      "topic": "Mechanistic interpretability",
+      "title": "Can we explain the computation behind an answer?",
+      "kicker": "Research review",
+      "summary": "Circuit tracing has made internal explanations more concrete. The central question is whether a proposed explanation survives interventions, alternative measurements and new cases.",
+      "whyNow": "Novel proposes explaining discovery only after establishing a reliable behavioral result. These papers clarify what an internal explanation would need to earn that claim.",
+      "status": "core",
+      "prerequisites": [],
+      "reviewedAt": "2026-10-17",
+      "relatedReviews": [
+        "brains",
+        "reasoning"
+      ],
+      "sections": [
+        {
+          "id": "trace-a-hypothesis",
+          "title": "A graph becomes useful when it makes a prediction",
+          "paragraphs": [
+            "In 2025, Anthropic’s On the Biology of a Large Language Model traced an example in Claude 3.5 Haiku that answers a question about the capital of the state containing Dallas. The proposed intermediate representation concerns Texas. Interventions on that representation help test whether it contributes to the answer. The report also studies advance planning of rhyming words and cases where written reasoning does not describe the computation faithfully. These are selected examples in one model. The authors estimate that their graphs gave satisfying insight for about a quarter of prompts they tried; this is a subjective account of investigative success, not a benchmark accuracy.",
+            "A circuit is a proposed collection of internal components and connections that explains a specified behavior. An activation is the numerical value a component takes while processing an input. A feature is a candidate meaningful pattern in those values, such as information about a place. Giving a feature a readable label creates a hypothesis about its role. It does not establish that every occurrence of that pattern has the same meaning.",
+            "For Novel, the attraction is precise: a successful scientific answer may depend on combining prerequisites that were separately available. A graph might suggest where that combination occurs. But the behavior to explain must first be defined by independent judgment of the answer. Otherwise a visually persuasive graph can explain the production of familiar words while the proposed scientific mechanism remains wrong."
+          ],
+          "citations": [
+            "circuit-biology"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "transformer",
+              "label": "What are activations and model components?"
+            },
+            {
+              "chapter": "judgment",
+              "label": "How should an answer and its written reasoning be judged?"
+            }
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Behavior",
+                "text": "Define which answer counts as a valid solution"
+              },
+              {
+                "title": "Hypothesis",
+                "text": "Trace candidate components and their interactions"
+              },
+              {
+                "title": "Intervention",
+                "text": "Change the predicted component and measure the effect"
+              },
+              {
+                "title": "New cases",
+                "text": "Test specific predictions away from the discovery examples"
+              }
+            ],
+            "caption": "An illustrative research workflow, not a completed Novel experiment."
+          }
+        },
+        {
+          "id": "replacement-model",
+          "title": "Why the graph is a model of a model",
+          "paragraphs": [
+            "The companion Circuit Tracing methods paper builds a cross-layer transcoder: a learned replacement for the transformer’s feed-forward computations, expressed through sparsely active features. Sparse means relatively few features activate on one input. Its largest replacement for an 18-layer model matches the original’s top next-token choice on 50% of the evaluated prompts; those prompts were filtered to correctly predicted tokens with original confidence below 80%. This is not a claim about reproducing half of all reasoning.",
+            "For a particular prompt, the local graph adds reconstruction errors and fixes attention patterns and normalization quantities to their original values. It can therefore match that forward pass exactly without matching how the original model responds to changes. The method explains information movement conditional on the fixed attention pattern; it does not fully explain why attention selected those locations.",
+            "This distinction is easy to miss. Two calculators can return the same number once while using different procedures. To distinguish their procedures, give them inputs on which the proposed procedures disagree. Likewise, reproducing one model output is a weaker test than predicting its response to a selective intervention. Keeping the unexplained remainder visible is part of the explanation, rather than an inconvenience to hide."
+          ],
+          "citations": [
+            "circuit-tracing"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "sparse-features",
+              "label": "Neurons, sparse features and replacement models"
+            },
+            {
+              "chapter": "transformer",
+              "label": "Attention and the residual stream"
+            },
+            {
+              "chapter": "patching",
+              "label": "What an intervention changes"
+            }
+          ]
+        },
+        {
+          "id": "measure-an-effect",
+          "title": "What does a successful intervention establish?",
+          "paragraphs": [
+            "Consider an illustrative experiment in which a model usually answers one task correctly and a controlled input change disrupts that answer. A patch copies selected internal values from one run into the other. The design must specify which values move, which positions receive them, and what outcome is measured. Copying an entire state can import much more than the proposed prerequisite.",
+            "One useful descriptive quantity is the change in success probability under the declared intervention:",
+            "\\[\\Delta=\\Pr(Y=1\\mid\\operatorname{do}(H=h_1))-\\Pr(Y=1\\mid\\operatorname{do}(H=h_0)).\\]",
+            "Here Y equals 1 when an independently judged solution succeeds; H names the internal quantity being changed; h₁ and h₀ are the two chosen replacement values; Pr means probability; and do means deliberately setting that quantity. Everything else, including prompts and sampling policy, belongs in the experimental specification. This equation defines a proposed contrast, not a measured Novel result.",
+            "If the success rates were 0.40 and 0.25 in an invented example, Δ would be 0.15: fifteen percentage points. That would describe the effect of those replacements under that protocol. It would not show that the patched quantity contains an entire scientific idea, nor that the model normally uses it in isolation. A replacement may create an unusual state, break a competing pathway, or transfer answer-bearing information."
+          ],
+          "citations": [
+            "patching-interpretation",
+            "patching-best-practices"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "sampling",
+              "label": "Success probabilities depend on the generation policy"
+            },
+            {
+              "chapter": "uncertainty",
+              "label": "Uncertainty around measured effects"
+            }
+          ],
+          "visual": {
+            "type": "network",
+            "id": "circuit-intervention",
+            "nodes": [
+              {
+                "id": "original",
+                "x": 12,
+                "y": 25,
+                "title": "Original run",
+                "text": "Prompt → internal values\n→ candidate answer"
+              },
+              {
+                "id": "changed",
+                "x": 478,
+                "y": 25,
+                "title": "Intervened run",
+                "text": "Same procedure, with\none specified replacement"
+              },
+              {
+                "id": "component",
+                "x": 245,
+                "y": 155,
+                "title": "Targeted values",
+                "text": "Choose a position and\ncomponent before testing"
+              },
+              {
+                "id": "outcome",
+                "x": 245,
+                "y": 294,
+                "title": "Compare success",
+                "text": "Independent answer judging;\ninclude control patches"
+              }
+            ],
+            "edges": [
+              {
+                "from": "original",
+                "to": "component",
+                "fromSide": "bottom",
+                "toSide": "left"
+              },
+              {
+                "from": "component",
+                "to": "changed",
+                "fromSide": "right",
+                "toSide": "bottom"
+              },
+              {
+                "from": "original",
+                "to": "outcome",
+                "fromSide": "left",
+                "toSide": "left"
+              },
+              {
+                "from": "changed",
+                "to": "outcome",
+                "fromSide": "right",
+                "toSide": "right"
+              }
+            ],
+            "caption": "Original schematic of a paired intervention. Record which values are replaced and keep the outcome judge independent of the circuit hypothesis. Lines show the comparison design, not a traced biological or model circuit."
+          }
+        },
+        {
+          "id": "faithfulness-choices",
+          "title": "A faithful circuit under which test?",
+          "paragraphs": [
+            "Miller, Chughtai and Saunders’ 2024 study examines established transformer circuits and shows that measured faithfulness changes with ablation choices. Ablation replaces internal values to remove selected information. Replacing a value with zero, an average, or a value from another prompt asks different questions. Their indirect-object-identification example also distinguishes restoring circuit edges in a corrupted run from corrupting the edges outside a circuit in a clean run: the former can allow useful information to travel along additional paths.",
+            "The practical implication is that “this circuit preserves performance” needs a complete experimental sentence after it. Does the circuit remain sufficient when its surroundings lose task-specific information? Does removing it make the intact model fail? These questions concern sufficiency and necessity, respectively. A system with redundant routes can use a component without needing it in every situation. Conversely, disabling a broadly useful component can impair an answer without revealing a task-specific mechanism.",
+            "Novel should therefore compare plausible alternative patches and matched control directions, retain the raw outcome measures, and separate answer-token effects from semantic success. A change that makes the word “flow” more likely is not enough to explain recovery of a new flow-based method. This example is illustrative; no such mechanism has been established in Novel."
+          ],
+          "citations": [
+            "circuit-faithfulness"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "likelihood",
+              "label": "Why a token score differs from scientific success"
+            },
+            {
+              "chapter": "patching",
+              "label": "Necessity, restoration and controls"
+            }
+          ]
+        },
+        {
+          "id": "neuron-basis",
+          "title": "The 2026 counterpoint: which components should we trace?",
+          "paragraphs": [
+            "Arora and colleagues’ ICML 2026 paper challenges the need to learn a new feature basis before tracing circuits. A basis is the set of coordinates used to describe an internal state. Their comparison uses Llama 3.1-8B, measures internal feed-forward neurons before a learned linear map combines them back into the model’s running state, and applies RelP, an attribution method. They report neuron circuits as sparse and faithful as the tested sparse-autoencoder alternatives; roughly 100 neurons can control subject–verb agreement. The evaluation uses 300 training pairs and 40 held-out pairs per task, with mean ablation—replacing selected values by averages measured on reference inputs. A related Llama 3.1-8B-Instruct case study traces city–state–capital reasoning. These are scoped comparisons, not proof that learned features are unnecessary everywhere.",
+            "This changes a concrete research choice. Novel need not assume that the most interpretable instrument requires an expensive learned replacement. It can compare simpler internal components with learned features on the same behavior and intervention tests. Sparsity, human readability and causal fidelity remain separate properties: a short list of components can still be difficult to explain. The authors themselves identify interpretation and clustering of the remaining neurons as limitations.",
+            "Novel’s immediate decision remains modest: establish reliable success and failure cases, then use internal measurements to generate discriminating hypotheses. A later causal study would need fresh cases, a fixed intervention recipe, selective controls and an independently judged endpoint. Engineering checks that a hook reads or writes the intended tensor are necessary. Numerical agreement checks that the measurement preserves computation are also necessary. Neither supplies evidence that the proposed discovery mechanism is true. The literature offers candidate instruments and sharper questions; it does not supply an already validated explanation of machine discovery."
+          ],
+          "citations": [
+            "neuron-basis-circuits"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "sparse-features",
+              "label": "Neurons, sparse features and replacement models"
+            },
+            {
+              "chapter": "observational",
+              "label": "Novel’s first observational study"
+            },
+            {
+              "chapter": "vectors",
+              "label": "Directions, perturbations and what they preserve"
+            }
+          ]
+        }
+      ],
+      "takeaway": "Compare simpler neuron-based explanations with learned feature models using the same behavior and intervention controls. A plausible graph becomes stronger evidence when it predicts changes on new cases.",
+      "sources": [
+        "circuit-biology",
+        "circuit-tracing",
+        "circuit-faithfulness",
+        "neuron-basis-circuits",
+        "patching-interpretation",
+        "patching-best-practices"
+      ],
+      "connections": [
+        {
+          "chapter": "patching",
+          "reason": "Open the underlying concepts when useful; no reading order is required."
+        }
+      ]
+    },
+    {
+      "id": "brains",
+      "topic": "Neuroscience and AI",
+      "title": "What can a language model tell us about a brain?",
+      "kicker": "Research review",
+      "summary": "Recent studies connect language-model representations with vision, speech and deductive reasoning. Prediction, shared information and causal explanation remain distinct achievements.",
+      "whyNow": "Neuroscience can motivate hypotheses about representations and useful interventions, but Novel must test those hypotheses in its own models and discovery tasks.",
+      "status": "core",
+      "prerequisites": [],
+      "reviewedAt": "2026-10-17",
+      "relatedReviews": [
+        "circuits",
+        "discovery"
+      ],
+      "sections": [
+        {
+          "id": "current-question",
+          "title": "From similar responses to useful internal guidance",
+          "paragraphs": [
+            "The recent literature has moved beyond asking whether model activity resembles brain activity. Studies now compare responses to visual scenes, the timing of speech comprehension, individual neurons during speech production, and interventions guided by reasoning-related brain measurements. Each design illuminates a different relationship. Reading them together is more informative than treating “brain alignment” as one general score.",
+            "A representation is a pattern of values that carries information useful to a system. In a language model this might be a vector of activations; in a brain experiment it might be measured activity across cells or recording sites. Alignment means that the two patterns correspond under a stated comparison. The comparison can preserve similarities between stimuli, predict one pattern from the other, or identify a useful direction for changing model behavior. Those are different tests.",
+            "For Novel, the motivating question is whether a useful scientific combination depends on representations that can be characterized and changed. Human evidence can suggest candidate distinctions, such as separating the structure of an argument from its wording. It cannot certify that a language model has a human discovery process. That requires experiments which distinguish alternative explanations of the model’s own behavior."
+          ],
+          "citations": [
+            "brain-guided-reasoning",
+            "neuronal-language"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "alignment",
+              "label": "What does alignment actually measure?"
+            },
+            {
+              "chapter": "vectors",
+              "label": "What is a representation vector?"
+            },
+            {
+              "chapter": "judgment",
+              "label": "Behavioral evidence and explanations"
+            }
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Shared material",
+                "text": "Record responses to specified scenes, words or arguments"
+              },
+              {
+                "title": "Comparison",
+                "text": "Fit a mapping or compare similarities"
+              },
+              {
+                "title": "Held-out test",
+                "text": "Predict responses for material excluded from fitting"
+              },
+              {
+                "title": "Causal question",
+                "text": "Ask what targeted changes alter behavior"
+              }
+            ],
+            "caption": "A schematic comparison framework. The last step needs additional experiments; it does not follow automatically from alignment."
+          }
+        },
+        {
+          "id": "visual-alignment",
+          "title": "Why text can predict responses to pictures",
+          "paragraphs": [
+            "Doerig and colleagues’ 2025 study uses the Natural Scenes Dataset: eight people viewed images during 7-tesla functional magnetic resonance imaging, or fMRI. This measures changes in blood oxygenation associated with neural activity. The researchers embed human-written image captions with MPNet, a sentence model, and compare those vectors with visual brain responses. Full-caption embeddings outperform several simpler category and word-based comparisons. The finding supports shared information about scenes across language-derived vectors and high-level visual responses.",
+            "One control matters for interpretation. Original and word-scrambled captions produced embeddings with a reported mean correlation of 0.91, with standard deviation 0.001. Thus this success does not establish a detailed match in grammatical processing. The relevant information may include objects, actions and their usual relationships without requiring the same treatment of word order.",
+            "An illustrative analogy is two catalogues that organize tools similarly: both place drills near screwdrivers and far from fruit. Their agreement reveals useful structure even if one catalogue is built from photographs and the other from descriptions. It does not reveal identical construction procedures. Similarly, shared regularities in the world are a competing explanation for alignment; a model need not reproduce the biological route used to extract them."
+          ],
+          "citations": [
+            "visual-brain-alignment"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "meaning",
+              "label": "Meaning, wording and the equivalence being tested"
+            }
+          ]
+        },
+        {
+          "id": "predictivity",
+          "title": "Reading an encoding result without overclaiming",
+          "paragraphs": [
+            "An encoding model predicts a measured brain response from stimulus-related features. A simple version is:",
+            "\\[\\widehat{b}_i=W h_i+c,\\qquad r=\\operatorname{corr}(\\widehat{b},b).\\]",
+            "Here i labels a stimulus, hᵢ is its model representation, W contains fitted mapping coefficients, c is an offset, bᵢ is the measured brain response and the hat marks a prediction. The correlation r summarizes how predictions and observations vary together on held-out examples. In the vector case, researchers must specify how scores across recording sites are summarized. This is an explanatory schematic of a linear encoding model, not the full pipeline of every paper.",
+            "The mapping must be fitted without using the held-out answers. Choosing the model layer, response delay or fitting settings on the final test material would let that material influence the result. A noise ceiling estimates how well any predictor could do given unreliable measurements; dividing by such an estimate answers a different question from reporting the raw correlation. Neither quantity is a percentage of shared thoughts.",
+            "Consider an invented example: sentence length predicts both a model activation and a brain signal. A mapping may work even when the systems perform different reasoning. Length controls, competing linguistic features and new stimulus families can help discriminate that explanation. A rich representation is valuable partly because it predicts many things, which is also why its predictive success alone leaves several mechanisms possible."
+          ],
+          "citations": [
+            "visual-brain-alignment",
+            "brain-guided-reasoning"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "alignment",
+              "label": "What does alignment actually measure?"
+            },
+            {
+              "chapter": "observational",
+              "label": "Association, controls and new cases"
+            },
+            {
+              "chapter": "uncertainty",
+              "label": "What a noisy measurement can support"
+            }
+          ],
+          "visual": {
+            "type": "network",
+            "id": "brain-comparison",
+            "nodes": [
+              {
+                "id": "stimulus",
+                "x": 245,
+                "y": 12,
+                "title": "The same material",
+                "text": "A scene, sentence\nor argument"
+              },
+              {
+                "id": "model",
+                "x": 12,
+                "y": 150,
+                "title": "Model representation",
+                "text": "A vector of\ninternal values"
+              },
+              {
+                "id": "brain",
+                "x": 478,
+                "y": 150,
+                "title": "Brain response",
+                "text": "A measured signal\nfrom a recording"
+              },
+              {
+                "id": "comparison",
+                "x": 245,
+                "y": 294,
+                "title": "Held-out comparison",
+                "text": "Fit a mapping on training;\npredict new responses"
+              }
+            ],
+            "edges": [
+              {
+                "from": "stimulus",
+                "to": "model",
+                "fromSide": "left",
+                "toSide": "top"
+              },
+              {
+                "from": "stimulus",
+                "to": "brain",
+                "fromSide": "right",
+                "toSide": "top"
+              },
+              {
+                "from": "model",
+                "to": "comparison",
+                "fromSide": "bottom",
+                "toSide": "left"
+              },
+              {
+                "from": "brain",
+                "to": "comparison",
+                "fromSide": "bottom",
+                "toSide": "right"
+              }
+            ],
+            "caption": "Original schematic: common inputs feed two different systems. The mapping compares their responses; it does not show that the systems perform the same computation."
+          }
+        },
+        {
+          "id": "time-and-cells",
+          "title": "Timing and individual cells add constraints",
+          "paragraphs": [
+            "Goldstein and colleagues’ 2025 study compares language-model layers with electrocorticography, electrical recordings from the cortical surface, while participants listen to a 30-minute narrative. Deeper GPT-2 XL layers best predict later responses in several language regions. In the temporal pole, the peaks associated with the first and last layers differ by more than 500 milliseconds. A control using linearly interpolated artificial layers fits the temporal pattern less well. These results constrain a purely static similarity account, while leaving open which biological transformations produce the correspondence.",
+            "Cai and colleagues’ June 2026 study instead records 579 putative single neurons (recorded units classified as individual cells) across eight participants and fourteen sessions during natural speech production. Some cells distinguish grammatical properties; population analyses compare explicit syntactic features (properties of grammatical structure), word meanings and contextual Vicuna representations. Contextual representations predict activity better than the tested alternatives, and context-length gains plateau around five preceding words under the reported analysis. The study also compares neuronal activity with local-field signals that reflect combined electrical activity near an electrode, showing why recording scale matters.",
+            "These findings should not be compressed into “a transformer layer is a brain area” or “a model feature is a neuron.” A layer is one computational transformation; a brain area contains recurrent, interacting populations. A recording samples a limited location and task. Moreover, understanding heard language and preparing speech are different activities. Their agreement can strengthen a hypothesis about shared information, while their differences help specify where that hypothesis stops."
+          ],
+          "citations": [
+            "temporal-brain-hierarchy",
+            "neuronal-language"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "transformer",
+              "label": "What a transformer layer does"
+            }
+          ]
+        },
+        {
+          "id": "brain-guided-intervention",
+          "title": "A 2026 intervention result, with the comparison intact",
+          "paragraphs": [
+            "Xiao, Du and Lin’s 2026 brain-guided reasoning study takes a further step: it uses relationships between task-fMRI responses and model activations to construct interventions and a fine-tuning objective. The inspected June preprint reports a 13.2-percentage-point improvement on generated propositional problems for Mistral-7B-Instruct: 83.7% versus 70.5%, comparing the best of five runs in each condition. The reference condition is language-only fine-tuning. This is a particular transfer result, not an average improvement across the ten models considered. The paper also tests random-signal and random-direction alternatives for its inference intervention.",
+            "This is evidence that a brain-derived training or intervention signal can be useful in the tested setting. It is stronger than an encoding correlation, because model behavior is deliberately changed. It still does not establish that the model reasons through the same causal sequence as a person. A useful supervisory signal can improve a system without making its procedure biologically identical.",
+            "For Novel, the relevant next step is a proposed comparison, not immediate adoption: test a well-defined representation intervention against controls matched for data, search and compute, then judge genuinely new scientific answers. Brain recordings, abstract reasoning benchmarks and historical discovery tasks differ in both input and outcome. Transferring an intervention between them requires new evidence. The project currently reports no admitted historical idea and no scientific model-performance result; external papers supply motivations and experimental designs, not a promotion of Novel’s status."
+          ],
+          "citations": [
+            "brain-guided-reasoning"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "vectors",
+              "label": "Steering versus changing weights"
+            },
+            {
+              "chapter": "patching",
+              "label": "Specificity and causal intervention"
+            },
+            {
+              "chapter": "history",
+              "label": "Historical eligibility of the full model bundle"
+            }
+          ]
+        }
+      ],
+      "takeaway": "Use brain comparisons to propose specific representation tests. Separate shared structure, held-out prediction and successful intervention before asking whether a result transfers to scientific discovery.",
+      "sources": [
+        "visual-brain-alignment",
+        "temporal-brain-hierarchy",
+        "neuronal-language",
+        "brain-guided-reasoning"
+      ],
+      "connections": [
+        {
+          "chapter": "vectors",
+          "reason": "Open the underlying concepts when useful; no reading order is required."
+        }
+      ]
+    }
+  ],
+  "literatureReview": {
+    "searchedAt": "2026-10-17",
+    "coverage": "Selected 2025–2026 primary work, with earlier methods and counterarguments where relevant. Searches explicitly included October 2026.",
+    "focus": [
+      "Scientific discovery and evaluation",
+      "Reasoning, reinforcement learning and search",
+      "Mechanistic interpretability",
+      "AI and neuroscience"
+    ],
+    "boundary": "Targeted methods/results review; no exhaustive survey or independent replication."
+  }
 }

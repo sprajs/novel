@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "revision": "3c962e0e26e53f2b33dc6eae4c6f9835223ef89f",
-  "reviewedAt": "2026-10-12",
-  "contentSha256": "5bb353944c7dd64deea3a7cf7c288d1c9309e0d2f1978ec0ec00210e67bf5387",
+  "reviewedAt": "2026-10-17",
+  "contentSha256": "665212d95dd8e130016b7d3c42cf737cfa840c7d45f621ca57b2eb741dbb4034",
   "files": {
     "Plan/README.md": "defe92ddc362137d4598e1b0051283a1df20472da85ba5a372250e282c488104",
     "Plan/candidate-casebook.md": "3c0d36c085bf2c42806d0e7fa2d46a2955429dadb59d691c6ebefc489a6d03fe",
@@ -13,7 +13,7 @@
     "Plan/observational-review.md": "88e273ce48af84ee65146638262fc7c153ac961a010902c55a9d2e5483cd3ed4",
     "Plan/reading-list.md": "b7cc1eff67f3b2328264d0267cb917e612c7993c4e83a76cf281bdba628e3541",
     "Plan/research-plan.md": "2fd9a9089b15b1229511442fad73d91791a2b59a6318593ad9e28f6dc8148080",
-    "README.md": "aa1822145663df9fdec5121ca97d4f61e9db9d186eba27b9f409672841163fb0",
+    "README.md": "f41b2eff0e81dd476e2a2e6735e9201285444e394fdd96afd1afce10e42c51ad",
     "data/discovery/README.md": "cec03878d12fccec93e54b29e4deab96d304d60902d8621df0166cafb9945d39",
     "data/discovery/admission.schema.json": "52c4aaf60b952ec60e75c3d576c48f668b65e904a9dd1cdea1d847f4dbebbe3d",
     "data/discovery/finite_measurement.json": "6106ff6e90c4693b4a18d2492509ffffe53271efd9fc34db5d0806155e9f77ff",

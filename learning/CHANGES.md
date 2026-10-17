@@ -61,3 +61,39 @@ Introduce a reviewed source fingerprint and repository check, a stable private
 Site identity and a daily chat review. Future removals must record the reason
 here; a retired source may remain as an audit record while disappearing from the
 default active library and learning path.
+
+## 17 October 2026 — Research-led literature review
+
+The reader requested a newer entry point and a literature review rather than a
+linear introductory course. Four connected reviews now lead the Site: scientific
+discovery, reasoning/search, mechanistic interpretability, and AI/neuroscience.
+They compare primary methods and reported results, including 2026 papers, and
+retain competing explanations and limitations beside the findings.
+
+Twelve primary sources were added. Four existing records (execution study, CUSP,
+Reconstruction and reasoning faithfulness) received fresh targeted methods/results
+checks. Search coverage, screened leads, versions, correction checks and access
+depth are recorded in `source-audit.md`. The frontier search date is distinct from
+a claim of exhaustive coverage. Neuroscience and the RLVR boundary debate are
+context; circuit methods and trained search interventions are later-study reading.
+No scientific status changed and no paper was independently replicated.
+
+The previous thirteen chapters are optional concept notes. Three focused notes
+explain representation alignment, sparse features and reward-based training.
+Reviews link to concepts at the relevant passage, concept notes link back to
+reviews, and papers link to the arguments that use them. Existing `#/learn/...`
+links still work. Numbered chapters and next/previous progression are removed
+from the interface. The reader can select a passage and ask for an additional
+linked subpage; text selection itself stores nothing and sends no request.
+
+The Site contains 42 sources, 49 glossary entries, 26 original figures and 150
+checked mathematical expressions. Source and concept search, section links,
+local KaTeX/MathML and the four optional illustrative controls are retained.
+Reference-graph checks now validate review citations, concept anchors and links
+between reviews without depending on display order.
+
+AGENTS.md, README and maintenance instructions now preserve this research-first
+approach. The existing daily maintenance automation also performs a bounded
+primary-literature search when seven days have passed since the last recorded
+search. The existing private Site identity and PR #9 are retained; no merge is
+authorized by this update.
