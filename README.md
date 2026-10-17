@@ -19,7 +19,14 @@ first, followed by causal studies once the assay is reliable. **No historical
 idea is admitted yet, and no scientific model-performance result is reported.**
 The implementation and provenance records establish engineering capabilities.
 
-Start with the [programme and roadmap](Plan/research-plan.md), then the
+Start with the [Novel reading room](https://novel-reading-room.sprajs.chatgpt.site),
+the private, living baseline for this project. It explains the concepts from
+first principles, summarizes the selected papers, and connects diagrams and
+interactive examples to the current research decisions. Its
+[versioned source and maintenance contract](learning/README.md) keep reading
+aligned with the programme, including retiring reading that stops being useful.
+
+Continue with the [programme and roadmap](Plan/research-plan.md), then the
 [tooling comparison](docs/tooling/current-stack.md),
 [model selection](docs/models/selection.md), and [reading notes](papers/README.md).
 The [research guide](Plan/README.md) connects the protocols and next working

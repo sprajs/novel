@@ -1,0 +1,28 @@
+name: Learning baseline
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  reading-room:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate coverage and reviewed research inputs
+        run: python scripts/learning/build.py --check
+      - name: Exercise drift detection and output integrity
+        run: python -m unittest discover -s tests/learning -v
+      - name: Validate typeset equations and the open reading interface
+        run: node scripts/learning/check_math.mjs
+      - name: Build the static reading room
+        run: python scripts/learning/build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: novel-reading-room
+          path: learning/site/dist
+          retention-days: 7
