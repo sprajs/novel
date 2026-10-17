@@ -1,8 +1,10 @@
 # Measuring recovery of ideas disclosed after a model freeze
 
+Scope: later scientific-transfer track; the next experiment is [HC-1](hidden-context-protocol.md).
+
 Prepared 11 October 2026. Status: proposed observational protocol, ready to turn into a preregistration after the explicit freeze decisions below. No target model has been run, no historical discovery has been certified, and no confirmation corpus exists. Numerical allocations are feasibility proposals, not measured runtime or a claim of adequate rare-event power.
 
-The first study asks how a particular immutable model distributes probability over valid reconstructions of human ideas whose first contribution-bearing public disclosure came after that model already existed. It measures behaviour and conditional likelihood, then characterizes observable failures. Changing activations, weights, caches, or decoding to increase recovery is a later experiment with its own protocol. The [causal study guide](causal-review.md) defines requirements for that work; this protocol defines the observational endpoint.
+This later historical reconstruction study asks how a particular immutable model distributes probability over valid reconstructions of human ideas whose first contribution-bearing public disclosure came after that model already existed. It measures behaviour and conditional likelihood, then characterizes observable failures. Changing activations, weights, caches, or decoding to increase recovery is a later experiment with its own protocol. The [causal study guide](causal-review.md) defines requirements for that work; this protocol defines the observational endpoint.
 
 The [ground-truth collection](../docs/ground_truth/README.md) supplies development fixtures, audits, and verifier precedents. Its DPO, speculative-decoding, DoRA, FlashAttention, and MeanFlow packets are not admitted historical discoveries. In particular, recovering a classical identity appearing inside a later method cannot establish recovery of that method's novel contribution. Read the [antecedent audit](../docs/ground_truth/lead_temporal_audit.md), [model audit](../docs/ground_truth/model_audit.md), and [corrected benchmark audit](../docs/ground_truth/benchmark_audit.md) before selecting events.
 
