@@ -122,3 +122,22 @@ that still called historical admission the immediate next task. Keep reported
 paper findings, design choices, engineering evidence and scientific results
 separate. Maintenance now follows the active HC-1 protocol as well as the wider
 research literature. There are no quizzes, declarations or progress controls.
+
+## 5 November 2026 — relational inference and specific mechanism transfer
+
+Complete the due bounded primary-source search across discovery, reasoning,
+interpretability and neuroscience. Add Russin et al. as context for a richer
+relational follow-up, and unsatz as later reading for scientific-mechanism
+transfer. Record inspected sections, queries, dates and deferred leads in
+`source-audit.md`. The research plan and HC-1 evidence gates remain unchanged.
+
+Connect the two additions to the transfer and discovery reviews. Add one optional
+concept note with worked relations, rank/link procedures, conflicting premises
+and an illustrative difference between related/control gains. Include three
+original visuals, typeset equations and three glossary entries. Remove the
+relative “newest” label from the existing EurekaBench section. No sources are
+retired; no experiment is run and no paper result is independently reproduced.
+
+The review receipt is refreshed after reviewing the unchanged project inputs
+and the substantive literature changes. Publication provenance is recorded
+separately in `publication.json`; a repository commit is not a deployment.

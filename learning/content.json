@@ -1,7 +1,7 @@
 {
   "title": "How does intelligence find something new?",
   "subtitle": "A connected literature review of machine discovery, reasoning, interpretability and neuroscience.",
-  "asOf": "2026-10-17",
+  "asOf": "2026-11-05",
   "baselineRevision": "bc6bc56afaa4ad41f78a1f384d810e63b61d5715",
   "overview": [
     "The reading room starts with research questions and compares recent primary papers: their methods, findings, disagreements and implications for Novel. Technical terms are explained where they matter; concept notes supply more background when useful.",
@@ -1770,6 +1770,137 @@
           ]
         }
       ]
+    },
+    {
+      "id": "relational-inference",
+      "title": "Relations, remembered ranks and specific transfer",
+      "kicker": "Concept note",
+      "summary": "Two explicit ways to answer a relational question, and a controlled comparison for asking what knowledge transfers.",
+      "whyNow": "These examples explain the newer literature comparisons while keeping richer experiments separate from HC-1.",
+      "status": "later",
+      "prerequisites": [],
+      "sources": [
+        "geometric-algebraic-inference",
+        "unsatz"
+      ],
+      "connections": [
+        {
+          "chapter": "hidden-context",
+          "reason": "HC-1 has a simpler rule family and a defined behaviour-first gate."
+        },
+        {
+          "chapter": "patching",
+          "reason": "An intervention needs controls before it can distinguish internal explanations."
+        },
+        {
+          "chapter": "search",
+          "reason": "Compare computation and supplied information as well as answers."
+        }
+      ],
+      "takeaway": "Specify competing procedures, create cases on which their predictions differ, and state exactly what information transfers.",
+      "sections": [
+        {
+          "id": "relations",
+          "title": "What the relation says",
+          "paragraphs": [
+            "Imagine four parcels ordered by priority: A before B, B before C, and C before D. These three statements are premises: information the example grants us. We want to know whether A comes before D. Priority is transitive here, meaning that if one parcel precedes a second and the second precedes a third, the first precedes the third.",
+            "\\[A\\succ B,\\quad B\\succ C,\\quad C\\succ D\\quad\\Longrightarrow\\quad A\\succ D.\\]",
+            "The symbol ≻ means precedes in this example; the long arrow means implies. It does not mean a causal effect. Not every relation is transitive: A can defeat B and B defeat C in a game without A defeating C. A task must state the rule it expects the system to use.",
+            "The following procedures are original teaching examples, not fitted descriptions of any participant or network in the cited studies."
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "A before B",
+                "text": "First supplied relation"
+              },
+              {
+                "title": "B before C",
+                "text": "Shared B connects two relations"
+              },
+              {
+                "title": "C before D",
+                "text": "Shared C extends the chain"
+              }
+            ],
+            "caption": "Original premise-chain diagram. Combining the statements gives A before D; arrows show the order of composition, not neural activity."
+          }
+        },
+        {
+          "id": "two-procedures",
+          "title": "Store positions or follow links",
+          "paragraphs": [
+            "One program could store a rank, a numerical position, for every parcel: r(A)=4, r(B)=3, r(C)=2 and r(D)=1. It answers by subtracting two ranks. For A and D, 4−1=3 is positive, so A precedes D. This compresses many pairwise answers into one ordered list.",
+            "\\[A\\succ D\\quad\\text{if}\\quad r(A)-r(D)>0,\\qquad d(A,D)=|r(A)-r(D)|=3.\\]",
+            "The vertical bars mean absolute value: ignore the sign. Here d counts the adjacent rank intervals between the items, often called symbolic distance. These ranks are assigned for the example; they are not measured neural coordinates.",
+            "A second program could store the supplied links and follow them: A to B, then B to C, then C to D. It reaches the same answer without needing a previously stored rank for each parcel. This particular walk takes three link traversals. A comparison with the nearer pair A and B takes one. Another implementation could compute all ranks first; these are examples of procedures, not the only possibilities.",
+            "Both programs must acquire their information. A one-subtraction answer is cheap only after the rank list exists. Counting answer-time operations while ignoring the cost of constructing or updating that list would obscure the tradeoff."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Explicit toy procedure",
+              "A versus B",
+              "A versus D"
+            ],
+            "rows": [
+              [
+                "Read stored ranks",
+                "Compare 4 with 3",
+                "Compare 4 with 1"
+              ],
+              [
+                "Follow adjacent links",
+                "Traverse A → B",
+                "Traverse A → B → C → D"
+              ]
+            ],
+            "caption": "Original operation-count comparison, assuming the rank list or link list is already available. It is not a timing measurement or a model-performance result."
+          }
+        },
+        {
+          "id": "conflict",
+          "title": "Create a case where the procedures disagree",
+          "paragraphs": [
+            "Now supply new premises that reverse the familiar order: D before C, C before B, B before A. A program that keeps using the old ranks answers A before D. A program that successfully follows the new links answers D before A. The disagreement makes the source of an answer easier to investigate.",
+            "One successful answer is still ambiguous. The first program could update its ranks, and the second could fail because it missed a premise. Compare familiar and new items, consistent and conflicting premises, shorter and longer chains, and declared computation budgets. Behaviour narrows the candidate explanations; a causal study must then manipulate the proposed computation with appropriate controls.",
+            "HC-1 deliberately starts with less structure: two opposite maps and a diagnostic feedback event. Success there can be explained by one reversal flag. Relational tests would ask a further question after that behaviour is established. They should not be described as an ability already measured in Novel."
+          ]
+        },
+        {
+          "id": "specific-transfer",
+          "title": "A gain can come from a useful hint rather than the shared mechanism",
+          "paragraphs": [
+            "Suppose an earlier solution is supplied to a system solving a new problem. An ansatz is a proposed model structure, such as a straight line rather than a saturating curve; fitting coefficients sets the numerical values within that structure. The earlier solution may suggest a useful mechanism, but it may also provide a formatting template or a generic search hint. To distinguish these possibilities, compare a related problem with a control problem where the candidate shared mechanism has been changed.",
+            "Let S be a declared success measure, such as the proportion of solved problems. Use R for related problems and C for controls; plus means the earlier solution is supplied, and minus means it is withheld. One possible descriptive contrast is:",
+            "\\[\\Delta_R=S_R^+-S_R^-,\\qquad \\Delta_C=S_C^+-S_C^-,\\qquad D=\\Delta_R-\\Delta_C.\\]",
+            "Each delta, the triangular letter, is a difference. D subtracts the control gain from the related gain. In an invented example, success rises from 0.40 to 0.60 on related problems and from 0.30 to 0.45 on controls. Then D=(0.60−0.40)−(0.45−0.30)=0.05: a five-percentage-point difference between gains. The twenty-point related gain alone would conceal the fifteen-point control gain.",
+            "This is an illustrative comparison, not an analysis of the new paper’s data or a registered Novel endpoint. A positive D can also reflect differences in task difficulty, unequal information or chance. Matched tasks, repeated independent runs and uncertainty estimates are needed; aggregate solve counts alone cannot reconstruct the paired outcomes or justify a strong causal claim."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Problem",
+              "Earlier solution withheld",
+              "Earlier solution supplied"
+            ],
+            "rows": [
+              [
+                "Related",
+                "R−: measure baseline success",
+                "R+: measure success with the earlier solution"
+              ],
+              [
+                "Changed-mechanism control",
+                "C−: measure control baseline",
+                "C+: measure generic help on the control"
+              ]
+            ],
+            "caption": "Original comparison design. Compare the within-row gains before comparing those gains across rows; keep budgets and available observations matched."
+          }
+        }
+      ]
     }
   ],
   "papers": [
@@ -2736,6 +2867,54 @@
         "generalisation"
       ],
       "publicationType": "Journal article"
+    },
+    {
+      "id": "geometric-algebraic-inference",
+      "title": "Geometric and algebraic inference in humans and neural networks",
+      "authors": "Jacob Russin, Joonhwa Kim, Ellie Pavlick and Michael J. Frank",
+      "year": 2026,
+      "publishedAt": "2026-10-30",
+      "url": "https://arxiv.org/abs/2611.00387",
+      "methodUrl": "https://arxiv.org/html/2611.00387v1",
+      "status": "context",
+      "stage": "Interpreting transfer; later relational experiments",
+      "summary": "Comparing familiar rankings with newly supplied relations.",
+      "mechanism": "Tests distinguish rank-based comparison from sequential inference.",
+      "novelUse": "Design a richer comparison after HC-1’s behavioural gate.",
+      "limits": "Shared behavioural patterns do not establish identical biological mechanisms.",
+      "readFor": "Which competing explanations a transfer test excludes.",
+      "readSections": "Sections 2, 3.1, 3.3 and 5.1; Figure 2.",
+      "sourceScope": "Targeted v1 primary HTML methods/results read on 5 November 2026, including training supervision and intervention controls. Not a complete appendix audit; no code or data execution.",
+      "concepts": [
+        "transitive inference",
+        "symbolic distance",
+        "representational geometry"
+      ],
+      "publicationType": "Preprint · v1"
+    },
+    {
+      "id": "unsatz",
+      "title": "unsatz: Evaluating Scientific Discovery Without a Given Ansatz",
+      "authors": "Ethan Ji, Wei Wang and Yizhou Sun",
+      "year": 2026,
+      "publishedAt": "2026-10-31",
+      "url": "https://arxiv.org/abs/2611.03713",
+      "methodUrl": "https://arxiv.org/html/2611.03713v1",
+      "status": "later",
+      "stage": "Later scientific-mechanism transfer",
+      "summary": "Generated systems test discovery of model structure.",
+      "mechanism": "Agents purchase experiments and submit programs; a supplied fitter estimates coefficients.",
+      "novelUse": "Separate reuse of a specific mechanism from generic help provided by an earlier solution.",
+      "limits": "Synthetic systems, restricted expression language and a small transfer sample; no independent replication.",
+      "readFor": "Matched related-world and changed-mechanism controls.",
+      "readSections": "Sections 2.5, 2.7 and 4.5; Appendix E.8–E.9, Table 10.",
+      "sourceScope": "Targeted v1 primary HTML scoring, transfer methods and results read on 5 November 2026. Software, seeds and episode records were not acquired or executed.",
+      "concepts": [
+        "model structure",
+        "mechanism transfer",
+        "held-out prediction"
+      ],
+      "publicationType": "Preprint · v1"
     }
   ],
   "glossary": [
@@ -3056,6 +3235,24 @@
       "definition": "Whether a rule or fitted decoder works on conditions excluded from fitting.",
       "example": "Fit a context reader on some item/map groups and evaluate it on other groups.",
       "chapter": "hidden-context"
+    },
+    {
+      "term": "Transitive inference",
+      "definition": "Combining relations using a rule that links their shared item.",
+      "example": "If A precedes B and B precedes C in a transitive ordering, A precedes C.",
+      "chapter": "relational-inference"
+    },
+    {
+      "term": "Symbolic distance",
+      "definition": "The number of adjacent rank intervals separating two items in an ordering.",
+      "example": "A and D are three intervals apart in A, B, C, D.",
+      "chapter": "relational-inference"
+    },
+    {
+      "term": "Model structure / ansatz",
+      "definition": "The proposed mathematical form of a model, before choosing its numerical coefficients.",
+      "example": "Choosing a straight line rather than a saturating curve is a structure choice.",
+      "chapter": "relational-inference"
     }
   ],
   "reviews": [
@@ -3068,11 +3265,12 @@
       "whyNow": "Hidden-context transfer is Novel’s selected next experiment. HC-1 is specified; its generator, training adapters and measurements have not been implemented or run.",
       "status": "core",
       "prerequisites": [],
-      "reviewedAt": "2026-10-17",
+      "reviewedAt": "2026-11-05",
       "sources": [
         "human-context-inference",
         "multitask-abstraction",
-        "rule-guided-replay"
+        "rule-guided-replay",
+        "geometric-algebraic-inference"
       ],
       "relatedReviews": [
         "brains",
@@ -3256,6 +3454,24 @@
           ]
         },
         {
+          "id": "relations-beyond-reversal",
+          "title": "A newer comparison: remembering a ranking or deriving a relation?",
+          "paragraphs": [
+            "If A outranks B and B outranks C, then A outranks C. This is transitive inference: combining relations to infer another. The same answer could come from a remembered ranking or a computation over the supplied statements. Correctness alone leaves that distinction open.",
+            "Russin and colleagues’ October 2026 preprint compares familiar and novel orderings. In their first human experiment (40 participants), greater separation in the ordering improved familiar-item accuracy but reduced novel-item accuracy. Custom transformers showed the same opposing pattern; they had explicitly been trained on reasoning chains. Network interventions separately disrupted rank information and attention to contextual relations. These are the authors’ results, not Novel measurements.",
+            "Compared with HC-1’s two opposite maps, an ordering offers more ways to make two candidate strategies disagree. A later Novel study could vary relation distance, contradict a familiar ordering, and measure performance at fixed computation budgets. This is a design possibility, not a change to the active protocol. The linked example makes the competing procedures concrete; neither its arithmetic nor a matching behavioural pattern identifies a brain mechanism."
+          ],
+          "citations": [
+            "geometric-algebraic-inference"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "relational-inference",
+              "label": "Two procedures for the same relation, with worked notation"
+            }
+          ]
+        },
+        {
           "id": "what-happens-next",
           "title": "The next research deliverable",
           "paragraphs": [
@@ -3279,7 +3495,7 @@
     {
       "id": "discovery",
       "topic": "Machine scientific discovery",
-      "reviewedAt": "2026-10-17",
+      "reviewedAt": "2026-11-05",
       "relatedReviews": [
         "reasoning",
         "circuits"
@@ -3390,7 +3606,7 @@
         },
         {
           "id": "mechanisms-and-insights",
-          "title": "The newest benchmarks ask what an explanation lets us infer",
+          "title": "An executable explanation can support further questions",
           "paragraphs": [
             "EurekaBench, submitted on 30 September 2026, extends evaluation into interactive experiments. Its 26 tasks span six domains, with 306 expert-developed insight questions. Agents submit executable mechanisms. The evaluation distinguishes scientific constraints, predictive accuracy and insights derivable from the mechanism.",
             "Its GPT 6 Astra configuration scores 47.4% on the normalized predictive measure versus 48.8% for human reference mechanisms, but 29.4% versus 69.7% on insights. These are benchmark-specific scores, not the probability that a scientific assertion is true. Agentic judges may run additional experiments to derive insights, so this endpoint also differs from insights the proposing agent itself expressed.",
@@ -3403,6 +3619,30 @@
             {
               "chapter": "judgment",
               "label": "Distinguish proposal validity from demonstrated evidence"
+            }
+          ]
+        },
+        {
+          "id": "mechanism-transfer",
+          "title": "Does an earlier mechanism help in a different system?",
+          "paragraphs": [
+            "An ansatz is a proposed mathematical form: for example, a straight line rather than a saturating curve. Choosing that form differs from fitting its numerical coefficients. Unsatz, an October 2026 preprint, tests both structure discovery and transfer. Its transfer comparison gives a previous program to fresh agents on related and changed-mechanism worlds, with matched budgets and noise.",
+            "Across 35 studies with an initial submitted program, related-world solves were 6 with that program and 4 without; changed-mechanism control solves were 0 and 1. Only six first worlds were solved. Within that subset, related-world counts were 5 versus 2. These small counts suggest a comparison worth studying, not a settled general advantage.",
+            "Where EurekaBench asks what consequences an executable mechanism supports, this comparison asks whether it helps on another system. For Novel, the next useful distinction is what actually carries over. Supplying a saved program is external memory. Retaining a rule in a network’s changing state, as in HC-1, is different. A future scientific-transfer experiment must specify which information survives and compare help on related and unrelated systems. Historical reconstruction remains a separate later track."
+          ],
+          "citations": [
+            "unsatz"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "relational-inference",
+              "section": "specific-transfer",
+              "label": "Why a related-world gain needs a comparison gain"
+            },
+            {
+              "chapter": "hidden-context",
+              "section": "state",
+              "label": "State, weights and external memory"
             }
           ]
         },
@@ -3448,7 +3688,8 @@
         "execution-study",
         "reconstruction",
         "cusp",
-        "eurekabench"
+        "eurekabench",
+        "unsatz"
       ],
       "connections": [
         {
@@ -4136,8 +4377,8 @@
     }
   ],
   "literatureReview": {
-    "searchedAt": "2026-10-17",
-    "coverage": "Selected 2025–2026 primary work, with earlier methods and counterarguments where relevant. Searches explicitly included October 2026. A focused follow-up selected 2023–2024 context/abstraction studies and a 2019 replay experiment for HC-1; this is a task-driven addition, not a new exhaustive frontier search.",
+    "searchedAt": "2026-11-05",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 5 November 2026, emphasizing 17 October–5 November additions and relevant counterevidence. Selected earlier work remains for its connection to Novel; coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",

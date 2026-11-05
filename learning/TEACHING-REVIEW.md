@@ -110,3 +110,37 @@ and current programme connections now say later scientific-transfer work. This
 review is an editorial and design assessment, not testing with a novice reader,
 implementation verification or independent replication. Actual content, renderer,
 browser and deployment checks are recorded in the publication receipt.
+
+## 5 November 2026 — parent review of the literature additions
+
+Read the two new review sections, the complete relational-inference concept
+note, both paper cards and their surrounding transfer/discovery arguments.
+This is a targeted editorial and technical review, not a fresh audit of every
+older source or a comprehension study with human readers.
+
+The reader can enter at the research comparison and follow a concept link
+without opening a paper. “Transitive,” “premise,” rank, symbolic distance and
+ansatz are defined locally. The parcel example shows both candidate procedures
+and explicitly charges the preparation of stored ranks. Conflicting premises
+make their possible disagreement concrete without claiming to identify a neural
+algorithm from a correct answer. The related/control example defines every
+subscript and sign before computing a five-percentage-point illustrative
+difference. It is labelled as an example, not the paper's analysis or Novel's
+registered endpoint.
+
+The new human-study count is tied to Experiment 1. The custom transformers'
+reasoning-chain supervision is explicit. Unsatz's overall transfer counts are
+presented before the selected successful-first-world subset, with the small
+denominators and absence of independent replication retained. The article
+comparisons distinguish external programs from transient model state. HC-1's
+one-bit solution and behaviour-first gates remain visible; there is no new
+experiment authorization. Free navigation, existing links and the absence of
+quizzes, completion declarations and progress tracking are preserved.
+
+Validation: all 12 learning-contract tests passed; all 157 mathematical
+expressions rendered with the pinned KaTeX renderer. The baseline check matched
+128 reviewed project inputs and the static build completed. Local Chrome
+inspection confirmed the new concept note, displayed rank/transfer equations,
+worked tables and the discovery-review link to its exact concept section.
+The in-app browser was unavailable, so Chrome supplied this bounded desktop
+preview check. No new mobile or authenticated-production visual pass is claimed.

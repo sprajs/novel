@@ -1,8 +1,79 @@
 # Literature and teaching-source audit
 
+## Bounded literature update — 5 November 2026
+
+Current inventory: **5 research reviews, 18 optional concept notes, 47 source
+records and 56 glossary terms**. This is a literature update, not a new research
+protocol or an experiment result. The earlier records below retain their own
+dates, inventories and access limitations.
+
+The remote was fetched. Default branch remained
+`8aa2393f13f2f787f8d1839704eb2fa1a1e7405a`; curriculum PR #10 remained open at
+`b65732cf80be4e45598f8875212f08c12e885333` before this update. All 128 reviewed
+project inputs matched. The HC-1 protocol, implementation status and evidence
+gates are unchanged: establish observable transfer first, then investigate
+representations and selective causal interventions. No neural training or
+scientific evaluation was run. The research revision remains
+`bc6bc56afaa4ad41f78a1f384d810e63b61d5715`.
+
+### Search scope and access
+
+Search date: **5 November 2026**. Previous documented frontier search:
+17 October 2026. This bounded search covered all four review areas, emphasizing
+new work between 17 October and 5 November while considering competing methods
+and counterevidence. Search-engine date filtering also returned older work;
+publication dates were checked separately for the two additions. This is not an
+exhaustive survey, a newest-paper ranking or independent replication.
+
+Queries issued:
+
+- `site:arxiv.org "scientific discovery" benchmark after:2026-10-17 before:2026-11-06`
+- `site:arxiv.org reasoning search reinforcement learning generalization after:2026-10-17 before:2026-11-06`
+- `site:arxiv.org mechanistic interpretability causal evaluation after:2026-10-17 before:2026-11-06`
+- `neuroscience neural network "context" "inference" after:2026-10-17 before:2026-11-06`
+- Follow-up: `site:arxiv.org/abs/ "scientific discovery" benchmark "2026" after:2026-10-17 before:2026-11-06`, restricted to arxiv.org.
+
+| Area and source | Access actually used | Decision for Novel |
+| --- | --- | --- |
+| Neuroscience / reasoning: [Russin et al., geometric and algebraic inference, v1](https://arxiv.org/html/2611.00387v1), submitted 30 October | Primary abstract; targeted HTML Sections 2, 3.1, 3.3, 5.1, including training-chain supervision and random-intervention controls. No full appendix audit or code execution. | Add as `context` for interpreting transfer. A richer relational comparison is a possible later study, not a replacement for HC-1. Distinguish human behaviour, network intervention and biological analogy. |
+| Discovery: [Ji et al., unsatz, v1](https://arxiv.org/html/2611.03713v1), submitted 31 October | Primary HTML Sections 2.4–2.7, 4.5, reproducibility statement and Appendix E.8–E.9/Table 10. No acquisition or execution of software, seeds or episode records. | Add as `later`. Use the related/control comparison and retain the small aggregate counts; do not promote the selected successful-first-world subset into a general transfer guarantee. |
+| Reasoning counterevidence: [Pang and Wang, Not All Reasoning Generalizes, v1](https://arxiv.org/pdf/2611.03627) | Primary PDF abstract and targeted Sections 3.3/4.1 on training, evaluation shifts and trace labels. HTML/abstract endpoint fetches failed; the primary PDF resolved access. Not a complete methods or supplemental review. | Defer from the active library. RLVR strategy shifts are relevant to a later training study, while current HC-1 proposes small supervised models. Trace categorisation would not by itself establish a causal internal mechanism. Existing reasoning and faithfulness readings remain relevant. |
+| Interpretability counterevidence: [Circuit Oracle, v1](https://arxiv.org/html/2611.00420v1) | Primary HTML Sections 4.1–4.3, 7 and the single-pick versus best-of-five comparison discussion. No graph/tool execution. | Defer tool adoption until behaviour and internal-capture gates are met. Its traversal ablation supplies a useful caution: success on a proxy task need not establish that graph traversal contributes. The existing circuit evaluation readings already support that decision. |
+
+Additional discovery leads were screened at **search-result/abstract depth
+only**: [FindLink](https://arxiv.org/abs/2611.02545),
+[ScienceVision](https://arxiv.org/abs/2611.04087) and
+[SciGame](https://arxiv.org/abs/2610.37919). They are deferred from the library:
+source-grounded biomedical connections, 3D observations and counterfactual
+scientific worlds do not change the immediate HC-1 decision. No quantitative
+results from these leads were adopted. An older thalamocortical context-model
+lead (Nature Communications, 2024, DOI 10.1038/s41467-024-52289-3) was screened
+through search excerpts only and not added; learning/plasticity during context
+adaptation must be distinguished from HC-1's frozen evaluation weights.
+
+### What changed and why
+
+The transfer review now compares the existing hidden-context and replay
+questions with relational inference. The discovery review connects executable
+mechanisms to a specific-transfer comparison. One linked concept note explains
+transitivity, ranks, link traversal, conflicting evidence and a difference
+between gains with original examples, three diagrams/tables and typeset maths.
+It is optional, not a restored introductory sequence. No source was removed or
+retired: the existing selection still serves the unchanged protocol; the two
+new records are context/later, not new core experiment dependencies.
+
+Parent review checked the new passages against the inspected methods, separated
+an illustrative contrast from a registered endpoint, kept model training and
+human testing distinct, and retained the small transfer denominators. The
+examples are original analytic illustrations, not simulations or measured
+Novel results. Reading and content checks support publication readiness, not
+numerical qualification or independently supported scientific claims. Exact
+validation/publication outcomes are retained in the change and publication
+records once verified.
+
 ## Hidden-context direction — 17 October 2026
 
-This is the current review record. Current inventory: **5 research reviews,
+Inventory at that review: **5 research reviews,
 17 optional concept notes, 45 source records and 53 glossary terms**. The earlier
 records below retain the counts and decisions of their respective passes.
 

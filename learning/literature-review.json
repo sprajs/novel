@@ -1,8 +1,8 @@
 {
-  "searchedAt": "2026-10-17",
+  "searchedAt": "2026-11-05",
   "scope": {
-    "searchedAt": "2026-10-17",
-    "coverage": "Selected 2025–2026 primary work, with earlier methods and counterarguments where relevant. Searches explicitly included October 2026. A focused follow-up selected 2023–2024 context/abstraction studies and a 2019 replay experiment for HC-1; this is a task-driven addition, not a new exhaustive frontier search.",
+    "searchedAt": "2026-11-05",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 5 November 2026, emphasizing 17 October–5 November additions and relevant counterevidence. Selected earlier work remains for its connection to Novel; coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",
@@ -19,7 +19,8 @@
       "sources": [
         "human-context-inference",
         "multitask-abstraction",
-        "rule-guided-replay"
+        "rule-guided-replay",
+        "geometric-algebraic-inference"
       ]
     },
     {
@@ -29,7 +30,8 @@
         "execution-study",
         "reconstruction",
         "cusp",
-        "eurekabench"
+        "eurekabench",
+        "unsatz"
       ]
     },
     {
