@@ -3,11 +3,11 @@
   "projectId": "appgprj_6acd40d2a55c81919e433f02a07b603a",
   "audience": "owner-private",
   "researchRevision": "bc6bc56afaa4ad41f78a1f384d810e63b61d5715",
-  "siteSourceCommit": "a8098c78682b7ae6cb336d99a53093c17bda5687",
-  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_7afcabb5f6ec8191a54e327ec1bb2bdb",
-  "deploymentId": "appgdep_6aece327d7d08191af7120bdecc2165b",
+  "siteSourceCommit": "9d45b8ca1aee640067820e4328bcf872b71be63d",
+  "versionId": "appgprj_6acd40d2a55c81919e433f02a07b603a~appgver_d3c40eb89a588191bb06a5880ec76e74",
+  "deploymentId": "appgdep_6b000d5d62cc81919aedcbb7af5f42a5",
   "deploymentStatus": "succeeded",
-  "publishedAt": "2026-11-05T20:12:34.738585+00:00",
+  "publishedAt": "2026-11-20T09:05:44.346885+00:00",
   "maintenance": {
     "automationId": "keep-novel-s-reading-baseline-current",
     "kind": "local-thread-heartbeat",
@@ -18,42 +18,42 @@
     "promptUpdatedAt": "2026-10-17",
     "literatureSearchCadence": "Bounded primary-literature search when at least seven days have elapsed since the last documented search, or on request.",
     "direction": "Follow active HC-1 behavioural protocol; representation and causal studies remain gated, historical reconstruction later. Future repository changes can revise this priority.",
-    "lastVerifiedRunAt": "2026-11-05"
+    "lastVerifiedRunAt": "2026-11-20"
   },
   "verification": {
     "contentContractTests": 12,
     "researchReviews": 5,
-    "conceptNotes": 18,
-    "sources": 47,
-    "glossaryTerms": 56,
-    "diagrams": 33,
+    "conceptNotes": 19,
+    "sources": 48,
+    "glossaryTerms": 58,
+    "diagrams": 37,
     "interactiveExamples": 4,
-    "typesetExpressions": 157,
+    "typesetExpressions": 160,
     "mathRenderer": "KaTeX 0.19.0 (local assets, htmlAndMathml)",
     "browserErrors": null,
     "quizAndProgressControls": 0,
     "testedLayouts": [
-      "desktop (default Chrome viewport)"
+      "Initial desktop and 391px Chrome preview; final equation rewrite renderer-checked only"
     ],
     "runtimeArchiveFiles": 74,
     "reviewedProjectInputs": 128,
-    "note": "Twelve content-contract tests, all 157 expressions with the pinned KaTeX renderer, and the 128-input baseline check pass; static build completed. Targeted local Chrome inspection confirmed the new concept note, displayed rank/transfer equations, worked tables and the discovery-to-concept section link. The in-app browser was unavailable. No new mobile, console-log or authenticated-production visual pass is claimed; prior layout checks remain documented historically. All 74 runtime archive files match the checked output byte for byte. The supported Sites 1.1.3 helper places the matching hosting manifest at dist/.openai/hosting.json, giving 75 archive files. Sites verified successful version 7 publication from the pushed source commit; owner-only access was read back. No neural-network experiment, training run or paper replication was performed.",
+    "note": "Twelve content-contract tests, all 160 mathematical expressions with pinned KaTeX, the 128-input baseline check and static build pass. Initial local Chrome inspection showed the concept note, equations and tables at desktop width and 391px; it identified sideways scrolling inside two equations. They were rewritten into shorter aligned steps. After the interrupted run resumed, no preview browser was available, so final mobile fit and review-to-concept navigation were not visually rechecked. No authenticated-production visual check is claimed. All 74 runtime archive files match the checked build byte for byte; the Sites 1.1.7 helper includes the matching manifest at dist/.openai/hosting.json, giving 75 files. The native deployment succeeded as version 8 from the pushed source commit and owner-only access was read back. No training, model experiment, paper replication or scientific qualification was performed.",
     "archiveFilesIncludingManifest": 75,
     "archiveManifestPath": "dist/.openai/hosting.json"
   },
-  "curriculumCommit": "71eed5da30e9235b72e8e2a92811f8c65ce3b716",
-  "archiveSha256": "7867fc673f7dbe887174fa4db6c804809b794d956200c05c0f5ed21575c1d31a",
-  "versionNumber": 7,
+  "curriculumCommit": "077ee3712462bd700c48f9a98b38ac711373dfde",
+  "archiveSha256": "b815fc85804decce4a336cf2e3dd3fca0db6cd1952126abfd01095f572139777",
+  "versionNumber": 8,
   "parentTeachingReview": {
     "record": "learning/TEACHING-REVIEW.md",
-    "reviewedCurriculumCommit": "71eed5da30e9235b72e8e2a92811f8c65ce3b716",
+    "reviewedCurriculumCommit": "077ee3712462bd700c48f9a98b38ac711373dfde",
     "researchReviewsRead": 2,
     "newConceptNotesRead": 1,
     "humanNoviceStudy": false,
-    "scope": "New transfer/discovery sections and their surrounding arguments, complete relational-inference concept note, both source cards and the bounded source audit. Earlier broader reviews remain in TEACHING-REVIEW.md.",
-    "independentDesignReview": "Historical HC-1 protocol review by Astra is retained from 17 October; this literature-only update received a targeted parent review, not a new independent agent review."
+    "scope": "New transfer and brain-review passages in their surrounding arguments, complete shared-relationships concept note, new source card and bounded four-area source audit. The final math rewrite received parent review and renderer checks; earlier broader reviews remain historical.",
+    "independentDesignReview": "Historical HC-1 protocol review by Astra is retained from 17 October. This literature-only update received targeted parent review, not a new independent agent review."
   },
   "archiveFormat": "tar.gz (local helper output supplied to Sites)",
-  "storedArchiveContentHash": "sha256:ddb61e7ac15754866b38f7ccd1cb5ec6df70cf1f5d88095d7069adcb880c3157",
+  "storedArchiveContentHash": "sha256:130c935dad6834dd40f03e24371a2ebdef2c01262fc77a0abea1e96a06cd37c3",
   "storedArchiveFormat": "tar (Sites-reported storage metadata; distinct from local archive bytes)"
 }

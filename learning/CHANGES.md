@@ -156,3 +156,11 @@ four-area search, access fallbacks and defer decisions in `source-audit.md`.
 No reading is retired and no protocol, model execution or scientific status is
 changed. HC-1 remains proposed; the existing PR and owner-private Site are reused.
 Checks and publication results are recorded after verification.
+
+Verified publication: version 8 on the same owner-private Site; source
+`9d45b8ca1aee640067820e4328bcf872b71be63d`. All 12 content tests, 160 KaTeX
+expressions, the 128-input baseline check and static build pass. All 74 runtime
+archive files match the checked output; the supported helper adds the retained
+hosting manifest. Initial desktop/391px preview prompted a shorter equation
+layout; browser unavailability after interruption prevented final visual
+rechecking. Exact provenance and limitations are in `publication.json`.
