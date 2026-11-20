@@ -141,3 +141,18 @@ retired; no experiment is run and no paper result is independently reproduced.
 The review receipt is refreshed after reviewing the unchanged project inputs
 and the substantive literature changes. Publication provenance is recorded
 separately in `publication.json`; a repository commit is not a deployment.
+
+## 20 November 2026 — relational inference and causal evidence
+
+Add Pan et al.'s 16 November study as context for HC-1. Connect the transfer and
+brain reviews to an optional concept note on shared pairings, uncertain evidence,
+retrieved history, recurrent state, similarity analysis and selective disruption.
+Compare the human and network information explicitly. Preserve the distinction
+between inference impairment, broader learning impairment and a shared mechanism.
+
+Add four original explanatory diagrams/tables, three displayed equations and
+two glossary entries. Update the dated search overview and record the bounded
+four-area search, access fallbacks and defer decisions in `source-audit.md`.
+No reading is retired and no protocol, model execution or scientific status is
+changed. HC-1 remains proposed; the existing PR and owner-private Site are reused.
+Checks and publication results are recorded after verification.

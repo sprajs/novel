@@ -144,3 +144,44 @@ inspection confirmed the new concept note, displayed rank/transfer equations,
 worked tables and the discovery-review link to its exact concept section.
 The in-app browser was unavailable, so Chrome supplied this bounded desktop
 preview check. No new mobile or authenticated-production visual pass is claimed.
+
+## 20 November 2026 — parent review of the causal comparison
+
+Read the new transfer/brain passages in context, the entire shared-relationships
+note and the source card against the targeted primary methods/results. This was
+a parent editorial and technical review, not an independent agent review, a new
+audit of all older papers or a study with novice readers.
+
+The note starts with four characters and two possible pairings. It defines
+transition, relational structure, likelihood, prior/posterior, LSTM, RSA, ablation,
+counterbalancing, standardized effect size and preregistration where needed.
+The Bayesian example states its two hypotheses, equal priors, unchanged structure
+and independent-probe assumptions before multiplying likelihoods. It distinguishes
+noisy evidence from HC-1's initially indistinguishable causes. All displayed
+symbols are explained in the surrounding prose; the reader need not open a paper
+to follow the argument.
+
+The human task and network task are separated, including the network's supplied
+retrieval of same-state history. The comparison does not count repeated lesion
+episodes as independently trained networks or equate the stochastic task's
+80% ceiling with HC-1's deterministic accuracy gate. The human intervention
+result includes both inference and direct-learning impairment; the confidence
+interval and effect size are not presented as percentages. The note distinguishes
+a direct comparison of effects from significance in only one group. Original
+visuals and calculations explain claims; none is a plotted Novel result.
+
+The earlier behaviour-first protocol remains active. Existing links and free
+navigation are preserved; no quiz, declaration, checkbox or progress state is
+introduced. Exact content, math, browser and publication checks are recorded in
+the publication receipt only after verification.
+
+The mobile preview identified long Bayesian equations. Their final form separates
+likelihood-times-prior weights from normalization, with every weight defined in
+the prose and the calculation broken into short aligned lines.
+
+Verification: the initial local Chrome preview showed the new concept, equations
+and table at desktop width and 391 pixels. It found sideways scrolling inside
+the two long equations, which prompted the aligned rewrite. After the interrupted
+run resumed, no browser was available. The final equations passed the pinned
+renderer check; the final mobile fit and review-to-concept navigation were not
+visually rechecked. No authenticated-production visual check is claimed.

@@ -1,5 +1,86 @@
 # Literature and teaching-source audit
 
+## Bounded literature update — 20 November 2026
+
+Current inventory: **5 research reviews, 19 optional concept notes, 48 source
+records and 58 glossary terms**. The remote was fetched; default branch remains
+`8aa2393f13f2f787f8d1839704eb2fa1a1e7405a`. Existing curriculum PR #10 was open
+at `93e3a1e652c5de27f81d898f2bab9fd8bc4151e3` before this update. All 128
+project inputs matched. Research revision
+`bc6bc56afaa4ad41f78a1f384d810e63b61d5715` and the HC-1 protocol are unchanged.
+HC-1 remains specification-only: no generator, training run or measured neural
+transfer result was added. Behaviour precedes representation and causal work.
+
+### Search coverage and access
+
+Search date: **20 November 2026**. The last documented search was the quiet
+13 November check, retained in automation-local state because it selected no
+material update. This search covered all four review areas, including recent
+work and counterevidence. Date-filtered arXiv queries returned no results;
+broader queries supplied leads. Two later queries using a literal “Nov 1”
+pattern returned unrelated items and supplied no evidence. Search timestamps
+and crawl dates are not treated as publication dates. Coverage is bounded,
+not exhaustive; all numerical results remain authors' findings.
+
+Queries issued (including unproductive queries and source-location follow-ups):
+
+- `site:arxiv.org/abs/ "scientific discovery" evaluation benchmark after:2026-11-13 before:2026-11-21`
+- `site:arxiv.org/abs/ reasoning generalization failure controlled experiments after:2026-11-13 before:2026-11-21`
+- `site:arxiv.org/abs/ mechanistic interpretability causal faithfulness after:2026-11-13 before:2026-11-21`
+- `neuroscience neural networks latent context inference transfer after:2026-11-13 before:2026-11-21`
+- `scientific discovery AI benchmark evaluation November 2026 arxiv`
+- `reasoning generalization counterevidence November 2026 arxiv`
+- `mechanistic interpretability causal faithfulness November 2026 arxiv`
+- `"Causal role of human hippocampus in relational structure learning and inference"`
+- `"Transferring active inference to newly encountered prism-shifted environments"`
+- `site:arxiv.org/abs/2611 reasoning generalization "Nov 1"`
+- `site:arxiv.org/abs/2611 interpretability causal "Nov 1"`
+- `"Causal role of human hippocampus" Pan preprint`
+- `"s41562-026-02627-w" PMC`
+- `"Causal necessity of human hippocampus for structure-based inference in learning"`
+
+| Area and source | Access actually used | Decision and boundary |
+| --- | --- | --- |
+| Neuroscience: [Pan et al., final article, 16 November 2026](https://www.nature.com/articles/s41562-026-02627-w) | Publisher HTML and PDF retrieved by ordinary HTTPS after web-tool cookie redirects failed. Targeted Results on task/behaviour, RSA, RNN lesions and human intervention; Methods on task probabilities, participants, network inputs/training, RSA and lesion procedure; Discussion and relevant extended-data captions. Supplements and Zenodo data/code identified, not audited or executed. | Add as `context`. Directly compares a shared-structure task, recurrent-network intervention and human intervention. Explain retrieved same-state history, noisy versus diagnostic feedback, representation versus use, and direct-learning impairment alongside inference impairment. It does not change HC-1 or establish a shared brain/network mechanism. |
+| Discovery: [SciWorkBench, v1, 17 November 2026](https://arxiv.org/html/2611.22490v1) | Targeted primary HTML Sections 3–5, including 98-task construction, model/harness comparisons, rubric judging and limited repetitions. No task package or trajectory execution. | Defer. Workflow/evidence evaluation is useful for later scientific transfer. Rubric grading by a model is not independent scientific adjudication; the model–harness distinction and grading limits are already present in the current reviews. No new leaderboard numbers are imported. |
+| Reasoning counterevidence: [Pang and Wang, v1, 2 November 2026](https://arxiv.org/pdf/2611.03627v1) | Primary PDF retrieved after web HTML failed. Rechecked abstract/controlled strategy framing and Appendix H limitations. The earlier 5 November record already documents targeted training/shift review. | Retain deferral. The main single-base-model, inversion-task strategy contrast is useful for a later RLVR study, not a new reason to change supervised HC-1. Verbal strategy labels are not causal internal measurements. |
+| Interpretability counterevidence: [Are We Recovering Mechanisms?, v1, 1 October 2026](https://arxiv.org/pdf/2610.02098v1) | Primary PDF after web HTML failed. Targeted Section 2 behavioural criterion/misranking definitions and limitations/restoration discussion. Not a full experimental-table or appendix audit. | Defer as overlapping context. Its separate behavioural criterion itself uses resampling and does not establish mechanism identity; selected restoration cases do not establish superiority to random restoration. Existing circuit-faithfulness and patching readings already require intervention-specific claims and controls. |
+| Neuroscience alternative: [Transferring active inference to newly encountered prism-shifted environments, 16 November 2026](https://www.nature.com/articles/s42003-026-11152-5) | Publisher PDF via ordinary HTTPS after web-tool redirects failed; targeted introduction and Results on stored policy mixtures versus parameter relearning. Mathematical derivations and empirical dataset comparison were not fully audited. | Defer. Built-in policy selection versus relearning is a concrete alternative for future adaptation work, but different information/architecture must be charged. It does not change HC-1's frozen evaluation recipe. No general speedup or biological-equivalence claim adopted. |
+
+The 2025 Pan preprint was located in Oxford's repository; its metadata and
+abstract were screened. The final 2026 publisher text, not the older preprint,
+supports the new lesson. Other search leads (including interpretability surveys,
+publication-based spatial-transcriptomics evaluation and older contextual-learning
+reviews) were screened at search/abstract depth only; no quantitative findings
+were adopted. All targeted primary sources above were accessible through the
+listed fallbacks; no unresolved access blocker remains.
+
+### Teaching and selection decisions
+
+The transfer and brain reviews now connect the new study to Novel. One linked
+concept note explains the pairing task, conditional probability, retrieved
+history, recurrent state, representational similarity and controlled disruption.
+Four original diagrams/tables and three displayed calculations are explanatory
+constructions, not measured data. The two-probe Bayesian calculation explicitly
+assumes an unchanged two-structure world and conditionally independent probes;
+it is not the human task's fitted model. The intervention contrast is not a newly
+registered HC-1 endpoint.
+
+The parent checked the new passages against the accessed methods and reviewed
+them without requiring the paper for missing definitions. The RNN receives
+retrieved same-state action/reward history and omits human shot-direction
+prediction. Near-80% stochastic-task accuracy is not comparable to HC-1's 95%
+deterministic-task criterion. Both experience and inference were impaired;
+selectivity relative to another task is different from inference-only impairment.
+Repeated lesion evaluations are not independent trained networks. The human
+sample sizes, effect-size interpretation, control site, connected-region limit
+and absence of preregistration remain explicit. No paper was independently
+replicated, and no human-reader comprehension study is claimed.
+
+No source is retired or deleted: the existing selection still serves the active
+question. The new paper is context, not a new mandatory implementation dependency.
+Validation and exact publication identities are recorded separately after checks.
+
 ## Bounded literature update — 5 November 2026
 
 Current inventory: **5 research reviews, 18 optional concept notes, 47 source

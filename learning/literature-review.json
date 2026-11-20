@@ -1,8 +1,8 @@
 {
-  "searchedAt": "2026-11-05",
+  "searchedAt": "2026-11-20",
   "scope": {
-    "searchedAt": "2026-11-05",
-    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 5 November 2026, emphasizing 17 October–5 November additions and relevant counterevidence. Selected earlier work remains for its connection to Novel; coverage is not exhaustive.",
+    "searchedAt": "2026-11-20",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 20 November 2026, following the quiet 13 November search. Recent work and counterevidence were screened; one directly relevant neuroscience study was added. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",
@@ -20,7 +20,8 @@
         "human-context-inference",
         "multitask-abstraction",
         "rule-guided-replay",
-        "geometric-algebraic-inference"
+        "geometric-algebraic-inference",
+        "hippocampal-structure-causality"
       ]
     },
     {
@@ -63,7 +64,8 @@
         "visual-brain-alignment",
         "temporal-brain-hierarchy",
         "neuronal-language",
-        "brain-guided-reasoning"
+        "brain-guided-reasoning",
+        "hippocampal-structure-causality"
       ]
     }
   ]

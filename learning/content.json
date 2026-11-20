@@ -1,11 +1,11 @@
 {
   "title": "How does intelligence find something new?",
   "subtitle": "A connected literature review of machine discovery, reasoning, interpretability and neuroscience.",
-  "asOf": "2026-11-05",
+  "asOf": "2026-11-20",
   "baselineRevision": "bc6bc56afaa4ad41f78a1f384d810e63b61d5715",
   "overview": [
     "The reading room starts with research questions and compares recent primary papers: their methods, findings, disagreements and implications for Novel. Technical terms are explained where they matter; concept notes supply more background when useful.",
-    "The 17 October 2026 search includes 2026 work, with earlier sources retained to explain live debates. This is a selective, dated literature review, not an exhaustive survey or a live leaderboard.",
+    "The bounded literature search was refreshed on 20 November 2026 across discovery, reasoning, interpretability and neuroscience. Earlier sources remain when they clarify the current question; publication recency alone is not a selection criterion. Coverage is selective, dated and not exhaustive.",
     "Novel’s selected next experiment is hidden-context transfer, a controlled behavioural adaptation of a neuroscience task. Its generator and training adapters are not implemented or run. Historical reconstruction remains a later scientific-transfer track. No historical contribution has been admitted and no scientific model-performance result is reported.",
     "Reviews, papers and concept notes can be read in any order. Selecting text does not store reading state; a requested explanation can become a focused linked note through the same reviewed publication workflow."
   ],
@@ -1901,6 +1901,197 @@
           }
         }
       ]
+    },
+    {
+      "id": "structure-and-intervention",
+      "title": "Shared relationships and selective disruption",
+      "kicker": "Concept note",
+      "summary": "How evidence about one pair informs another, how a network can learn that dependency, and what a controlled intervention can establish.",
+      "whyNow": "A November 2026 study links a human relational task to network lesions. These examples explain its relevance to HC-1 without changing the active protocol.",
+      "status": "core",
+      "prerequisites": [],
+      "sources": [
+        "hippocampal-structure-causality",
+        "human-context-inference",
+        "circuit-faithfulness"
+      ],
+      "connections": [
+        {
+          "chapter": "hidden-context",
+          "reason": "Compare uncertain sequences with HC-1’s diagnostic feedback and exact observer."
+        },
+        {
+          "chapter": "patching",
+          "reason": "Choose controls for a proposed intervention after the behavioural gates are met."
+        },
+        {
+          "chapter": "alignment",
+          "reason": "Distinguish a readable representation from a shared mechanism."
+        }
+      ],
+      "takeaway": "A shared rule lets evidence travel between cases. Behaviour, readable activity and selective disruption provide different kinds of evidence for how that happens.",
+      "sections": [
+        {
+          "id": "two-pairs",
+          "title": "A relationship constrains more than one answer",
+          "paragraphs": [
+            "Imagine four characters, A, B, C and D, appearing one at a time. A transition is the move from the current character to the next. In one arrangement, A and B form a pair, while C and D form another. A usually leads to B, and C usually leads to D. In a second arrangement, A pairs with C and B pairs with D. The items are the same; the relationship between them changes.",
+            "This is relational structure: a pattern of dependencies among items. Learning each transition separately would require evidence about each one. Learning the shared pattern allows an observation about A to change a prediction about D. That is the inference question in Pan and colleagues’ study. People first learned the pattern with other characters, then used it in a task where the pairings could reverse without warning.",
+            "The table is an original, restricted example of the paper’s structure. Each row starts with A. The numbers are probabilities of the next character: they add to one, and a probability of zero rules out a transition. The full study also includes transitions starting from B, C and D, other permissible assignments and the human shot-direction task."
+          ],
+          "citations": [
+            "hippocampal-structure-causality"
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Shared pairing",
+              "Next B from A",
+              "Next C from A",
+              "Next A or D from A"
+            ],
+            "rows": [
+              [
+                "AB and CD",
+                "0.8",
+                "0.2",
+                "0"
+              ],
+              [
+                "AC and BD",
+                "0.2",
+                "0.8",
+                "0"
+              ]
+            ],
+            "caption": "Illustrative two-structure comparison using the study’s 0.8/0.2 transition probabilities. In each structure the high-probability links are bidirectional. This is a teaching example, not a measured transition table."
+          }
+        },
+        {
+          "id": "noisy-evidence",
+          "title": "A surprising observation is evidence, not certainty",
+          "paragraphs": [
+            "Let C₀ mean the AB/CD pairing and C₁ mean the AC/BD pairing. Suppose these are the only two possibilities, each initially equally likely, and no switch occurs while we collect evidence. We observe A followed by B. That observation is four times as likely under C₀ as under C₁: 0.8 divided by 0.2 equals 4. A likelihood is the probability of the observation under a specified explanation.",
+            "Bayes’ rule combines that evidence with the prior, our probability before the observation. The posterior is our probability after it. Let E stand for the observed transition from A to B. First multiply each explanation’s likelihood by its prior to obtain a weight, w₀ or w₁. Then divide one weight by the sum of both:",
+            "\\[\\begin{aligned}w_0&=0.8\\times0.5=0.4,\\\\w_1&=0.2\\times0.5=0.1,\\\\P(C_0\\mid E)&=\\frac{w_0}{w_0+w_1}=0.8.\\end{aligned}\\]",
+            "The vertical bar means given. We now favour C₀, but C₁ remains possible because it can also generate A followed by B. If we arrange a second independent probe starting from A under the same unchanged structure and again observe B, the likelihoods multiply. E₁ and E₂ name those two observations; we recalculate the weights using both:",
+            "\\[\\begin{aligned}w_0&=0.8^2\\times0.5=0.32,\\\\w_1&=0.2^2\\times0.5=0.02,\\\\P(C_0\\mid E_1,E_2)&=\\frac{w_0}{w_0+w_1}\\\\&=\\frac{16}{17}\\approx0.941.\\end{aligned}\\]",
+            "The independence and unchanged-structure assumptions belong to this invented calculation. Two arbitrary observations in a changing sequence need not satisfy them. A model of the actual experiment must account for the allowed structures, transition history and possible changes. These numbers are neither fitted participant beliefs nor reported network scores.",
+            "HC-1 starts with an easier information problem: in its primary task, negative feedback on the old action identifies a global reversal. The later ambiguity task supplies a different kind of uncertainty, where two causes initially generate exactly the same evidence. Noise and ambiguity both limit certainty, but for different reasons."
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "hidden-context",
+              "label": "Diagnostic feedback and indistinguishable causes"
+            }
+          ]
+        },
+        {
+          "id": "human-and-network",
+          "title": "What the human and the network actually receive",
+          "paragraphs": [
+            "In the human task, participants predict a football shot’s direction before seeing which character will shoot. After the character appears, they can keep or change that prediction. Anticipating the next character depends on the transition pattern; predicting its shot direction also requires learning that character’s preferences. The two rules can change at different times. This lets the researchers examine relationship learning separately from preference learning.",
+            "The network task keeps next-character prediction and omits shot direction. Its recurrent core carries numerical activity from one event to the next. The authors use a long short-term memory network, or LSTM: a recurrent model with learned gates that control what information its memory retains and updates. There are 64 hidden units, each contributing one coordinate to the carried activity.",
+            "The input is more than the current character. It includes the trial number and the most recent action and reward from the last time that same character appeared. The experiment therefore supplies a retrieval operation: it finds relevant past experience for the network. A comparison that omitted this input would test a different memory problem.",
+            "Across 5,000 training episodes of 160 trials, reward-based updates teach the network how to predict. Within an episode, adaptation occurs through changing activity. The memory resets between episodes, and the weights stay fixed during post-training lesion evaluations. Changing activity, retrieving a past event and changing weights are distinct operations even when all improve the next answer.",
+            "The reported next-state accuracy approached 80%, the ceiling implied by the task’s most likely transition. That is not directly comparable with HC-1’s proposed 95% criterion: HC-1’s primary answers are deterministic. A score has meaning only with its task and information limits attached."
+          ],
+          "citations": [
+            "hippocampal-structure-causality"
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Supplied evidence",
+                "text": "Current item, time and retrieved same-item action/reward"
+              },
+              {
+                "title": "Carried activity",
+                "text": "An LSTM updates its internal memory"
+              },
+              {
+                "title": "Prediction",
+                "text": "A probability for each next character"
+              }
+            ],
+            "caption": "Original information-flow diagram of the paper’s network condition. During lesion evaluation the learned weights stay fixed; selected activity coordinates are set to zero."
+          }
+        },
+        {
+          "id": "readable-activity",
+          "title": "Reading a relationship from activity",
+          "paragraphs": [
+            "Representational similarity analysis, abbreviated RSA, asks whether similarities in activity follow a hypothesised pattern. A researcher builds one table of differences between activity patterns and another describing differences expected from the task’s relationships. A correlation between the tables indicates that the activity varies with that structure. It does not yet show that the network uses it to make its answer.",
+            "Pan and colleagues applied a version of this comparison separately to each artificial unit and selected units whose relationship scores differed from an untrained-network reference. Roughly half the units were labelled “HPC-like”, with HPC standing for hippocampus. That label refers to a selected statistical property. It does not turn an artificial unit into a hippocampal neuron; the paper reports a difference in the direction of the activity-pattern changes between network and brain.",
+            "For Novel, selection and evaluation must remain separate. Choosing units on one set of examples and testing interventions on held-out examples reduces the chance of rediscovering the same selection criterion. HC-1 already requires appropriate behavioural evidence before internal decoding and causal work. A variable being readable is a hypothesis to test, not the completed explanation."
+          ],
+          "citations": [
+            "hippocampal-structure-causality"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "alignment",
+              "label": "Prediction, correlation and representational comparisons"
+            }
+          ]
+        },
+        {
+          "id": "selective-effects",
+          "title": "What changes when we disrupt it?",
+          "paragraphs": [
+            "An ablation disables part of a system. In the network experiment, a lesion means setting selected hidden-state outputs to zero while leaving the learned weights fixed. The comparison silences units selected for relationship coding or other units, varying how many are silenced. Repeated lesion episodes measure variation within the tested network conditions; they must not be counted as independently trained networks.",
+            "The selected-unit lesions weakened the effects of both same-pair history, called experience, and other-pair history, called inference. Control-unit lesions did not show comparable effects. In a separate human experiment with 20 participants, ultrasound targeted the hippocampus or a control white-matter site in counterbalanced sessions: different participants received the conditions in different orders. This helps separate the target’s effect from session order and effects common to stimulation.",
+            "The authors report an inference reduction with Cohen’s d = −0.89 and a 95% confidence interval from −1.41 to −0.36, as well as a direct-learning reduction of similar standardized size. Cohen’s d expresses a difference in units of variability; it is not an 89% loss of ability. The interval describes uncertainty under the statistical procedure. These are the authors’ human results, not Novel measurements.",
+            "Two meanings of selective must be distinguished. A disruption can affect structure learning more than a separate preference task, yet impair both direct learning and inference within structure learning. Nor does a significant effect in one condition and an inconclusive effect in another, by itself, demonstrate a difference between those effects. That requires a direct comparison.",
+            "For a future network experiment, let D denote an impairment: performance before an intervention minus performance after it, measured with the same task metric. Let selected and control name the two unit groups. One useful contrast is:",
+            "\\[\\Delta=D_{\\mathrm{selected}}-D_{\\mathrm{control}}.\\]",
+            "A positive Δ means the selected-unit intervention caused a larger impairment under that comparison. It does not establish that only inference was affected. Compare direct-learning and inference outcomes separately, use matched intervention sizes, and retain uncertainty across independently trained networks. This is explanatory notation for a possible comparison, not the paper’s reported statistic or a newly registered HC-1 endpoint.",
+            "The human findings support causal involvement of the hippocampus and possibly its connected network. The authors note that the network inputs and implementation differ from the human system; brain stimulation can affect connected regions; and none of the experiments was preregistered. Preregistration means recording the intended methods and analyses before seeing the results. The study motivates stronger tests, while HC-1 still needs its first implemented and validated behavioural assay."
+          ],
+          "citations": [
+            "hippocampal-structure-causality",
+            "circuit-faithfulness"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "patching",
+              "label": "Intervention controls and alternative explanations"
+            }
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Comparison",
+              "What it asks",
+              "What it does not settle"
+            ],
+            "rows": [
+              [
+                "Other-pair history affects prediction",
+                "Does information transfer between relationships?",
+                "Which internal computation transfers it"
+              ],
+              [
+                "Activity tracks relationship structure",
+                "Is that variable represented in a readable form?",
+                "Whether the answer depends on it"
+              ],
+              [
+                "Selected vs control disruption",
+                "Does this intervention affect behaviour more?",
+                "A unique mechanism or inference-only impairment"
+              ],
+              [
+                "Network and human effects resemble each other",
+                "Does a computational account predict a useful contrast?",
+                "Identical algorithms or biological implementation"
+              ]
+            ],
+            "caption": "Original claim map. Each comparison adds a constraint; none replaces the others."
+          }
+        }
+      ]
     }
   ],
   "papers": [
@@ -2915,6 +3106,30 @@
         "held-out prediction"
       ],
       "publicationType": "Preprint · v1"
+    },
+    {
+      "id": "hippocampal-structure-causality",
+      "title": "Causal role of human hippocampus in relational structure learning and inference",
+      "authors": "Deng Pan and colleagues",
+      "year": 2026,
+      "publishedAt": "2026-11-16",
+      "url": "https://www.nature.com/articles/s41562-026-02627-w",
+      "methodUrl": "https://www.nature.com/articles/s41562-026-02627-w.pdf",
+      "status": "context",
+      "stage": "Hidden-context transfer; gated causal comparisons",
+      "summary": "Connects relational inference, recurrent-network lesions and a human hippocampal intervention.",
+      "mechanism": "Learners use a shared pairing structure to predict unobserved transitions; silencing selected network units and disrupting hippocampal activity test causal involvement.",
+      "novelUse": "Compare the information supplied to humans and networks, and separate inference effects from broader learning impairment.",
+      "limits": "The network receives retrieved state-specific history. Both direct learning and inference are affected; biological and artificial implementations differ.",
+      "readFor": "How behavioural, representation and intervention evidence constrain different claims.",
+      "readSections": "Results: relational learning, network lesions and ultrasound intervention; Methods: tasks, participants, neural network and lesion analysis; Discussion.",
+      "sourceScope": "Targeted publisher HTML and PDF methods/results read on 20 November 2026 via ordinary HTTPS after web-tool redirects failed. Checked task probabilities, model inputs/training, fixed-weight lesions, human control conditions and limitations. Main-paper and extended-data captions inspected; no complete supplementary audit, raw-data analysis, code execution or independent replication. The 2025 preprint was identified but is not treated as the final article.",
+      "concepts": [
+        "relational structure",
+        "representational similarity",
+        "ablation"
+      ],
+      "publicationType": "Journal article · 16 November 2026"
     }
   ],
   "glossary": [
@@ -3253,6 +3468,18 @@
       "definition": "The proposed mathematical form of a model, before choosing its numerical coefficients.",
       "example": "Choosing a straight line rather than a saturating curve is a structure choice.",
       "chapter": "relational-inference"
+    },
+    {
+      "term": "Transition",
+      "definition": "A move from the current state or item to the next.",
+      "example": "A followed by B is one observed transition; its probability can depend on a hidden pairing rule.",
+      "chapter": "structure-and-intervention"
+    },
+    {
+      "term": "Representational similarity analysis (RSA)",
+      "definition": "Comparing differences between activity patterns with differences predicted by a task or model.",
+      "example": "Activity may track which characters form a pair without establishing that this information causes the answer.",
+      "chapter": "structure-and-intervention"
     }
   ],
   "reviews": [
@@ -3265,12 +3492,13 @@
       "whyNow": "Hidden-context transfer is Novel’s selected next experiment. HC-1 is specified; its generator, training adapters and measurements have not been implemented or run.",
       "status": "core",
       "prerequisites": [],
-      "reviewedAt": "2026-11-05",
+      "reviewedAt": "2026-11-20",
       "sources": [
         "human-context-inference",
         "multitask-abstraction",
         "rule-guided-replay",
-        "geometric-algebraic-inference"
+        "geometric-algebraic-inference",
+        "hippocampal-structure-causality"
       ],
       "relatedReviews": [
         "brains",
@@ -3332,6 +3560,44 @@
               "label": "What a representation comparison can establish"
             }
           ]
+        },
+        {
+          "id": "causal-relational-comparison",
+          "title": "A newer test: from shared relationships to causal involvement",
+          "paragraphs": [
+            "Pan and colleagues’ November 2026 study offers a particularly close comparison. People learned a sequence organised into two pairs of characters. Members of a pair usually followed each other; the pairings could change without a signal. Evidence about one pair could therefore inform predictions about the other. This shares HC-1’s question about transfer, but uses noisy sequences and unsignalled changes instead of one perfectly diagnostic feedback event.",
+            "The authors combined brain imaging in 36 participants, a recurrent-network model and a separate intervention study in 20 participants. The network learned to predict the next character. After training, they silenced units whose activity tracked the relationship structure and compared the consequences with silencing other units. In humans, targeted ultrasound temporarily perturbed hippocampal activity, with a separate brain site as the control. Both interventions weakened inference, and also weakened learning from direct experience. They did not isolate an impairment affecting inference alone.",
+            "The result extends the earlier representation association: an intervention can test whether changing a component changes behaviour. It still does not identify an identical algorithm in a brain and a network. The paper’s network was supplied with retrieved history for the current character, and the human task included an additional prediction about shot direction. Those differences matter when translating an experiment.",
+            "For Novel, the useful next question remains which competing explanations survive each test. HC-1’s behaviour and representation gates still apply. The linked note explains the pairing task, its probabilities and the intervention comparisons; it proposes no new training run or human experiment."
+          ],
+          "citations": [
+            "hippocampal-structure-causality",
+            "human-context-inference"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "structure-and-intervention",
+              "label": "The pairing task, its mathematics and what disruption establishes"
+            }
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Transfer behaviour",
+                "text": "Does evidence about one relation change another prediction?"
+              },
+              {
+                "title": "Representation",
+                "text": "Does activity vary with the shared structure?"
+              },
+              {
+                "title": "Intervention",
+                "text": "What changes when selected activity is perturbed?"
+              }
+            ],
+            "caption": "Original evidence map. These are different questions; a result at one stage does not automatically settle the next."
+          }
         },
         {
           "id": "one-change-two-cases",
@@ -4151,7 +4417,7 @@
       "whyNow": "The active HC-1 study adapts a behavioural neuroscience task. The comparisons reviewed here provide wider context for future representation and intervention studies.",
       "status": "core",
       "prerequisites": [],
-      "reviewedAt": "2026-10-17",
+      "reviewedAt": "2026-11-20",
       "relatedReviews": [
         "transfer",
         "circuits",
@@ -4359,6 +4625,24 @@
               "label": "Historical eligibility of the full model bundle"
             }
           ]
+        },
+        {
+          "id": "relational-causal-bridge",
+          "title": "When the comparison includes an intervention in both systems",
+          "paragraphs": [
+            "A newer bridge comes from Pan and colleagues’ relational-learning study. Its network lesion and human hippocampal intervention both reduced the influence of other-pair experience on predictions. Here other-pair experience means evidence about a relationship different from the one currently being predicted. The study also found disruption of direct learning. This makes it useful to ask how selective an effect is, rather than labelling any performance drop a loss of reasoning.",
+            "The network and brain encoded the relationships differently, and perturbing a brain region can affect connected regions. Matching a behavioural effect therefore supports a computational hypothesis without proving a shared biological mechanism. The connected explanation follows the task from observable evidence to the intervention contrast and relates it to Novel’s still-proposed HC-1 study."
+          ],
+          "citations": [
+            "hippocampal-structure-causality"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "structure-and-intervention",
+              "section": "selective-effects",
+              "label": "Compare disruption, selectivity and causal claims"
+            }
+          ]
         }
       ],
       "takeaway": "Use brain comparisons to propose specific representation tests. Separate shared structure, held-out prediction and successful intervention before asking whether a result transfers to scientific discovery.",
@@ -4366,7 +4650,8 @@
         "visual-brain-alignment",
         "temporal-brain-hierarchy",
         "neuronal-language",
-        "brain-guided-reasoning"
+        "brain-guided-reasoning",
+        "hippocampal-structure-causality"
       ],
       "connections": [
         {
@@ -4377,8 +4662,8 @@
     }
   ],
   "literatureReview": {
-    "searchedAt": "2026-11-05",
-    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 5 November 2026, emphasizing 17 October–5 November additions and relevant counterevidence. Selected earlier work remains for its connection to Novel; coverage is not exhaustive.",
+    "searchedAt": "2026-11-20",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 20 November 2026, following the quiet 13 November search. Recent work and counterevidence were screened; one directly relevant neuroscience study was added. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",
