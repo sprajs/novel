@@ -6,8 +6,12 @@ execution semantics or validated capabilities, review the teaching guide in
 Explain new prerequisites, add reading only for a concrete project decision,
 and retire or defer reading that no longer serves the current direction.
 
-Write for an interested beginner who is learning this field. Explain assumed
-knowledge and connections in readable prose with concrete examples and diagrams.
+Lead with current research questions and a critical synthesis of primary papers
+in AI discovery, reasoning, interpretability and relevant neuroscience. Write in
+plain language, defining terms where they enter the argument. Put extended
+prerequisites in linked concept notes, rather than making introductory chapters
+the entry point. Add a focused, linked explanation page when the reader asks
+about a passage. Explain connections with concrete examples, diagrams and maths.
 The Site is an open reading reference: no quizzes, comprehension declarations,
 completion checkboxes, progress tracking or enforced reading order.
 

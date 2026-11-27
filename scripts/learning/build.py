@@ -61,18 +61,20 @@ def require(condition, message):
 
 
 def validate(data):
-    for key in ("title", "subtitle", "asOf", "baselineRevision", "overview", "chapters", "papers", "glossary"):
+    for key in ("title", "subtitle", "asOf", "baselineRevision", "overview", "literatureReview", "reviews", "chapters", "papers", "glossary"):
         require(key in data, f"Missing content field: {key}")
-    require(len(data["chapters"]) >= 10, "The baseline needs its complete teaching path.")
+    require(data["chapters"] and data["reviews"], "Reviews and linked concept notes are required.")
     date.fromisoformat(data["asOf"])
+    date.fromisoformat(data["literatureReview"]["searchedAt"])
     ids = {}
-    for kind in ("chapters", "papers"):
+    for kind in ("chapters", "papers", "reviews"):
         values = [entry["id"] for entry in data[kind]]
         require(len(set(values)) == len(values), f"Duplicate {kind} IDs")
         require(all(ID.fullmatch(value) for value in values), f"Unsafe {kind} ID")
         ids[kind] = set(values)
     widgets = set()
-    for chapter in data["chapters"]:
+    sections_by_chapter = {c["id"]: {s["id"] for s in c["sections"]} for c in data["chapters"]}
+    for chapter in data["chapters"] + data["reviews"]:
         for field in ("title", "kicker", "summary", "whyNow", "takeaway"):
             require(isinstance(chapter.get(field), str) and chapter[field].strip(), f"Empty {chapter['id']}.{field}")
         require(chapter["status"] in {"core", "later"}, "Invalid chapter status")
@@ -90,9 +92,15 @@ def validate(data):
         for section in chapter["sections"]:
             require(section.get("title") and section.get("paragraphs"), "Empty lesson section")
             require(all(isinstance(p, str) and p.strip() for p in section["paragraphs"]), "Empty paragraph")
+            require(set(section.get("citations", [])) <= set(chapter["sources"]),
+                    f"Broken section citations in {chapter['id']}")
+            for link in section.get("conceptLinks", []):
+                require(link.get("chapter") in ids["chapters"], "Broken concept link")
+                require(not link.get("section") or link["section"] in sections_by_chapter[link["chapter"]],
+                        "Broken concept section link")
             if "visual" in section:
                 v = section["visual"]
-                require(v["type"] in {"flow", "matrix", "table", "residual"} and v.get("caption"), "Invalid diagram")
+                require(v["type"] in {"flow", "matrix", "table", "residual", "network"} and v.get("caption"), "Invalid diagram")
                 if v["type"] == "table":
                     require(len(v.get("headers", [])) >= 2 and v.get("rows")
                             and all(isinstance(h, str) and h.strip() for h in v["headers"])
@@ -104,15 +112,41 @@ def validate(data):
                     require(len(v["nodes"]) == 4 and len(v["rowLabels"]) == 2 and len(v["columnLabels"]) == 2, "Invalid concept matrix")
                 if v["type"] == "residual":
                     require(len(v["nodes"]) == 3, "Invalid residual diagram")
+                if v["type"] == "network":
+                    require(ID.fullmatch(v.get("id", "")), "Invalid network diagram ID")
+                    node_ids = {n.get("id") for n in v["nodes"]}
+                    require(len(node_ids) == len(v["nodes"]), "Duplicate diagram node")
+                    for node in v["nodes"]:
+                        require(all(isinstance(node.get(k), (int, float)) and 0 <= node[k] <= limit
+                                    for k, limit in (("x", 490), ("y", 306))), "Invalid diagram coordinates")
+                    require(v.get("edges") and all(e.get("from") in node_ids and e.get("to") in node_ids
+                            and e.get("fromSide") in {"left", "right", "top", "bottom"}
+                            and e.get("toSide") in {"left", "right", "top", "bottom"}
+                            for e in v["edges"]), "Broken diagram edge")
                 require(all(n.get("title") and n.get("text") for n in v.get("nodes", [])), "Empty diagram node")
             if "interactive" in section:
                 widgets.add(section["interactive"])
     require(widgets == {"sampling", "likelihood", "intervention", "timeline"}, "Missing or unsupported interactive lesson")
-    # Prerequisites must appear first: no hidden cycles or forward references.
+    # Background is a freely navigable graph; only cycles in prerequisite metadata are invalid.
+    graph = {c["id"]: c["prerequisites"] for c in data["chapters"]}
+    def visit(node, active, seen):
+        require(node not in active, "Prerequisite cycle")
+        if node in seen:
+            return
+        for dependency in graph[node]:
+            visit(dependency, active | {node}, seen)
+        seen.add(node)
     seen = set()
-    for chapter in data["chapters"]:
-        require(set(chapter["prerequisites"]) <= seen, f"Prerequisites out of order: {chapter['id']}")
-        seen.add(chapter["id"])
+    for node in graph:
+        visit(node, set(), seen)
+    for review in data["reviews"]:
+        require(review.get("topic") and review.get("sources"), "Review needs a topic and primary sources")
+        date.fromisoformat(review["reviewedAt"])
+        require(set(review.get("relatedReviews", [])) <= ids["reviews"] - {review["id"]},
+                "Broken related review")
+        cited = {p for section in review["sections"] for p in section.get("citations", [])}
+        require(cited == set(review["sources"]), "Review sources must be cited in the argument")
+        require(any(s.get("conceptLinks") for s in review["sections"]), "Review needs concept drilldowns")
     for paper in data["papers"]:
         for key in ("title", "authors", "url", "summary", "mechanism", "novelUse", "limits", "readFor", "readSections", "sourceScope", "stage"):
             require(isinstance(paper.get(key), str) and paper[key].strip(), f"Missing {paper['id']}.{key}")
@@ -178,7 +212,7 @@ def build(data, baseline):
             "contentSha256": digest(LEARNING / "content.json"),
             "files": {str(p.relative_to(destination)): digest(p) for p in sorted(destination.rglob("*")) if p.is_file()}}
     (destination / "build-info.json").write_text(json.dumps(info, indent=2) + "\n")
-    print(f"Built {len(data['chapters'])} chapters, {len(data['papers'])} sources and {len(data['glossary'])} terms into {destination.relative_to(ROOT)}")
+    print(f"Built {len(data['reviews'])} reviews, {len(data['chapters'])} concept notes, {len(data['papers'])} sources and {len(data['glossary'])} terms into {destination.relative_to(ROOT)}")
 
 
 def main():

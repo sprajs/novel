@@ -19,7 +19,7 @@ class BaselineContract(unittest.TestCase):
     def setUpClass(cls):
         cls.content = build.read(ROOT / "learning/content.json")
 
-    def test_real_reading_inventory_and_dependency_order(self):
+    def test_real_reading_inventory_and_reference_graph(self):
         build.validate(self.content)
         build.check_baseline(self.content)
 
@@ -28,8 +28,10 @@ class BaselineContract(unittest.TestCase):
         key = next(iter(build.inventory()))
         removed = {p["id"] for p in content["papers"] if build.source_key(p["url"]) == key}
         content["papers"] = [p for p in content["papers"] if p["id"] not in removed]
-        for chapter in content["chapters"]:
+        for chapter in content["chapters"] + content["reviews"]:
             chapter["sources"] = [s for s in chapter["sources"] if s not in removed]
+            for section in chapter["sections"]:
+                section["citations"] = [s for s in section.get("citations", []) if s not in removed]
         with self.assertRaisesRegex(ValueError, "inventory not covered"):
             build.validate(content)
 
@@ -57,8 +59,34 @@ class BaselineContract(unittest.TestCase):
     def test_prerequisite_cycle_is_rejected(self):
         content = copy.deepcopy(self.content)
         content["chapters"][0]["prerequisites"] = [content["chapters"][-1]["id"]]
-        with self.assertRaisesRegex(ValueError, "out of order"):
+        content["chapters"][-1]["prerequisites"] = [content["chapters"][0]["id"]]
+        with self.assertRaisesRegex(ValueError, "cycle"):
             build.validate(content)
+
+    def test_concepts_can_be_reordered_without_breaking_navigation(self):
+        content = copy.deepcopy(self.content)
+        content["chapters"].reverse()
+        build.validate(content)
+
+    def test_review_citations_and_drilldown_anchors_are_checked(self):
+        for kind in ("citation", "concept", "anchor", "related"):
+            content = copy.deepcopy(self.content)
+            review = content["reviews"][0]
+            section = next(s for s in review["sections"] if s.get("conceptLinks"))
+            if kind == "citation":
+                section["citations"] = ["missing-paper"]
+                message = "section citations"
+            elif kind == "concept":
+                section["conceptLinks"][0]["chapter"] = "missing-concept"
+                message = "concept link"
+            elif kind == "anchor":
+                section["conceptLinks"][0]["section"] = "missing-section"
+                message = "concept section"
+            else:
+                review["relatedReviews"] = ["missing-review"]
+                message = "related review"
+            with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, message):
+                build.validate(content)
 
     def test_broken_reference_links_cannot_publish(self):
         for kind in ("chapter", "glossary", "method"):

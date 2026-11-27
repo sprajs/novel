@@ -1,8 +1,24 @@
-# Reading tied to the observational study
+# Reading tied to Novel’s research decisions
 
-Prepared 11 October 2026. These are primary sources and decision aids, not
-certifications of our corpus or reproductions of their experiments. Read the
-local protocol first, then inspect methods relevant to the decision at hand.
+The active task is [hidden-context transfer](hidden-context-protocol.md). Primary
+reading supplies a task, a computational comparison or a measurement decision.
+The reading room explains these in connected prose; there is no required order.
+Source access is recorded in [the audit](../learning/source-audit.md).
+
+## Current behavioural track
+
+| Decision | Primary reading | Use and limit |
+| --- | --- | --- |
+| What counts as transfer after feedback? | [Courellis et al. 2024](https://www.nature.com/articles/s41586-024-07799-x) | Adapt the first other-item inference contrast; omit clinical recordings/reward magnitude explicitly; no claim of human-equivalent mechanism. |
+| How could abstraction arise in a neural network? | [Johnston and Fusi 2023](https://www.nature.com/articles/s41467-023-36583-0) | Computational counterpoint and held-out decoder generalisation; not proof that HC-1 needs the same representation. |
+| What would sequence reorganisation add? | [Liu et al. 2019](https://discovery.ucl.ac.uk/10078375/1/1-s2.0-S0092867419306403-main.pdf) | Next-track task design; reconstructing a sequence is distinct from spontaneous replay. |
+
+## Later historical scientific-transfer track
+
+These sources remain useful for historical contribution admission, semantic
+measurement and eventual discovery claims. They are deferred from the next
+working session, not prerequisites for running HC-1. The following selection
+was prepared 11 October 2026 and retains its bounded source-access notes.
 
 | Decision | Primary reading | Use and limit |
 | --- | --- | --- |
@@ -16,10 +32,9 @@ local protocol first, then inspect methods relevant to the decision at hand.
 | Which exact model predates the claim? | [Existing artifact audit](../docs/ground_truth/model_audit.md), linked immutable cards/trees; [Qwen3 release](https://qwenlm.github.io/blog/qwen3/) | A family release/cutoff does not replace byte and interface identity. Do not use a current card to silently replace the historical template. |
 | When can internal association become a causal experiment? | [Patching best practices](https://arxiv.org/abs/2309.16042); [patching interpretation](https://arxiv.org/abs/2404.15255) | State the intervention, metric, controls and conditional interpretation before patching. See [later causal gate](causal-review.md). |
 
-Suggested order is corpus protocol and one worked case, semantic measurement,
-human adjudication, sampling/statistics, then internal diagnostics. A first pass
-should yield one written decision per source, not a requirement to read an
-entire library before qualifying the first claim.
+Use the historical protocols when that track is activated; HC-1 has its own
+behavioural measurements and checks. No source certifies our corpus or reproduces
+its authors' experiments merely by being listed here.
 
 ## Source access and boundaries
 
