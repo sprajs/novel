@@ -1,5 +1,22 @@
 # Curriculum changes
 
+## 27 November 2026 — independent decoder tests
+
+Perform the due bounded search across discovery, reasoning, interpretability
+and neuroscience. Add Wong and colleagues' accepted neural-decoding study as
+context for HC-1's later representation analysis. Connect it from the brain
+review and add a transfer-review drilldown to a new optional note, “What makes
+a test independent?” Explain fitted preprocessing, PCA, dependent time samples,
+grouped evaluation, cross-validation and tuning in simple language, with two
+original diagrams/tables and a worked centring calculation. Add three glossary
+terms. Label examples as constructions and distinguish independent prediction
+from causal evidence.
+
+Record recent primary candidates, counterevidence, deferrals and the unresolved
+bioRxiv full-text access limit. No source is retired; none is added merely for
+recency. HC-1 remains unchanged and specification-only. No training, numerical
+qualification, scientific result or independent paper replication is claimed.
+
 ## 12 October 2026 — typeset mathematics and refresh the original preview
 
 Render inline notation and displayed equations using a pinned local KaTeX copy,

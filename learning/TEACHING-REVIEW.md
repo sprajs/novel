@@ -1,4 +1,34 @@
-# Beginner readability review — 12 October 2026
+# Teaching review record
+
+## Independent decoder tests — 27 November 2026
+
+The parent reviewed the new concept note, source card and brain-review passage
+against targeted primary methods/results, and checked the link in the transfer
+review in context. This is an editorial and technical assessment, not a human
+novice study or an independent replication.
+
+The note starts from a scientific question: what a fitted decoder can read on
+new cases. It defines decoder, label, preprocessing, PCA, autocorrelation,
+episode/group, fold, tuning and checkpoint where used. The worked mean
+calculation explains the sum and each numerical step; it explicitly avoids
+claiming that this arithmetic alone proves an accuracy bias. Fitted values and
+selected settings are distinguished. Fitting inside folds and choosing an
+appropriate held-out unit address different problems.
+
+The paper's possibility of pessimistic as well as optimistic error is retained.
+The note does not imply that any specific brain-alignment study is invalid or
+that every preprocessing step requires fitting. An independently specified
+transformation can be applied to test inputs; a data-dependent transformation
+must respect the intended evaluation boundary. The examples do not silently
+change HC-1's split, confirmation procedure or gated scientific status. The
+reward-history shortcut, within-checkpoint coordinates and need for a separate
+causal hypothesis remain explicit. The page is reachable from the argument and
+from the concept index; no linear syllabus or assessment controls are added.
+
+Visual/runtime checks and publication status are reported in the separate
+publication receipt after verification.
+
+## Beginner readability review — 12 October 2026
 
 The parent agent read all 13 chapters of the completed second teaching pass at
 `636ecc423d65b527add3ecb10c8b0f55470df707`, including their examples, diagrams

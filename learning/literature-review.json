@@ -1,8 +1,8 @@
 {
-  "searchedAt": "2026-11-20",
+  "searchedAt": "2026-11-27",
   "scope": {
-    "searchedAt": "2026-11-20",
-    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 20 November 2026, following the quiet 13 November search. Recent work and counterevidence were screened; one directly relevant neuroscience study was added. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
+    "searchedAt": "2026-11-27",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 27 November 2026. Added a neural-decoding evaluation study; screened recent work and counterevidence and recorded deferrals and access limits. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",
@@ -65,7 +65,8 @@
         "temporal-brain-hierarchy",
         "neuronal-language",
         "brain-guided-reasoning",
-        "hippocampal-structure-causality"
+        "hippocampal-structure-causality",
+        "neural-decoding-leakage"
       ]
     }
   ]

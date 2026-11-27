@@ -1,5 +1,68 @@
 # Literature and teaching-source audit
 
+## Bounded literature update — 27 November 2026
+
+The seven-day search adds one evaluation source and an optional explanation of
+independent decoder tests: **5 reviews, 20 concept notes, 49 source records and
+61 glossary terms**. Remote fetch found no change in the research inputs:
+default branch `8aa2393f13f2f787f8d1839704eb2fa1a1e7405a`, open curriculum PR #10
+at `51984f0575ee90b2f669b74a1851f1d673fbf6f7`, and all 128 reviewed inputs
+matched. Research revision remains
+`bc6bc56afaa4ad41f78a1f384d810e63b61d5715`. HC-1 is still specified, not
+implemented or measured. No protocol, model, execution or qualification change
+is inferred from the literature.
+
+### Search and access record
+
+Search performed **27 November 2026**, following the documented 20 November
+search. Initial queries targeted the interval after 20 November and before
+28 November, but results included earlier publications. Dates below come from
+the primary record, not the crawl date. This is a bounded selection, not an
+exhaustive survey. Next routine search is due 4 December unless a project change
+or reader request calls for earlier review.
+
+Queries issued:
+
+- `AI scientific discovery benchmark evaluation November 2026 after:2026-11-20 before:2026-11-28`
+- `AI reasoning generalization counterevidence November 2026 after:2026-11-20 before:2026-11-28`
+- `mechanistic interpretability causal faithfulness November 2026 after:2026-11-20 before:2026-11-28`
+- `neuroscience neural networks hidden context inference transfer November 2026 after:2026-11-20 before:2026-11-28`
+- `"Structure learning and context inference emerge from next-state prediction" Bhatia Gershman`
+- `"Preventing data leakage in neural decoding" Wong November 2026`
+
+| Area / primary source | Access actually used | Selection and limits |
+| --- | --- | --- |
+| Neuroscience/evaluation: [Wong et al., Preventing data leakage in neural decoding](https://www.nature.com/articles/s41467-026-79123-2), accepted article in press, 25 November | Publisher PDF downloaded through ordinary HTTPS after the web reader's cookie redirect failed. Targeted Results on supervised/unsupervised preprocessing and temporal correlations, Discussion, main-paper Methods and Figures 2–7. Supplementary proofs, source data and code not audited or executed. | Add as `context`. Explains both fitting-boundary leakage and dependence across test partitions. The direction of the error need not be optimistic. Connect to HC-1's existing grouped, within-checkpoint decoder proposal; no claim of a demonstrated problem in Novel and no new representation experiment. Publisher warns that this accepted version may receive further edits. |
+| Discovery: [MedChemBench primary paper](https://cdn.openai.com/pdf/09c4ec60-a32e-4652-837b-1811368a3bb0/medchembench-paper.pdf), dated 9 November; [research release](https://openai.com/index/introducing-medchembench/) dated 20 November | Primary PDF construction/scope and Discussion, plus the source-identifier sensitivity passage. No task execution, grading audit or specialist chemistry review. | Defer to later scientific transfer. A retrospective evidence package and reference scoring do not establish prospective discoveries. The authors flag historical-case dependence, alternative valid answers, training exposure and single-turn limits. A small source-identifier effect does not certify absence of contamination. Current discovery review already separates these endpoints; no leaderboard imported. |
+| Reasoning/cognitive-task adaptation: [Failing to Falsify](https://arxiv.org/html/2604.02485v2), v2, 7 November | Primary HTML abstract, Wason-task background/caveat and evaluation metrics. No full distillation or mathematical-transfer results audit. | Defer to active experiment selection, which follows HC-1. The paper's own caveat distinguishes positive tests from confirmation bias when the hidden rule is narrower; task-success judgments and turns-to-success have different denominators. No reported improvement is adopted as a Novel target or independent result. |
+| Interpretability counterevidence: [Parasite Features](https://arxiv.org/html/2611.26711v1), v1, 19 November | Primary HTML framing, Sections 6.1 and 8 on the constructed agreement task, carry-one task and limits of prevalence claims. No full theorem, training or appendix audit. | Defer as additional context for a future causal-abstraction protocol. It questions whether intervention agreement identifies the natural computation. The authors distinguish demonstrated examples from broader prevalence and speculation about other tools. Current reading already separates intervention effects from mechanism identity; HC-1 does not select an alignment-search method. |
+| Interpretability alternative: [Constructive Causal Abstraction](https://arxiv.org/html/2611.31795v1), v1, 24 November | Primary abstract and targeted case-study/discussion passages on auditing versus editing. Formal construction, ODE algorithm and proofs not audited. | Defer. Retaining omitted causal state is relevant to later intervention definitions, but does not justify choosing this framework before HC-1 behavioural and representation gates. No mathematical guarantee adopted. |
+| Neuroscience/model alternative: [Bhatia, Gershman and Amematsro, Structure learning and context inference emerge from next-state prediction](https://www.biorxiv.org/content/10.64898/2026.11.14.765964v1), first version listed 16 November | Search-indexed abstract and [author-lab publication listing](https://gershmanlab.com/pubs.html). Primary bioRxiv HTML and PDF both returned HTTP 403; the lab listing linked to the same source. Full methods/results inaccessible in this run. | Defer pending primary-text review. The abstract's circuit and motor-transfer claims are leads only. No claim about its learning rule, frozen-weight comparison or biological mechanism is imported into the reading room. |
+
+Secondary reports and aggregators supplied discovery leads only. The search
+also returned vendor/model news and survey pages; they supplied no technical
+claims to the update. Raw PDFs and extracted text remain ignored under `.local/`
+and are excluded from the published artifact. All retained findings are the
+authors' findings; no external paper was independently replicated.
+
+### Teaching and project decisions
+
+The brain review gains a focused comparison and the transfer review links to
+the explanation at its decoder discussion. The new concept note distinguishes
+test exclusion from independence, defines preprocessing/PCA, folds and tuning,
+and connects grouped testing to the actual HC-1 contract. A centring calculation
+is explicitly illustrative: changing a transformation does not prove that every
+predictor's score changes. Two original diagrams/tables show fitting boundaries
+and what different held-out units test. Grouping is not claimed to eliminate all
+confounds; new item/map groups are not a new rule family.
+
+The existing input-history, shuffled-label and untrained-network comparisons
+remain necessary. Independent decoding does not establish causal use, and a
+small score is not evidence that leakage is absent. No source is retired or
+deleted: the current selection still serves the unchanged research direction.
+Parent editorial/technical review is recorded in `TEACHING-REVIEW.md`; checks
+and deployment identities are recorded separately after verification.
+
 ## Bounded literature update — 20 November 2026
 
 Current inventory: **5 research reviews, 19 optional concept notes, 48 source

@@ -1,11 +1,11 @@
 {
   "title": "How does intelligence find something new?",
   "subtitle": "A connected literature review of machine discovery, reasoning, interpretability and neuroscience.",
-  "asOf": "2026-11-20",
+  "asOf": "2026-11-27",
   "baselineRevision": "bc6bc56afaa4ad41f78a1f384d810e63b61d5715",
   "overview": [
     "The reading room starts with research questions and compares recent primary papers: their methods, findings, disagreements and implications for Novel. Technical terms are explained where they matter; concept notes supply more background when useful.",
-    "The bounded literature search was refreshed on 20 November 2026 across discovery, reasoning, interpretability and neuroscience. Earlier sources remain when they clarify the current question; publication recency alone is not a selection criterion. Coverage is selective, dated and not exhaustive.",
+    "The bounded literature search was refreshed on 27 November 2026 across discovery, reasoning, interpretability and neuroscience. A new neural-decoding study sharpens how we evaluate readable internal information. Earlier sources remain when they clarify the current question; coverage is selective, dated and not exhaustive.",
     "Novel’s selected next experiment is hidden-context transfer, a controlled behavioural adaptation of a neuroscience task. Its generator and training adapters are not implemented or run. Historical reconstruction remains a later scientific-transfer track. No historical contribution has been admitted and no scientific model-performance result is reported.",
     "Reviews, papers and concept notes can be read in any order. Selecting text does not store reading state; a requested explanation can become a focused linked note through the same reviewed publication workflow."
   ],
@@ -2092,6 +2092,140 @@
           }
         }
       ]
+    },
+    {
+      "id": "independent-tests",
+      "title": "What makes a test independent?",
+      "kicker": "Concept note",
+      "summary": "A decoder can appear to read a hidden rule because the analysis has already encountered part of its test. Follow the information through the whole procedure.",
+      "whyNow": "HC-1 proposes reading context from saved network states only after reliable behaviour. These examples explain how to make that later test informative.",
+      "status": "core",
+      "prerequisites": [],
+      "sources": [
+        "neural-decoding-leakage",
+        "human-context-inference",
+        "circuit-faithfulness"
+      ],
+      "connections": [
+        {
+          "chapter": "hidden-context",
+          "reason": "See which item/map groups and simpler explanations HC-1 already separates."
+        },
+        {
+          "chapter": "alignment",
+          "reason": "Compare prediction from activity with claims about a shared representation."
+        },
+        {
+          "chapter": "patching",
+          "reason": "Ask a separate causal question after a reliable decoding result."
+        }
+      ],
+      "takeaway": "Choose what must be new, keep it out of every fitting and selection step, and test the complete frozen procedure. Reading information from a state remains a different claim from showing how the network uses it.",
+      "sections": [
+        {
+          "id": "readable-information",
+          "title": "What is being tested?",
+          "paragraphs": [
+            "Suppose a network changes its answer after evidence that a sorting rule has reversed. We save its internal state: a list of numbers describing the network at that moment. A decoder is another, usually small, model trained to predict the current rule from that list. Its label is the rule we know from generating the task. The original network does not receive that label.",
+            "The question is whether the fitted decoder can read the rule on new cases. A high score on the cases used to fit it is insufficient: it could learn their peculiarities. We therefore reserve test cases. Data leakage occurs when information meant to be reserved for evaluation influences fitting or selection. Even test inputs without labels can influence a fitted transformation.",
+            "A second problem is dependence between examples. Two snapshots from the same episode may share the same history. Testing on one after fitting on the other is a weaker test than predicting an independent episode. “New” must describe the relationship between cases, not just a different row number in a file."
+          ]
+        },
+        {
+          "id": "fit-the-whole-procedure",
+          "title": "The decoder begins before its final prediction",
+          "paragraphs": [
+            "Preprocessing is any transformation applied before the final predictor: centring a measurement, rescaling it, selecting neurons, or compressing a long state vector into fewer coordinates. Some transformations are fixed in advance. Others learn values from the dataset. Those learned values are part of what is fitted.",
+            "Consider centring one coordinate by subtracting a mean. Let x be a recorded value and let the fitting set contain n values. The sum sign means add those values; dividing by n gives their mean:",
+            "\\[\\mu_{\\mathrm{fit}}=\\frac{1}{n}\\sum_{i=1}^{n}x_i,\\qquad z=x-\\mu_{\\mathrm{fit}}.\\]",
+            "With fitting values 2 and 4, the mean is 3. A later test value of 10 becomes 7 after centring. If we first pool all three values, the mean changes to 16/3. The same test observation becomes 14/3, about 4.67:",
+            "\\[\\begin{aligned}\\mu_{\\mathrm{fit}}&=(2+4)/2=3,\\\\z_{\\mathrm{test}}&=10-3=7.\\end{aligned}\\]",
+            "\\[\\begin{aligned}\\mu_{\\mathrm{pooled}}&=(2+4+10)/3=16/3,\\\\z_{\\mathrm{pooled}}&=10-16/3=14/3.\\end{aligned}\\]",
+            "No label was needed for the test observation to change the transformation. This arithmetic illustrates information entering preprocessing; it does not prove that centring alone changes every predictor’s accuracy. Some predictors are insensitive to a shared shift. The effect depends on the complete procedure.",
+            "Principal component analysis, or PCA, chooses directions along which the observed vectors vary most, then represents each vector using fewer coordinates. The chosen directions depend on the data. If the eventual test vectors helped choose them, the test is no longer evaluating a representation fitted without those vectors. Averaging vectors by their known labels before PCA also uses label information, even though ordinary PCA itself does not require labels."
+          ],
+          "visual": {
+            "type": "flow",
+            "nodes": [
+              {
+                "title": "Reserve groups",
+                "text": "Choose fitting, tuning and final-test groups before learning transformations."
+              },
+              {
+                "title": "Fit and select",
+                "text": "Learn preprocessing and decoder values on fitting data. Choose settings using tuning data."
+              },
+              {
+                "title": "Freeze and apply",
+                "text": "Apply the chosen procedure to final-test groups without refitting or choosing again."
+              }
+            ],
+            "caption": "Original diagram of information flow. Test inputs pass through the frozen transformation; they do not help fit it. This is an evaluation design, not an executed Novel analysis."
+          }
+        },
+        {
+          "id": "what-the-study-finds",
+          "title": "A recent result changes how we interpret a suspicious score",
+          "paragraphs": [
+            "Wong and colleagues’ November 2026 article compares neural-decoding procedures in simulations and recorded neural data. Fitting preprocessing before reserving test data can distort the score in either direction. Their PCA analysis includes cases where leakage makes the estimated error larger, not smaller. Randomly splitting correlated time points can also exaggerate performance despite fitting preprocessing only on training data.",
+            "That is why “the score was modest” is not a safeguard. Nor does a drop after repairing an analysis prove the repair was wrong. The relevant question is whether the measurement estimates performance on the intended unseen cases. The paper separates that question from transfer to a different experimental setting.",
+            "For Novel, this is an evaluation warning, not evidence that an existing HC-1 result is invalid: HC-1 has not yet been implemented or run. It explains why future decoder fitting must respect both the data boundary and the kind of generalisation claimed."
+          ]
+        },
+        {
+          "id": "choose-the-unit",
+          "title": "A new moment is not always a new case",
+          "paragraphs": [
+            "Autocorrelation means that a quantity is related to its own nearby values in time. A slowly changing state can make adjacent measurements similar even when the similarity is irrelevant to the rule we want to decode. Randomly dividing those measurements between fitting and testing can put near-neighbours on both sides.",
+            "An episode is a complete sequence of task events. A group collects cases that share something the test is meant to withhold. In HC-1, item/map groups keep linked task variants together. An episode reset clears the model’s state, but it does not make two episodes with shared task structure an adequate test of transfer to new groups.",
+            "The right grouping depends on the claim. Holding out whole episodes asks a different question from holding out item/map groups, recording sessions or people. Grouping removes the particular overlap it targets; it does not guarantee that every remaining confound has disappeared."
+          ],
+          "visual": {
+            "type": "table",
+            "headers": [
+              "Held out",
+              "What is new?",
+              "What may still be familiar?"
+            ],
+            "rows": [
+              [
+                "A time point",
+                "One recorded moment",
+                "Nearby states and the same episode history"
+              ],
+              [
+                "An episode",
+                "One complete sequence",
+                "The item/map group used in other episodes"
+              ],
+              [
+                "An item/map group",
+                "Linked task variants together",
+                "The rule family and the trained network"
+              ]
+            ],
+            "caption": "Original comparison for designing a decoder test. These are different claims, not three steps in a required learning sequence. Holding out HC-1 groups does not introduce a new rule family."
+          }
+        },
+        {
+          "id": "cross-validation",
+          "title": "Several test partitions still require separate fitting",
+          "paragraphs": [
+            "Cross-validation divides the available development data into several parts, called folds. In turn, each fold is evaluated while the others supply fitting data. For a fitted preprocessing step, that means learning it again inside each fitting partition. Computing PCA once on the whole dataset and then cross-validating only the decoder leaves the earlier information leak intact.",
+            "Tuning means choosing settings, such as which layer to inspect or how strongly to constrain the decoder’s coefficients. Trying settings and choosing the best score uses information too. Those choices belong on development data. Nested cross-validation puts a tuning loop inside each outer fitting partition, leaving its outer evaluation fold untouched. A separate, untouched confirmation set is another way to evaluate a procedure selected in development.",
+            "If using unlabelled test inputs to adapt a model is part of the intended application, describe and freeze that adaptation rule, then evaluate it on further unseen data. That is a different information allowance from a frozen decoder test. HC-1’s planned frozen evaluation is the relevant allowance here."
+          ]
+        },
+        {
+          "id": "novel-boundary",
+          "title": "An independent decoder test is still only one kind of evidence",
+          "paragraphs": [
+            "HC-1 already requires held-out item/map groups within each trained network, a separately fitted decoder for each checkpoint, development-chosen settings and comparisons with input history, shuffled labels and an untrained network. A checkpoint is one saved set of model weights. Separate checkpoints need separate decoders because their internal coordinates need not line up.",
+            "In HC-1’s simple condition, the diagnostic reward itself reveals context. A decoder that reads remembered reward can therefore succeed without discovering an abstract rule representation. Testing different histories leading to the same rule helps distinguish those possibilities. Keeping preprocessing and selection inside the appropriate fitting partitions makes those comparisons interpretable; it does not replace them.",
+            "Finally, readable information need not be information the original network uses. A causal experiment deliberately changes a specified state and tests a predicted consequence with controls. Such work remains gated on reliable behaviour and a separately frozen hypothesis. This note explains existing evaluation commitments and their implications; it adds no new experiment or measured capability."
+          ]
+        }
+      ]
     }
   ],
   "papers": [
@@ -3130,6 +3264,30 @@
         "ablation"
       ],
       "publicationType": "Journal article · 16 November 2026"
+    },
+    {
+      "id": "neural-decoding-leakage",
+      "title": "Preventing data leakage in neural decoding",
+      "authors": "Robert Wong and colleagues",
+      "year": 2026,
+      "publishedAt": "2026-11-25",
+      "url": "https://www.nature.com/articles/s41467-026-79123-2",
+      "methodUrl": "https://www.nature.com/articles/s41467-026-79123-2_reference.pdf",
+      "publicationType": "Accepted journal article in press · 25 November 2026",
+      "status": "context",
+      "stage": "Gated representation analysis; evaluation design",
+      "summary": "Preprocessing and dependent samples can distort tests of readable neural information.",
+      "mechanism": "Held-out observations can influence a fitted transformation or remain statistically coupled to training observations.",
+      "novelUse": "Explain the independence required by HC-1’s future within-checkpoint decoder tests.",
+      "limits": "Leakage can raise or lower apparent performance. An independent test still does not identify a causal mechanism.",
+      "readFor": "Why the complete fitting procedure and the unit held out both matter.",
+      "readSections": "Results on supervised and unsupervised preprocessing; temporal correlations; Discussion; relevant main-paper Methods and Figures 2–7.",
+      "sourceScope": "Targeted primary article-in-press PDF read on 27 November 2026, retrieved through ordinary HTTPS after the web reader encountered a cookie redirect. Main-paper methods/results and figure captions inspected. Supplementary derivations, source data and code were not audited or run; no independent replication. Publisher marks this accepted version as subject to further edits.",
+      "concepts": [
+        "data leakage",
+        "cross-validation",
+        "autocorrelation"
+      ]
     }
   ],
   "glossary": [
@@ -3480,6 +3638,24 @@
       "definition": "Comparing differences between activity patterns with differences predicted by a task or model.",
       "example": "Activity may track which characters form a pair without establishing that this information causes the answer.",
       "chapter": "structure-and-intervention"
+    },
+    {
+      "term": "Data leakage",
+      "definition": "Information reserved for evaluation influences fitting or selection, changing what the test can establish.",
+      "example": "Test vectors help choose PCA directions before the decoder is tested.",
+      "chapter": "independent-tests"
+    },
+    {
+      "term": "Cross-validation",
+      "definition": "Evaluate a fitting procedure repeatedly, each time holding out a different part of the data.",
+      "example": "Refit the preprocessing and decoder within each fitting partition.",
+      "chapter": "independent-tests"
+    },
+    {
+      "term": "Autocorrelation",
+      "definition": "A quantity is statistically related to its own values at nearby times.",
+      "example": "Adjacent saved states may share episode history even when they occupy different dataset rows.",
+      "chapter": "independent-tests"
     }
   ],
   "reviews": [
@@ -3492,7 +3668,7 @@
       "whyNow": "Hidden-context transfer is Novel’s selected next experiment. HC-1 is specified; its generator, training adapters and measurements have not been implemented or run.",
       "status": "core",
       "prerequisites": [],
-      "reviewedAt": "2026-11-20",
+      "reviewedAt": "2026-11-27",
       "sources": [
         "human-context-inference",
         "multitask-abstraction",
@@ -3698,6 +3874,11 @@
             {
               "chapter": "inference",
               "label": "Frozen weights and changing context"
+            },
+            {
+              "chapter": "independent-tests",
+              "section": "choose-the-unit",
+              "label": "What makes a held-out context test independent?"
             }
           ]
         },
@@ -4417,7 +4598,7 @@
       "whyNow": "The active HC-1 study adapts a behavioural neuroscience task. The comparisons reviewed here provide wider context for future representation and intervention studies.",
       "status": "core",
       "prerequisites": [],
-      "reviewedAt": "2026-11-20",
+      "reviewedAt": "2026-11-27",
       "relatedReviews": [
         "transfer",
         "circuits",
@@ -4582,6 +4763,24 @@
           }
         },
         {
+          "id": "independent-decoding",
+          "title": "Before interpreting a score, ask what was held out",
+          "paragraphs": [
+            "A November 2026 study by Wong and colleagues makes the evaluation problem more concrete. Selecting components or fitting a compression before reserving test data lets those observations influence the analysis. Randomly splitting nearby time points can leave fitting and test examples dependent. The paper reports that leakage can make estimated performance look either better or worse. A disappointing score therefore does not certify an independent test.",
+            "This qualifies the earlier brain-prediction comparisons: the whole fitted procedure and the held-out unit determine what a prediction score supports. For Novel, HC-1’s future decoder should generalise across item/map groups within a trained network. Its preprocessing and setting selection must respect that separation. The linked explanation works through a numerical example and shows why independent prediction still falls short of a causal account."
+          ],
+          "citations": [
+            "neural-decoding-leakage"
+          ],
+          "conceptLinks": [
+            {
+              "chapter": "independent-tests",
+              "section": "fit-the-whole-procedure",
+              "label": "Follow the fitting procedure and the test boundary"
+            }
+          ]
+        },
+        {
           "id": "time-and-cells",
           "title": "Timing and individual cells add constraints",
           "paragraphs": [
@@ -4651,7 +4850,8 @@
         "temporal-brain-hierarchy",
         "neuronal-language",
         "brain-guided-reasoning",
-        "hippocampal-structure-causality"
+        "hippocampal-structure-causality",
+        "neural-decoding-leakage"
       ],
       "connections": [
         {
@@ -4662,8 +4862,8 @@
     }
   ],
   "literatureReview": {
-    "searchedAt": "2026-11-20",
-    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 20 November 2026, following the quiet 13 November search. Recent work and counterevidence were screened; one directly relevant neuroscience study was added. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
+    "searchedAt": "2026-11-27",
+    "coverage": "Bounded primary-source search across discovery, reasoning, interpretability and neuroscience on 27 November 2026. Added a neural-decoding evaluation study; screened recent work and counterevidence and recorded deferrals and access limits. Earlier sources remain for concrete Novel decisions. Coverage is not exhaustive.",
     "focus": [
       "Hidden-context transfer: the active computational adaptation of neuroscience tasks",
       "Scientific discovery and evaluation",
